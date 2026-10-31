@@ -20,21 +20,18 @@ export function Pieces({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
-  const dims = {
-    sm: "h-5 w-3.5 rounded-[6px] gap-1.5",
-    md: "h-12 w-8 rounded-[12px] gap-2.5",
-    lg: "h-20 w-12 sm:h-28 sm:w-16 rounded-[18px] gap-3",
+  const sizes = {
+    sm: { piece: "h-5 w-3.5 rounded-[6px]", gap: "gap-1.5" },
+    md: { piece: "h-12 w-8 rounded-[12px]", gap: "gap-2.5" },
+    lg: { piece: "h-20 w-12 rounded-[18px] sm:h-28 sm:w-16", gap: "gap-3" },
   }[size];
-  const [h, w, r, gap] = dims.split(" ");
   return (
-    <div className={cn("flex items-end", gap, className)} aria-hidden="true">
+    <div className={cn("flex items-end", sizes.gap, className)} aria-hidden="true">
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
           className={cn(
-            h,
-            w,
-            r,
+            sizes.piece,
             "block transition-transform duration-500",
             i === lit ? "piece-lit -translate-y-1" : "border border-border bg-card",
           )}

@@ -154,7 +154,8 @@
 
 @utility logo-script {
   font-family: var(--font-script);
-  line-height: 1;
+  line-height: 1.3;
+  padding-inline: 0.08em;
   color: var(--fnx-crema);
 }
 

@@ -38,7 +38,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-20 sm:px-8">
         <Link to="/" className="rounded-md px-1" aria-label="Fnx, ir al inicio">
-          <Logo className="text-5xl sm:text-6xl" />
+          <Logo className="block pt-4 text-[2.6rem] sm:text-5xl" />
         </Link>
 
         <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">

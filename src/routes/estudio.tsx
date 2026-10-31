@@ -164,7 +164,7 @@ function RotatingPhrases() {
         </h2>
         <div className="min-h-[9rem] sm:min-h-[12rem]" aria-live="polite">
           <p key={index} className="headline phrase-in text-5xl text-foreground sm:text-7xl lg:text-8xl">
-            <PhraseText text={PHRASES[index]} />
+            <PhraseText text={PHRASES[index] ?? ""} />
           </p>
         </div>
         <div className="flex items-center gap-3">

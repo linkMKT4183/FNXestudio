@@ -80,9 +80,10 @@ function Marca() {
     return () => window.removeEventListener("keydown", onKey);
   }, [go, index]);
 
-  const Current = SECTIONS[index].C;
-  const prev = SECTIONS[(index - 1 + SECTIONS.length) % SECTIONS.length];
-  const next = SECTIONS[(index + 1) % SECTIONS.length];
+  const current = SECTIONS[index] ?? SECTIONS[0]!;
+  const Current = current.C;
+  const prev = SECTIONS[(index - 1 + SECTIONS.length) % SECTIONS.length]!;
+  const next = SECTIONS[(index + 1) % SECTIONS.length]!;
 
   return (
     <div data-area="estudio">
@@ -137,12 +138,12 @@ function Marca() {
       </div>
 
       <section
-        id={`panel-${SECTIONS[index].id}`}
+        id={`panel-${current.id}`}
         role="tabpanel"
-        aria-labelledby={`tab-${SECTIONS[index].id}`}
+        aria-labelledby={`tab-${current.id}`}
         className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 sm:py-20"
       >
-        <div key={SECTIONS[index].id} className="phrase-in">
+        <div key={current.id} className="phrase-in">
           <Current />
         </div>
       </section>

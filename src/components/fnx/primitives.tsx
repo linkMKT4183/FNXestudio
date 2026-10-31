@@ -111,11 +111,11 @@ export function Headline({
   className,
   id,
 }: {
-  lead?: string;
+  lead?: string | undefined;
   accent: string;
   as?: ElementType;
   className?: string;
-  id?: string;
+  id?: string | undefined;
 }) {
   return (
     <Tag id={id} className={cn("headline text-foreground", className)}>

@@ -535,7 +535,7 @@ const CHAPTERS = [
 
 export function Manual() {
   const [active, setActive] = useState(1);
-  const ch = CHAPTERS[active];
+  const ch = CHAPTERS[active] ?? CHAPTERS[0]!;
   return (
     <Panel
       eyebrow="Manual de marca"

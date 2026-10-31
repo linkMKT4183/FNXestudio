@@ -41,7 +41,7 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
     { v: "noticias", l: "Noticias" },
   ];
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex rounded-full border border-border p-1">
+    <div role="radiogroup" aria-label={label} className="inline-flex self-start rounded-full border border-border p-1">
       {opts.map((o) => (
         <button
           key={o.v}

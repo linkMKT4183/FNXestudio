@@ -313,7 +313,7 @@ function Door({
           {kicker}
         </Tag>
         <span className="flex items-end justify-between gap-6">
-          <span className="headline text-4xl text-foreground sm:text-5xl md:text-4xl lg:text-5xl">{title}</span>
+          <span className="headline text-4xl text-foreground sm:text-5xl md:text-3xl lg:text-4xl">{title}</span>
           <span
             className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
             aria-hidden="true"

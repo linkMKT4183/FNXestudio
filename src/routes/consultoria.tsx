@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { Check } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
@@ -338,7 +339,7 @@ function ServiceTabs({ services }: { services: Service[] }) {
   );
 }
 
-function ComboGroup({ tag, combos, extra }: { tag: string; combos: Combo[]; extra?: React.ReactNode }) {
+function ComboGroup({ tag, combos, extra }: { tag: string; combos: Combo[]; extra?: ReactNode }) {
   return (
     <div className="flex flex-col gap-5">
       <Tag className="self-start">{tag}</Tag>

@@ -249,9 +249,12 @@ function Home() {
       <section id="contacto" aria-labelledby="cta-titulo" className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8">
         <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
           <Pieces lit={4} />
-          <h2 id="cta-titulo" className="headline text-5xl text-foreground sm:text-7xl">
-            ¿Arrancamos? <span className="text-area">Escribinos.</span>
-          </h2>
+          <Headline
+            id="cta-titulo"
+            lead="¿Arrancamos?"
+            accent="Escribinos."
+            className="text-5xl sm:text-7xl"
+          />
           <p className="max-w-lg text-muted-foreground">
             Contanos qué necesitás y te respondemos por WhatsApp.
           </p>
@@ -263,33 +266,42 @@ function Home() {
 }
 
 function Door({
-  area,
   to,
+  tone,
   kicker,
   title,
+  img,
 }: {
-  area: "estudio" | "salud";
   to: "/estudio" | "/salud";
+  tone: "naranja" | "verde";
   kicker: string;
   title: string;
+  img: FnxImg;
 }) {
   return (
     <Link
       to={to}
-      data-area={area}
-      className={cn(
-        "group relative flex min-h-64 flex-col justify-between gap-10 overflow-hidden rounded-3xl border border-border bg-card p-7 transition-all hover:border-area hover:shadow-glow-soft sm:p-9",
-      )}
+      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
     >
-      <span className="absolute inset-x-0 top-0 h-1.5 bg-area" aria-hidden="true" />
-      <span className="eyebrow text-area">{kicker}</span>
-      <span className="flex items-end justify-between gap-6">
-        <span className="headline text-4xl text-foreground sm:text-5xl">{title}</span>
-        <span
-          className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-transform group-hover:translate-x-1"
-          aria-hidden="true"
-        >
-          <ArrowRight className="h-6 w-6" />
+      <span className="block aspect-[16/9] overflow-hidden border-b border-border">
+        <FnxImage
+          img={img}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="photo-hover h-full w-full object-cover"
+        />
+      </span>
+      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-9">
+        <Tag tone={tone} className="self-start">
+          {kicker}
+        </Tag>
+        <span className="flex items-end justify-between gap-6">
+          <span className="headline text-4xl text-foreground sm:text-5xl">{title}</span>
+          <span
+            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
+            aria-hidden="true"
+          >
+            <ArrowRight className="h-6 w-6" />
+          </span>
         </span>
       </span>
     </Link>

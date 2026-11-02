@@ -199,9 +199,12 @@ function Home() {
             <TenSeconds className="max-w-2xl bg-background">
               Sabemos del sector y tenemos los contactos.
             </TenSeconds>
-            <h2 id="valor-titulo" className="headline max-w-4xl text-5xl text-foreground sm:text-7xl">
-              Conocemos el sector y tenemos <span className="text-area">la red.</span>
-            </h2>
+            <Headline
+              id="valor-titulo"
+              lead="Conocemos el sector y tenemos"
+              accent="la red."
+              className="max-w-4xl text-5xl sm:text-7xl"
+            />
             <p className="max-w-xl text-lg text-muted-foreground">
               Pocas agencias pueden hacer las tres cosas a la vez.
             </p>

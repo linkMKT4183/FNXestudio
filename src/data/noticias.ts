@@ -1,7 +1,10 @@
 /**
  * Noticias de FNX Noticias. Para sumar una nueva, agregá un objeto al principio del array.
  * category: "Marketing" | "Negocios" | "Cannabis medicinal"
+ * image: la foto propia de la noticia (registrala en src/data/imagenes.ts).
  */
+import { IMG, type FnxImg } from "@/data/imagenes";
+
 export type NewsCategory = "Marketing" | "Negocios" | "Cannabis medicinal";
 
 export interface NewsItem {
@@ -12,6 +15,7 @@ export interface NewsItem {
   source: string;
   date: string;
   url: string;
+  image: FnxImg;
 }
 
 export const NEWS_CATEGORIES: NewsCategory[] = ["Marketing", "Negocios", "Cannabis medicinal"];
@@ -28,6 +32,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Publimetro",
     date: "29/10/2026",
     url: "https://www.publimetro.co/tecnologia/2026/10/29/instagram-prepara-un-cambio-que-podria-transformar-la-app-videos-de-90-minutos-nuevas-formas-de-monetizacion-y-mas-ia/",
+    image: IMG.nInstagram,
   },
   {
     id: "aviso-personalizado",
@@ -37,6 +42,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "La Nación",
     date: "31/10/2026",
     url: "https://www.lanacion.com.ar/economia/negocios/la-publicidad-entra-en-la-era-del-aviso-personalizado-nid31102026/",
+    image: IMG.nCarteles,
   },
   {
     id: "pymes-recesion",
@@ -47,6 +53,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Noticias Argentinas",
     date: "01/10/2026",
     url: "https://noticiasargentinas.com/economia/advierten-que-el-entramado-pyme-entra-al-ultimo-trimestre-en-recesion_a6abe5a7d8419983d4254f506",
+    image: IMG.nPymes,
   },
   {
     id: "endeavor-cuyo",
@@ -56,6 +63,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Descubre.vc",
     date: "06/10/2026",
     url: "https://www.descubre.vc/noticia/mendoza-recibe-la-experiencia-endeavor-cuyo-2026-para-potenciar-emprendedores-2026-10-06",
+    image: IMG.nEndeavor,
   },
   {
     id: "expo-cannabis-300-marcas",
@@ -65,6 +73,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "MDZ",
     date: "26/10/2026",
     url: "https://www.mdzol.com/sociedad/2026/10/26/expo-cannabis-2026-la-rural-junto-mas-de-300-marcas-clubes-cannabicos-y-una-industria-en-alza-1990700.html",
+    image: IMG.nExpo,
   },
   {
     id: "conicet-muestras",
@@ -74,6 +83,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "ENyS-CONICET",
     date: "octubre 2026",
     url: "https://enys.conicet.gov.ar/expo-cannabis-2026/",
+    image: IMG.nConicet,
   },
   {
     id: "mercado-834-millones",
@@ -84,6 +94,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Análisis Digital",
     date: "13/10/2026",
     url: "https://www.analisisdigital.com.ar/interes-general/2026/10/13/cannabis-medicinal-un-mercado-potencial-de-us-834-millones-que-la-falta-de-regulacion-mantiene-frenado",
+    image: IMG.nMercado,
   },
   {
     id: "ariccame-prorroga",
@@ -93,6 +104,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Agenda Cannabis",
     date: "13/10/2026",
     url: AGENDA_CANNABIS_URL,
+    image: IMG.nAriccame,
   },
   {
     id: "canamo-licencias",
@@ -102,6 +114,7 @@ export const NOTICIAS: NewsItem[] = [
     source: "Agenda Cannabis",
     date: "13/10/2026",
     url: AGENDA_CANNABIS_URL,
+    image: IMG.nLicencias,
   },
   {
     id: "reprocann-sedronar",
@@ -111,5 +124,6 @@ export const NOTICIAS: NewsItem[] = [
     source: "Revista THC",
     date: "22/10/2026",
     url: "https://revistathc.com/reprocann-en-expo-cannabis-2026-aprovecha-para-hacer-tu-registro-con-descuento/",
+    image: IMG.nReprocann,
   },
 ];

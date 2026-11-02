@@ -432,11 +432,11 @@ function Consultoria() {
       <Tabs defaultValue="agro" className="block">
         <div className="sticky top-16 z-30 border-b border-border bg-background/90 backdrop-blur-md sm:top-20">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:px-8">
-            <p className="eyebrow text-muted-foreground" id="sector-label">
+            <p className="eyebrow hidden text-muted-foreground sm:block" aria-hidden="true">
               Elegí tu sector
             </p>
             <TabsList
-              aria-labelledby="sector-label"
+              aria-label="Elegí tu sector"
               className="h-auto gap-1 rounded-full border border-border bg-transparent p-1"
             >
               {SECTORS.map((s) => (

@@ -1,7 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  ClipboardList,
+  FileCheck2,
+  FileSignature,
+  FolderOpen,
+  HeartHandshake,
+  MessagesSquare,
+  Newspaper,
+  PenTool,
+  Scale,
+} from "lucide-react";
+import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
-import { Headline, Logo, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
+import { IconBadge, Headline, Logo, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
@@ -30,6 +42,7 @@ export const Route = createFileRoute("/")({
 const AREAS = [
   {
     name: "FNX Estudio",
+    icon: PenTool,
     tone: "naranja" as const,
     to: "/estudio" as const,
     img: IMG.rey,
@@ -37,6 +50,7 @@ const AREAS = [
   },
   {
     name: "FNX Consultoría",
+    icon: Scale,
     tone: "azul" as const,
     to: "/consultoria" as const,
     img: IMG.cHero,
@@ -44,6 +58,7 @@ const AREAS = [
   },
   {
     name: "FNX Salud",
+    icon: HeartHandshake,
     tone: "verde" as const,
     to: "/salud" as const,
     img: IMG.lupa,
@@ -55,6 +70,7 @@ const AREAS = [
   },
   {
     name: "FNX Noticias",
+    icon: Newspaper,
     tone: "amarillo" as const,
     to: "/noticias" as const,
     img: IMG.nCarteles,
@@ -63,13 +79,14 @@ const AREAS = [
 ];
 
 const STEPS = [
-  { n: "01", title: "Nos escribís por WhatsApp", text: "Un mensaje alcanza para arrancar." },
+  { n: "01", icon: MessagesSquare, title: "Nos escribís por WhatsApp", text: "Un mensaje alcanza para arrancar." },
   {
     n: "02",
+    icon: ClipboardList,
     title: "Te hacemos 3 preguntas",
     text: "Para entender qué necesitás, sin vueltas.",
   },
-  { n: "03", title: "Te pasamos una propuesta clara", text: "Qué hacemos, cuándo y cómo." },
+  { n: "03", icon: FileCheck2, title: "Te pasamos una propuesta clara", text: "Qué hacemos, cuándo y cómo." },
 ];
 
 /** Parallax leve: la foto baja más lento que el scroll. Se apaga con movimiento reducido. */
@@ -180,7 +197,10 @@ function Home() {
                   <FnxImage img={a.img} className="photo-hover h-full w-full object-cover" />
                 </div>
                 <div className="flex items-center justify-between px-2">
-                  <Tag tone={a.tone}>{a.name}</Tag>
+                  <span className="flex min-w-0 items-center gap-2">
+                    <IconBadge icon={a.icon} variant="neutral" size="sm" className="shrink-0" />
+                    <Tag tone={a.tone} className="whitespace-nowrap">{a.name}</Tag>
+                  </span>
                   <ArrowRight
                     className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
                     aria-hidden="true"
@@ -240,7 +260,10 @@ function Home() {
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
               <div className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
-                <span className="headline text-5xl text-area">{s.n}</span>
+                <div className="flex items-center justify-between">
+                  <span className="headline text-5xl text-area">{s.n}</span>
+                  <IconBadge icon={s.icon} />
+                </div>
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
               </div>
@@ -249,17 +272,36 @@ function Home() {
         </ol>
         <Reveal className="mt-8 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-border p-6">
-            <p className="eyebrow text-muted-foreground">Para empezar</p>
+            <p className="eyebrow flex items-center gap-2 text-muted-foreground">
+              <FileSignature className="h-4 w-4 text-area" aria-hidden="true" />
+              Para empezar
+            </p>
             <p className="mt-2 font-semibold text-foreground">
               Presupuesto firmado y 50% de anticipo.
             </p>
           </div>
           <div className="rounded-2xl border border-border p-6">
-            <p className="eyebrow text-muted-foreground">Al terminar</p>
+            <p className="eyebrow flex items-center gap-2 text-muted-foreground">
+              <FolderOpen className="h-4 w-4 text-area" aria-hidden="true" />
+              Al terminar
+            </p>
             <p className="mt-2 font-semibold text-foreground">
               Archivos editables con el 100% pago.
             </p>
           </div>
+        </Reveal>
+      </Section>
+
+      {/* Instagram */}
+      <Section
+        id="instagram"
+        eyebrow="Instagram"
+        lead="Dos cuentas,"
+        accent="un equipo."
+        tldr="Dos perfiles que trabajan en colaboración: seguí el que más te sirva, o los dos."
+      >
+        <Reveal>
+          <InstagramDuo />
         </Reveal>
       </Section>
 

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { BadgeCheck, Compass, Users } from "lucide-react";
+import { BadgeCheck, Compass, FileQuestion, Lock, Users } from "lucide-react";
+import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { AgeGate } from "@/components/fnx/AgeGate";
 import { ResourceCard } from "@/components/fnx/cards";
@@ -65,13 +66,15 @@ const SERVICES = [
 ];
 
 const FAQ = [
-  { q: "¿Por dónde empiezo?", a: "Escribinos y te orientamos según tu caso.", img: IMG.brujulas },
+  { icon: Compass, q: "¿Por dónde empiezo?", a: "Escribinos y te orientamos según tu caso.", img: IMG.brujulas },
   {
+    icon: FileQuestion,
     q: "¿Me garantizan la aprobación?",
     a: "No. La aprobación depende de la evaluación oficial; te ayudamos a presentar todo correctamente.",
     img: IMG.mitoRealidad,
   },
   {
+    icon: Lock,
     q: "¿Qué pasa con mis datos?",
     a: "Pedimos tu consentimiento y tratamos tu información con reserva.",
     img: IMG.candado,
@@ -96,7 +99,10 @@ function FaqWithPhotos() {
           {FAQ.map((f, i) => (
             <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
               <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
-                {f.q}
+                <span className="flex items-center gap-3">
+                  <f.icon className="h-5 w-5 shrink-0 text-area" aria-hidden="true" />
+                  {f.q}
+                </span>
               </AccordionTrigger>
               <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
             </AccordionItem>
@@ -157,6 +163,7 @@ function Salud() {
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
             <WhatsAppButton topic="salud" />
+            <InstagramButton account="salud" />
             <Pieces lit={2} />
           </div>
           <AdultNote />

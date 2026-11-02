@@ -1,5 +1,6 @@
 import { useId, useState, type ReactNode } from "react";
-import { Plus, RotateCw } from "lucide-react";
+import { Plus, RotateCw, type LucideIcon } from "lucide-react";
+import { IconBadge } from "./primitives";
 import { cn } from "@/lib/utils";
 
 /** Tarjeta que se da vuelta al tocarla. Opcionalmente lleva una foto arriba en el frente. */
@@ -72,8 +73,10 @@ export function ExpandCard({
   children,
   className,
   media,
+  icon,
   defaultOpen = false,
 }: {
+  icon?: LucideIcon;
   title: ReactNode;
   kicker?: ReactNode;
   children: ReactNode;
@@ -102,9 +105,12 @@ export function ExpandCard({
         aria-controls={id}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="flex flex-col gap-2">
-          {kicker}
-          <span className="text-xl font-bold text-foreground">{title}</span>
+        <span className="flex items-start gap-4">
+          {icon ? <IconBadge icon={icon} /> : null}
+          <span className="flex flex-col gap-2">
+            {kicker}
+            <span className="text-xl font-bold text-foreground">{title}</span>
+          </span>
         </span>
         <span
           className={cn(

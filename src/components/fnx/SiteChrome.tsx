@@ -1,5 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Instagram, Menu, X } from "lucide-react";
+import { INSTAGRAM_ACCOUNTS, buildInstagramLink, buildWhatsAppLink, type InstagramAccountId } from "@/config/site";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 import { useEffect, useState } from "react";
 import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
@@ -104,6 +106,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-3">
           <Logo className="text-7xl" />
           <p className="text-sm text-muted-foreground">Mendoza, Argentina</p>
+          <SocialLinks />
         </div>
         <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3">
           <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-foreground">
@@ -126,5 +129,44 @@ export function SiteFooter() {
         </p>
       </div>
     </footer>
+  );
+}
+
+/** Íconos de contacto del pie: WhatsApp y las dos cuentas de Instagram. */
+function SocialLinks() {
+  const wa = buildWhatsAppLink("marca");
+  const ids = Object.keys(INSTAGRAM_ACCOUNTS) as InstagramAccountId[];
+  const base =
+    "inline-flex h-11 items-center gap-2 rounded-full border border-border px-4 text-sm font-semibold text-muted-foreground transition-colors hover:border-foreground hover:text-foreground";
+  return (
+    <ul className="mt-2 flex flex-wrap gap-2" aria-label="Redes y contacto">
+      {wa ? (
+        <li>
+          <a href={wa} target="_blank" rel="noopener noreferrer" className={base}>
+            <WhatsAppIcon className="h-4 w-4" />
+            WhatsApp
+          </a>
+        </li>
+      ) : null}
+      {ids.map((id) => {
+        const href = buildInstagramLink(id);
+        const acc = INSTAGRAM_ACCOUNTS[id];
+        return (
+          <li key={id}>
+            {href ? (
+              <a href={href} target="_blank" rel="noopener noreferrer" className={base}>
+                <Instagram className="h-4 w-4" aria-hidden="true" />
+                {acc.name}
+              </a>
+            ) : (
+              <span className={`${base} cursor-default opacity-60`} title="Instagram próximamente">
+                <Instagram className="h-4 w-4" aria-hidden="true" />
+                {acc.name}
+              </span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }

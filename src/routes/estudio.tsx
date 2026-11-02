@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
+import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
@@ -30,30 +32,35 @@ export const Route = createFileRoute("/estudio")({
 
 const SERVICES = [
   {
+    icon: Palette,
     title: "Branding e identidad",
     short: "Que tu marca se reconozca.",
     detail: "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
     img: IMG.branding,
   },
   {
+    icon: Clapperboard,
     title: "Producción audiovisual",
     short: "Foto y video con idea.",
     detail: "Piezas para redes, campañas y web. Planificadas, filmadas y editadas por nosotros.",
     img: IMG.audiovisual,
   },
   {
+    icon: ShoppingBag,
     title: "Tienda online",
     short: "Vender mientras dormís.",
     detail: "Armamos tu tienda, cargamos productos y la dejamos lista para cobrar.",
     img: IMG.tienda,
   },
   {
+    icon: Smartphone,
     title: "Redes y contenido",
     short: "Constancia sin perder tiempo.",
     detail: "Calendario, diseño y textos. Vos aprobás, nosotros publicamos.",
     img: IMG.redes,
   },
   {
+    icon: Target,
     title: "Estrategia",
     short: "Ver la jugada antes.",
     detail: "Ordenamos objetivos, público y mensajes antes de invertir en pauta.",
@@ -106,6 +113,7 @@ function Estudio() {
             <Reveal key={s.title} delay={i * 70}>
               <ExpandCard
                 title={s.title}
+                icon={s.icon}
                 kicker={<span className="text-sm text-muted-foreground">{s.short}</span>}
                 media={<FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />}
               >
@@ -143,7 +151,10 @@ function Estudio() {
             accent="tu marca."
             className="text-5xl sm:text-7xl"
           />
-          <WhatsAppButton topic="marca" />
+          <div className="flex flex-wrap gap-3">
+            <WhatsAppButton topic="marca" />
+            <InstagramButton account="estudio" />
+          </div>
         </Reveal>
       </section>
     </div>

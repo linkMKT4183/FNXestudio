@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import { Briefcase, ExternalLink, Landmark, LayoutGrid, Megaphone, type LucideIcon } from "lucide-react";
+import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useMemo, useState } from "react";
-import { Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
+import { IconBadge, Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 
@@ -32,6 +33,13 @@ export const Route = createFileRoute("/noticias")({
 
 type Filter = "Todas" | NewsCategory;
 const FILTERS: Filter[] = ["Todas", ...NEWS_CATEGORIES];
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  Todas: LayoutGrid,
+  Marketing: Megaphone,
+  Negocios: Briefcase,
+  "Cannabis medicinal": Landmark,
+};
 
 function Noticias() {
   const [filter, setFilter] = useState<Filter>("Todas");
@@ -74,6 +82,10 @@ function Noticias() {
                   : "border-border text-muted-foreground hover:text-foreground",
               )}
             >
+              {(() => {
+                const Icon = CATEGORY_ICONS[f];
+                return Icon ? <Icon className="mr-2 inline h-4 w-4 align-[-3px]" aria-hidden="true" /> : null;
+              })()}
               {f}
             </button>
           ))}
@@ -94,7 +106,13 @@ function Noticias() {
                   </div>
                   <div className="flex flex-1 flex-col gap-4 p-6">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <Tag>{n.category}</Tag>
+                      <span className="flex items-center gap-2">
+                        {(() => {
+                          const Icon = CATEGORY_ICONS[n.category];
+                          return Icon ? <IconBadge icon={Icon} variant="outline" size="sm" /> : null;
+                        })()}
+                        <Tag>{n.category}</Tag>
+                      </span>
                       <time className="text-xs text-muted-foreground">{n.date}</time>
                     </div>
                     <h2 className="text-xl font-bold leading-snug text-foreground">{n.title}</h2>
@@ -134,6 +152,10 @@ function Noticias() {
           />
           <p className="text-muted-foreground">Lo importante, corto y con fuente.</p>
           <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
+        </Reveal>
+        <Reveal className="mt-8 flex flex-col gap-5">
+          <p className="eyebrow text-muted-foreground">También en Instagram</p>
+          <InstagramDuo />
         </Reveal>
       </section>
     </div>

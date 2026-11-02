@@ -1,6 +1,19 @@
 import { useState, type ReactNode } from "react";
-import { Check, X } from "lucide-react";
-import { Headline, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
+import {
+  BadgeCheck,
+  Check,
+  Eye,
+  Flame,
+  HeartHandshake,
+  Link2,
+  PenTool,
+  Scale,
+  ShieldCheck,
+  Target,
+  Telescope,
+  X,
+} from "lucide-react";
+import { IconBadge, Headline, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
 import { cn } from "@/lib/utils";
 
@@ -102,11 +115,11 @@ export function MisionVision() {
       tldr="Crear marcas con carácter y conectar con gente de confianza."
     >
       <div className="grid gap-4 md:grid-cols-2">
-        <ExpandCard title="Misión" kicker={<span className="eyebrow text-area">Hoy</span>} defaultOpen>
+        <ExpandCard title="Misión" icon={Target} kicker={<span className="eyebrow text-area">Hoy</span>} defaultOpen>
           Crear marcas con carácter y conectar a las personas con profesionales y organizaciones de
           confianza, con claridad, responsabilidad y una mirada propia.
         </ExpandCard>
-        <ExpandCard title="Visión" kicker={<span className="eyebrow text-area">Mañana</span>} defaultOpen>
+        <ExpandCard title="Visión" icon={Telescope} kicker={<span className="eyebrow text-area">Mañana</span>} defaultOpen>
           Ser la referencia en Argentina para las marcas que quieren destacarse y para quienes buscan
           información y acompañamiento confiable en salud.
         </ExpandCard>
@@ -117,11 +130,11 @@ export function MisionVision() {
 
 /* 3. Valores */
 const VALUES = [
-  { t: "Carácter", d: "Cada pieza tiene una idea propia." },
-  { t: "Claridad", d: "Decimos las cosas simples y sin vueltas." },
-  { t: "Confianza verificada", d: "Solo trabajamos con profesionales y marcas que cumplen." },
-  { t: "Responsabilidad", d: "Comunicamos salud con cuidado y para adultos." },
-  { t: "Coherencia", d: "Lo que prometemos es lo que hacemos." },
+  { icon: Flame, t: "Carácter", d: "Cada pieza tiene una idea propia." },
+  { icon: Eye, t: "Claridad", d: "Decimos las cosas simples y sin vueltas." },
+  { icon: BadgeCheck, t: "Confianza verificada", d: "Solo trabajamos con profesionales y marcas que cumplen." },
+  { icon: ShieldCheck, t: "Responsabilidad", d: "Comunicamos salud con cuidado y para adultos." },
+  { icon: Link2, t: "Coherencia", d: "Lo que prometemos es lo que hacemos." },
 ];
 
 export function Valores() {
@@ -139,7 +152,10 @@ export function Valores() {
             label={v.t}
             front={
               <div className="flex flex-col gap-4">
-                <span className="headline text-2xl text-muted-foreground">0{i + 1}</span>
+                <div className="flex items-center justify-between">
+                  <span className="headline text-2xl text-muted-foreground">0{i + 1}</span>
+                  <IconBadge icon={v.icon} />
+                </div>
                 <span className="headline text-4xl text-foreground">{v.t}</span>
               </div>
             }
@@ -231,6 +247,8 @@ export function Tono() {
 }
 
 /* 6. A quién le hablamos */
+const PERSONA_ICONS = { naranja: PenTool, verde: HeartHandshake, azul: Scale } as const;
+
 const PERSONAS = [
   {
     name: "Lucía",
@@ -292,6 +310,7 @@ export function Publico() {
           <ExpandCard
             key={p.name}
             title={p.name}
+            icon={PERSONA_ICONS[p.tone]}
             kicker={
               <Tag tone={p.tone} className="self-start">
                 {p.area}

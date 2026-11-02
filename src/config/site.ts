@@ -27,3 +27,31 @@ export function buildWhatsAppLink(
 }
 
 export const SITE_NAME = "FNX · Fénix Creativo";
+
+/**
+ * Cuentas de Instagram de FNX. Son dos cuentas separadas que trabajan en colaboración.
+ * HANDLE: completalo con el usuario sin "@", por ejemplo "fnxestudio".
+ * Mientras esté vacío, el botón muestra "Instagram próximamente".
+ * Los nombres y las áreas de cada cuenta son provisorios: cambialos cuando estén definidas.
+ */
+export const INSTAGRAM_ACCOUNTS = {
+  estudio: {
+    name: "FNX Estudio",
+    handle: "",
+    covers: "Estudio y Consultoría",
+  },
+  salud: {
+    name: "FNX Salud",
+    handle: "",
+    covers: "Salud y Noticias",
+  },
+} as const;
+
+export type InstagramAccountId = keyof typeof INSTAGRAM_ACCOUNTS;
+
+/** Devuelve el link al perfil o null si todavía no hay usuario cargado. */
+export function buildInstagramLink(id: InstagramAccountId, handle: string = INSTAGRAM_ACCOUNTS[id].handle): string | null {
+  const clean = handle.trim().replace(/^@/, "");
+  if (!clean) return null;
+  return `https://www.instagram.com/${clean}/`;
+}

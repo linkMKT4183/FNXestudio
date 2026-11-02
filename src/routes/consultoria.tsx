@@ -1,7 +1,29 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Check } from "lucide-react";
-import { Headline, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
+import {
+  ClipboardCheck,
+  ClipboardList,
+  Droplets,
+  FileSignature,
+  FolderKanban,
+  Handshake,
+  MessagesSquare,
+  Network,
+  RefreshCw,
+  Route as RouteIcon,
+  Scale,
+  Share2,
+  ShieldCheck,
+  Stamp,
+  Tractor,
+  TrendingUp,
+  Users,
+  UsersRound,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
+import { InstagramButton } from "@/components/fnx/InstagramButton";
+import { Headline, IconBadge, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -34,6 +56,7 @@ export const Route = createFileRoute("/consultoria")({
 type Sector = "agro" | "cannabis";
 
 interface Audience {
+  icon?: LucideIcon;
   who: string;
   need: string;
   door: string;
@@ -41,6 +64,7 @@ interface Audience {
 }
 
 interface Service {
+  icon?: LucideIcon;
   id: string;
   label: string;
   who: string;
@@ -59,22 +83,26 @@ interface Combo {
 
 const AUDIENCE_AGRO: Audience[] = [
   {
+    icon: Droplets,
     who: "Productores que quieren tecnificar su producción",
     need: "Riego eficiente, monitoreo y mejores rindes",
     door: "Tecnificación y riego",
     img: IMG.cValvula,
   },
   {
+    icon: Tractor,
     who: "Proyectos agrícolas de gran escala",
     need: "Diseño, dimensionamiento y cotización de infraestructura",
     door: "Proyectos a escala",
   },
   {
+    icon: ClipboardCheck,
     who: "Productores que necesitan trazabilidad",
     need: "Registros ordenados y presentables",
     door: "Monitoreo y trazabilidad",
   },
   {
+    icon: Handshake,
     who: "Emprendimientos, cooperativas y sociedades agrícolas",
     need: "Constituirse y tener sus contratos en regla",
     door: "Constitución y contratos",
@@ -83,6 +111,7 @@ const AUDIENCE_AGRO: Audience[] = [
 
 const SERVICES_AGRO: Service[] = [
   {
+    icon: Wrench,
     id: "tecnico-agro",
     label: "Técnico",
     who: "Profesional en Gestión Ambiental con amplia experiencia en riego y proyectos de gran escala.",
@@ -97,6 +126,7 @@ const SERVICES_AGRO: Service[] = [
     ],
   },
   {
+    icon: Scale,
     id: "juridico-agro",
     label: "Jurídico",
     who: "Abogados de la red de FNX, elegidos según cada caso.",
@@ -128,26 +158,31 @@ const COMBOS_AGRO: Combo[] = [
 
 const AUDIENCE_CANNABIS: Audience[] = [
   {
+    icon: Users,
     who: "Grupos que quieren armar una asociación civil",
     need: "Constituirla bien desde el primer día",
     door: "Asociación llave en mano",
   },
   {
+    icon: FolderKanban,
     who: "Asociaciones que ya funcionan, pero desordenadas",
     need: "Libros, actas y padrón al día",
     door: "Regularización y mantenimiento",
   },
   {
+    icon: RouteIcon,
     who: "Quienes cultivan en la informalidad y quieren pasar a la legalidad",
     need: "Un plan de cultivo y trazabilidad presentables",
     door: "Plan de cultivo y asesoramiento técnico",
   },
   {
+    icon: Stamp,
     who: "Emprendimientos y marcas de productos",
     need: "Sociedad, registro de marca y comunicación",
     door: "Marca protegida",
   },
   {
+    icon: TrendingUp,
     who: "Inversores y proyectos industriales",
     need: "Licencias y presentaciones ante organismos",
     door: "Mentoría de proyectos",
@@ -157,6 +192,7 @@ const AUDIENCE_CANNABIS: Audience[] = [
 
 const SERVICES_CANNABIS: Service[] = [
   {
+    icon: Scale,
     id: "juridico",
     label: "Jurídico",
     who: "Abogados de la red de FNX, elegidos según cada caso.",
@@ -175,6 +211,7 @@ const SERVICES_CANNABIS: Service[] = [
     ],
   },
   {
+    icon: Wrench,
     id: "tecnico",
     label: "Técnico de cultivo",
     who: "Profesional en Gestión Ambiental especializado en dirección técnica de cultivo.",
@@ -189,6 +226,7 @@ const SERVICES_CANNABIS: Service[] = [
     ],
   },
   {
+    icon: Share2,
     id: "derivaciones",
     label: "Derivaciones",
     who: "Lo que Consultoría no hace se deriva a profesionales de la red.",
@@ -228,6 +266,8 @@ const COMBOS_CANNABIS: Combo[] = [
     img: IMG.cEscudo,
   },
 ];
+
+const STEP_ICONS: LucideIcon[] = [MessagesSquare, ClipboardList, UsersRound, FileSignature, Network, RefreshCw];
 
 const STEPS = [
   "Nos escribís por WhatsApp o redes.",
@@ -280,7 +320,10 @@ function AudienceGrid({ items }: { items: Audience[] }) {
               </div>
             ) : null}
             <div className="flex flex-1 flex-col gap-5 p-6">
-              <span className="headline text-3xl text-muted-foreground">0{i + 1}</span>
+              <div className="flex items-center justify-between">
+                <span className="headline text-3xl text-muted-foreground">0{i + 1}</span>
+                {a.icon ? <IconBadge icon={a.icon} /> : null}
+              </div>
               <h3 className="text-lg font-bold leading-snug text-foreground">{a.who}</h3>
               <p className="text-sm text-muted-foreground">{a.need}</p>
               <div className="mt-auto border-t border-border pt-4">
@@ -306,6 +349,7 @@ function ServiceTabs({ services }: { services: Service[] }) {
               value={s.id}
               className="h-10 shrink-0 rounded-full px-5 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none"
             >
+              {s.icon ? <s.icon className="mr-2 h-4 w-4" aria-hidden="true" /> : null}
               {s.label}
             </TabsTrigger>
           ))}
@@ -567,7 +611,10 @@ function Consultoria() {
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s} delay={i * 70}>
               <div className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
-                <span className="headline text-5xl text-area">0{i + 1}</span>
+                <div className="flex items-center justify-between">
+                  <span className="headline text-5xl text-area">0{i + 1}</span>
+                  {STEP_ICONS[i] ? <IconBadge icon={STEP_ICONS[i]!} /> : null}
+                </div>
                 <p className="font-semibold leading-snug text-foreground">{s}</p>
               </div>
             </Reveal>
@@ -605,7 +652,7 @@ function Consultoria() {
             {LIMITS.map((l) => (
               <li key={l.text} className="flex items-start gap-4 rounded-2xl border border-border p-6">
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-area text-area">
-                  <Check className="h-4 w-4" aria-hidden="true" />
+                  <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span className="flex flex-col gap-2">
                   {l.note ? <span className="eyebrow text-area">{l.note}</span> : null}
@@ -625,7 +672,10 @@ function Consultoria() {
           <p className="max-w-lg text-muted-foreground">
             Te respondemos por WhatsApp y vemos juntos por dónde empezar.
           </p>
-          <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+          <div className="flex flex-wrap gap-3">
+            <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+            <InstagramButton account="estudio" />
+          </div>
         </Reveal>
       </section>
     </div>

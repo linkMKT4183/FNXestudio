@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode, type ElementType, type RefObject } from "react";
+import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** Devuelve true la primera vez que el elemento entra en pantalla. */
@@ -209,6 +210,38 @@ export function Tag({
       )}
     >
       {children}
+    </span>
+  );
+}
+
+/** Ícono de la marca en un recuadro. "solid": fondo del color del área. "outline": borde y ícono en color. "neutral": en crema. */
+export function IconBadge({
+  icon: Icon,
+  variant = "solid",
+  size = "md",
+  className,
+}: {
+  icon: LucideIcon;
+  variant?: "solid" | "outline" | "neutral";
+  size?: "sm" | "md";
+  className?: string;
+}) {
+  const variants = {
+    solid: "bg-area text-area-foreground",
+    outline: "border border-area text-area",
+    neutral: "border border-border text-foreground",
+  };
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 items-center justify-center rounded-xl",
+        size === "sm" ? "h-9 w-9" : "h-12 w-12",
+        variants[variant],
+        className,
+      )}
+      aria-hidden="true"
+    >
+      <Icon className={size === "sm" ? "h-4 w-4" : "h-6 w-6"} strokeWidth={1.75} />
     </span>
   );
 }

@@ -34,18 +34,24 @@ export const SITE_NAME = "FNX · Fénix Creativo";
  * Mientras esté vacío, el botón muestra "Instagram próximamente".
  * Los nombres y las áreas de cada cuenta son provisorios: cambialos cuando estén definidas.
  */
-export const INSTAGRAM_ACCOUNTS = {
+export interface InstagramAccount {
+  name: string;
+  handle: string;
+  covers: string;
+}
+
+export const INSTAGRAM_ACCOUNTS: Record<"estudio" | "salud", InstagramAccount> = {
   estudio: {
     name: "FNX Estudio",
-    handle: "",
-    covers: "Estudio y Consultoría",
+    handle: "fnx.estudio",
+    covers: "Marca, consultoría y negocios",
   },
   salud: {
     name: "FNX Salud",
-    handle: "",
-    covers: "Salud y Noticias",
+    handle: "fnx.salud",
+    covers: "Orientación +18 y noticias del sector",
   },
-} as const;
+};
 
 export type InstagramAccountId = keyof typeof INSTAGRAM_ACCOUNTS;
 

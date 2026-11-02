@@ -1,5 +1,33 @@
-import { useEffect, useRef, useState, type ReactNode, type ElementType } from "react";
+import { useEffect, useRef, useState, type ReactNode, type ElementType, type RefObject } from "react";
 import { cn } from "@/lib/utils";
+
+/** Devuelve true la primera vez que el elemento entra en pantalla. */
+export function useInView<T extends Element = HTMLElement>(
+  threshold = 0.12,
+): [RefObject<T | null>, boolean] {
+  const ref = useRef<T | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold, rootMargin: "0px 0px -40px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
 
 /** Logo: solo "Fnx" en Mrs Saint Delafield, color crema. */
 export function Logo({ className, as: Tag = "span" }: { className?: string; as?: ElementType }) {
@@ -10,7 +38,7 @@ export function Logo({ className, as: Tag = "span" }: { className?: string; as?:
   );
 }
 
-/** "Uno que se destaca entre muchos": 4 piezas grafito y 1 encendida. */
+/** "Uno que se destaca entre muchos": 4 piezas grafito y 1 que se enciende al aparecer. */
 export function Pieces({
   lit = 3,
   size = "md",
@@ -20,21 +48,25 @@ export function Pieces({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
+  const [ref, on] = useInView<HTMLDivElement>(0.4);
   const sizes = {
     sm: { piece: "h-5 w-3.5 rounded-[6px]", gap: "gap-1.5" },
     md: { piece: "h-12 w-8 rounded-[12px]", gap: "gap-2.5" },
     lg: { piece: "h-20 w-12 rounded-[18px] sm:h-28 sm:w-16", gap: "gap-3" },
   }[size];
   return (
-    <div className={cn("flex items-end", sizes.gap, className)} aria-hidden="true">
+    <div ref={ref} className={cn("flex items-end", sizes.gap, className)} aria-hidden="true">
       {Array.from({ length: 5 }).map((_, i) => (
         <span
           key={i}
           className={cn(
             sizes.piece,
-            "block transition-transform duration-500",
-            i === lit ? "piece-lit -translate-y-1" : "border border-border bg-card",
+            "block border transition-[background-color,border-color,transform] duration-700 ease-out",
+            i === lit && on
+              ? "piece-lit -translate-y-1 border-transparent"
+              : "border-border bg-card",
           )}
+          style={i === lit ? { transitionDelay: "350ms" } : undefined}
         />
       ))}
     </div>
@@ -53,27 +85,7 @@ export function Reveal({
   delay?: number;
   as?: ElementType;
 }) {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const [ref, visible] = useInView<HTMLElement>();
   return (
     <Tag
       ref={ref}

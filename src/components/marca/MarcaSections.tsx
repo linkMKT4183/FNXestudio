@@ -44,7 +44,7 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
     { v: "noticias", l: "Noticias" },
   ];
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex self-start rounded-full border border-border p-1">
+    <div role="radiogroup" aria-label={label} className="inline-flex max-w-full self-start overflow-x-auto rounded-full border border-border p-1">
       {opts.map((o) => (
         <button
           key={o.v}
@@ -54,7 +54,7 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
           data-area={o.v}
           onClick={() => onChange(o.v)}
           className={cn(
-            "h-10 rounded-full px-5 text-sm font-semibold transition-colors",
+            "h-10 shrink-0 rounded-full px-3.5 text-sm font-semibold transition-colors sm:px-5",
             value === o.v ? "bg-area text-area-foreground" : "text-muted-foreground hover:text-foreground",
           )}
         >
@@ -385,10 +385,10 @@ const SWATCHES = [
   { name: "Grafito", hex: "#1C1C1C", cls: "bg-fnx-grafito text-fnx-crema" },
   { name: "Crema", hex: "#F3EEE4", cls: "bg-fnx-crema text-fnx-negro" },
   { name: "Gris", hex: "#A3A3A3", cls: "bg-fnx-gris text-fnx-negro" },
-  { name: "Naranja fuego", hex: "#F2552C", cls: "bg-fnx-naranja text-fnx-negro" },
+  { name: "Naranja fuego · FNX Estudio", hex: "#F2552C", cls: "bg-fnx-naranja text-fnx-negro" },
   { name: "Azul cobalto · FNX Consultoría", hex: "#4C8DFF", cls: "bg-fnx-azul text-fnx-negro" },
-  { name: "Verde", hex: "#3CCB7F", cls: "bg-fnx-verde text-fnx-negro" },
-  { name: "Amarillo", hex: "#FFD23F", cls: "bg-fnx-amarillo text-fnx-negro" },
+  { name: "Verde · FNX Salud", hex: "#3CCB7F", cls: "bg-fnx-verde text-fnx-negro" },
+  { name: "Amarillo · FNX Noticias", hex: "#FFD23F", cls: "bg-fnx-amarillo text-fnx-negro" },
 ];
 
 const POST: Record<Area, { lead: string; accent: string; tag: string }> = {
@@ -433,7 +433,7 @@ export function IdentidadVisual() {
       {/* Paleta */}
       <div className="flex flex-col gap-4">
         <h3 className="text-xl font-bold text-foreground">Paleta · tocá para copiar</h3>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {SWATCHES.map((s) => (
             <button
               key={s.hex}
@@ -463,6 +463,17 @@ export function IdentidadVisual() {
             Regla <span className="font-semibold text-foreground">70/20/10</span>: 70% negro, 20%
             crema y grafito, 10% el color del área.
           </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-sm text-muted-foreground">
+              Un solo color de área por pieza; los cuatro juntos solo en etiquetas chicas.
+            </p>
+            <span className="flex flex-wrap gap-1.5">
+              <Tag tone="naranja">Estudio</Tag>
+              <Tag tone="azul">Consultoría</Tag>
+              <Tag tone="verde">Salud</Tag>
+              <Tag tone="amarillo">Noticias</Tag>
+            </span>
+          </div>
         </div>
       </div>
 

@@ -56,6 +56,7 @@
   --color-fnx-naranja: var(--fnx-naranja);
   --color-fnx-verde: var(--fnx-verde);
   --color-fnx-amarillo: var(--fnx-amarillo);
+  --color-fnx-azul: var(--fnx-azul);
 
   --shadow-glow: var(--glow);
   --shadow-glow-soft: var(--glow-soft);
@@ -70,6 +71,7 @@
   --fnx-naranja: oklch(0.657 0.2 35.25); /* #F2552C */
   --fnx-verde: oklch(0.749 0.163 155.29); /* #3CCB7F */
   --fnx-amarillo: oklch(0.879 0.162 90.94); /* #FFD23F */
+  --fnx-azul: #4c8dff; /* #4C8DFF azul cobalto, FNX Consultoría */
 
   --radius: 1rem;
   --background: var(--fnx-negro);
@@ -101,6 +103,9 @@
 
 [data-area="estudio"] {
   --area: var(--fnx-naranja);
+}
+[data-area="consultoria"] {
+  --area: var(--fnx-azul);
 }
 [data-area="salud"] {
   --area: var(--fnx-verde);

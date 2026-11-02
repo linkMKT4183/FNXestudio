@@ -190,12 +190,13 @@ export function Tag({
 }: {
   children: ReactNode;
   className?: string;
-  tone?: "area" | "neutral" | "naranja" | "verde" | "amarillo";
+  tone?: "area" | "neutral" | "naranja" | "azul" | "verde" | "amarillo";
 }) {
   const tones = {
     area: "bg-area text-area-foreground",
     neutral: "border border-border text-muted-foreground",
     naranja: "bg-fnx-naranja text-fnx-negro",
+    azul: "bg-fnx-azul text-fnx-negro",
     verde: "bg-fnx-verde text-fnx-negro",
     amarillo: "bg-fnx-amarillo text-fnx-negro",
   };

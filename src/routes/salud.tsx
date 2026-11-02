@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { BadgeCheck, Compass, Users } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
@@ -141,6 +141,16 @@ function Salud() {
           />
           <p className="max-w-xl text-lg text-muted-foreground">
             Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.
+          </p>
+          <p className="max-w-xl text-sm text-muted-foreground">
+            Atendemos a pacientes. Si representás una asociación o un proyecto, te acompaña{" "}
+            <Link
+              to="/consultoria"
+              className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
+            >
+              FNX Consultoría
+            </Link>
+            .
           </p>
           <TenSeconds className="max-w-2xl">
             Te guiamos en el REPROCANN y te conectamos con gente verificada.

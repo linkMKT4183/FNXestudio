@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Project rules
-- Area accent is driven by `data-area` (estudio|salud|noticias) setting `--area`; components use `bg-area`/`text-area` tokens, never fixed accent colors — so one accent per section stays automatic.
+- Area accent is driven by `data-area` (estudio|consultoria|salud|noticias) setting `--area`; components use `bg-area`/`text-area` tokens, never fixed accent colors — so one accent per section stays automatic.
 - Site constants (WhatsApp number, messages, manual URL) live only in `src/config/site.ts`; every WhatsApp CTA goes through `WhatsAppButton`/`buildWhatsAppLink` so the empty-number fallback is consistent.
 - News content lives in `src/data/noticias.ts` as plain data so new items are added without touching UI.
 - Shared brand primitives (Logo, Pieces, Reveal, TenSeconds, Headline, Section) live in `src/components/fnx/`; reuse them instead of re-styling per page.

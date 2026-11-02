@@ -12,6 +12,7 @@ export interface GalleryItem extends FnxImg {
 export const GALLERY_GROUPS: { area: ImageArea; title: string }[] = [
   { area: "general", title: "Inicio" },
   { area: "estudio", title: "FNX Estudio" },
+  { area: "consultoria", title: "FNX Consultoría" },
   { area: "salud", title: "FNX Salud" },
   { area: "noticias", title: "FNX Noticias" },
 ];

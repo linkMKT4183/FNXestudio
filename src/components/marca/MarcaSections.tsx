@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MANUAL_URL } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-type Area = "estudio" | "salud" | "noticias";
+type Area = "estudio" | "consultoria" | "salud" | "noticias";
 
 function Panel({
   eyebrow,
@@ -39,6 +39,7 @@ function Panel({
 function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: Area) => void; label: string }) {
   const opts: { v: Area; l: string }[] = [
     { v: "estudio", l: "Estudio" },
+    { v: "consultoria", l: "Consultoría" },
     { v: "salud", l: "Salud" },
     { v: "noticias", l: "Noticias" },
   ];
@@ -214,6 +215,11 @@ export function Personalidad() {
 /* 5. Tono */
 const TONES: Record<Area, { name: string; tone: string; phrase: string }> = {
   estudio: { name: "FNX Estudio", tone: "Directo, con carácter, seguro.", phrase: "Desatamos tu marca." },
+  consultoria: {
+    name: "FNX Consultoría",
+    tone: "Experto, claro y sin juzgar.",
+    phrase: "Crecer en regla.",
+  },
   salud: {
     name: "FNX Salud",
     tone: "Cercano, claro, sin estigma, responsable.",
@@ -234,7 +240,7 @@ export function Tono() {
       <Panel
         eyebrow="Tono"
         lead="Una voz,"
-        accent="tres registros."
+        accent="cuatro registros."
         tldr="Hablamos igual de claro, pero cambiamos el registro según el área."
       >
         <AreaSelector value={area} onChange={setArea} label="Elegí un área" />
@@ -318,15 +324,24 @@ const PERSONAS = [
     blocks: "La poca visibilidad.",
     message: "Te mostramos como una opción verificada.",
   },
+  {
+    name: "Proyecto cannábico",
+    area: "FNX Consultoría",
+    tone: "azul" as const,
+    who: "Asociaciones, emprendimientos, marcas e inversores que ya están dentro del mundo cannábico.",
+    needs: "Constituirse, regularizarse y crecer dentro de la ley.",
+    blocks: "Tener libros, actas y padrón desordenados o un cultivo que todavía no está en regla.",
+    message: "Crecer en regla.",
+  },
 ];
 
 export function Publico() {
   return (
     <Panel
       eyebrow="A quién le hablamos"
-      lead="Cuatro personas,"
+      lead="Cinco perfiles,"
       accent="un mensaje."
-      tldr="Lucía, Dr. Martín, Sofía y las ONGs. Tocá para conocerlas."
+      tldr="Lucía, Dr. Martín, Sofía, las ONGs y los proyectos cannábicos. Tocá para conocerlos."
     >
       <div className="grid gap-4 md:grid-cols-2">
         {PERSONAS.map((p) => (
@@ -371,12 +386,14 @@ const SWATCHES = [
   { name: "Crema", hex: "#F3EEE4", cls: "bg-fnx-crema text-fnx-negro" },
   { name: "Gris", hex: "#A3A3A3", cls: "bg-fnx-gris text-fnx-negro" },
   { name: "Naranja fuego", hex: "#F2552C", cls: "bg-fnx-naranja text-fnx-negro" },
+  { name: "Azul cobalto · FNX Consultoría", hex: "#4C8DFF", cls: "bg-fnx-azul text-fnx-negro" },
   { name: "Verde", hex: "#3CCB7F", cls: "bg-fnx-verde text-fnx-negro" },
   { name: "Amarillo", hex: "#FFD23F", cls: "bg-fnx-amarillo text-fnx-negro" },
 ];
 
 const POST: Record<Area, { lead: string; accent: string; tag: string }> = {
   estudio: { lead: "Primero la marca.", accent: "Después la pauta.", tag: "FNX Estudio" },
+  consultoria: { lead: "Crecer en", accent: "regla.", tag: "FNX Consultoría" },
   salud: { lead: "Te acompañamos en", accent: "cada paso.", tag: "FNX Salud · +18" },
   noticias: { lead: "Lo que pasa, contado", accent: "con fuentes.", tag: "FNX Noticias" },
 };
@@ -416,7 +433,7 @@ export function IdentidadVisual() {
       {/* Paleta */}
       <div className="flex flex-col gap-4">
         <h3 className="text-xl font-bold text-foreground">Paleta · tocá para copiar</h3>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
           {SWATCHES.map((s) => (
             <button
               key={s.hex}

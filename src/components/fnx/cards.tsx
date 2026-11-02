@@ -2,17 +2,21 @@ import { useId, useState, type ReactNode } from "react";
 import { Plus, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/** Tarjeta que se da vuelta al tocarla. */
+/** Tarjeta que se da vuelta al tocarla. Opcionalmente lleva una foto arriba en el frente. */
 export function FlipCard({
   front,
   back,
   label,
   className,
+  media,
+  heightClass = "h-56",
 }: {
   front: ReactNode;
   back: ReactNode;
   label: string;
   className?: string;
+  media?: ReactNode;
+  heightClass?: string;
 }) {
   const [flipped, setFlipped] = useState(false);
   return (
@@ -21,11 +25,28 @@ export function FlipCard({
       onClick={() => setFlipped((v) => !v)}
       aria-pressed={flipped}
       aria-label={`${label}. ${flipped ? "Tocá para volver" : "Tocá para ver más"}`}
-      className={cn("flip-scene block w-full rounded-2xl text-left", className)}
+      className={cn("flip-scene group block w-full rounded-2xl text-left", className)}
     >
-      <div className={cn("flip-inner h-56", flipped && "is-flipped")}>
+      <div className={cn("flip-inner", heightClass, flipped && "is-flipped")}>
+        {media ? (
+          <div
+            className="flip-face flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors group-hover:border-area"
+            aria-hidden={flipped}
+          >
+            <div className="aspect-[16/9] shrink-0 overflow-hidden border-b border-border">{media}</div>
+            <div className="flex flex-1 flex-col justify-between gap-4 p-6">
+              {front}
+              <span className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground">
+                <RotateCw className="h-3.5 w-3.5" aria-hidden="true" /> Tocá para dar vuelta
+              </span>
+            </div>
+          </div>
+        ) : null}
         <div
-          className="flip-face flex flex-col justify-between rounded-2xl border border-border bg-card p-6"
+          className={cn(
+            "flip-face flex flex-col justify-between rounded-2xl border border-border bg-card p-6",
+            media && "hidden",
+          )}
           aria-hidden={flipped}
         >
           {front}

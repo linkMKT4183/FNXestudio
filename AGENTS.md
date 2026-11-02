@@ -14,3 +14,4 @@
 - Site constants (WhatsApp number, messages, manual URL) live only in `src/config/site.ts`; every WhatsApp CTA goes through `WhatsAppButton`/`buildWhatsAppLink` so the empty-number fallback is consistent.
 - News content lives in `src/data/noticias.ts` as plain data so new items are added without touching UI.
 - Shared brand primitives (Logo, Pieces, Reveal, TenSeconds, Headline, Section) live in `src/components/fnx/`; reuse them instead of re-styling per page.
+- Site photos are registered only in `src/data/imagenes.ts` (webp, sm+lg, Spanish alt) and rendered through `FnxImage` — so sizes, lazy-loading and alt text stay consistent; news photo choice comes from `newsImages()`.

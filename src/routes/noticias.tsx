@@ -2,9 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
+import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { IMG, newsImages } from "@/data/imagenes";
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
+
+const images = newsImages(NOTICIAS);
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
@@ -81,43 +85,54 @@ function Noticias() {
         </p>
 
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((n) => (
-            <li key={n.id}>
-              <article className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-area">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Tag>{n.category}</Tag>
-                  <time className="text-xs text-muted-foreground">{n.date}</time>
-                </div>
-                <h2 className="text-xl font-bold leading-snug text-foreground">{n.title}</h2>
-                <p className="text-sm text-muted-foreground">{n.summary}</p>
-                <div className="mt-auto flex flex-col gap-3 border-t border-border pt-4">
-                  <a
-                    href={n.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-area hover:underline"
-                  >
-                    Fuente: {n.source}
-                    <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span className="sr-only">(se abre en una pestaña nueva)</span>
-                  </a>
-                  {n.category === "Cannabis medicinal" ? (
-                    <p className="text-xs text-muted-foreground">
-                      Contenido para mayores de 18 años
-                    </p>
-                  ) : null}
-                </div>
-              </article>
-            </li>
-          ))}
+          {items.map((n, i) => {
+            const img = images[n.id] ?? IMG.diarios;
+            return (
+              <Reveal as="li" key={`${filter}-${n.id}`} delay={(i % 6) * 80}>
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-area hover:shadow-glow-soft">
+                  <div className="aspect-[16/9] overflow-hidden border-b border-border">
+                    <FnxImage img={img} className="photo-hover h-full w-full object-cover" />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-4 p-6">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <Tag>{n.category}</Tag>
+                      <time className="text-xs text-muted-foreground">{n.date}</time>
+                    </div>
+                    <h2 className="text-xl font-bold leading-snug text-foreground">{n.title}</h2>
+                    <p className="text-sm text-muted-foreground">{n.summary}</p>
+                    <div className="mt-auto flex flex-col gap-3 border-t border-border pt-4">
+                      <a
+                        href={n.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-area hover:underline"
+                      >
+                        Fuente: {n.source}
+                        <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span className="sr-only">(se abre en una pestaña nueva)</span>
+                      </a>
+                      {n.category === "Cannabis medicinal" ? (
+                        <p className="text-xs text-muted-foreground">
+                          Contenido para mayores de 18 años
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </ul>
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="noticias-cta">
         <Reveal className="flex flex-col items-start gap-6 rounded-3xl border border-border bg-card p-8 sm:p-14">
-          <h2 id="noticias-cta" className="headline text-5xl text-foreground sm:text-7xl">
-            Recibí las novedades <span className="text-area">por WhatsApp.</span>
-          </h2>
+          <Headline
+            id="noticias-cta"
+            lead="Recibí las novedades"
+            accent="por WhatsApp."
+            className="text-5xl sm:text-7xl"
+          />
           <p className="text-muted-foreground">Lo importante, corto y con fuente.</p>
           <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
         </Reveal>

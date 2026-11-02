@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BadgeCheck, Compass, Users } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { AgeGate } from "@/components/fnx/AgeGate";
+import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { IMG, type FnxImg } from "@/data/imagenes";
 import {
   Accordion,
   AccordionContent,
@@ -44,16 +46,19 @@ const SERVICES = [
     icon: Compass,
     title: "Orientación en el trámite REPROCANN",
     text: "Te explicamos qué necesitás y en qué orden.",
+    img: IMG.carpetas,
   },
   {
     icon: BadgeCheck,
     title: "Profesionales verificados",
     text: "Médicos y abogados que chequeamos antes de recomendarte.",
+    img: IMG.lupa,
   },
   {
     icon: Users,
     title: "Vinculación con ONGs verificadas",
     text: "Te conectamos con organizaciones que cumplen.",
+    img: IMG.brujulas,
   },
 ];
 
@@ -68,6 +73,18 @@ const FAQ = [
     a: "Pedimos tu consentimiento y tratamos tu información con reserva.",
   },
 ];
+
+function SidePhoto({ img }: { img: FnxImg }) {
+  return (
+    <div className="group overflow-hidden rounded-2xl border border-border bg-card">
+      <FnxImage
+        img={img}
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        className="photo-hover aspect-[3/2] h-full w-full object-cover"
+      />
+    </div>
+  );
+}
 
 function Salud() {
   return (
@@ -109,12 +126,17 @@ function Salud() {
         <div className="grid gap-4 md:grid-cols-3">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 80}>
-              <div className="flex h-full flex-col gap-5 rounded-2xl border border-border bg-card p-6">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-area text-area-foreground">
-                  <s.icon className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
+              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft">
+                <div className="aspect-[16/9] overflow-hidden border-b border-border">
+                  <FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />
+                </div>
+                <div className="flex flex-1 flex-col gap-5 p-6">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-area text-area-foreground">
+                    <s.icon className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                  <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground">{s.text}</p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -129,23 +151,28 @@ function Salud() {
         tldr="El trámite explicado paso a paso. Hoy: la consulta médica."
         footer={<AdultNote />}
       >
-        <Reveal>
-          <Accordion type="single" collapsible defaultValue="paso-1" className="flex flex-col gap-3">
-            <AccordionItem value="paso-1" className="rounded-2xl border border-border bg-card px-6">
-              <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
-                <span className="flex items-center gap-4">
-                  <span className="headline text-3xl text-area">01</span> La consulta médica
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground">
-                Todo empieza con un médico con formación en cannabis medicinal.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <p className="mt-4 rounded-2xl border border-dashed border-border px-6 py-5 text-sm text-muted-foreground">
-            Próximos pasos en preparación
-          </p>
-        </Reveal>
+        <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal>
+            <Accordion type="single" collapsible defaultValue="paso-1" className="flex flex-col gap-3">
+              <AccordionItem value="paso-1" className="rounded-2xl border border-border bg-card px-6">
+                <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
+                  <span className="flex items-center gap-4">
+                    <span className="headline text-3xl text-area">01</span> La consulta médica
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="text-base text-muted-foreground">
+                  Todo empieza con un médico con formación en cannabis medicinal.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+            <p className="mt-4 rounded-2xl border border-dashed border-border px-6 py-5 text-sm text-muted-foreground">
+              Próximos pasos en preparación
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <SidePhoto img={IMG.escalera} />
+          </Reveal>
+        </div>
       </Section>
 
       <Section
@@ -156,18 +183,23 @@ function Salud() {
         tldr="Por dónde empezar, si hay garantía y qué pasa con tus datos."
         footer={<AdultNote />}
       >
-        <Reveal>
-          <Accordion type="single" collapsible className="flex flex-col gap-3">
-            {FAQ.map((f, i) => (
-              <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
-                <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+        <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal>
+            <Accordion type="single" collapsible className="flex flex-col gap-3">
+              {FAQ.map((f, i) => (
+                <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
+                  <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
+          <Reveal delay={120}>
+            <SidePhoto img={IMG.candado} />
+          </Reveal>
+        </div>
       </Section>
 
       <Section

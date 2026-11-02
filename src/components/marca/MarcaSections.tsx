@@ -3,6 +3,8 @@ import { Check, Copy, ExternalLink, X } from "lucide-react";
 import { toast } from "sonner";
 import { Headline, Logo, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
+import { Gallery } from "@/components/fnx/Gallery";
+import { GALERIA } from "@/data/imagenes";
 import { Button } from "@/components/ui/button";
 import { MANUAL_URL } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -478,15 +480,25 @@ export function IdentidadVisual() {
           aria-label={`Post de ejemplo de ${post.tag}`}
           role="img"
         >
-          <div className="flex items-center justify-between">
-            <Logo className="text-5xl" />
-            <Tag>{post.tag}</Tag>
-          </div>
+          <Logo className="self-start text-5xl" />
           <p className="headline text-5xl text-foreground" key={area}>
             {post.lead} <span className="text-area">{post.accent}</span>
           </p>
-          <Pieces lit={3} size="sm" />
+          <div className="flex items-end justify-between gap-4">
+            <Tag>{post.tag}</Tag>
+            <Pieces lit={3} size="sm" />
+          </div>
         </div>
+      </div>
+
+      {/* Fotografía */}
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl font-bold text-foreground">Fotografía · tocá para ampliar</h3>
+        <p className="max-w-2xl text-sm text-muted-foreground">
+          Estudio oscuro, fondo negro y luz de contorno. Muchos objetos negros y uno solo en el
+          color del área.
+        </p>
+        <Gallery images={GALERIA} />
       </div>
     </Panel>
   );

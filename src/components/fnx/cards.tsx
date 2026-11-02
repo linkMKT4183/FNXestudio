@@ -44,18 +44,20 @@ export function FlipCard({
   );
 }
 
-/** Tarjeta que se abre al tocarla. */
+/** Tarjeta que se abre al tocarla. Opcionalmente lleva una foto arriba. */
 export function ExpandCard({
   title,
   kicker,
   children,
   className,
+  media,
   defaultOpen = false,
 }: {
   title: ReactNode;
   kicker?: ReactNode;
   children: ReactNode;
   className?: string;
+  media?: ReactNode;
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -63,11 +65,15 @@ export function ExpandCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border bg-card transition-colors",
-        open ? "border-area" : "border-border",
+        "group overflow-hidden rounded-2xl border bg-card transition-[border-color,transform,box-shadow] duration-300",
+        open ? "border-area" : "border-border hover:border-muted-foreground",
+        media && "hover:-translate-y-1 hover:shadow-glow-soft",
         className,
       )}
     >
+      {media ? (
+        <div className="aspect-[16/9] overflow-hidden border-b border-border">{media}</div>
+      ) : null}
       <button
         type="button"
         className="flex w-full items-start justify-between gap-4 rounded-2xl p-6 text-left"
@@ -82,7 +88,9 @@ export function ExpandCard({
         <span
           className={cn(
             "mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all",
-            open ? "rotate-45 border-area bg-area text-area-foreground" : "border-border text-foreground",
+            open
+              ? "rotate-45 border-area bg-area text-area-foreground"
+              : "border-border text-foreground group-hover:border-foreground",
           )}
           aria-hidden="true"
         >

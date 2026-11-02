@@ -68,36 +68,17 @@ function Marca() {
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
       if (t?.getAttribute("role") === "radio") return;
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        go(index + 1, t?.getAttribute("role") === "tab");
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        go(index - 1, t?.getAttribute("role") === "tab");
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [go, index]);
-
-  const current = SECTIONS[index] ?? SECTIONS[0]!;
-  const Current = current.C;
-  const prev = SECTIONS[(index - 1 + SECTIONS.length) % SECTIONS.length]!;
-  const next = SECTIONS[(index + 1) % SECTIONS.length]!;
-
-  return (
-    <div data-area="estudio">
+      if (t?.closest('[role="dialog"]') || document.querySelector('[role="dialog"]')) return;
+...
       <section className="mx-auto w-full max-w-6xl px-5 pb-8 pt-16 sm:px-8 sm:pt-24" aria-labelledby="marca-titulo">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Headline
-            as="h1"
-            id="marca-titulo"
-            lead="Así es"
-            accent="Fénix Creativo."
-            className="text-6xl sm:text-8xl"
-          />
-          <Logo className="text-7xl" />
-        </div>
+        <Logo className="mb-4 block text-7xl" />
+        <Headline
+          as="h1"
+          id="marca-titulo"
+          lead="Así es"
+          accent="Fénix Creativo."
+          className="text-6xl sm:text-8xl"
+        />
         <p className="mt-6 max-w-xl text-muted-foreground">
           La identidad de la marca en 8 partes. Usá las pestañas, los botones o las flechas del
           teclado.

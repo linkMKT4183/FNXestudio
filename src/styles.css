@@ -222,10 +222,10 @@
   transform-origin: 70% 75%;
   will-change: transform;
 }
-/* Funde el borde superior de una foto con el fondo negro (máscara de opacidad, sin color) */
+/* Funde los bordes de una foto con el fondo negro (máscara de opacidad, sin color) */
 @utility fade-top {
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 35%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%, #000 82%, transparent 100%);
 }
 
 /* Foto que se aclara y crece apenas al pasar el mouse por su tarjeta (.group) */

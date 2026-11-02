@@ -89,7 +89,7 @@ export function Gallery({ images }: { images: FnxImg[] }) {
             {current ? (
               <>
                 <DialogPrimitive.Title className="sr-only">
-                  Foto {current.n} de {n}
+                  Foto {(open ?? 0) + 1} de {n}
                 </DialogPrimitive.Title>
                 <DialogPrimitive.Description className="sr-only">{current.alt}</DialogPrimitive.Description>
                 <figure key={current.n} className="phrase-in flex w-full max-w-6xl flex-col gap-4">

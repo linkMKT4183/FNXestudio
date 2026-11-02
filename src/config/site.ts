@@ -3,7 +3,7 @@
  * WHATSAPP_NUMBER: completalo con el número en formato internacional, sin "+" ni espacios.
  * Ejemplo: "5492611234567". Mientras esté vacío, los botones muestran "WhatsApp próximamente".
  */
-export const WHATSAPP_NUMBER = "";
+export const WHATSAPP_NUMBER = "5492616306508";
 
 export const MANUAL_URL = "https://www.canva.com/d/SYr8B-ZM5BWGkRt";
 

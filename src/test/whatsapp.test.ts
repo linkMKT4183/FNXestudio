@@ -6,8 +6,9 @@ describe("WhatsApp links", () => {
     expect(buildWhatsAppLink("marca", "")).toBeNull();
   });
 
-  it("ships with an empty number for the owner to fill in", () => {
-    expect(WHATSAPP_NUMBER).toBe("");
+  it("uses the FNX WhatsApp Business number", () => {
+    expect(WHATSAPP_NUMBER).toBe("5492616306508");
+    expect(buildWhatsAppLink("marca")).toMatch(/^https:\/\/wa\.me\/5492616306508\?text=/);
   });
 
   it("builds the brand message link", () => {

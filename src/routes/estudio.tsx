@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Pause, Play } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard } from "@/components/fnx/cards";
+import { FnxImage } from "@/components/fnx/FnxImage";
+import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
-import { cn } from "@/lib/utils";
+import { IMG } from "@/data/imagenes";
+
 
 export const Route = createFileRoute("/estudio")({
   head: () => ({

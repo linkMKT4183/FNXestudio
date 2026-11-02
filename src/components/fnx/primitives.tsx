@@ -126,8 +126,13 @@ export function Headline({
   className?: string;
   id?: string | undefined;
 }) {
+  const [ref, visible] = useInView<HTMLElement>();
   return (
-    <Tag id={id} className={cn("headline text-foreground", className)}>
+    <Tag
+      ref={ref}
+      id={id}
+      className={cn("headline headline-reveal text-foreground", visible && "is-visible", className)}
+    >
       {lead ? <>{lead} </> : null}
       <span className="text-area">{accent}</span>
     </Tag>

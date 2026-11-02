@@ -180,19 +180,65 @@
   }
 }
 
-/* Piece glow pulse */
+/* Titulares: subida + fundido al entrar en pantalla */
+@utility headline-reveal {
+  opacity: 0;
+  transform: translateY(0.35em);
+  transition:
+    opacity 0.8s ease 0.08s,
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s;
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Piece glow pulse (lento) */
 @keyframes piece-pulse {
   0%,
   100% {
-    box-shadow: 0 0 28px -6px color-mix(in oklab, var(--area) 55%, transparent);
+    box-shadow: 0 0 22px -8px color-mix(in oklab, var(--area) 50%, transparent);
   }
   50% {
-    box-shadow: 0 0 44px -2px color-mix(in oklab, var(--area) 75%, transparent);
+    box-shadow: 0 0 46px -2px color-mix(in oklab, var(--area) 80%, transparent);
   }
 }
 @utility piece-lit {
-  background: var(--area);
-  animation: piece-pulse 3.6s ease-in-out infinite;
+  background-color: var(--area);
+  animation: piece-pulse 4.2s ease-in-out 1s infinite;
+}
+
+/* Hero: acercamiento lento */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+@utility hero-zoom {
+  animation: hero-zoom 12s ease-in-out infinite alternate;
+  transform-origin: 70% 75%;
+  will-change: transform;
+}
+/* Funde el borde superior de una foto con el fondo negro (máscara de opacidad, sin color) */
+@utility fade-top {
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
+}
+
+/* Foto que se aclara y crece apenas al pasar el mouse por su tarjeta (.group) */
+@utility photo-hover {
+  filter: brightness(0.78);
+  transition:
+    filter 0.5s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  :where(.group):hover &,
+  :where(.group):focus-visible & {
+    filter: brightness(1.08);
+    transform: scale(1.04);
+  }
 }
 
 @keyframes phrase-in {
@@ -235,14 +281,19 @@
   html {
     scroll-behavior: auto;
   }
-  .reveal {
+  .reveal,
+  .headline-reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
   .piece-lit,
-  .phrase-in {
+  .phrase-in,
+  .hero-zoom {
     animation: none;
+  }
+  .photo-hover {
+    transform: none !important;
   }
   .flip-inner {
     transition: none;
@@ -252,5 +303,6 @@
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }

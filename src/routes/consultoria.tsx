@@ -298,7 +298,7 @@ function AudienceGrid({ items }: { items: Audience[] }) {
 function ServiceTabs({ services }: { services: Service[] }) {
   return (
     <Reveal>
-      <Tabs defaultValue={services[0]?.id} className="flex flex-col gap-8">
+      <Tabs defaultValue={services[0]?.id ?? ""} className="flex flex-col gap-8">
         <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-full border border-border bg-transparent p-1 sm:w-auto sm:self-start">
           {services.map((s) => (
             <TabsTrigger

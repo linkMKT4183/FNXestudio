@@ -22,6 +22,12 @@ describe("WhatsApp links", () => {
     );
   });
 
+  it("builds the consultoría message link", () => {
+    expect(buildWhatsAppLink("consultoria", "5492611234567")).toBe(
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito asesoría jurídica o de cultivo para mi proyecto")}`,
+    );
+  });
+
   it("builds the news message link", () => {
     expect(buildWhatsAppLink("novedades", "+54 9 261 123-4567")).toBe(
       `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, quiero recibir novedades")}`,

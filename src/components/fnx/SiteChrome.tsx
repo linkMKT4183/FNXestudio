@@ -60,7 +60,6 @@ export function SiteHeader() {
             label="Escribinos"
             size="default"
             className="ml-3"
-            showIcon={false}
           />
         </nav>
 

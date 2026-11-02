@@ -1,7 +1,7 @@
-import { MessageCircle } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { buildWhatsAppLink, type WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 interface Props {
   topic: WhatsAppTopic;
@@ -32,7 +32,7 @@ export function WhatsAppButton({
         aria-disabled="true"
         className={cn(className)}
       >
-        {showIcon ? <MessageCircle aria-hidden="true" /> : null}
+        {showIcon ? <WhatsAppIcon className="h-5 w-5 shrink-0" /> : null}
         WhatsApp próximamente
       </Button>
     );
@@ -40,7 +40,7 @@ export function WhatsAppButton({
   return (
     <Button asChild variant={variant} size={size} className={className}>
       <a href={href} target="_blank" rel="noopener noreferrer">
-        {showIcon ? <MessageCircle aria-hidden="true" /> : null}
+        {showIcon ? <WhatsAppIcon className="h-5 w-5 shrink-0" /> : null}
         {label}
         <span className="sr-only"> (se abre WhatsApp en una pestaña nueva)</span>
       </a>

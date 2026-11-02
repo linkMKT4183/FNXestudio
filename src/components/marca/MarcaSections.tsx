@@ -44,7 +44,7 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
     { v: "noticias", l: "Noticias" },
   ];
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex self-start rounded-full border border-border p-1">
+    <div role="radiogroup" aria-label={label} className="inline-flex max-w-full self-start overflow-x-auto rounded-full border border-border p-1">
       {opts.map((o) => (
         <button
           key={o.v}
@@ -54,7 +54,7 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
           data-area={o.v}
           onClick={() => onChange(o.v)}
           className={cn(
-            "h-10 rounded-full px-5 text-sm font-semibold transition-colors",
+            "h-10 shrink-0 rounded-full px-3.5 text-sm font-semibold transition-colors sm:px-5",
             value === o.v ? "bg-area text-area-foreground" : "text-muted-foreground hover:text-foreground",
           )}
         >

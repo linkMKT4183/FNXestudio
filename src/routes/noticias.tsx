@@ -4,11 +4,10 @@ import { useMemo, useState } from "react";
 import { Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
-import { IMG, newsImages } from "@/data/imagenes";
+
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
 
-const images = newsImages(NOTICIAS);
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
@@ -86,7 +85,7 @@ function Noticias() {
 
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((n, i) => {
-            const img = images[n.id] ?? IMG.diarios;
+            const img = n.image;
             return (
               <Reveal as="li" key={`${filter}-${n.id}`} delay={(i % 6) * 80}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-area hover:shadow-glow-soft">

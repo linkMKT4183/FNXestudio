@@ -39,7 +39,7 @@ const AREAS = [
     name: "FNX Salud",
     tone: "verde" as const,
     to: "/salud" as const,
-    img: IMG.carpetas,
+    img: IMG.lupa,
     items: [
       "Gestión del trámite REPROCANN",
       "Profesionales verificados",
@@ -50,7 +50,7 @@ const AREAS = [
     name: "FNX Noticias",
     tone: "amarillo" as const,
     to: "/noticias" as const,
-    img: IMG.diarios,
+    img: IMG.nCarteles,
     items: ["Marketing", "Negocios", "Emprendimiento", "Cannabis medicinal, siempre con fuentes"],
   },
 ];

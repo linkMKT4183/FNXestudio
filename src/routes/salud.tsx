@@ -58,7 +58,7 @@ const SERVICES = [
     icon: Users,
     title: "Vinculación con ONGs verificadas",
     text: "Te conectamos con organizaciones que cumplen.",
-    img: IMG.brujulas,
+    img: IMG.ongs,
   },
 ];
 

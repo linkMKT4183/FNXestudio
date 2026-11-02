@@ -33,38 +33,38 @@ const SERVICES = [
     title: "Branding e identidad",
     short: "Que tu marca se reconozca.",
     detail: "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
-    img: IMG.rompecabezas,
+    img: IMG.branding,
   },
   {
     title: "Producción audiovisual",
     short: "Foto y video con idea.",
     detail: "Piezas para redes, campañas y web. Planificadas, filmadas y editadas por nosotros.",
-    img: IMG.manoFigura,
+    img: IMG.audiovisual,
   },
   {
     title: "Tienda online",
     short: "Vender mientras dormís.",
     detail: "Armamos tu tienda, cargamos productos y la dejamos lista para cobrar.",
-    img: IMG.enter,
+    img: IMG.tienda,
   },
   {
     title: "Redes y contenido",
     short: "Constancia sin perder tiempo.",
     detail: "Calendario, diseño y textos. Vos aprobás, nosotros publicamos.",
-    img: IMG.megafonos,
+    img: IMG.redes,
   },
   {
     title: "Estrategia",
     short: "Ver la jugada antes.",
     detail: "Ordenamos objetivos, público y mensajes antes de invertir en pauta.",
-    img: IMG.rey,
+    img: IMG.estrategia,
   },
 ];
 
 const PHRASES: PhraseSlide[] = [
   { text: "Tu potencial necesita dirección.", img: IMG.manoFigura, focusX: "45%" },
-  { text: "Ver la jugada antes que el mercado.", img: IMG.rey, focusX: "64%" },
-  { text: "Primero la marca. Después la pauta.", img: IMG.iman, focusX: "78%" },
+  { text: "Ver la jugada antes que el mercado.", img: IMG.caminoLuz, focusX: "40%" },
+  { text: "Primero la marca. Después la pauta.", img: IMG.cerebro, focusX: "55%" },
   { text: "Anuncios que se escuchan.", img: IMG.megafonos, focusX: "76%" },
 ];
 

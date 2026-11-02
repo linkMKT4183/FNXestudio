@@ -13,12 +13,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Estudio creativo en Mendoza con tres áreas: Estudio, Salud y Noticias.",
+          "Creamos marcas y conectamos personas de confianza. Estudio creativo en Mendoza con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
       },
       { property: "og:title", content: "FNX · Fénix Creativo | Estudio creativo en Mendoza" },
       {
         property: "og:description",
-        content: "Creamos marcas y conectamos personas de confianza. Una empresa, tres áreas.",
+        content: "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,6 +34,13 @@ const AREAS = [
     to: "/estudio" as const,
     img: IMG.rey,
     items: ["Branding", "Producción audiovisual", "Tienda online", "Redes y estrategia"],
+  },
+  {
+    name: "FNX Consultoría",
+    tone: "azul" as const,
+    to: "/consultoria" as const,
+    img: IMG.cHero,
+    items: ["Asesoría jurídica y técnica de cultivo para proyectos cannábicos."],
   },
   {
     name: "FNX Salud",
@@ -109,7 +116,7 @@ function Home() {
           />
           <Reveal delay={120} className="flex flex-wrap items-center justify-between gap-6">
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio creativo en Mendoza. Una empresa, tres áreas.
+              Estudio creativo en Mendoza. Una empresa, cuatro áreas.
             </p>
             <Pieces lit={3} />
           </Reveal>
@@ -127,15 +134,22 @@ function Home() {
         </div>
       </section>
 
-      {/* Dos puertas */}
+      {/* Tres puertas */}
       <section aria-label="Elegí por dónde empezar" className="mx-auto w-full max-w-6xl px-5 pb-8 pt-6 sm:px-8">
-        <Reveal className="grid gap-4 md:grid-cols-2">
+        <Reveal className="grid gap-4 md:grid-cols-3">
           <Door
             to="/estudio"
             tone="naranja"
             kicker="FNX Estudio"
             title="Quiero hacer crecer mi marca"
             img={IMG.rey}
+          />
+          <Door
+            to="/consultoria"
+            tone="azul"
+            kicker="FNX Consultoría"
+            title="Necesito asesoría para mi proyecto cannábico"
+            img={IMG.cHero}
           />
           <Door
             to="/salud"
@@ -147,15 +161,15 @@ function Home() {
         </Reveal>
       </section>
 
-      {/* Tres áreas */}
+      {/* Cuatro áreas */}
       <Section
         id="areas"
         eyebrow="Una empresa"
-        lead="Tres áreas,"
+        lead="Cuatro áreas,"
         accent="una mirada."
-        tldr="Estudio para marcas, Salud para orientación y Noticias con fuentes."
+        tldr="Estudio para marcas, Consultoría para proyectos cannábicos, Salud para orientación y Noticias con fuentes."
       >
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (
             <Reveal key={a.name} delay={i * 90}>
               <Link
@@ -206,7 +220,8 @@ function Home() {
               className="max-w-4xl text-5xl sm:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Pocas agencias pueden hacer las tres cosas a la vez.
+              Estudio crea la marca, Consultoría ordena el proyecto, Salud conecta con profesionales
+              verificados y Noticias informa con fuentes.
             </p>
             <Pieces lit={1} className="mt-4" />
           </Reveal>
@@ -275,8 +290,8 @@ function Door({
   title,
   img,
 }: {
-  to: "/estudio" | "/salud";
-  tone: "naranja" | "verde";
+  to: "/estudio" | "/consultoria" | "/salud";
+  tone: "naranja" | "azul" | "verde";
   kicker: string;
   title: string;
   img: FnxImg;
@@ -289,16 +304,16 @@ function Door({
       <span className="block aspect-[16/9] overflow-hidden border-b border-border">
         <FnxImage
           img={img}
-          sizes="(min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 768px) 33vw, 100vw"
           className="photo-hover h-full w-full object-cover"
         />
       </span>
-      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-9">
+      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-9 md:p-6 lg:p-8">
         <Tag tone={tone} className="self-start">
           {kicker}
         </Tag>
         <span className="flex items-end justify-between gap-6">
-          <span className="headline text-4xl text-foreground sm:text-5xl">{title}</span>
+          <span className="headline text-4xl text-foreground sm:text-5xl md:text-4xl lg:text-5xl">{title}</span>
           <span
             className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
             aria-hidden="true"

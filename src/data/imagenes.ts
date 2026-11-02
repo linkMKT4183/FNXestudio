@@ -16,7 +16,7 @@ export interface FnxImg {
   alt: string;
   area: ImageArea;
   /** Qué representa en el sitio. Las fotos de noticias toman el título de la noticia. */
-  label?: string;
+  label?: string | undefined;
 }
 
 function img(

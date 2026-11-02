@@ -75,7 +75,9 @@ export function Gallery({ images }: { images: GalleryItem[] }) {
           <div className="flex items-center gap-3 border-b border-border pb-3">
             <AreaTag area={g.area} />
             <h4 className="text-sm font-semibold text-foreground">{g.title}</h4>
-            <span className="text-xs text-muted-foreground">{g.items.length} fotos</span>
+            <span className="text-xs text-muted-foreground">
+              {g.items.length} {g.items.length === 1 ? "foto" : "fotos"}
+            </span>
           </div>
           <ul className="grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 lg:grid-cols-4">
             {g.items.map((img) => {

@@ -97,7 +97,7 @@ export function Reveal({
   );
 }
 
-/** Recuadro "En 10 segundos". */
+/** Recuadro "En resumen". */
 export function TenSeconds({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div
@@ -106,7 +106,7 @@ export function TenSeconds({ children, className }: { children: ReactNode; class
         className,
       )}
     >
-      <span className="eyebrow shrink-0 text-area">En 10 segundos</span>
+      <span className="eyebrow shrink-0 text-area">En resumen</span>
       <p className="text-sm font-medium text-foreground sm:text-base">{children}</p>
     </div>
   );
@@ -139,7 +139,7 @@ export function Headline({
   );
 }
 
-/** Sección estándar con eyebrow, titular y recuadro "En 10 segundos". */
+/** Sección estándar con eyebrow, titular y recuadro "En resumen". */
 export function Section({
   id,
   eyebrow,

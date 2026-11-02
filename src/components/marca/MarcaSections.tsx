@@ -1,12 +1,10 @@
 import { useState, type ReactNode } from "react";
-import { Check, Copy, ExternalLink, X } from "lucide-react";
+import { Check, Copy, X } from "lucide-react";
 import { toast } from "sonner";
 import { Headline, Logo, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
 import { Gallery } from "@/components/fnx/Gallery";
 import { GALERIA } from "@/data/galeria";
-import { Button } from "@/components/ui/button";
-import { MANUAL_URL } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 type Area = "estudio" | "consultoria" | "salud" | "noticias";
@@ -156,57 +154,6 @@ export function Valores() {
             }
           />
         ))}
-      </div>
-    </Panel>
-  );
-}
-
-/* 4. Personalidad */
-const TRAITS = [
-  { a: "Seria", b: "Juguetona", v: 28 },
-  { a: "Clásica", b: "Moderna", v: 74 },
-  { a: "Discreta", b: "Audaz", v: 78 },
-  { a: "Distante", b: "Cercana", v: 80 },
-];
-
-export function Personalidad() {
-  return (
-    <Panel
-      eyebrow="Personalidad"
-      lead="La Creadora"
-      accent="que guía."
-      tldr="Moderna, audaz y cercana, pero más seria que juguetona."
-    >
-      <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7">
-        <p className="text-sm text-muted-foreground">
-          Arquetipo: <span className="font-semibold text-foreground">la Creadora que guía</span>
-        </p>
-        <ul className="flex flex-col gap-7">
-          {TRAITS.map((t) => (
-            <li key={t.a} className="flex flex-col gap-2">
-              <div className="flex justify-between text-sm font-semibold">
-                <span className={t.v < 50 ? "text-foreground" : "text-muted-foreground"}>{t.a}</span>
-                <span className={t.v >= 50 ? "text-foreground" : "text-muted-foreground"}>{t.b}</span>
-              </div>
-              <div
-                className="relative h-3 rounded-full bg-background"
-                role="meter"
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={t.v}
-                aria-label={`${t.a} a ${t.b}: ${t.v}%`}
-              >
-                <div className="absolute inset-y-0 left-0 rounded-full bg-area" style={{ width: `${t.v}%` }} />
-                <span
-                  className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-card bg-foreground"
-                  style={{ left: `${t.v}%` }}
-                  aria-hidden="true"
-                />
-              </div>
-              <span className="text-xs text-muted-foreground">{t.v}%</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </Panel>
   );
@@ -527,118 +474,6 @@ export function IdentidadVisual() {
           color del área.
         </p>
         <Gallery images={GALERIA} />
-      </div>
-    </Panel>
-  );
-}
-
-/* 8. Manual de marca */
-const CHAPTERS = [
-  { t: "Portada e índice", p: "1–2", items: ["Portada", "Índice de capítulos"] },
-  {
-    t: "Identidad",
-    p: "3–13",
-    items: [
-      "Esencia",
-      "Misión y visión",
-      "Valores",
-      "Propuesta de valor",
-      "Personalidad",
-      "Tono",
-      "Mensajes clave",
-      "Así sí y así no",
-      "Lo que nunca hacemos",
-    ],
-  },
-  { t: "Tres áreas", p: "14–15", items: ["FNX Estudio", "FNX Salud", "FNX Noticias"] },
-  { t: "Personas", p: "16–20", items: ["Lucía", "Dr. Martín", "Sofía", "ONG"] },
-  { t: "Logo", p: "21–22", items: ["Construcción", "Usos correctos e incorrectos"] },
-  { t: "Color", p: "23–25", items: ["Paleta base", "Color por área", "Regla 70/20/10"] },
-  { t: "Tipografía", p: "26–27", items: ["Anton", "Montserrat", "Mrs Saint Delafield"] },
-  { t: "Fotografía", p: "28–30", items: ["Estilo", "Composición", "Elementos gráficos"] },
-  { t: "Por área", p: "31–33", items: ["Estudio", "Salud", "Noticias"] },
-  {
-    t: "Aplicaciones",
-    p: "34–41",
-    items: [
-      "Papelería",
-      "Stickers",
-      "Banners",
-      "Redes sociales",
-      "Página web",
-      "Merchandising",
-      "Firma de email",
-    ],
-  },
-  { t: "Cierre", p: "42", items: ["Contacto y cierre"] },
-];
-
-export function Manual() {
-  const [active, setActive] = useState(1);
-  const ch = CHAPTERS[active] ?? CHAPTERS[0]!;
-  return (
-    <Panel
-      eyebrow="Manual de marca"
-      lead="Todo en"
-      accent="un lugar."
-      tldr="42 páginas con todas las reglas. Abrilo o recorré los capítulos acá."
-    >
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr]">
-        <div className="flex flex-col gap-6">
-          <div className="flex aspect-[4/5] flex-col justify-between rounded-2xl border border-border bg-card p-8 shadow-glow-soft">
-            <Logo className="text-8xl" />
-            <div className="flex flex-col gap-4">
-              <Pieces lit={4} size="sm" />
-              <p className="headline text-5xl text-foreground">
-                Manual de <span className="text-area">marca</span>
-              </p>
-              <p className="text-sm text-muted-foreground">42 páginas · 11 capítulos</p>
-            </div>
-          </div>
-          <Button asChild variant="area" size="lg" className="w-full">
-            <a href={MANUAL_URL} target="_blank" rel="noopener noreferrer">
-              Abrir el manual completo
-              <ExternalLink aria-hidden="true" />
-              <span className="sr-only">(se abre en una pestaña nueva)</span>
-            </a>
-          </Button>
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xl font-bold text-foreground">Mapa de capítulos</h3>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Capítulos del manual">
-            {CHAPTERS.map((c, i) => (
-              <button
-                key={c.t}
-                type="button"
-                onClick={() => setActive(i)}
-                aria-pressed={active === i}
-                className={cn(
-                  "h-10 rounded-full border px-4 text-sm font-semibold transition-colors",
-                  active === i
-                    ? "border-area bg-area text-area-foreground"
-                    : "border-border text-muted-foreground hover:text-foreground",
-                )}
-              >
-                {c.t}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7" aria-live="polite">
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="headline text-4xl text-foreground">{ch.t}</p>
-              <span className="text-sm text-muted-foreground">Págs. {ch.p}</span>
-            </div>
-            <ul className="grid gap-2 sm:grid-cols-2">
-              {ch.items.map((it) => (
-                <li key={it} className="flex items-center gap-3 text-sm text-foreground">
-                  <span className="block h-2.5 w-2 shrink-0 rounded-[3px] bg-area" aria-hidden="true" />
-                  {it}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </div>
     </Panel>
   );

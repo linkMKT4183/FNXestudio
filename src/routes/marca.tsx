@@ -4,9 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Esencia,
   IdentidadVisual,
-  Manual,
   MisionVision,
-  Personalidad,
   Publico,
   Tono,
   Valores,
@@ -22,7 +20,7 @@ export const Route = createFileRoute("/marca")({
       {
         name: "description",
         content:
-          "Conocé la identidad de Fénix Creativo: esencia, misión y visión, valores, personalidad, tono, público, identidad visual y manual de marca.",
+          "Conocé la identidad de Fénix Creativo: esencia, misión y visión, valores, tono, público e identidad visual.",
       },
       { property: "og:title", content: "Marca · Identidad de FNX" },
       {
@@ -40,11 +38,9 @@ const SECTIONS = [
   { id: "esencia", label: "Esencia", C: Esencia },
   { id: "mision", label: "Misión y visión", C: MisionVision },
   { id: "valores", label: "Valores", C: Valores },
-  { id: "personalidad", label: "Personalidad", C: Personalidad },
   { id: "tono", label: "Tono", C: Tono },
   { id: "publico", label: "A quién le hablamos", C: Publico },
   { id: "identidad", label: "Identidad visual", C: IdentidadVisual },
-  { id: "manual", label: "Manual de marca", C: Manual },
 ];
 
 function Marca() {
@@ -98,7 +94,7 @@ function Marca() {
           className="text-6xl sm:text-8xl"
         />
         <p className="mt-6 max-w-xl text-muted-foreground">
-          La identidad de la marca en 8 partes. Usá las pestañas, los botones o las flechas del
+          La identidad de la marca en 6 partes. Usá las pestañas, los botones o las flechas del
           teclado.
         </p>
       </section>

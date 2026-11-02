@@ -9,7 +9,7 @@ export const MANUAL_URL = "https://www.canva.com/d/SYr8B-ZM5BWGkRt";
 
 export const WHATSAPP_MESSAGES = {
   marca: "Hola FNX, quiero hacer crecer mi marca",
-  consultoria: "Hola FNX, necesito asesoría jurídica o de cultivo para mi proyecto",
+  consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o cannábico",
   salud: "Hola FNX, necesito orientación en cannabis medicinal",
   novedades: "Hola FNX, quiero recibir novedades",
 } as const;

@@ -69,7 +69,25 @@ function Marca() {
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
       if (t?.getAttribute("role") === "radio") return;
       if (t?.closest('[role="dialog"]') || document.querySelector('[role="dialog"]')) return;
-...
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        go(index + 1, t?.getAttribute("role") === "tab");
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        go(index - 1, t?.getAttribute("role") === "tab");
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [go, index]);
+
+  const current = SECTIONS[index] ?? SECTIONS[0]!;
+  const Current = current.C;
+  const prev = SECTIONS[(index - 1 + SECTIONS.length) % SECTIONS.length]!;
+  const next = SECTIONS[(index + 1) % SECTIONS.length]!;
+
+  return (
+    <div data-area="estudio">
       <section className="mx-auto w-full max-w-6xl px-5 pb-8 pt-16 sm:px-8 sm:pt-24" aria-labelledby="marca-titulo">
         <Logo className="mb-4 block text-7xl" />
         <Headline

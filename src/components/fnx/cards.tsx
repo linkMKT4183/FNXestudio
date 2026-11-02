@@ -108,3 +108,31 @@ export function ExpandCard({
     </div>
   );
 }
+
+/** Tarjeta de recurso gratuito: foto a la izquierda, texto y botón a la derecha. */
+export function ResourceCard({
+  media,
+  title,
+  text,
+  action,
+}: {
+  media: ReactNode;
+  title: ReactNode;
+  text: ReactNode;
+  action: ReactNode;
+}) {
+  return (
+    <div className="group grid overflow-hidden rounded-3xl border border-border bg-card transition-[border-color,box-shadow] duration-300 hover:border-area hover:shadow-glow-soft md:grid-cols-[2fr_3fr]">
+      <div className="aspect-[16/9] overflow-hidden border-b border-border md:aspect-auto md:border-b-0 md:border-r">
+        {media}
+      </div>
+      <div className="flex flex-col items-start justify-center gap-6 p-8 sm:p-10">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-2xl font-bold text-foreground">{title}</h3>
+          <p className="text-sm text-muted-foreground">{text}</p>
+        </div>
+        {action}
+      </div>
+    </div>
+  );
+}

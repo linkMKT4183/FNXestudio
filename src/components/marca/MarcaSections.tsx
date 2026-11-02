@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Headline, Logo, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
 import { Gallery } from "@/components/fnx/Gallery";
-import { GALERIA } from "@/data/imagenes";
+import { GALERIA } from "@/data/galeria";
 import { Button } from "@/components/ui/button";
 import { MANUAL_URL } from "@/config/site";
 import { cn } from "@/lib/utils";

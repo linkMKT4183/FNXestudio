@@ -1,166 +1,223 @@
 /**
  * Fotos de FNX. Todas siguen el mismo estilo: estudio oscuro, fondo negro, luz de contorno
  * y "uno que se destaca entre muchos" en el color del área.
+ * Cada foto acompaña un contenido concreto; `label` dice qué representa (se ve en la galería de Marca).
  */
-import img01lg from "@/assets/fnx/01-estudio-rey-lg.webp";
-import img01sm from "@/assets/fnx/01-estudio-rey-sm.webp";
-import img02lg from "@/assets/fnx/02-estudio-mano-figura-lg.webp";
-import img02sm from "@/assets/fnx/02-estudio-mano-figura-sm.webp";
-import img03lg from "@/assets/fnx/03-estudio-rompecabezas-lg.webp";
-import img03sm from "@/assets/fnx/03-estudio-rompecabezas-sm.webp";
-import img04lg from "@/assets/fnx/04-estudio-iman-lg.webp";
-import img04sm from "@/assets/fnx/04-estudio-iman-sm.webp";
-import img05lg from "@/assets/fnx/05-estudio-megafonos-lg.webp";
-import img05sm from "@/assets/fnx/05-estudio-megafonos-sm.webp";
-import img06lg from "@/assets/fnx/06-estudio-enter-lg.webp";
-import img06sm from "@/assets/fnx/06-estudio-enter-sm.webp";
-import img07lg from "@/assets/fnx/07-salud-carpetas-lg.webp";
-import img07sm from "@/assets/fnx/07-salud-carpetas-sm.webp";
-import img08lg from "@/assets/fnx/08-salud-lupa-lg.webp";
-import img08sm from "@/assets/fnx/08-salud-lupa-sm.webp";
-import img09lg from "@/assets/fnx/09-salud-brujulas-lg.webp";
-import img09sm from "@/assets/fnx/09-salud-brujulas-sm.webp";
-import img10lg from "@/assets/fnx/10-salud-candado-lg.webp";
-import img10sm from "@/assets/fnx/10-salud-candado-sm.webp";
-import img11lg from "@/assets/fnx/11-salud-escalera-lg.webp";
-import img11sm from "@/assets/fnx/11-salud-escalera-sm.webp";
-import img12lg from "@/assets/fnx/12-noticias-diarios-lg.webp";
-import img12sm from "@/assets/fnx/12-noticias-diarios-sm.webp";
-import img13lg from "@/assets/fnx/13-noticias-llaves-lg.webp";
-import img13sm from "@/assets/fnx/13-noticias-llaves-sm.webp";
-import img14lg from "@/assets/fnx/14-noticias-tubos-lg.webp";
-import img14sm from "@/assets/fnx/14-noticias-tubos-sm.webp";
-import img15lg from "@/assets/fnx/15-hero-ajedrez-lg.webp";
-import img15sm from "@/assets/fnx/15-hero-ajedrez-sm.webp";
-import type { NewsItem } from "@/data/noticias";
+const files = import.meta.glob<string>("../assets/fnx/*.webp", { eager: true, import: "default" });
 
 export type ImageArea = "estudio" | "salud" | "noticias" | "general";
 
 export interface FnxImg {
-  n: number;
+  id: string;
   lg: string;
   sm: string;
   width: number;
   height: number;
   alt: string;
   area: ImageArea;
+  /** Qué representa en el sitio. Las fotos de noticias toman el título de la noticia. */
+  label?: string | undefined;
 }
 
-const W = 1536;
-const H = 1024;
-
-function img(n: number, lg: string, sm: string, area: ImageArea, alt: string): FnxImg {
-  return { n, lg, sm, width: W, height: H, alt, area };
+function img(
+  file: string,
+  area: ImageArea,
+  alt: string,
+  label?: string,
+  size: [number, number] = [1536, 1024],
+): FnxImg {
+  const lg = files[`../assets/fnx/${file}-lg.webp`];
+  const sm = files[`../assets/fnx/${file}-sm.webp`];
+  if (!lg || !sm) throw new Error(`Falta la foto ${file}`);
+  return { id: file, lg, sm, width: size[0], height: size[1], alt, area, label };
 }
 
 export const IMG = {
-  rey: img(1, img01lg, img01sm, "estudio", "Tablero de ajedrez con muchos peones negros y un solo rey naranja."),
+  /* Inicio */
+  hero: img(
+    "15-hero-ajedrez",
+    "general",
+    "Muchas piezas de ajedrez negras sobre un tablero oscuro y un solo rey naranja encendido.",
+    "Inicio: imagen principal",
+    [1920, 1088],
+  ),
+  rey: img(
+    "01-estudio-rey",
+    "estudio",
+    "Tablero de ajedrez con muchos peones negros y un solo rey naranja.",
+    "Inicio: Quiero hacer crecer mi marca",
+  ),
+
+  /* Estudio: servicios y recurso */
+  branding: img(
+    "e-branding",
+    "estudio",
+    "Un sello de lacre naranja sobre una fila de tarjetas de presentación negras.",
+    "Branding e identidad",
+  ),
+  audiovisual: img(
+    "e-audiovisual",
+    "estudio",
+    "Una fila de cámaras de cine negras con una sola cámara naranja.",
+    "Producción audiovisual",
+  ),
+  tienda: img(
+    "e-tienda",
+    "estudio",
+    "Una fila de cajas de envío negras con una caja naranja y un carrito de compras negro al lado.",
+    "Tienda online",
+  ),
+  redes: img(
+    "e-redes",
+    "estudio",
+    "Una fila de celulares negros parados y uno solo con la pantalla encendida en naranja.",
+    "Redes y contenido",
+  ),
+  estrategia: img(
+    "e-estrategia",
+    "estudio",
+    "Tablero de ajedrez negro con un caballo naranja y una línea de luz naranja que marca la jugada.",
+    "Estrategia",
+  ),
+  checklist: img(
+    "e-checklist",
+    "estudio",
+    "Un portapapeles negro con casillas vacías y una sola tilde naranja.",
+    "Recurso: Checklist de marca",
+  ),
+
+  /* Estudio: carrusel de frases */
   manoFigura: img(
-    2,
-    img02lg,
-    img02sm,
+    "02-estudio-mano-figura",
     "estudio",
     "Una mano sostiene entre dos dedos una figura humana diminuta, iluminada con luz naranja.",
+    "Frase: Tu potencial necesita dirección.",
   ),
-  rompecabezas: img(
-    3,
-    img03lg,
-    img03sm,
+  caminoLuz: img(
+    "e-camino-luz",
     "estudio",
-    "Una mano coloca una pieza de rompecabezas naranja entre piezas negras.",
+    "Tablero de ajedrez con piezas negras y un camino de luz naranja que atraviesa las casillas.",
+    "Frase: Ver la jugada antes que el mercado.",
   ),
-  iman: img(
-    4,
-    img04lg,
-    img04sm,
+  cerebro: img(
+    "e-cerebro",
     "estudio",
-    "Un imán naranja en forma de herradura atrae a un grupo de figuritas negras.",
+    "Un cerebro escultórico gris con muchos cables negros conectados y uno solo naranja.",
+    "Frase: Primero la marca. Después la pauta.",
   ),
-  megafonos: img(5, img05lg, img05sm, "estudio", "Una fila de megáfonos negros con uno solo naranja."),
-  enter: img(
-    6,
-    img06lg,
-    img06sm,
+  megafonos: img(
+    "05-estudio-megafonos",
     "estudio",
-    "Una tecla Enter gigante se abre como una puerta y deja salir luz naranja.",
+    "Una fila de megáfonos negros con uno solo naranja.",
+    "Frase: Anuncios que se escuchan.",
   ),
-  carpetas: img(7, img07lg, img07sm, "salud", "Una fila de carpetas negras con una sola carpeta verde."),
+
+  /* Salud */
+  carpetas: img(
+    "07-salud-carpetas",
+    "salud",
+    "Una fila de carpetas negras con una sola carpeta verde.",
+    "Orientación en el trámite REPROCANN",
+  ),
   lupa: img(
-    8,
-    img08lg,
-    img08sm,
+    "08-salud-lupa",
     "salud",
     "Una lupa sobre credenciales negras resalta la única credencial verde.",
+    "Profesionales verificados",
   ),
-  brujulas: img(9, img09lg, img09sm, "salud", "Una fila de brújulas negras con una sola brújula verde."),
-  candado: img(10, img10lg, img10sm, "salud", "Un candado verde entre candados negros."),
+  ongs: img(
+    "s-ongs",
+    "salud",
+    "Una mano une dos piezas de rompecabezas negras con una pieza verde en el centro.",
+    "Vinculación con ONGs verificadas",
+  ),
   escalera: img(
-    11,
-    img11lg,
-    img11sm,
+    "11-salud-escalera",
     "salud",
     "Una escalera de bloques negros cuyo primer escalón es verde.",
+    "REPROCANN sin vueltas: la consulta médica",
   ),
-  diarios: img(12, img12lg, img12sm, "noticias", "Una pila de diarios negros con un solo diario amarillo."),
-  llaves: img(13, img13lg, img13sm, "noticias", "Una fila de llaves negras con una sola llave amarilla."),
-  tubos: img(
-    14,
-    img14lg,
-    img14sm,
+  brujulas: img(
+    "09-salud-brujulas",
+    "salud",
+    "Una fila de brújulas negras con una sola brújula verde.",
+    "Pregunta: ¿Por dónde empiezo?",
+  ),
+  mitoRealidad: img(
+    "s-mito-realidad",
+    "salud",
+    "Dos tarjetas: una negra con la palabra MITO tachada y una verde con la palabra REALIDAD.",
+    "Pregunta: ¿Me garantizan la aprobación?",
+  ),
+  candado: img(
+    "10-salud-candado",
+    "salud",
+    "Un candado verde entre candados negros.",
+    "Pregunta: ¿Qué pasa con mis datos?",
+  ),
+  guia: img(
+    "s-guia",
+    "salud",
+    "Un cuaderno negro cerrado con una cinta señaladora verde.",
+    "Recurso: Guía REPROCANN paso a paso",
+  ),
+
+  /* Noticias: una por noticia (el título sale del registro de cada noticia) */
+  nInstagram: img(
+    "n-instagram",
+    "noticias",
+    "Una pantalla horizontal amarilla entre teléfonos verticales negros.",
+  ),
+  nCarteles: img(
+    "n-carteles",
+    "noticias",
+    "Una fila de carteles publicitarios negros con uno solo encendido en amarillo.",
+  ),
+  nPymes: img(
+    "n-pymes",
+    "noticias",
+    "Un gráfico de barras negro que desciende, con una flecha amarilla hacia abajo.",
+  ),
+  nEndeavor: img(
+    "n-endeavor",
+    "noticias",
+    "Siluetas de montañas negras con un punto de luz amarillo en la cima más alta.",
+  ),
+  nExpo: img(
+    "n-expo",
+    "noticias",
+    "Una fila de credenciales de feria negras colgando y una sola amarilla.",
+  ),
+  nConicet: img(
+    "14-noticias-tubos",
     "noticias",
     "Una gradilla de tubos de ensayo negros con un solo tubo amarillo.",
   ),
-  hero: {
-    n: 15,
-    lg: img15lg,
-    sm: img15sm,
-    width: 1920,
-    height: 1088,
-    alt: "Muchas piezas de ajedrez negras sobre un tablero oscuro y un solo rey naranja encendido.",
-    area: "general",
-  } satisfies FnxImg,
-} as const;
-
-/** Las 15 fotos en orden, para la galería de Marca. */
-export const GALERIA: FnxImg[] = [
-  IMG.hero,
-  IMG.rey,
-  IMG.manoFigura,
-  IMG.rompecabezas,
-  IMG.iman,
-  IMG.megafonos,
-  IMG.enter,
-  IMG.carpetas,
-  IMG.lupa,
-  IMG.brujulas,
-  IMG.candado,
-  IMG.escalera,
-  IMG.diarios,
-  IMG.llaves,
-  IMG.tubos,
-];
+  nMercado: img(
+    "n-mercado",
+    "noticias",
+    "Pilas de monedas negras con una sola moneda amarilla arriba.",
+  ),
+  nAriccame: img(
+    "n-sello",
+    "noticias",
+    "Un sello de goma negro sobre un documento negro con una marca de tinta amarilla.",
+  ),
+  nLicencias: img(
+    "13-noticias-llaves",
+    "noticias",
+    "Una fila de llaves negras con una sola llave amarilla.",
+  ),
+  nReprocann: img(
+    "n-reprocann",
+    "noticias",
+    "Un archivo de carpetas negras con una carpeta amarilla que sobresale.",
+  ),
+} satisfies Record<string, FnxImg>;
 
 export const AREA_LABEL: Record<ImageArea, string> = {
   estudio: "Estudio",
   salud: "Salud",
   noticias: "Noticias",
-  general: "General",
+  general: "Inicio",
 };
-
-/**
- * Foto de cada noticia según su categoría: Marketing y Negocios usan los diarios;
- * Cannabis medicinal alterna llaves y tubos de ensayo, en el orden de la lista completa.
- */
-export function newsImages(items: NewsItem[]): Record<string, FnxImg> {
-  const out: Record<string, FnxImg> = {};
-  let cannabis = 0;
-  for (const n of items) {
-    if (n.category === "Cannabis medicinal") {
-      out[n.id] = cannabis % 2 === 0 ? IMG.llaves : IMG.tubos;
-      cannabis += 1;
-    } else {
-      out[n.id] = IMG.diarios;
-    }
-  }
-  return out;
-}

@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { BadgeCheck, Compass, Users } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { AgeGate } from "@/components/fnx/AgeGate";
+import { ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
@@ -58,21 +60,57 @@ const SERVICES = [
     icon: Users,
     title: "Vinculación con ONGs verificadas",
     text: "Te conectamos con organizaciones que cumplen.",
-    img: IMG.brujulas,
+    img: IMG.ongs,
   },
 ];
 
 const FAQ = [
-  { q: "¿Por dónde empiezo?", a: "Escribinos y te orientamos según tu caso." },
+  { q: "¿Por dónde empiezo?", a: "Escribinos y te orientamos según tu caso.", img: IMG.brujulas },
   {
     q: "¿Me garantizan la aprobación?",
     a: "No. La aprobación depende de la evaluación oficial; te ayudamos a presentar todo correctamente.",
+    img: IMG.mitoRealidad,
   },
   {
     q: "¿Qué pasa con mis datos?",
     a: "Pedimos tu consentimiento y tratamos tu información con reserva.",
+    img: IMG.candado,
   },
 ];
+
+/** Preguntas frecuentes: la foto de al lado cambia según la pregunta abierta. */
+function FaqWithPhotos() {
+  const [open, setOpen] = useState("");
+  const idx = Math.max(0, FAQ.findIndex((_, i) => `faq-${i}` === open));
+  const current = FAQ[idx] ?? FAQ[0]!;
+  return (
+    <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
+      <Reveal>
+        <Accordion
+          type="single"
+          collapsible
+          value={open}
+          onValueChange={setOpen}
+          className="flex flex-col gap-3"
+        >
+          {FAQ.map((f, i) => (
+            <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
+              <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Reveal>
+      <Reveal delay={120}>
+        <div key={current.img.id} className="phrase-in">
+          <SidePhoto img={current.img} />
+        </div>
+      </Reveal>
+    </div>
+  );
+}
 
 function SidePhoto({ img }: { img: FnxImg }) {
   return (
@@ -183,23 +221,7 @@ function Salud() {
         tldr="Por dónde empezar, si hay garantía y qué pasa con tus datos."
         footer={<AdultNote />}
       >
-        <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <Reveal>
-            <Accordion type="single" collapsible className="flex flex-col gap-3">
-              {FAQ.map((f, i) => (
-                <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
-                  <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
-                    {f.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Reveal>
-          <Reveal delay={120}>
-            <SidePhoto img={IMG.candado} />
-          </Reveal>
-        </div>
+        <FaqWithPhotos />
       </Section>
 
       <Section
@@ -210,12 +232,13 @@ function Salud() {
         tldr="Una guía simple para hacer el trámite sin perderte."
         footer={<AdultNote />}
       >
-        <Reveal className="flex flex-col gap-6 rounded-3xl border border-border bg-card p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-          <div className="flex flex-col gap-2">
-            <h3 className="text-2xl font-bold text-foreground">Guía REPROCANN paso a paso</h3>
-            <p className="text-sm text-muted-foreground">Te la mandamos por WhatsApp, sin costo.</p>
-          </div>
-          <WhatsAppButton topic="salud" label="Pedila gratis" />
+        <Reveal>
+          <ResourceCard
+            media={<FnxImage img={IMG.guia} sizes="(min-width: 768px) 40vw, 100vw" className="photo-hover h-full w-full object-cover" />}
+            title="Guía REPROCANN paso a paso"
+            text="Te la mandamos por WhatsApp, sin costo."
+            action={<WhatsAppButton topic="salud" label="Pedila gratis" />}
+          />
         </Reveal>
       </Section>
     </div>

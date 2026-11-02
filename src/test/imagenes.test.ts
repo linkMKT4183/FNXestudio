@@ -1,26 +1,29 @@
 import { describe, expect, it } from "vitest";
-import { GALERIA, IMG, newsImages } from "@/data/imagenes";
+import { GALERIA } from "@/data/galeria";
+import { IMG } from "@/data/imagenes";
 import { NOTICIAS } from "@/data/noticias";
 
 describe("Fotos de noticias", () => {
-  const map = newsImages(NOTICIAS);
-
-  it("Marketing y Negocios usan la foto 12 (diarios)", () => {
-    for (const n of NOTICIAS.filter((x) => x.category !== "Cannabis medicinal")) {
-      expect(map[n.id]?.n).toBe(12);
-    }
+  it("cada noticia tiene su propia foto, sin repetir", () => {
+    const ids = NOTICIAS.map((n) => n.image.id);
+    expect(new Set(ids).size).toBe(NOTICIAS.length);
   });
 
-  it("Cannabis medicinal alterna las fotos 13 y 14", () => {
-    const nums = NOTICIAS.filter((x) => x.category === "Cannabis medicinal").map((n) => map[n.id]?.n);
-    expect(nums.slice(0, 4)).toEqual([13, 14, 13, 14]);
+  it("las fotos de noticias son del área Noticias", () => {
+    for (const n of NOTICIAS) expect(n.image.area).toBe("noticias");
   });
 });
 
 describe("Galería de Marca", () => {
-  it("muestra las 15 fotos, sin repetir", () => {
-    expect(GALERIA).toHaveLength(15);
-    expect(new Set(GALERIA.map((g) => g.n)).size).toBe(15);
+  it("muestra todas las fotos del sitio una sola vez", () => {
+    const all = Object.values(IMG);
+    expect(GALERIA).toHaveLength(all.length);
+    expect(new Set(GALERIA.map((g) => g.id)).size).toBe(all.length);
+  });
+
+  it("cada noticia aparece con el título de la noticia", () => {
+    const expo = GALERIA.find((g) => g.id === IMG.nExpo.id);
+    expect(expo?.label).toBe("Noticia: Expo Cannabis 2026: más de 300 marcas en La Rural");
   });
 
   it("cada foto tiene texto alternativo", () => {

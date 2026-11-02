@@ -7,17 +7,19 @@ import { GALLERY_GROUPS, type GalleryItem } from "@/data/galeria";
 import { AREA_LABEL, type ImageArea } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
 
-const TONE: Record<ImageArea, "naranja" | "verde" | "amarillo" | "neutral"> = {
+const TONE: Record<ImageArea, "naranja" | "azul" | "verde" | "amarillo" | "neutral"> = {
   estudio: "naranja",
+  consultoria: "azul",
   salud: "verde",
   noticias: "amarillo",
   general: "neutral",
 };
 
-type Filter = "todas" | "estudio" | "salud" | "noticias";
+type Filter = "todas" | "estudio" | "consultoria" | "salud" | "noticias";
 const FILTERS: { v: Filter; l: string }[] = [
   { v: "todas", l: "Todas" },
   { v: "estudio", l: "Estudio" },
+  { v: "consultoria", l: "Consultoría" },
   { v: "salud", l: "Salud" },
   { v: "noticias", l: "Noticias" },
 ];

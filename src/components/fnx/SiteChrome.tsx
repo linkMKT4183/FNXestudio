@@ -8,20 +8,23 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { to: "/estudio", label: "Estudio" },
+  { to: "/consultoria", label: "Consultoría" },
   { to: "/salud", label: "Salud" },
   { to: "/noticias", label: "Noticias" },
   { to: "/marca", label: "Marca" },
 ] as const;
 
-export type Area = "estudio" | "salud" | "noticias";
+export type Area = "estudio" | "consultoria" | "salud" | "noticias";
 
 export function areaFromPath(pathname: string): Area {
+  if (pathname.startsWith("/consultoria")) return "consultoria";
   if (pathname.startsWith("/salud")) return "salud";
   if (pathname.startsWith("/noticias")) return "noticias";
   return "estudio";
 }
 
 function topicFromPath(pathname: string): WhatsAppTopic {
+  if (pathname.startsWith("/consultoria")) return "consultoria";
   if (pathname.startsWith("/salud")) return "salud";
   if (pathname.startsWith("/noticias")) return "novedades";
   return "marca";

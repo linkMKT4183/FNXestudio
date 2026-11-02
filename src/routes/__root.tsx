@@ -87,14 +87,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Estudio creativo en Mendoza. Una empresa, tres áreas: FNX Estudio, FNX Salud y FNX Noticias.",
+          "Estudio creativo en Mendoza. Una empresa, cuatro áreas: FNX Estudio, FNX Consultoría, FNX Salud y FNX Noticias.",
       },
       { name: "author", content: "Fénix Creativo" },
       { name: "theme-color", content: "#0B0B0B" },
       { property: "og:title", content: "FNX · Fénix Creativo" },
       {
         property: "og:description",
-        content: "Estudio creativo en Mendoza. Una empresa, tres áreas.",
+        content: "Estudio creativo en Mendoza. Una empresa, cuatro áreas.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_AR" },

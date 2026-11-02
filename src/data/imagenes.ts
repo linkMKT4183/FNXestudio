@@ -5,7 +5,7 @@
  */
 const files = import.meta.glob<string>("../assets/fnx/*.webp", { eager: true, import: "default" });
 
-export type ImageArea = "estudio" | "salud" | "noticias" | "general";
+export type ImageArea = "estudio" | "consultoria" | "salud" | "noticias" | "general";
 
 export interface FnxImg {
   id: string;
@@ -110,6 +110,62 @@ export const IMG = {
     "estudio",
     "Una fila de megáfonos negros con uno solo naranja.",
     "Frase: Anuncios que se escuchan.",
+  ),
+
+  /* Consultoría */
+  cHero: img(
+    "c-hero",
+    "consultoria",
+    "Una balanza de justicia azul entre objetos de escritorio negros.",
+    "Consultoría: imagen principal",
+  ),
+  cJuridico: img(
+    "c-juridico",
+    "consultoria",
+    "Un sello de goma azul sobre una pila de documentos negros.",
+    "Servicios jurídicos",
+  ),
+  cTecnico: img(
+    "c-tecnico",
+    "consultoria",
+    "Una fila de instrumentos de medición negros, con termómetros y reglas, y un higrómetro azul.",
+    "Servicios técnicos de cultivo",
+  ),
+  cDerivaciones: img(
+    "c-derivaciones",
+    "consultoria",
+    "Una fila de compases negros con un solo compás azul.",
+    "Derivaciones a la red de profesionales",
+  ),
+  cLlave: img(
+    "c-llave",
+    "consultoria",
+    "Una fila de llaves negras con una sola llave azul.",
+    "Combo: Asociación llave en mano",
+  ),
+  cCarpetas: img(
+    "c-carpetas",
+    "consultoria",
+    "Una fila de biblioratos negros ordenados con uno solo azul.",
+    "Combo: Regularización",
+  ),
+  cCalendario: img(
+    "c-calendario",
+    "consultoria",
+    "Un calendario de escritorio negro con un solo día marcado en azul.",
+    "Combo: Mantenimiento",
+  ),
+  cEscudo: img(
+    "c-escudo",
+    "consultoria",
+    "Una fila de escudos negros con un solo escudo azul.",
+    "Combo: Marca protegida",
+  ),
+  cEscalera: img(
+    "c-escalera",
+    "consultoria",
+    "Una escalera de bloques negros cuyo último escalón es azul.",
+    "Inversores y proyectos industriales",
   ),
 
   /* Salud */
@@ -217,6 +273,7 @@ export const IMG = {
 
 export const AREA_LABEL: Record<ImageArea, string> = {
   estudio: "Estudio",
+  consultoria: "Consultoría",
   salud: "Salud",
   noticias: "Noticias",
   general: "Inicio",

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { Check } from "lucide-react";
-import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
+import { Headline, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -11,17 +12,17 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/consultoria")({
   head: () => ({
     meta: [
-      { title: "FNX Consultoría · Asesoría jurídica y técnica de cultivo | FNX · Fénix Creativo" },
+      { title: "FNX Consultoría · Asesoría jurídica y técnica | FNX · Fénix Creativo" },
       {
         name: "description",
         content:
-          "Asesoría jurídica y técnica de cultivo para que los proyectos cannábicos se constituyan, se regularicen y crezcan dentro de la ley. Desde Mendoza.",
+          "Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan, se regularicen y crezcan en regla. Desde Mendoza.",
       },
       { property: "og:title", content: "FNX Consultoría · Crecer en regla" },
       {
         property: "og:description",
         content:
-          "Asociaciones civiles, regularización, plan de cultivo y registro de marca, coordinado por FNX.",
+          "Del campo al cultivo regulado: riego, tecnificación, sociedades, asociaciones civiles y regularización, coordinado por FNX.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -30,7 +31,102 @@ export const Route = createFileRoute("/consultoria")({
   component: Consultoria,
 });
 
-const AUDIENCE: { who: string; need: string; door: string; img?: FnxImg }[] = [
+type Sector = "agro" | "cannabis";
+
+interface Audience {
+  who: string;
+  need: string;
+  door: string;
+  img?: FnxImg;
+}
+
+interface Service {
+  id: string;
+  label: string;
+  who: string;
+  img: FnxImg;
+  items: string[];
+}
+
+interface Combo {
+  name: string;
+  forWho: string;
+  includes: string;
+  img?: FnxImg;
+}
+
+/* ---------- Agro ---------- */
+
+const AUDIENCE_AGRO: Audience[] = [
+  {
+    who: "Productores que quieren tecnificar su producción",
+    need: "Riego eficiente, monitoreo y mejores rindes",
+    door: "Tecnificación y riego",
+    img: IMG.cValvula,
+  },
+  {
+    who: "Proyectos agrícolas de gran escala",
+    need: "Diseño, dimensionamiento y cotización de infraestructura",
+    door: "Proyectos a escala",
+  },
+  {
+    who: "Productores que necesitan trazabilidad",
+    need: "Registros ordenados y presentables",
+    door: "Monitoreo y trazabilidad",
+  },
+  {
+    who: "Emprendimientos, cooperativas y sociedades agrícolas",
+    need: "Constituirse y tener sus contratos en regla",
+    door: "Constitución y contratos",
+  },
+];
+
+const SERVICES_AGRO: Service[] = [
+  {
+    id: "tecnico-agro",
+    label: "Técnico",
+    who: "Profesional en Gestión Ambiental con amplia experiencia en riego y proyectos de gran escala.",
+    img: IMG.cSensor,
+    items: [
+      "Diseño y dimensionamiento de sistemas de riego.",
+      "Tecnificación de la producción.",
+      "Monitoreo de cultivos.",
+      "Trazabilidad de productores.",
+      "Diseño, dimensionamiento y cotización de infraestructura por escala.",
+      "Mentoría de proyectos agrícolas e industriales.",
+    ],
+  },
+  {
+    id: "juridico-agro",
+    label: "Jurídico",
+    who: "Abogados de la red de FNX, elegidos según cada caso.",
+    img: IMG.cJuridico,
+    items: [
+      "Constitución de sociedades comerciales (incluidas SAS) y cooperativas.",
+      "Contratos y acuerdos entre socios.",
+      "Registro de marca.",
+      "Derecho administrativo y presentaciones ante organismos.",
+    ],
+  },
+];
+
+const COMBOS_AGRO: Combo[] = [
+  {
+    name: "Riego eficiente",
+    forWho: "Productores que quieren tecnificar",
+    includes: "Diagnóstico + diseño y dimensionamiento del sistema de riego + cotización por escala.",
+    img: IMG.cAspersores,
+  },
+  {
+    name: "Proyecto a escala",
+    forWho: "Proyectos agrícolas e industriales",
+    includes: "Diseño de infraestructura + cotización + mentoría del proyecto.",
+  },
+];
+
+/* ---------- Cannabis ---------- */
+
+const AUDIENCE_CANNABIS: Audience[] = [
   {
     who: "Grupos que quieren armar una asociación civil",
     need: "Constituirla bien desde el primer día",
@@ -59,7 +155,7 @@ const AUDIENCE: { who: string; need: string; door: string; img?: FnxImg }[] = [
   },
 ];
 
-const SERVICES = [
+const SERVICES_CANNABIS: Service[] = [
   {
     id: "juridico",
     label: "Jurídico",
@@ -101,7 +197,7 @@ const SERVICES = [
   },
 ];
 
-const COMBOS: { name: string; forWho: string; includes: string; img?: FnxImg }[] = [
+const COMBOS_CANNABIS: Combo[] = [
   {
     name: "Asociación llave en mano",
     forWho: "Grupos que arrancan de cero",
@@ -142,15 +238,145 @@ const STEPS = [
   "Te ofrecemos un servicio recurrente, como el mantenimiento, para seguir acompañándote.",
 ];
 
-const LIMITS = [
-  "Ante una zona gris, te mostramos el camino para regularizar, nunca el atajo.",
-  "No armamos actas que no reflejen hechos reales ni declaramos más plantas de las que justifica el padrón.",
-  "No prometemos protección penal ni plazos que dependen del Estado.",
-  "Ningún documento legal hecho con IA se entrega sin revisión de un abogado de la red.",
+const LIMITS: { text: string; note?: string }[] = [
+  {
+    text: "Ante una zona gris, te mostramos el camino para regularizar, nunca el atajo.",
+    note: "Para cualquier proyecto, agrícola o cannábico",
+  },
+  {
+    text: "No armamos actas que no reflejen hechos reales ni declaramos más plantas de las que justifica el padrón.",
+  },
+  { text: "No prometemos protección penal ni plazos que dependen del Estado." },
+  { text: "Ningún documento legal hecho con IA se entrega sin revisión de un abogado de la red." },
+];
+
+const SECTORS: { v: Sector; l: string }[] = [
+  { v: "agro", l: "Agro" },
+  { v: "cannabis", l: "Cannabis" },
 ];
 
 function Bullet() {
   return <span className="mt-1.5 block h-2.5 w-2 shrink-0 rounded-[3px] bg-area" aria-hidden="true" />;
+}
+
+function AudienceGrid({ items }: { items: Audience[] }) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((a, i) => (
+        <Reveal key={a.who} delay={i * 70} className={cn(a.img && "md:col-span-2 lg:col-span-2")}>
+          <article
+            className={cn(
+              "group flex h-full overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft",
+              a.img ? "flex-col sm:flex-row" : "flex-col",
+            )}
+          >
+            {a.img ? (
+              <div className="aspect-[16/9] overflow-hidden border-b border-border sm:aspect-auto sm:w-1/2 sm:border-b-0 sm:border-r">
+                <FnxImage
+                  img={a.img}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="photo-hover h-full w-full object-cover"
+                />
+              </div>
+            ) : null}
+            <div className="flex flex-1 flex-col gap-5 p-6">
+              <span className="headline text-3xl text-muted-foreground">0{i + 1}</span>
+              <h3 className="text-lg font-bold leading-snug text-foreground">{a.who}</h3>
+              <p className="text-sm text-muted-foreground">{a.need}</p>
+              <div className="mt-auto border-t border-border pt-4">
+                <p className="eyebrow text-muted-foreground">Puerta de entrada</p>
+                <p className="mt-1 font-semibold text-area">{a.door}</p>
+              </div>
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+function ServiceTabs({ services }: { services: Service[] }) {
+  return (
+    <Reveal>
+      <Tabs defaultValue={services[0]?.id ?? ""} className="flex flex-col gap-8">
+        <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-full border border-border bg-transparent p-1 sm:w-auto sm:self-start">
+          {services.map((s) => (
+            <TabsTrigger
+              key={s.id}
+              value={s.id}
+              className="h-10 shrink-0 rounded-full px-5 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none"
+            >
+              {s.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {services.map((s) => (
+          <TabsContent key={s.id} value={s.id} className="mt-0">
+            <div className="phrase-in grid items-start gap-6 lg:grid-cols-[1fr_1.3fr]">
+              <div className="group overflow-hidden rounded-2xl border border-border bg-card">
+                <FnxImage
+                  img={s.img}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="photo-hover aspect-[3/2] h-full w-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8">
+                <p className="text-sm text-muted-foreground">{s.who}</p>
+                <ul className="flex flex-col gap-3">
+                  {s.items.map((it) => (
+                    <li key={it} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
+                      <Bullet />
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </TabsContent>
+        ))}
+      </Tabs>
+    </Reveal>
+  );
+}
+
+function ComboGroup({ tag, combos, extra }: { tag: string; combos: Combo[]; extra?: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-5">
+      <Tag className="self-start">{tag}</Tag>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {combos.map((c, i) => (
+          <Reveal key={c.name} delay={i * 70}>
+            <FlipCard
+              label={c.name}
+              heightClass="h-[24rem]"
+              media={
+                c.img ? (
+                  <FnxImage img={c.img} className="photo-hover h-full w-full object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-background">
+                    <Pieces lit={2} />
+                  </div>
+                )
+              }
+              front={
+                <div className="flex flex-col gap-2">
+                  <span className="text-xl font-bold leading-snug text-foreground">{c.name}</span>
+                  <span className="text-sm text-muted-foreground">{c.forWho}</span>
+                </div>
+              }
+              back={
+                <div className="flex flex-col gap-3">
+                  <span className="eyebrow">{c.name}</span>
+                  <p className="text-xl font-bold leading-snug">{c.includes}</p>
+                </div>
+              }
+            />
+          </Reveal>
+        ))}
+        {extra ? <Reveal delay={combos.length * 70}>{extra}</Reveal> : null}
+      </div>
+    </div>
+  );
 }
 
 function Consultoria() {
@@ -171,12 +397,12 @@ function Consultoria() {
             className="text-7xl sm:text-8xl lg:text-9xl"
           />
           <p className="max-w-xl text-lg text-muted-foreground">
-            Asesoría jurídica y técnica de cultivo para que los proyectos cannábicos se constituyan,
-            se regularicen y crezcan dentro de la ley.
+            Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan,
+            se regularicen y crezcan en regla.
           </p>
           <TenSeconds className="max-w-2xl">
-            Todo lo que un proyecto cannábico necesita para ser legal y funcionar en regla,
-            coordinado por FNX y resuelto por profesionales especializados.
+            Todo lo que un proyecto productivo necesita para funcionar en regla y crecer, del campo
+            al cultivo regulado, coordinado por FNX y resuelto por profesionales especializados.
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
             <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
@@ -195,108 +421,112 @@ function Consultoria() {
         </Reveal>
       </section>
 
-      {/* A quién le hablamos */}
-      <Section
-        id="a-quien"
-        eyebrow="A quién le hablamos"
-        lead="Cada proyecto tiene"
-        accent="su puerta."
-        tldr="Cinco tipos de proyecto, cada uno con su forma de empezar."
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {AUDIENCE.map((a, i) => (
-            <Reveal
-              key={a.who}
-              delay={i * 70}
-              className={cn(a.img && "md:col-span-2 lg:col-span-2")}
-            >
-              <article
-                className={cn(
-                  "group flex h-full overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft",
-                  a.img ? "flex-col sm:flex-row" : "flex-col",
-                )}
-              >
-                {a.img ? (
-                  <div className="aspect-[16/9] overflow-hidden border-b border-border sm:aspect-auto sm:w-1/2 sm:border-b-0 sm:border-r">
-                    <FnxImage
-                      img={a.img}
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="photo-hover h-full w-full object-cover"
-                    />
-                  </div>
-                ) : null}
-                <div className="flex flex-1 flex-col gap-5 p-6">
-                  <span className="headline text-3xl text-muted-foreground">0{i + 1}</span>
-                  <h3 className="text-lg font-bold leading-snug text-foreground">{a.who}</h3>
-                  <p className="text-sm text-muted-foreground">{a.need}</p>
-                  <div className="mt-auto border-t border-border pt-4">
-                    <p className="eyebrow text-muted-foreground">Puerta de entrada</p>
-                    <p className="mt-1 font-semibold text-area">{a.door}</p>
-                  </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-6">
-          <p className="text-sm text-muted-foreground">
-            Si sos paciente, te acompaña{" "}
-            <Link to="/salud" className="font-semibold text-foreground underline underline-offset-4 hover:text-area">
-              FNX Salud
-            </Link>
-            .
-          </p>
+      {/* Línea bajo el hero */}
+      <div className="border-y border-border">
+        <Reveal className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
+          <Headline as="p" lead="Del campo al" accent="cultivo regulado." className="text-4xl sm:text-6xl" />
         </Reveal>
-      </Section>
+      </div>
 
-      {/* Servicios en pestañas */}
-      <Section
-        id="servicios"
-        eyebrow="Servicios"
-        lead="Jurídico y"
-        accent="técnico."
-        tldr="Tres frentes: lo jurídico, lo técnico de cultivo y lo que derivamos a la red."
-      >
-        <Reveal>
-          <Tabs defaultValue="juridico" className="flex flex-col gap-8">
-            <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-full border border-border bg-transparent p-1 sm:w-auto sm:self-start">
-              {SERVICES.map((s) => (
+      {/* Selector de sector: controla "A quién le hablamos" y "Servicios" */}
+      <Tabs defaultValue="agro" className="block">
+        <div className="sticky top-16 z-30 border-b border-border bg-background/90 backdrop-blur-md sm:top-20">
+          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:px-8">
+            <p className="eyebrow hidden text-muted-foreground sm:block" aria-hidden="true">
+              Elegí tu sector
+            </p>
+            <TabsList
+              aria-label="Elegí tu sector"
+              className="h-auto gap-1 rounded-full border border-border bg-transparent p-1"
+            >
+              {SECTORS.map((s) => (
                 <TabsTrigger
-                  key={s.id}
-                  value={s.id}
-                  className="h-10 shrink-0 rounded-full px-5 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none"
+                  key={s.v}
+                  value={s.v}
+                  className="h-10 rounded-full px-6 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none"
                 >
-                  {s.label}
+                  {s.l}
                 </TabsTrigger>
               ))}
             </TabsList>
-            {SERVICES.map((s) => (
-              <TabsContent key={s.id} value={s.id} className="mt-0">
-                <div className="phrase-in grid items-start gap-6 lg:grid-cols-[1fr_1.3fr]">
-                  <div className="group overflow-hidden rounded-2xl border border-border bg-card">
-                    <FnxImage
-                      img={s.img}
-                      sizes="(min-width: 1024px) 40vw, 100vw"
-                      className="photo-hover aspect-[3/2] h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 sm:p-8">
-                    <p className="text-sm text-muted-foreground">{s.who}</p>
-                    <ul className="flex flex-col gap-3">
-                      {s.items.map((it) => (
-                        <li key={it} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
-                          <Bullet />
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </Reveal>
-      </Section>
+          </div>
+        </div>
+
+        <TabsContent value="agro" className="mt-0">
+          {/* Hero de la pestaña Agro */}
+          <div className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16">
+            <Reveal>
+              <figure className="group relative overflow-hidden rounded-3xl border border-border bg-card">
+                <FnxImage
+                  img={IMG.cMaqueta}
+                  sizes="(min-width: 1152px) 1152px, 100vw"
+                  className="photo-hover aspect-[16/9] w-full object-cover sm:aspect-[21/9]"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-3 bg-background/80 px-5 py-4 backdrop-blur-sm sm:px-8">
+                  <Tag>Agro</Tag>
+                  <span className="text-sm font-semibold text-foreground">
+                    Riego, tecnificación, trazabilidad y proyectos a escala.
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          </div>
+
+          <Section
+            id="a-quien-agro"
+            eyebrow="A quién le hablamos · Agro"
+            lead="Cada proyecto tiene"
+            accent="su puerta."
+            tldr="Cuatro tipos de proyecto agrícola, cada uno con su forma de empezar."
+          >
+            <AudienceGrid items={AUDIENCE_AGRO} />
+          </Section>
+
+          <Section
+            id="servicios-agro"
+            eyebrow="Servicios · Agro"
+            lead="Técnico y"
+            accent="jurídico."
+            tldr="Dos frentes: lo técnico del campo y lo jurídico de la empresa."
+          >
+            <ServiceTabs services={SERVICES_AGRO} />
+          </Section>
+        </TabsContent>
+
+        <TabsContent value="cannabis" className="mt-0">
+          <Section
+            id="a-quien"
+            eyebrow="A quién le hablamos · Cannabis"
+            lead="Cada proyecto tiene"
+            accent="su puerta."
+            tldr="Cinco tipos de proyecto, cada uno con su forma de empezar."
+          >
+            <AudienceGrid items={AUDIENCE_CANNABIS} />
+            <Reveal className="mt-6">
+              <p className="text-sm text-muted-foreground">
+                Si sos paciente, te acompaña{" "}
+                <Link
+                  to="/salud"
+                  className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
+                >
+                  FNX Salud
+                </Link>
+                .
+              </p>
+            </Reveal>
+          </Section>
+
+          <Section
+            id="servicios"
+            eyebrow="Servicios · Cannabis"
+            lead="Jurídico y"
+            accent="técnico."
+            tldr="Tres frentes: lo jurídico, lo técnico de cultivo y lo que derivamos a la red."
+          >
+            <ServiceTabs services={SERVICES_CANNABIS} />
+          </Section>
+        </TabsContent>
+      </Tabs>
 
       {/* Combos */}
       <Section
@@ -304,47 +534,24 @@ function Consultoria() {
         eyebrow="Combos"
         lead="Todo junto,"
         accent="más simple."
-        tldr="Cinco combos. Tocá cada tarjeta para ver qué incluye."
+        tldr="Dos combos para agro y cinco para cannabis. Tocá cada tarjeta para ver qué incluye."
+        className="border-t border-border"
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {COMBOS.map((c, i) => (
-            <Reveal key={c.name} delay={i * 70}>
-              <FlipCard
-                label={c.name}
-                heightClass="h-[24rem]"
-                media={
-                  c.img ? (
-                    <FnxImage img={c.img} className="photo-hover h-full w-full object-cover" />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-background">
-                      <Pieces lit={2} />
-                    </div>
-                  )
-                }
-                front={
-                  <div className="flex flex-col gap-2">
-                    <span className="text-xl font-bold leading-snug text-foreground">{c.name}</span>
-                    <span className="text-sm text-muted-foreground">{c.forWho}</span>
-                  </div>
-                }
-                back={
-                  <div className="flex flex-col gap-3">
-                    <span className="eyebrow">{c.name}</span>
-                    <p className="text-xl font-bold leading-snug">{c.includes}</p>
-                  </div>
-                }
-              />
-            </Reveal>
-          ))}
-          <Reveal delay={COMBOS.length * 70}>
-            <div className="flex h-full min-h-40 flex-col justify-center gap-4 rounded-2xl border border-dashed border-border p-6">
-              <p className="eyebrow text-muted-foreground">Con FNX Estudio</p>
-              <p className="text-sm leading-relaxed text-foreground">
-                Los combos que suman marca o redes se resuelven con FNX Estudio, en un solo
-                presupuesto.
-              </p>
-            </div>
-          </Reveal>
+        <div className="flex flex-col gap-14">
+          <ComboGroup tag="Agro" combos={COMBOS_AGRO} />
+          <ComboGroup
+            tag="Cannabis"
+            combos={COMBOS_CANNABIS}
+            extra={
+              <div className="flex h-full min-h-40 flex-col justify-center gap-4 rounded-2xl border border-dashed border-border p-6">
+                <p className="eyebrow text-muted-foreground">Con FNX Estudio</p>
+                <p className="text-sm leading-relaxed text-foreground">
+                  Los combos que suman marca o redes se resuelven con FNX Estudio, en un solo
+                  presupuesto.
+                </p>
+              </div>
+            }
+          />
         </div>
       </Section>
 
@@ -373,12 +580,7 @@ function Consultoria() {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-end">
           <Reveal className="flex flex-col gap-6">
             <p className="eyebrow text-muted-foreground">Red de profesionales de FNX</p>
-            <Headline
-              id="red-titulo"
-              lead="Vos sos cliente"
-              accent="de FNX."
-              className="text-5xl sm:text-7xl"
-            />
+            <Headline id="red-titulo" lead="Vos sos cliente" accent="de FNX." className="text-5xl sm:text-7xl" />
             <p className="max-w-xl text-lg text-muted-foreground">
               Trabajamos con una red de abogados y técnicos especializados. Vos sos siempre cliente
               de FNX: nosotros coordinamos, presupuestamos y entregamos.
@@ -401,11 +603,14 @@ function Consultoria() {
         <Reveal>
           <ul className="grid gap-4 md:grid-cols-2">
             {LIMITS.map((l) => (
-              <li key={l} className="flex items-start gap-4 rounded-2xl border border-border p-6">
+              <li key={l.text} className="flex items-start gap-4 rounded-2xl border border-border p-6">
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-area text-area">
                   <Check className="h-4 w-4" aria-hidden="true" />
                 </span>
-                <span className="text-sm leading-relaxed text-foreground">{l}</span>
+                <span className="flex flex-col gap-2">
+                  {l.note ? <span className="eyebrow text-area">{l.note}</span> : null}
+                  <span className="text-sm leading-relaxed text-foreground">{l.text}</span>
+                </span>
               </li>
             ))}
           </ul>
@@ -416,12 +621,7 @@ function Consultoria() {
       <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="consultoria-cta">
         <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
           <Pieces lit={1} />
-          <Headline
-            id="consultoria-cta"
-            lead="Contanos"
-            accent="tu proyecto."
-            className="text-5xl sm:text-7xl"
-          />
+          <Headline id="consultoria-cta" lead="Contanos" accent="tu proyecto." className="text-5xl sm:text-7xl" />
           <p className="max-w-lg text-muted-foreground">
             Te respondemos por WhatsApp y vemos juntos por dónde empezar.
           </p>

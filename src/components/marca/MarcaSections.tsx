@@ -325,12 +325,12 @@ const PERSONAS = [
     message: "Te mostramos como una opción verificada.",
   },
   {
-    name: "Proyecto cannábico",
+    name: "Proyecto productivo",
     area: "FNX Consultoría",
     tone: "azul" as const,
-    who: "Asociaciones, emprendimientos, marcas e inversores que ya están dentro del mundo cannábico.",
-    needs: "Constituirse, regularizarse y crecer dentro de la ley.",
-    blocks: "Tener libros, actas y padrón desordenados o un cultivo que todavía no está en regla.",
+    who: "Productores, cooperativas, emprendimientos agrícolas y proyectos cannábicos que quieren profesionalizarse.",
+    needs: "Ordenar, tecnificar y crecer dentro de la ley.",
+    blocks: "No tener la parte técnica o legal en regla.",
     message: "Crecer en regla.",
   },
 ];
@@ -341,7 +341,7 @@ export function Publico() {
       eyebrow="A quién le hablamos"
       lead="Cinco perfiles,"
       accent="un mensaje."
-      tldr="Lucía, Dr. Martín, Sofía, las ONGs y los proyectos cannábicos. Tocá para conocerlos."
+      tldr="Lucía, Dr. Martín, Sofía, las ONGs y los proyectos productivos. Tocá para conocerlos."
     >
       <div className="grid gap-4 md:grid-cols-2">
         {PERSONAS.map((p) => (

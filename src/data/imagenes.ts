@@ -167,6 +167,30 @@ export const IMG = {
     "Una escalera de bloques negros cuyo último escalón es azul.",
     "Inversores y proyectos industriales",
   ),
+  cMaqueta: img(
+    "c-maqueta",
+    "consultoria",
+    "Una maqueta de campo con surcos negros y una sola línea de riego azul.",
+    "Agro: imagen principal",
+  ),
+  cSensor: img(
+    "c-sensor",
+    "consultoria",
+    "Una fila de postes negros y una sola estación de monitoreo azul.",
+    "Agro: servicios técnicos y monitoreo",
+  ),
+  cValvula: img(
+    "c-valvula",
+    "consultoria",
+    "Tuberías de riego negras con una sola válvula azul.",
+    "Agro: tecnificación y riego",
+  ),
+  cAspersores: img(
+    "c-aspersores",
+    "consultoria",
+    "Una fila de goteros de riego negros con uno solo azul.",
+    "Combo: Riego eficiente",
+  ),
 
   /* Salud */
   carpetas: img(

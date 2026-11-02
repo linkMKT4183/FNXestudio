@@ -24,7 +24,7 @@ describe("WhatsApp links", () => {
 
   it("builds the consultoría message link", () => {
     expect(buildWhatsAppLink("consultoria", "5492611234567")).toBe(
-      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito asesoría jurídica o de cultivo para mi proyecto")}`,
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito asesoría para mi proyecto agrícola o cannábico")}`,
     );
   });
 

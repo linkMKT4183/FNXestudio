@@ -40,7 +40,7 @@ const AREAS = [
     tone: "azul" as const,
     to: "/consultoria" as const,
     img: IMG.cHero,
-    items: ["Asesoría jurídica y técnica de cultivo para proyectos cannábicos."],
+    items: ["Asesoría jurídica y técnica para proyectos agrícolas y cannábicos."],
   },
   {
     name: "FNX Salud",
@@ -148,7 +148,7 @@ function Home() {
             to="/consultoria"
             tone="azul"
             kicker="FNX Consultoría"
-            title="Necesito asesoría para mi proyecto cannábico"
+            title="Necesito asesoría para mi proyecto agrícola o cannábico"
             img={IMG.cHero}
           />
           <Door
@@ -167,7 +167,7 @@ function Home() {
         eyebrow="Una empresa"
         lead="Cuatro áreas,"
         accent="una mirada."
-        tldr="Estudio para marcas, Consultoría para proyectos cannábicos, Salud para orientación y Noticias con fuentes."
+        tldr="Estudio para marcas, Consultoría para proyectos agrícolas y cannábicos, Salud para orientación y Noticias con fuentes."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (

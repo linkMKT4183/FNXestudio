@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
-import { ExpandCard } from "@/components/fnx/cards";
+import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -125,14 +125,13 @@ function Estudio() {
         accent="marca."
         tldr="10 puntos para revisar antes de poner plata en redes."
       >
-        <Reveal className="flex flex-col gap-6 rounded-3xl border border-border bg-card p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-          <div className="flex flex-col gap-2">
-            <h3 className="text-2xl font-bold text-foreground">
-              Checklist de marca: 10 puntos antes de invertir en redes
-            </h3>
-            <p className="text-sm text-muted-foreground">Te lo mandamos por WhatsApp, sin costo.</p>
-          </div>
-          <WhatsAppButton topic="marca" label="Pedilo gratis" />
+        <Reveal>
+          <ResourceCard
+            media={<FnxImage img={IMG.checklist} sizes="(min-width: 768px) 40vw, 100vw" className="photo-hover h-full w-full object-cover" />}
+            title="Checklist de marca: 10 puntos antes de invertir en redes"
+            text="Te lo mandamos por WhatsApp, sin costo."
+            action={<WhatsAppButton topic="marca" label="Pedilo gratis" />}
+          />
         </Reveal>
       </Section>
 

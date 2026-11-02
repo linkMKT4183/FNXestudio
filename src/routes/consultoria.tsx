@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
@@ -426,12 +426,6 @@ function Consultoria() {
             Te respondemos por WhatsApp y vemos juntos por dónde empezar.
           </p>
           <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
-          <Link
-            to="/salud"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground"
-          >
-            ¿Sos paciente? Te acompaña FNX Salud <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
         </Reveal>
       </section>
     </div>

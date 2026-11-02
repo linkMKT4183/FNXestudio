@@ -33,34 +33,39 @@ const SERVICES = [
     title: "Branding e identidad",
     short: "Que tu marca se reconozca.",
     detail: "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
+    img: IMG.rompecabezas,
   },
   {
     title: "Producción audiovisual",
     short: "Foto y video con idea.",
     detail: "Piezas para redes, campañas y web. Planificadas, filmadas y editadas por nosotros.",
+    img: IMG.manoFigura,
   },
   {
     title: "Tienda online",
     short: "Vender mientras dormís.",
     detail: "Armamos tu tienda, cargamos productos y la dejamos lista para cobrar.",
+    img: IMG.enter,
   },
   {
     title: "Redes y contenido",
     short: "Constancia sin perder tiempo.",
     detail: "Calendario, diseño y textos. Vos aprobás, nosotros publicamos.",
+    img: IMG.megafonos,
   },
   {
     title: "Estrategia",
     short: "Ver la jugada antes.",
     detail: "Ordenamos objetivos, público y mensajes antes de invertir en pauta.",
+    img: IMG.rey,
   },
 ];
 
-const PHRASES = [
-  "Tu potencial necesita dirección.",
-  "Ver la jugada antes que el mercado.",
-  "Primero la marca. Después la pauta.",
-  "Tu perfil es tu vidriera.",
+const PHRASES: PhraseSlide[] = [
+  { text: "Tu potencial necesita dirección.", img: IMG.manoFigura, focusX: "45%" },
+  { text: "Ver la jugada antes que el mercado.", img: IMG.rey, focusX: "64%" },
+  { text: "Primero la marca. Después la pauta.", img: IMG.iman, focusX: "78%" },
+  { text: "Anuncios que se escuchan.", img: IMG.megafonos, focusX: "76%" },
 ];
 
 function Estudio() {
@@ -96,12 +101,13 @@ function Estudio() {
         accent="hacemos."
         tldr="Cinco servicios. Tocá cada uno para ver qué incluye."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 70}>
               <ExpandCard
                 title={s.title}
                 kicker={<span className="text-sm text-muted-foreground">{s.short}</span>}
+                media={<FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />}
               >
                 {s.detail}
               </ExpandCard>
@@ -110,7 +116,7 @@ function Estudio() {
         </div>
       </Section>
 
-      <RotatingPhrases />
+      <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
 
       <Section
         id="recurso"
@@ -132,80 +138,15 @@ function Estudio() {
 
       <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="estudio-cta">
         <Reveal className="flex flex-col items-start gap-6 border-t border-border pt-16">
-          <h2 id="estudio-cta" className="headline text-5xl text-foreground sm:text-7xl">
-            Contanos de <span className="text-area">tu marca.</span>
-          </h2>
+          <Headline
+            id="estudio-cta"
+            lead="Contanos de"
+            accent="tu marca."
+            className="text-5xl sm:text-7xl"
+          />
           <WhatsAppButton topic="marca" />
         </Reveal>
       </section>
     </div>
-  );
-}
-
-function RotatingPhrases() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) setPaused(true);
-  }, []);
-
-  useEffect(() => {
-    if (paused) return;
-    const t = window.setInterval(() => setIndex((i) => (i + 1) % PHRASES.length), 4000);
-    return () => window.clearInterval(t);
-  }, [paused]);
-
-  return (
-    <section aria-labelledby="frases-titulo" className="border-y border-border bg-card">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28">
-        <h2 id="frases-titulo" className="eyebrow text-muted-foreground">
-          Cómo pensamos
-        </h2>
-        <div className="min-h-[9rem] sm:min-h-[12rem]" aria-live="polite">
-          <p key={index} className="headline phrase-in text-5xl text-foreground sm:text-7xl lg:text-8xl">
-            <PhraseText text={PHRASES[index] ?? ""} />
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          {PHRASES.map((p, i) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => {
-                setIndex(i);
-                setPaused(true);
-              }}
-              aria-label={`Frase ${i + 1}: ${p}`}
-              aria-current={i === index}
-              className={cn(
-                "h-3 rounded-full transition-all",
-                i === index ? "w-10 bg-area" : "w-3 bg-border hover:bg-muted-foreground",
-              )}
-            />
-          ))}
-          <button
-            type="button"
-            onClick={() => setPaused((v) => !v)}
-            className="ml-3 inline-flex h-9 items-center gap-2 rounded-full border border-border px-3 text-xs font-semibold text-muted-foreground hover:text-foreground"
-          >
-            {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
-            {paused ? "Reproducir" : "Pausar"}
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Pinta la última palabra en el color de acento. */
-function PhraseText({ text }: { text: string }) {
-  const words = text.split(" ");
-  const last = words.pop();
-  return (
-    <>
-      {words.join(" ")} <span className="text-area">{last}</span>
-    </>
   );
 }

@@ -141,7 +141,7 @@ export const IMG = {
     "c-llave",
     "consultoria",
     "Una fila de llaves negras con una sola llave azul.",
-    "Combo: Asociación llave en mano",
+    "Combo: Estructura legal llave en mano",
   ),
   cCarpetas: img(
     "c-carpetas",

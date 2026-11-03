@@ -44,7 +44,7 @@ export const Route = createFileRoute("/consultoria")({
       {
         property: "og:description",
         content:
-          "Del campo al cultivo regulado: riego, tecnificación, sociedades, asociaciones civiles y regularización, coordinado por FNX.",
+          "Del campo al cultivo regulado: riego, tecnificación, estructuras legales y fortalecimiento organizacional, coordinado por FNX.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -103,8 +103,8 @@ const AUDIENCE_AGRO: Audience[] = [
   },
   {
     icon: Handshake,
-    who: "Emprendimientos, cooperativas y sociedades agrícolas",
-    need: "Constituirse y tener sus contratos en regla",
+    who: "Formalización de la actividad agrícola",
+    need: "Redacción de contratos, convenios y constitución de estructuras legales",
     door: "Constitución y contratos",
   },
 ];
@@ -132,10 +132,10 @@ const SERVICES_AGRO: Service[] = [
     who: "Abogados de la red de FNX, elegidos según cada caso.",
     img: IMG.cJuridico,
     items: [
-      "Constitución de sociedades comerciales (incluidas SAS) y cooperativas.",
-      "Contratos y acuerdos entre socios.",
+      "Constitución de estructuras legales.",
+      "Contratos, convenios y acuerdos entre socios.",
       "Registro de marca.",
-      "Derecho administrativo y presentaciones ante organismos.",
+      "Trámites ante organismos públicos.",
     ],
   },
 ];
@@ -159,32 +159,32 @@ const COMBOS_AGRO: Combo[] = [
 const AUDIENCE_CANNABIS: Audience[] = [
   {
     icon: Users,
-    who: "Grupos que quieren armar una asociación civil",
+    who: "Grupos que quieren constituir una estructura legal",
     need: "Constituirla bien desde el primer día",
-    door: "Asociación llave en mano",
+    door: "Estructura legal llave en mano",
   },
   {
     icon: FolderKanban,
-    who: "Asociaciones que ya funcionan, pero desordenadas",
+    who: "Fortalecimiento organizacional",
     need: "Libros, actas y padrón al día",
     door: "Regularización y mantenimiento",
   },
   {
     icon: RouteIcon,
-    who: "Quienes cultivan en la informalidad y quieren pasar a la legalidad",
+    who: "Plan de cultivo y trazabilidad",
     need: "Un plan de cultivo y trazabilidad presentables",
     door: "Plan de cultivo y asesoramiento técnico",
   },
   {
     icon: Stamp,
-    who: "Emprendimientos y marcas de productos",
-    need: "Sociedad, registro de marca y comunicación",
+    who: "Emprendimientos y trámites ante el INPI",
+    need: "Sociedades, registro de marcas de productos y servicios, patentes y modelos de utilidad",
     door: "Marca protegida",
   },
   {
     icon: TrendingUp,
     who: "Inversores y proyectos industriales",
-    need: "Licencias y presentaciones ante organismos",
+    need: "Licencias y presentaciones ante organismos públicos",
     door: "Mentoría de proyectos",
     img: IMG.cEscalera,
   },
@@ -198,15 +198,14 @@ const SERVICES_CANNABIS: Service[] = [
     who: "Abogados de la red de FNX, elegidos según cada caso.",
     img: IMG.cJuridico,
     items: [
-      "Constitución de asociaciones civiles cannábicas.",
-      "Sociedades comerciales (incluidas SAS) y cooperativas.",
+      "Constitución de estructuras legales.",
       "Regularización y cumplimiento normativo: libros, actas con respaldo y reglamentos.",
-      "Mantenimiento mensual de asociaciones y gestión del padrón de socios.",
+      "Mantenimiento mensual de estructuras legales y gestión del padrón de socios.",
       "Informe semestral y carpetas para REPROCANN y el régimen de Mendoza.",
       "Registro de marca: legajo, solicitud y seguimiento.",
       "Contratos y acuerdos entre socios.",
       "Revisión de estatutos y documentación institucional.",
-      "Derecho administrativo, recursos ante organismos y amparos de salud.",
+      "Trámites y recursos ante organismos públicos y amparos de salud.",
       "Asesoramiento regulatorio para licencias de CBD y capacitación jurídica.",
     ],
   },
@@ -237,25 +236,25 @@ const SERVICES_CANNABIS: Service[] = [
 
 const COMBOS_CANNABIS: Combo[] = [
   {
-    name: "Asociación llave en mano",
+    name: "Estructura legal llave en mano",
     forWho: "Grupos que arrancan de cero",
     includes: "Constitución + registro de marca + plan de cultivo + identidad visual de FNX Estudio.",
     img: IMG.cLlave,
   },
   {
     name: "Constitución con acompañamiento",
-    forWho: "Toda asociación nueva",
+    forWho: "Toda estructura legal nueva",
     includes: "Constitución + 6 meses de mantenimiento.",
   },
   {
     name: "Regularización",
-    forWho: "Organizaciones desordenadas",
+    forWho: "Fortalecimiento organizacional",
     includes: "Diagnóstico + actas atrasadas con respaldo real + libros al día + trazabilidad.",
     img: IMG.cCarpetas,
   },
   {
     name: "Mantenimiento",
-    forWho: "Asociaciones en funcionamiento",
+    forWho: "Estructuras legales en funcionamiento",
     includes: "Actas mensuales + padrón + informe semestral. Abono mensual, semestral o anual.",
     img: IMG.cCalendario,
   },

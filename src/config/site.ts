@@ -61,3 +61,21 @@ export function buildInstagramLink(id: InstagramAccountId, handle: string = INST
   if (!clean) return null;
   return `https://www.instagram.com/${clean}/`;
 }
+
+/**
+ * Estudios aliados de FNX con cuenta propia de Instagram.
+ * No son cuentas de FNX: se muestran como partners dentro de su área.
+ */
+export const PARTNERS = {
+  aro: {
+    name: "Aro · Estudio Jurídico",
+    role: "Partner jurídico de FNX",
+    handle: "aro.estudiojuridico",
+  },
+} as const;
+
+export type PartnerId = keyof typeof PARTNERS;
+
+export function buildPartnerInstagramLink(id: PartnerId): string {
+  return `https://www.instagram.com/${PARTNERS[id].handle}/`;
+}

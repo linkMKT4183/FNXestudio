@@ -7,6 +7,7 @@ import {
   FileSignature,
   FolderKanban,
   Handshake,
+  Instagram,
   MessagesSquare,
   Network,
   RefreshCw,
@@ -30,6 +31,8 @@ import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
+import { PARTNERS, buildPartnerInstagramLink, type PartnerId } from "@/config/site";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/consultoria")({
   head: () => ({
@@ -70,6 +73,7 @@ interface Service {
   who: string;
   img: FnxImg;
   items: string[];
+  partner?: PartnerId;
 }
 
 interface Combo {
@@ -128,6 +132,7 @@ const SERVICES_AGRO: Service[] = [
   {
     icon: Scale,
     id: "juridico-agro",
+    partner: "aro",
     label: "Jurídico",
     who: "Abogados de la red de FNX, elegidos según cada caso.",
     img: IMG.cJuridico,
@@ -194,6 +199,7 @@ const SERVICES_CANNABIS: Service[] = [
   {
     icon: Scale,
     id: "juridico",
+    partner: "aro",
     label: "Jurídico",
     who: "Abogados de la red de FNX, elegidos según cada caso.",
     img: IMG.cJuridico,
@@ -373,12 +379,33 @@ function ServiceTabs({ services }: { services: Service[] }) {
                     </li>
                   ))}
                 </ul>
+                {s.partner ? <PartnerInstagram id={s.partner} /> : null}
               </div>
             </div>
           </TabsContent>
         ))}
       </Tabs>
     </Reveal>
+  );
+}
+
+/** Partner con cuenta propia de Instagram, dentro del área donde trabaja con FNX. */
+function PartnerInstagram({ id }: { id: PartnerId }) {
+  const p = PARTNERS[id];
+  return (
+    <div className="flex flex-col gap-4 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col">
+        <span className="text-xs font-semibold uppercase tracking-wider text-area">{p.role}</span>
+        <span className="text-base font-bold text-foreground">{p.name}</span>
+      </div>
+      <Button asChild variant="outline" size="default" className="self-start sm:self-auto">
+        <a href={buildPartnerInstagramLink(id)} target="_blank" rel="noopener noreferrer">
+          <Instagram aria-hidden="true" />
+          @{p.handle}
+          <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
+        </a>
+      </Button>
+    </div>
   );
 }
 

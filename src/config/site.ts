@@ -13,6 +13,7 @@ export const WHATSAPP_MESSAGES = {
   consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o cannábico",
   salud: "Hola FNX, necesito orientación en cannabis medicinal",
   novedades: "Hola FNX, quiero recibir novedades",
+  guia: "Hola FNX, quiero recibir la guía ¿FNX puede ayudarte?",
 } as const;
 
 export type WhatsAppTopic = keyof typeof WHATSAPP_MESSAGES;
@@ -46,8 +47,8 @@ export const EMAIL_SUBJECTS = {
   consultoria: "Quiero asesoría para mi proyecto",
   salud: "Consulta FNX Salud",
   novedades: "Quiero recibir novedades por mail",
-  checklist: "Quiero el checklist de marca",
   guia: "Quiero la guía paso a paso",
+  guiaFnx: "Quiero la guía ¿FNX puede ayudarte?",
 } as const;
 
 export type EmailTopic = keyof typeof EMAIL_SUBJECTS;

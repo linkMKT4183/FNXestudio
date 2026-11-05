@@ -5,6 +5,7 @@ import { Headline, Pieces, Reveal, Section } from "@/components/fnx/primitives";
 import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
+import { LeadForm } from "@/components/fnx/LeadForm";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG } from "@/data/imagenes";
@@ -154,7 +155,7 @@ function Estudio() {
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
 
-      <Section id="recurso" eyebrow="Recurso gratuito" lead="Checklist de" accent="marca.">
+      <Section id="recurso" eyebrow="Recurso gratuito" lead="¿FNX puede" accent="ayudarte?">
         <Reveal>
           <ResourceCard
             media={
@@ -164,14 +165,9 @@ function Estudio() {
                 className="photo-hover h-full w-full object-cover"
               />
             }
-            title="Checklist de marca: 10 puntos antes de invertir en redes"
-            text="Te lo mandamos por WhatsApp o por mail, sin costo."
-            action={
-              <div className="flex flex-wrap gap-3">
-                <WhatsAppButton topic="marca" label="Pedilo gratis" />
-                <EmailButton account="estudio" topic="checklist" label="Pedilo por mail" />
-              </div>
-            }
+            title="Guía rápida: cómo saber si FNX es para vos"
+            text="En cinco minutos sabés si tu marca, tu proyecto o tu trámite es algo en lo que podemos acompañarte, y qué conviene tener a mano para empezar. Te la enviamos sin costo."
+            action={<LeadForm />}
           />
         </Reveal>
       </Section>
@@ -183,12 +179,16 @@ function Estudio() {
         <Reveal className="flex flex-col items-start gap-6 border-t border-border pt-16">
           <Headline
             id="estudio-cta"
-            lead="Contanos de"
-            accent="tu marca."
+            lead="Tu marca está lista para"
+            accent="levantar vuelo."
             className="text-5xl sm:text-7xl"
           />
+          <p className="max-w-2xl text-lg text-muted-foreground">
+            Una charla de 15 minutos alcanza para saber dónde está tu marca hoy y hasta dónde puede
+            llegar. Sin costo y sin compromiso.
+          </p>
           <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="marca" />
+            <WhatsAppButton topic="marca" label="Agendá tu charla" />
             <EmailButton account="estudio" topic="marca" />
             <InstagramButton account="estudio" />
           </div>

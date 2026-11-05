@@ -11,7 +11,7 @@ import {
   PenTool,
   Scale,
 } from "lucide-react";
-import { InstagramDuo } from "@/components/fnx/InstagramButton";
+import { InstagramButton, InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
 import {
   IconBadge,
@@ -282,12 +282,10 @@ function Home() {
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
                 {i === 0 ? (
-                  <WhatsAppButton
-                    topic="general"
-                    label="Escribinos"
-                    size="default"
-                    className="mt-auto self-start"
-                  />
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    <WhatsAppButton topic="general" label="Escribinos" size="default" />
+                    <InstagramButton account="estudio" label="Instagram" size="default" />
+                  </div>
                 ) : null}
               </div>
             </Reveal>

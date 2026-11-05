@@ -656,8 +656,8 @@ function Consultoria() {
                 <p className="eyebrow text-area">Presupuesto a medida</p>
                 <p className="text-sm leading-relaxed text-foreground">
                   Cada proyecto se presupuesta en forma individual, según su infraestructura, la
-                  documentación disponible y su situación legal y técnica actual. Primero
-                  relevamos; después cotizamos solo lo que efectivamente necesitás.
+                  documentación disponible y su situación legal y técnica actual. Primero relevamos;
+                  después cotizamos solo lo que efectivamente necesitás.
                 </p>
                 <p className="text-xs leading-relaxed text-muted-foreground">
                   Si el proyecto suma marca o redes, lo integramos con FNX Estudio en una única
@@ -693,12 +693,10 @@ function Consultoria() {
                 </div>
                 <p className="font-semibold leading-snug text-foreground">{s}</p>
                 {i === 0 ? (
-                  <WhatsAppButton
-                    topic="consultoria"
-                    label="Escribinos"
-                    size="default"
-                    className="mt-auto self-start"
-                  />
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    <WhatsAppButton topic="consultoria" label="Escribinos" size="default" />
+                    <InstagramButton account="estudio" label="Instagram" size="default" />
+                  </div>
                 ) : null}
               </div>
             </Reveal>

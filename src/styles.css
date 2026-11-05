@@ -97,7 +97,8 @@
   --area: var(--fnx-naranja);
   --area-foreground: var(--fnx-negro);
   --glow: 0 0 36px -4px color-mix(in oklab, var(--area) 65%, transparent);
-  --glow-soft: 0 0 0 1px color-mix(in oklab, var(--area) 35%, transparent),
+  --glow-soft:
+    0 0 0 1px color-mix(in oklab, var(--area) 35%, transparent),
     0 18px 50px -20px color-mix(in oklab, var(--area) 45%, transparent);
 }
 
@@ -115,7 +116,8 @@
 }
 [data-area] {
   --glow: 0 0 36px -4px color-mix(in oklab, var(--area) 65%, transparent);
-  --glow-soft: 0 0 0 1px color-mix(in oklab, var(--area) 35%, transparent),
+  --glow-soft:
+    0 0 0 1px color-mix(in oklab, var(--area) 35%, transparent),
     0 18px 50px -20px color-mix(in oklab, var(--area) 45%, transparent);
 }
 
@@ -230,7 +232,13 @@
 /* Funde los bordes de una foto con el fondo negro (máscara de opacidad, sin color) */
 @utility fade-top {
   mask-image: linear-gradient(to bottom, transparent 0%, #000 35%, #000 82%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 35%,
+    #000 82%,
+    transparent 100%
+  );
 }
 
 /* Foto que se aclara y crece apenas al pasar el mouse por su tarjeta (.group) */
@@ -293,44 +301,161 @@
 /* Maqueta de WhatsApp (Salud) */
 .wa-wallpaper {
   background-color: #0b141a;
-  background-image: radial-gradient(color-mix(in oklab, var(--area) 10%, transparent) 1px, transparent 1px);
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--area) 10%, transparent) 1px,
+    transparent 1px
+  );
   background-size: 18px 18px;
 }
 @keyframes wa-in {
-  from { opacity: 0; transform: translateY(8px) scale(0.98); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
-.wa-in { animation: wa-in 0.35s ease-out both; }
+.wa-in {
+  animation: wa-in 0.35s ease-out both;
+}
 @keyframes wa-dot {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-  30% { transform: translateY(-3px); opacity: 1; }
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
 }
-.wa-dot { animation: wa-dot 1s infinite ease-in-out; }
+.wa-dot {
+  animation: wa-dot 1s infinite ease-in-out;
+}
 
 /* Marca · Tono: imagen viva */
-@keyframes tono-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
-.tono-zoom { animation: tono-zoom 12s ease-in-out infinite alternate; }
-@keyframes tono-glow { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.6; } }
+@keyframes tono-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+.tono-zoom {
+  animation: tono-zoom 12s ease-in-out infinite alternate;
+}
+@keyframes tono-glow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
 .tono-glow {
-  background: radial-gradient(circle at 50% 55%, color-mix(in oklab, var(--area) 35%, transparent), transparent 60%);
+  background: radial-gradient(
+    circle at 50% 55%,
+    color-mix(in oklab, var(--area) 35%, transparent),
+    transparent 60%
+  );
   mix-blend-mode: screen;
   animation: tono-glow 4s ease-in-out infinite;
 }
-@keyframes tono-bar { 0%, 100% { height: 0.5rem; } 50% { height: 1.4rem; } }
-.tono-bar { height: 0.5rem; animation: tono-bar 0.9s ease-in-out infinite; }
+@keyframes tono-bar {
+  0%,
+  100% {
+    height: 0.5rem;
+  }
+  50% {
+    height: 1.4rem;
+  }
+}
+.tono-bar {
+  height: 0.5rem;
+  animation: tono-bar 0.9s ease-in-out infinite;
+}
 
 /* Red animada (NetworkViz) */
-@keyframes net-float { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, calc(-50% - 6px)); } }
-.net-node { animation: net-float 4.5s ease-in-out infinite; }
-@keyframes net-spin { to { transform: rotate(360deg); } }
-.net-ring { border-style: dashed; animation: net-spin 60s linear infinite; }
-.net-ring-2 { animation-direction: reverse; animation-duration: 40s; }
-@keyframes net-core { 0%, 100% { box-shadow: 0 0 30px -6px var(--area); } 50% { box-shadow: 0 0 60px 0 var(--area); } }
-.net-core { animation: net-core 3s ease-in-out infinite; }
-@keyframes net-line { 0%, 100% { stroke-opacity: 0.25; } 50% { stroke-opacity: 0.7; } }
-.net-line { animation: net-line 3s ease-in-out infinite; }
+@keyframes net-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px -8px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 30px -4px currentColor;
+  }
+}
+.net-node {
+  animation: net-pulse 3s ease-in-out infinite;
+}
+@keyframes net-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.net-orbit {
+  transform-origin: 50px 50px;
+  transform-box: view-box;
+  animation: net-spin 80s linear infinite;
+}
+.net-orbit-rev {
+  animation-direction: reverse;
+  animation-duration: 50s;
+}
+@keyframes net-core {
+  0%,
+  100% {
+    box-shadow: 0 0 28px -6px var(--area);
+  }
+  50% {
+    box-shadow: 0 0 56px 0 var(--area);
+  }
+}
+.net-core {
+  animation: net-core 3s ease-in-out infinite;
+}
+@keyframes net-halo {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.net-halo {
+  animation: net-halo 3s ease-in-out infinite;
+}
+@keyframes net-line {
+  0%,
+  100% {
+    stroke-opacity: 0.3;
+  }
+  50% {
+    stroke-opacity: 0.8;
+  }
+}
+.net-line {
+  animation: net-line 3s ease-in-out infinite;
+}
 
 /* Noticias: cinta de titulares */
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.ticker { animation: ticker 60s linear infinite; }
-.ticker:hover { animation-play-state: paused; }
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker {
+  animation: ticker 60s linear infinite;
+}
+.ticker:hover {
+  animation-play-state: paused;
+}

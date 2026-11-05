@@ -44,7 +44,7 @@ export const Route = createFileRoute("/salud")({
 function AdultNote() {
   return (
     <p className="border-t border-border pt-5 text-xs text-muted-foreground">
-      Contenido para mayores de 18 años. Uso medicinal y responsable, con indicación médica.
+      Contenido para mayores de 18 años. Uso medicinal y responsable.
     </p>
   );
 }

@@ -1,10 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Instagram, Mail, Menu, X } from "lucide-react";
+import { Instagram, Mail, Menu, Scale, X } from "lucide-react";
 import {
   EMAILS,
   INSTAGRAM_ACCOUNTS,
+  PARTNERS,
   buildInstagramLink,
   buildMailtoLink,
+  buildPartnerInstagramLink,
   buildWhatsAppLink,
   type InstagramAccountId,
 } from "@/config/site";
@@ -114,6 +116,18 @@ export function SiteFooter() {
           <Logo className="text-7xl" />
           <p className="text-sm text-muted-foreground">Mendoza, Argentina</p>
           <SocialLinks />
+          <a
+            href={buildPartnerInstagramLink("aro")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-3 self-start rounded-2xl border border-dashed border-border px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+          >
+            <Scale className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>
+              Partner jurídico: <strong className="font-semibold text-foreground">{PARTNERS.aro.name}</strong>
+            </span>
+            <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
+          </a>
         </div>
         <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3">
           <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-foreground">

@@ -62,7 +62,7 @@ export function AgeGate() {
           Este contenido es para <span className="text-area">mayores de 18 años.</span>
         </h1>
         <p className="text-sm text-muted-foreground">
-          Información de uso medicinal y responsable, con indicación médica.
+          Información de uso medicinal y responsable.
         </p>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button ref={acceptRef} variant="area" size="lg" onClick={accept}>

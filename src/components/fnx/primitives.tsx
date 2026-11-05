@@ -140,7 +140,7 @@ export function Headline({
   );
 }
 
-/** Sección estándar con eyebrow, titular y recuadro "En resumen". */
+/** Sección estándar con eyebrow, titular y, si suma algo, recuadro "En resumen". */
 export function Section({
   id,
   eyebrow,
@@ -155,7 +155,7 @@ export function Section({
   eyebrow?: string;
   lead?: string;
   accent: string;
-  tldr: string;
+  tldr?: string;
   children?: ReactNode;
   className?: string;
   footer?: ReactNode;
@@ -175,7 +175,7 @@ export function Section({
           accent={accent}
           className="text-5xl sm:text-6xl lg:text-7xl"
         />
-        <TenSeconds className="max-w-3xl">{tldr}</TenSeconds>
+        {tldr ? <TenSeconds className="max-w-3xl">{tldr}</TenSeconds> : null}
       </Reveal>
       {children ? <div className="mt-12">{children}</div> : null}
       {footer ? <div className="mt-12">{footer}</div> : null}

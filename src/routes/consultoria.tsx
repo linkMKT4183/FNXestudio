@@ -565,8 +565,7 @@ function Consultoria() {
             eyebrow="A quién le hablamos · Agro"
             lead="Cada proyecto tiene"
             accent="su puerta."
-            tldr="Cuatro tipos de proyecto agrícola, cada uno con su forma de empezar."
-          >
+              >
             <AudienceGrid items={AUDIENCE_AGRO} />
           </Section>
 
@@ -575,8 +574,7 @@ function Consultoria() {
             eyebrow="Servicios · Agro"
             lead="Técnico y"
             accent="jurídico."
-            tldr="Dos frentes: lo técnico del campo y lo jurídico de la empresa."
-          >
+              >
             <ServiceTabs services={SERVICES_AGRO} />
           </Section>
         </TabsContent>
@@ -587,8 +585,7 @@ function Consultoria() {
             eyebrow="A quién le hablamos · Cannabis"
             lead="Cada proyecto tiene"
             accent="su puerta."
-            tldr="Cinco tipos de proyecto, cada uno con su forma de empezar."
-          >
+              >
             <AudienceGrid items={AUDIENCE_CANNABIS} />
             <Reveal className="mt-6">
               <p className="text-sm text-muted-foreground">
@@ -609,8 +606,7 @@ function Consultoria() {
             eyebrow="Servicios · Cannabis"
             lead="Jurídico y"
             accent="técnico."
-            tldr="Tres frentes: lo jurídico, lo técnico de cultivo y lo que derivamos a la red."
-          >
+              >
             <ServiceTabs services={SERVICES_CANNABIS} />
           </Section>
         </TabsContent>
@@ -622,7 +618,6 @@ function Consultoria() {
         eyebrow="Combos"
         lead="Todo junto,"
         accent="más simple."
-        tldr="Dos combos para agro y cinco para cannabis. Tocá cada tarjeta para ver qué incluye."
         className="border-t border-border"
       >
         <div className="flex flex-col gap-14">
@@ -649,7 +644,7 @@ function Consultoria() {
         eyebrow="Proceso"
         lead="Cómo"
         accent="trabajamos."
-        tldr="Seis pasos, del primer mensaje al acompañamiento recurrente."
+        tldr="Todo lo que nos contás sobre tu proyecto es confidencial: solo lo conocen los profesionales que trabajan en él, con tu acuerdo."
       >
         <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STEPS.map((s, i) => (

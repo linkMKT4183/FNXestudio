@@ -112,7 +112,6 @@ function Estudio() {
         eyebrow="Servicios"
         lead="Lo que"
         accent="hacemos."
-        tldr="Cinco servicios. Tocá cada uno para ver qué incluye."
       >
         <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
@@ -137,7 +136,6 @@ function Estudio() {
         eyebrow="Recurso gratuito"
         lead="Checklist de"
         accent="marca."
-        tldr="10 puntos para revisar antes de poner plata en redes."
       >
         <Reveal>
           <ResourceCard

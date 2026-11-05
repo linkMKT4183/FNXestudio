@@ -189,7 +189,6 @@ function Home() {
         eyebrow="Una empresa"
         lead="Cuatro áreas,"
         accent="una mirada."
-        tldr="Estudio para marcas, Consultoría para proyectos agrícolas y cannábicos, Salud para orientación y Noticias con fuentes."
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (
@@ -306,7 +305,7 @@ function Home() {
         eyebrow="Instagram"
         lead="Dos cuentas,"
         accent="un equipo."
-        tldr="Dos perfiles de FNX que trabajan juntos, y en colaboración con Aro, nuestro estudio jurídico partner. Seguí el que más te sirva."
+        tldr="Seguinos para ver trabajos, novedades y consejos antes que nadie."
       >
         <Reveal>
           <InstagramDuo />

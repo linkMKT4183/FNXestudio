@@ -68,6 +68,12 @@ const SERVICES = [
     text: "Te conectamos con organizaciones que cumplen.",
     img: IMG.ongs,
   },
+  {
+    icon: Lock,
+    title: "Tus datos, protegidos",
+    text: "Te pedimos consentimiento, tratamos tu información con reserva y solo la compartimos con el profesional que elijas.",
+    img: IMG.candado,
+  },
 ];
 
 const FAQ = [
@@ -192,10 +198,9 @@ function Salud() {
         eyebrow="Qué hacemos"
         lead="Orientación con"
         accent="confianza."
-        tldr="Orientación, profesionales chequeados y ONGs verificadas."
         footer={<AdultNote />}
       >
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 80}>
               <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft">
@@ -220,7 +225,6 @@ function Salud() {
         eyebrow="Serie"
         lead="REPROCANN"
         accent="sin vueltas."
-        tldr="El trámite explicado paso a paso. Hoy: la consulta médica."
         footer={<AdultNote />}
       >
         <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
@@ -252,7 +256,6 @@ function Salud() {
         eyebrow="Preguntas frecuentes"
         lead="Lo que más nos"
         accent="preguntan."
-        tldr="Por dónde empezar, si hay garantía y qué pasa con tus datos."
         footer={<AdultNote />}
       >
         <FaqWithPhotos />
@@ -263,7 +266,6 @@ function Salud() {
         eyebrow="Recurso gratuito"
         lead="Guía REPROCANN"
         accent="paso a paso."
-        tldr="Una guía simple para hacer el trámite sin perderte."
         footer={<AdultNote />}
       >
         <Reveal>

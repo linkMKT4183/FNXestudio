@@ -85,11 +85,12 @@ export function Esencia() {
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-border bg-card p-7">
           <p className="text-lg leading-relaxed text-foreground">
-            Fénix Creativo es el estudio de Nadin Reus en Mendoza. Une creatividad, producción
-            audiovisual y una red de confianza en salud.
+            Fénix Creativo es un equipo interdisciplinario con base en Mendoza. Reúne creatividad,
+            producción audiovisual, asesoría jurídica y técnica, y una red de profesionales de la
+            salud verificados.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Toma lo que existe y lo hace renacer con más claridad y más fuerza.
+            Cada proyecto lo trabaja la red completa: un solo contacto, todo un equipo detrás.
           </p>
         </div>
         <div className="flex flex-col justify-between gap-8 rounded-2xl border border-border p-7">

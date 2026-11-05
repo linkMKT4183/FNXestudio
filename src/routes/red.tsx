@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   BadgeCheck,
   Briefcase,
@@ -21,6 +22,7 @@ import { Headline, IconBadge, Pieces, Reveal, Section } from "@/components/fnx/p
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
 import { PostulacionForm } from "@/components/fnx/PostulacionForm";
 import { Button } from "@/components/ui/button";
 import {
@@ -216,6 +218,44 @@ const FAQ = [
     a: "Se usan únicamente para evaluar tu incorporación. Podés pedir el acceso, la rectificación o la supresión de tus datos en cualquier momento.",
   },
 ];
+
+/** Preguntas frecuentes con un chat de WhatsApp que muestra la pregunta abierta y su respuesta. */
+function FaqRed() {
+  const [open, setOpen] = useState("faq-0");
+  const idx = Math.max(0, Number(open.replace("faq-", "")));
+  const actual = FAQ[idx] ?? FAQ[0]!;
+  return (
+    <div className="grid items-start gap-8 lg:grid-cols-[1.2fr_1fr]">
+      <Reveal>
+        <Accordion
+          type="single"
+          collapsible
+          value={open}
+          onValueChange={(v) => setOpen(v || open)}
+          className="flex flex-col gap-3"
+        >
+          {FAQ.map((f, i) => (
+            <AccordionItem
+              key={f.q}
+              value={`faq-${i}`}
+              className="rounded-2xl border border-border bg-card px-6 data-[state=open]:border-area"
+            >
+              <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-base text-muted-foreground">
+                <p>{f.a}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Reveal>
+      <Reveal delay={120}>
+        <WhatsAppChat name="Red de Profesionales FNX" question={actual.q} answer={actual.a} />
+      </Reveal>
+    </div>
+  );
+}
 
 function Red() {
   return (
@@ -413,22 +453,7 @@ function Red() {
         accent="preguntarnos."
         className="pt-0 sm:pt-0"
       >
-        <Accordion type="single" collapsible className="flex max-w-3xl flex-col gap-3">
-          {FAQ.map((f, i) => (
-            <AccordionItem
-              key={f.q}
-              value={`faq-${i}`}
-              className="rounded-2xl border border-border bg-card px-6"
-            >
-              <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
-                {f.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground">
-                <p>{f.a}</p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <FaqRed />
       </Section>
     </div>
   );

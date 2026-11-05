@@ -66,12 +66,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <WhatsAppButton
-            topic={topic}
-            label="Escribinos"
-            size="default"
-            className="ml-3"
-          />
+          <WhatsAppButton topic={topic} label="Escribinos" size="default" className="ml-3" />
         </nav>
 
         <button
@@ -124,13 +119,17 @@ export function SiteFooter() {
           >
             <Scale className="h-4 w-4 shrink-0" aria-hidden="true" />
             <span>
-              Partner jurídico: <strong className="font-semibold text-foreground">{PARTNERS.aro.name}</strong>
+              Partner jurídico:{" "}
+              <strong className="font-semibold text-foreground">{PARTNERS.aro.name}</strong>
             </span>
             <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
           </a>
         </div>
         <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3">
-          <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-foreground">
+          <Link
+            to="/"
+            className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+          >
             Inicio
           </Link>
           {NAV.map((item) => (

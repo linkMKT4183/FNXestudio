@@ -134,7 +134,9 @@ export function Gallery({ images }: { images: GalleryItem[] }) {
                 <DialogPrimitive.Title className="sr-only">
                   Foto {(open ?? 0) + 1} de {n}: {current.label}
                 </DialogPrimitive.Title>
-                <DialogPrimitive.Description className="sr-only">{current.alt}</DialogPrimitive.Description>
+                <DialogPrimitive.Description className="sr-only">
+                  {current.alt}
+                </DialogPrimitive.Description>
                 <figure key={current.id} className="phrase-in flex w-full max-w-6xl flex-col gap-4">
                   <FnxImage
                     img={current}
@@ -154,7 +156,10 @@ export function Gallery({ images }: { images: GalleryItem[] }) {
                   <LightboxButton label="Foto anterior" onClick={() => go(-1)}>
                     <ArrowLeft className="h-5 w-5" aria-hidden="true" />
                   </LightboxButton>
-                  <span className="min-w-16 text-center text-sm text-muted-foreground" aria-live="polite">
+                  <span
+                    className="min-w-16 text-center text-sm text-muted-foreground"
+                    aria-live="polite"
+                  >
                     {(open ?? 0) + 1} / {n}
                   </span>
                   <LightboxButton label="Foto siguiente" onClick={() => go(1)}>

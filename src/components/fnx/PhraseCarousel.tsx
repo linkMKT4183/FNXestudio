@@ -26,26 +26,21 @@ function PhraseText({ text }: { text: string }) {
 
 /**
  * Carrusel a pantalla ancha: cada frase sobre su foto. Flechas, puntos, deslizamiento táctil,
- * avance cada 6 segundos y pausa al pasar el mouse o al enfocar con teclado.
+ * avance automático cada 6 segundos; se pausa con el botón o al navegarlo con teclado.
  */
 export function PhraseCarousel({ slides, title }: { slides: PhraseSlide[]; title: string }) {
   const n = slides.length;
   const [index, setIndex] = useState(0);
-  const [hovering, setHovering] = useState(false);
   const [focused, setFocused] = useState(false);
   const [paused, setPaused] = useState(false);
-  const [reduce, setReduce] = useState(false);
   const touchX = useRef<number | null>(null);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduce(mq.matches);
-    if (mq.matches) setPaused(true);
-  }, []);
+  // El carrusel avanza solo siempre: es parte de la identidad de la web. Se puede pausar con el botón.
+  const reduce = false;
 
   const go = useCallback((i: number) => setIndex(((i % n) + n) % n), [n]);
 
-  const running = !paused && !hovering && !focused;
+  const running = !paused && !focused;
   useEffect(() => {
     if (!running) return;
     const t = window.setTimeout(() => go(index + 1), AUTOPLAY_MS);
@@ -57,8 +52,6 @@ export function PhraseCarousel({ slides, title }: { slides: PhraseSlide[]; title
       aria-roledescription="carrusel"
       aria-labelledby="carrusel-titulo"
       className="relative overflow-hidden border-y border-border bg-background"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
       onFocus={() => setFocused(true)}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false);

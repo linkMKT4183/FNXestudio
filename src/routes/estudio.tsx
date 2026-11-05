@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
-import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
+import { Headline, Pieces, Reveal, Section } from "@/components/fnx/primitives";
 import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG } from "@/data/imagenes";
-
 
 import { pageUrl } from "@/config/site";
 
@@ -19,12 +18,12 @@ export const Route = createFileRoute("/estudio")({
       {
         name: "description",
         content:
-          "Desatamos tu marca. Branding, producción audiovisual, tienda online, redes y estrategia para marcas de cualquier rubro, desde Mendoza.",
+          "Marcas que se destacan. Branding, producción audiovisual, tienda online, redes y estrategia en Mendoza para que tu marca deje de ser una más.",
       },
-      { property: "og:title", content: "FNX Estudio · Desatamos tu marca" },
+      { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
         property: "og:description",
-        content: "Branding, contenido y estrategia para marcas de cualquier rubro.",
+        content: "Identidad, contenido y estrategia para que tu marca deje de ser una más.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/estudio") },
@@ -40,7 +39,8 @@ const SERVICES = [
     icon: Palette,
     title: "Branding e identidad",
     short: "Que tu marca se reconozca.",
-    detail: "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
+    detail:
+      "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
     img: IMG.branding,
   },
   {
@@ -80,39 +80,62 @@ const PHRASES: PhraseSlide[] = [
   { text: "Anuncios que se escuchan.", img: IMG.megafonos, focusX: "76%" },
 ];
 
+const HERO_TAGS = ["Branding", "Redes y contenido", "Audiovisual", "Tienda online", "Estrategia"];
+
 function Estudio() {
   return (
     <div data-area="estudio">
-      <section className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24" aria-labelledby="estudio-titulo">
-        <Reveal className="flex flex-col gap-8">
-          <p className="eyebrow text-area">FNX Estudio</p>
-          <Headline
-            as="h1"
-            id="estudio-titulo"
-            lead="Desatamos"
-            accent="tu marca."
-            className="text-7xl sm:text-8xl lg:text-9xl"
-          />
-          <p className="max-w-xl text-lg text-muted-foreground">
-            Branding, contenido y estrategia para marcas de cualquier rubro.
-          </p>
-          <TenSeconds className="max-w-2xl">
-            Te ayudamos a que tu marca se vea bien, diga algo y venda.
-          </TenSeconds>
-          <div className="flex flex-wrap items-center gap-6">
-            <WhatsAppButton topic="marca" />
-            <EmailButton account="estudio" topic="marca" />
-            <Pieces lit={0} />
-          </div>
-        </Reveal>
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24"
+        aria-labelledby="estudio-titulo"
+      >
+        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+          <Reveal className="flex flex-col gap-8">
+            <p className="eyebrow text-area">FNX Estudio · Mendoza</p>
+            <Headline
+              as="h1"
+              id="estudio-titulo"
+              lead="Marcas que"
+              accent="se destacan."
+              className="text-6xl sm:text-7xl lg:text-8xl"
+            />
+            <p className="max-w-xl text-lg text-muted-foreground">
+              Diseñamos la identidad, el contenido y la estrategia para que tu marca deje de ser una
+              más y empiece a ser la elegida.
+            </p>
+            <ul className="flex flex-wrap gap-2" aria-label="Servicios de FNX Estudio">
+              {HERO_TAGS.map((t) => (
+                <li
+                  key={t}
+                  className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap items-center gap-3">
+              <WhatsAppButton topic="marca" />
+              <EmailButton account="estudio" topic="marca" />
+            </div>
+          </Reveal>
+          <Reveal delay={120} className="relative">
+            <div className="overflow-hidden rounded-3xl border border-border shadow-glow-soft">
+              <FnxImage
+                img={IMG.rey}
+                priority
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="hero-zoom aspect-[4/5] h-full w-full object-cover"
+              />
+            </div>
+            <Pieces
+              lit={0}
+              className="absolute -bottom-6 left-6 rounded-2xl bg-background/80 p-3 backdrop-blur"
+            />
+          </Reveal>
+        </div>
       </section>
 
-      <Section
-        id="servicios"
-        eyebrow="Servicios"
-        lead="Lo que"
-        accent="hacemos."
-      >
+      <Section id="servicios" eyebrow="Servicios" lead="Lo que" accent="hacemos.">
         <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 70}>
@@ -131,15 +154,16 @@ function Estudio() {
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
 
-      <Section
-        id="recurso"
-        eyebrow="Recurso gratuito"
-        lead="Checklist de"
-        accent="marca."
-      >
+      <Section id="recurso" eyebrow="Recurso gratuito" lead="Checklist de" accent="marca.">
         <Reveal>
           <ResourceCard
-            media={<FnxImage img={IMG.checklist} sizes="(min-width: 768px) 40vw, 100vw" className="photo-hover h-full w-full object-cover" />}
+            media={
+              <FnxImage
+                img={IMG.checklist}
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="photo-hover h-full w-full object-cover"
+              />
+            }
             title="Checklist de marca: 10 puntos antes de invertir en redes"
             text="Te lo mandamos por WhatsApp o por mail, sin costo."
             action={
@@ -152,7 +176,10 @@ function Estudio() {
         </Reveal>
       </Section>
 
-      <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="estudio-cta">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
+        aria-labelledby="estudio-cta"
+      >
         <Reveal className="flex flex-col items-start gap-6 border-t border-border pt-16">
           <Headline
             id="estudio-cta"

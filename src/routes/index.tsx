@@ -13,7 +13,16 @@ import {
 } from "lucide-react";
 import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
-import { IconBadge, Headline, Logo, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
+import {
+  IconBadge,
+  Headline,
+  Logo,
+  Pieces,
+  Reveal,
+  Section,
+  Tag,
+  TenSeconds,
+} from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -67,11 +76,7 @@ const AREAS = [
     tone: "verde" as const,
     to: "/salud" as const,
     img: IMG.lupa,
-    items: [
-      "Gestión del trámite REPROCANN",
-      "Profesionales verificados",
-      "Vinculación con ONGs",
-    ],
+    items: ["Gestión del trámite REPROCANN", "Profesionales verificados", "Vinculación con ONGs"],
   },
   {
     name: "FNX Noticias",
@@ -84,23 +89,32 @@ const AREAS = [
 ];
 
 const STEPS = [
-  { n: "01", icon: MessagesSquare, title: "Nos escribís por WhatsApp", text: "Un mensaje alcanza para arrancar." },
+  {
+    n: "01",
+    icon: MessagesSquare,
+    title: "Nos escribís por WhatsApp",
+    text: "Un mensaje alcanza para arrancar.",
+  },
   {
     n: "02",
     icon: ClipboardList,
     title: "Te hacemos 3 preguntas",
     text: "Para entender qué necesitás, sin vueltas.",
   },
-  { n: "03", icon: FileCheck2, title: "Te pasamos una propuesta clara", text: "Qué hacemos, cuándo y cómo." },
+  {
+    n: "03",
+    icon: FileCheck2,
+    title: "Te pasamos una propuesta clara",
+    text: "Qué hacemos, cuándo y cómo.",
+  },
 ];
 
-/** Parallax leve: la foto baja más lento que el scroll. Se apaga con movimiento reducido. */
+/** Parallax leve: la foto baja más lento que el scroll. */
 function useParallax<T extends HTMLElement>(factor = 0.18, max = 90) {
   const ref = useRef<T | null>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let raf = 0;
     const update = () => {
       cancelAnimationFrame(raf);
@@ -157,7 +171,10 @@ function Home() {
       </section>
 
       {/* Tres puertas */}
-      <section aria-label="Elegí por dónde empezar" className="mx-auto w-full max-w-6xl px-5 pb-8 pt-6 sm:px-8">
+      <section
+        aria-label="Elegí por dónde empezar"
+        className="mx-auto w-full max-w-6xl px-5 pb-8 pt-6 sm:px-8"
+      >
         <Reveal className="grid gap-4 md:grid-cols-3">
           <Door
             to="/estudio"
@@ -184,12 +201,7 @@ function Home() {
       </section>
 
       {/* Cuatro áreas */}
-      <Section
-        id="areas"
-        eyebrow="Una empresa"
-        lead="Cuatro áreas,"
-        accent="una mirada."
-      >
+      <Section id="areas" eyebrow="Una empresa" lead="Cuatro áreas," accent="una mirada.">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AREAS.map((a, i) => (
             <Reveal key={a.name} delay={i * 90}>
@@ -203,7 +215,9 @@ function Home() {
                 <div className="flex items-center justify-between px-2">
                   <span className="flex min-w-0 items-center gap-2">
                     <IconBadge icon={a.icon} variant="neutral" size="sm" className="shrink-0" />
-                    <Tag tone={a.tone} className="whitespace-nowrap">{a.name}</Tag>
+                    <Tag tone={a.tone} className="whitespace-nowrap">
+                      {a.name}
+                    </Tag>
                   </span>
                   <ArrowRight
                     className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
@@ -228,10 +242,7 @@ function Home() {
       </Section>
 
       {/* Propuesta de valor */}
-      <section
-        aria-labelledby="valor-titulo"
-        className="border-y border-border bg-card"
-      >
+      <section aria-labelledby="valor-titulo" className="border-y border-border bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28">
           <Reveal className="flex flex-col gap-6">
             <TenSeconds className="max-w-2xl bg-background">
@@ -271,7 +282,12 @@ function Home() {
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
                 {i === 0 ? (
-                  <WhatsAppButton topic="general" label="Escribinos" size="default" className="mt-auto self-start" />
+                  <WhatsAppButton
+                    topic="general"
+                    label="Escribinos"
+                    size="default"
+                    className="mt-auto self-start"
+                  />
                 ) : null}
               </div>
             </Reveal>
@@ -313,7 +329,11 @@ function Home() {
       </Section>
 
       {/* CTA final */}
-      <section id="contacto" aria-labelledby="cta-titulo" className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8">
+      <section
+        id="contacto"
+        aria-labelledby="cta-titulo"
+        className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
+      >
         <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
           <Pieces lit={4} />
           <Headline
@@ -365,7 +385,9 @@ function Door({
           {kicker}
         </Tag>
         <span className="flex items-end justify-between gap-6">
-          <span className="headline text-4xl text-foreground sm:text-5xl md:text-3xl lg:text-4xl">{title}</span>
+          <span className="headline text-4xl text-foreground sm:text-5xl md:text-3xl lg:text-4xl">
+            {title}
+          </span>
           <span
             className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
             aria-hidden="true"

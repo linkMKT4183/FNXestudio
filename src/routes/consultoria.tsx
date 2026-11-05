@@ -24,7 +24,15 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
-import { Headline, IconBadge, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
+import {
+  Headline,
+  IconBadge,
+  Pieces,
+  Reveal,
+  Section,
+  Tag,
+  TenSeconds,
+} from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
@@ -152,7 +160,8 @@ const COMBOS_AGRO: Combo[] = [
   {
     name: "Riego eficiente",
     forWho: "Productores que quieren tecnificar",
-    includes: "Diagnóstico + diseño y dimensionamiento del sistema de riego + cotización por escala.",
+    includes:
+      "Diagnóstico + diseño y dimensionamiento del sistema de riego + cotización por escala.",
     img: IMG.cAspersores,
   },
   {
@@ -247,7 +256,8 @@ const COMBOS_CANNABIS: Combo[] = [
   {
     name: "Estructura legal llave en mano",
     forWho: "Grupos que arrancan de cero",
-    includes: "Constitución + registro de marca + plan de cultivo + identidad visual de FNX Estudio.",
+    includes:
+      "Constitución + registro de marca + plan de cultivo + identidad visual de FNX Estudio.",
     img: IMG.cLlave,
   },
   {
@@ -275,7 +285,14 @@ const COMBOS_CANNABIS: Combo[] = [
   },
 ];
 
-const STEP_ICONS: LucideIcon[] = [MessagesSquare, ClipboardList, UsersRound, FileSignature, Network, RefreshCw];
+const STEP_ICONS: LucideIcon[] = [
+  MessagesSquare,
+  ClipboardList,
+  UsersRound,
+  FileSignature,
+  Network,
+  RefreshCw,
+];
 
 const STEPS = [
   "Nos escribís por WhatsApp o redes.",
@@ -318,7 +335,9 @@ const SECTORS: { v: Sector; l: string }[] = [
 ];
 
 function Bullet() {
-  return <span className="mt-1.5 block h-2.5 w-2 shrink-0 rounded-[3px] bg-area" aria-hidden="true" />;
+  return (
+    <span className="mt-1.5 block h-2.5 w-2 shrink-0 rounded-[3px] bg-area" aria-hidden="true" />
+  );
 }
 
 function AudienceGrid({ items }: { items: Audience[] }) {
@@ -390,7 +409,10 @@ function ServiceTabs({ services }: { services: Service[] }) {
                 <p className="text-sm text-muted-foreground">{s.who}</p>
                 <ul className="flex flex-col gap-3">
                   {s.items.map((it) => (
-                    <li key={it} className="flex items-start gap-3 text-sm leading-relaxed text-foreground">
+                    <li
+                      key={it}
+                      className="flex items-start gap-3 text-sm leading-relaxed text-foreground"
+                    >
                       <Bullet />
                       {it}
                     </li>
@@ -417,8 +439,7 @@ function PartnerInstagram({ id }: { id: PartnerId }) {
       </div>
       <Button asChild variant="outline" size="default" className="self-start sm:self-auto">
         <a href={buildPartnerInstagramLink(id)} target="_blank" rel="noopener noreferrer">
-          <Instagram aria-hidden="true" />
-          @{p.handle}
+          <Instagram aria-hidden="true" />@{p.handle}
           <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
         </a>
       </Button>
@@ -512,7 +533,12 @@ function Consultoria() {
       {/* Línea bajo el hero */}
       <div className="border-y border-border">
         <Reveal className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
-          <Headline as="p" lead="Del campo al" accent="cultivo regulado." className="text-4xl sm:text-6xl" />
+          <Headline
+            as="p"
+            lead="Del campo al"
+            accent="cultivo regulado."
+            className="text-4xl sm:text-6xl"
+          />
         </Reveal>
       </div>
 
@@ -565,7 +591,7 @@ function Consultoria() {
             eyebrow="A quién le hablamos · Agro"
             lead="Cada proyecto tiene"
             accent="su puerta."
-              >
+          >
             <AudienceGrid items={AUDIENCE_AGRO} />
           </Section>
 
@@ -574,7 +600,7 @@ function Consultoria() {
             eyebrow="Servicios · Agro"
             lead="Técnico y"
             accent="jurídico."
-              >
+          >
             <ServiceTabs services={SERVICES_AGRO} />
           </Section>
         </TabsContent>
@@ -585,7 +611,7 @@ function Consultoria() {
             eyebrow="A quién le hablamos · Cannabis"
             lead="Cada proyecto tiene"
             accent="su puerta."
-              >
+          >
             <AudienceGrid items={AUDIENCE_CANNABIS} />
             <Reveal className="mt-6">
               <p className="text-sm text-muted-foreground">
@@ -606,7 +632,7 @@ function Consultoria() {
             eyebrow="Servicios · Cannabis"
             lead="Jurídico y"
             accent="técnico."
-              >
+          >
             <ServiceTabs services={SERVICES_CANNABIS} />
           </Section>
         </TabsContent>
@@ -674,7 +700,12 @@ function Consultoria() {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-end">
           <Reveal className="flex flex-col gap-6">
             <p className="eyebrow text-muted-foreground">Red de profesionales de FNX</p>
-            <Headline id="red-titulo" lead="Un solo contacto," accent="todo un equipo." className="text-5xl sm:text-7xl" />
+            <Headline
+              id="red-titulo"
+              lead="Un solo contacto,"
+              accent="todo un equipo."
+              className="text-5xl sm:text-7xl"
+            />
             <p className="max-w-xl text-lg text-muted-foreground">
               Detrás de FNX trabaja una red de abogados y técnicos especializados, como el estudio
               jurídico Aro. No tenés que buscar ni coordinar a cada profesional: hablás solo con FNX
@@ -682,7 +713,10 @@ function Consultoria() {
             </p>
             <ul className="grid gap-3 sm:grid-cols-3">
               {NETWORK_POINTS.map((pt) => (
-                <li key={pt.title} className="flex flex-col gap-1 rounded-2xl border border-border p-4">
+                <li
+                  key={pt.title}
+                  className="flex flex-col gap-1 rounded-2xl border border-border p-4"
+                >
                   <span className="font-bold text-foreground">{pt.title}</span>
                   <span className="text-sm text-muted-foreground">{pt.text}</span>
                 </li>
@@ -706,7 +740,10 @@ function Consultoria() {
         <Reveal>
           <ul className="grid gap-4 md:grid-cols-2">
             {LIMITS.map((l) => (
-              <li key={l.no} className="flex items-start gap-4 rounded-2xl border border-border p-6">
+              <li
+                key={l.no}
+                className="flex items-start gap-4 rounded-2xl border border-border p-6"
+              >
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground">
                   <Ban className="h-4 w-4" aria-hidden="true" />
                 </span>
@@ -723,10 +760,18 @@ function Consultoria() {
       </Section>
 
       {/* CTA */}
-      <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="consultoria-cta">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
+        aria-labelledby="consultoria-cta"
+      >
         <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
           <Pieces lit={1} />
-          <Headline id="consultoria-cta" lead="Contanos" accent="tu proyecto." className="text-5xl sm:text-7xl" />
+          <Headline
+            id="consultoria-cta"
+            lead="Contanos"
+            accent="tu proyecto."
+            className="text-5xl sm:text-7xl"
+          />
           <p className="max-w-lg text-muted-foreground">
             Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar.
           </p>

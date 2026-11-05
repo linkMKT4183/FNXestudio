@@ -34,7 +34,9 @@ export function FlipCard({
             className="flip-face flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors group-hover:border-area"
             aria-hidden={flipped}
           >
-            <div className="aspect-[16/9] shrink-0 overflow-hidden border-b border-border">{media}</div>
+            <div className="aspect-[16/9] shrink-0 overflow-hidden border-b border-border">
+              {media}
+            </div>
             <div className="flex flex-1 flex-col justify-between gap-4 p-6">
               {front}
               <span className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground">

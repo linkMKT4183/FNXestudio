@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Briefcase, ExternalLink, Landmark, LayoutGrid, Megaphone, type LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  ExternalLink,
+  Landmark,
+  LayoutGrid,
+  Megaphone,
+  type LucideIcon,
+} from "lucide-react";
 import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useMemo, useState } from "react";
 import { IconBadge, Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
@@ -9,7 +16,6 @@ import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
-
 
 import { pageUrl } from "@/config/site";
 
@@ -55,7 +61,10 @@ function Noticias() {
 
   return (
     <div data-area="noticias">
-      <section className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24" aria-labelledby="noticias-titulo">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24"
+        aria-labelledby="noticias-titulo"
+      >
         <Reveal className="flex flex-col gap-8">
           <p className="eyebrow text-area">FNX Noticias</p>
           <Headline
@@ -89,7 +98,9 @@ function Noticias() {
             >
               {(() => {
                 const Icon = CATEGORY_ICONS[f];
-                return Icon ? <Icon className="mr-2 inline h-4 w-4 align-[-3px]" aria-hidden="true" /> : null;
+                return Icon ? (
+                  <Icon className="mr-2 inline h-4 w-4 align-[-3px]" aria-hidden="true" />
+                ) : null;
               })()}
               {f}
             </button>
@@ -114,7 +125,9 @@ function Noticias() {
                       <span className="flex items-center gap-2">
                         {(() => {
                           const Icon = CATEGORY_ICONS[n.category];
-                          return Icon ? <IconBadge icon={Icon} variant="outline" size="sm" /> : null;
+                          return Icon ? (
+                            <IconBadge icon={Icon} variant="outline" size="sm" />
+                          ) : null;
                         })()}
                         <Tag>{n.category}</Tag>
                       </span>
@@ -147,7 +160,10 @@ function Noticias() {
         </ul>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="noticias-cta">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
+        aria-labelledby="noticias-cta"
+      >
         <Reveal className="flex flex-col items-start gap-6 rounded-3xl border border-border bg-card p-8 sm:p-14">
           <Headline
             id="noticias-cta"

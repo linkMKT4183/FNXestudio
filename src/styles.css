@@ -282,32 +282,10 @@
   transform: rotateY(180deg);
 }
 
+/* Con "reducir movimiento" solo se quita el scroll suave: el resto de las animaciones
+   son parte de la identidad de la web y se mantienen (decisión de FNX, 05/11/2026). */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .reveal,
-  .headline-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .piece-lit,
-  .phrase-in,
-  .hero-zoom {
-    animation: none;
-  }
-  .photo-hover {
-    transform: none !important;
-  }
-  .flip-inner {
-    transition: none;
-  }
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
   }
 }

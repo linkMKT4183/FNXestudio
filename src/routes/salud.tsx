@@ -101,7 +101,10 @@ const FAQ = [
 /** Preguntas frecuentes: la foto de al lado cambia según la pregunta abierta. */
 function FaqWithPhotos() {
   const [open, setOpen] = useState("");
-  const idx = Math.max(0, FAQ.findIndex((_, i) => `faq-${i}` === open));
+  const idx = Math.max(
+    0,
+    FAQ.findIndex((_, i) => `faq-${i}` === open),
+  );
   const current = FAQ[idx] ?? FAQ[0]!;
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
@@ -114,7 +117,11 @@ function FaqWithPhotos() {
           className="flex flex-col gap-3"
         >
           {FAQ.map((f, i) => (
-            <AccordionItem key={f.q} value={`faq-${i}`} className="rounded-2xl border border-border bg-card px-6">
+            <AccordionItem
+              key={f.q}
+              value={`faq-${i}`}
+              className="rounded-2xl border border-border bg-card px-6"
+            >
               <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
                 <span className="flex items-center gap-3">
                   <f.icon className="h-5 w-5 shrink-0 text-area" aria-hidden="true" />
@@ -124,7 +131,12 @@ function FaqWithPhotos() {
               <AccordionContent className="text-base text-muted-foreground">
                 <p>{f.a}</p>
                 {"whatsapp" in f && f.whatsapp ? (
-                  <WhatsAppButton topic="salud" label="Escribinos" size="default" className="mt-4" />
+                  <WhatsAppButton
+                    topic="salud"
+                    label="Escribinos"
+                    size="default"
+                    className="mt-4"
+                  />
                 ) : null}
               </AccordionContent>
             </AccordionItem>
@@ -157,7 +169,10 @@ function Salud() {
     <div data-area="salud">
       <AgeGate />
 
-      <section className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24" aria-labelledby="salud-titulo">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24"
+        aria-labelledby="salud-titulo"
+      >
         <Reveal className="flex flex-col gap-8">
           <p className="eyebrow text-area">FNX Salud · +18</p>
           <Headline
@@ -229,8 +244,16 @@ function Salud() {
       >
         <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
-            <Accordion type="single" collapsible defaultValue="paso-1" className="flex flex-col gap-3">
-              <AccordionItem value="paso-1" className="rounded-2xl border border-border bg-card px-6">
+            <Accordion
+              type="single"
+              collapsible
+              defaultValue="paso-1"
+              className="flex flex-col gap-3"
+            >
+              <AccordionItem
+                value="paso-1"
+                className="rounded-2xl border border-border bg-card px-6"
+              >
                 <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
                   <span className="flex items-center gap-4">
                     <span className="headline text-3xl text-area">01</span> La consulta médica
@@ -270,7 +293,13 @@ function Salud() {
       >
         <Reveal>
           <ResourceCard
-            media={<FnxImage img={IMG.guia} sizes="(min-width: 768px) 40vw, 100vw" className="photo-hover h-full w-full object-cover" />}
+            media={
+              <FnxImage
+                img={IMG.guia}
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="photo-hover h-full w-full object-cover"
+              />
+            }
             title="Guía REPROCANN paso a paso"
             text="Te la mandamos por WhatsApp o por mail, sin costo."
             action={

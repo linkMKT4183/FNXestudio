@@ -93,7 +93,10 @@ export const INSTAGRAM_ACCOUNTS: Record<"estudio" | "salud", InstagramAccount> =
 export type InstagramAccountId = keyof typeof INSTAGRAM_ACCOUNTS;
 
 /** Devuelve el link al perfil o null si todavía no hay usuario cargado. */
-export function buildInstagramLink(id: InstagramAccountId, handle: string = INSTAGRAM_ACCOUNTS[id].handle): string | null {
+export function buildInstagramLink(
+  id: InstagramAccountId,
+  handle: string = INSTAGRAM_ACCOUNTS[id].handle,
+): string | null {
   const clean = handle.trim().replace(/^@/, "");
   if (!clean) return null;
   return `https://www.instagram.com/${clean}/`;

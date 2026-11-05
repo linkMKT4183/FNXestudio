@@ -1,13 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Esencia,
-  MisionVision,
-  Publico,
-  Tono,
-  Valores,
-} from "@/components/marca/MarcaSections";
+import { Esencia, MisionVision, Publico, Tono, Valores } from "@/components/marca/MarcaSections";
 import { Headline, Logo } from "@/components/fnx/primitives";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -86,7 +80,10 @@ function Marca() {
 
   return (
     <div data-area="estudio">
-      <section className="mx-auto w-full max-w-6xl px-5 pb-8 pt-16 sm:px-8 sm:pt-24" aria-labelledby="marca-titulo">
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-8 pt-16 sm:px-8 sm:pt-24"
+        aria-labelledby="marca-titulo"
+      >
         <Logo className="mb-4 block text-7xl" />
         <Headline
           as="h1"
@@ -101,7 +98,10 @@ function Marca() {
         </p>
       </section>
 
-      <div ref={topRef} className="sticky top-16 z-30 scroll-mt-16 border-y border-border bg-background/95 backdrop-blur-md sm:top-20 sm:scroll-mt-20">
+      <div
+        ref={topRef}
+        className="sticky top-16 z-30 scroll-mt-16 border-y border-border bg-background/95 backdrop-blur-md sm:top-20 sm:scroll-mt-20"
+      >
         <div
           role="tablist"
           aria-label="Secciones de la marca"

@@ -8,6 +8,7 @@ import {
 } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logoCrema from "@/assets/brand/fnx-logo-crema.png";
 
 /** Devuelve true la primera vez que el elemento entra en pantalla. */
 export function useInView<T extends Element = HTMLElement>(
@@ -37,11 +38,18 @@ export function useInView<T extends Element = HTMLElement>(
   return [ref, visible];
 }
 
-/** Logo: solo "Fnx" en Mrs Saint Delafield, color crema. */
+/** Logo original de FNX (firma "Fnx" en crema). El tamaño sigue al font-size de `className`. */
 export function Logo({ className, as: Tag = "span" }: { className?: string; as?: ElementType }) {
   return (
-    <Tag className={cn("logo-script select-none", className)} aria-label="Fnx">
-      Fnx
+    <Tag className={cn("inline-block select-none leading-none", className)}>
+      <img
+        src={logoCrema}
+        alt="Fnx"
+        width={986}
+        height={551}
+        className="block h-[1.1em] w-auto"
+        draggable={false}
+      />
     </Tag>
   );
 }

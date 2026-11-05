@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from "react";
 import {
   BadgeCheck,
-  Check,
   Eye,
   Flame,
   HeartHandshake,
@@ -11,10 +10,11 @@ import {
   ShieldCheck,
   Target,
   Telescope,
-  X,
 } from "lucide-react";
 import { IconBadge, Headline, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
+import { FnxImage } from "@/components/fnx/FnxImage";
+import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
 
 type Area = "estudio" | "consultoria" | "salud" | "noticias";
@@ -44,7 +44,15 @@ function Panel({
   );
 }
 
-function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: Area) => void; label: string }) {
+function AreaSelector({
+  value,
+  onChange,
+  label,
+}: {
+  value: Area;
+  onChange: (a: Area) => void;
+  label: string;
+}) {
   const opts: { v: Area; l: string }[] = [
     { v: "estudio", l: "Estudio" },
     { v: "consultoria", l: "Consultoría" },
@@ -52,7 +60,11 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
     { v: "noticias", l: "Noticias" },
   ];
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex max-w-full self-start overflow-x-auto rounded-full border border-border p-1">
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="inline-flex max-w-full self-start overflow-x-auto rounded-full border border-border p-1"
+    >
       {opts.map((o) => (
         <button
           key={o.v}
@@ -63,7 +75,9 @@ function AreaSelector({ value, onChange, label }: { value: Area; onChange: (a: A
           onClick={() => onChange(o.v)}
           className={cn(
             "h-10 shrink-0 rounded-full px-3.5 text-sm font-semibold transition-colors sm:px-5",
-            value === o.v ? "bg-area text-area-foreground" : "text-muted-foreground hover:text-foreground",
+            value === o.v
+              ? "bg-area text-area-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {o.l}
@@ -116,13 +130,23 @@ export function MisionVision() {
       tldr="Crear marcas con carácter y conectar con gente de confianza."
     >
       <div className="grid gap-4 md:grid-cols-2">
-        <ExpandCard title="Misión" icon={Target} kicker={<span className="eyebrow text-area">Hoy</span>} defaultOpen>
+        <ExpandCard
+          title="Misión"
+          icon={Target}
+          kicker={<span className="eyebrow text-area">Hoy</span>}
+          defaultOpen
+        >
           Crear marcas con carácter y conectar a las personas con profesionales y organizaciones de
           confianza, con claridad, responsabilidad y una mirada propia.
         </ExpandCard>
-        <ExpandCard title="Visión" icon={Telescope} kicker={<span className="eyebrow text-area">Mañana</span>} defaultOpen>
-          Ser la referencia en Argentina para las marcas que quieren destacarse y para quienes buscan
-          información y acompañamiento confiable en salud.
+        <ExpandCard
+          title="Visión"
+          icon={Telescope}
+          kicker={<span className="eyebrow text-area">Mañana</span>}
+          defaultOpen
+        >
+          Ser la referencia en Argentina para las marcas que quieren destacarse y para quienes
+          buscan información y acompañamiento confiable en salud.
         </ExpandCard>
       </div>
     </Panel>
@@ -133,7 +157,11 @@ export function MisionVision() {
 const VALUES = [
   { icon: Flame, t: "Carácter", d: "Cada pieza tiene una idea propia." },
   { icon: Eye, t: "Claridad", d: "Decimos las cosas simples y sin vueltas." },
-  { icon: BadgeCheck, t: "Confianza verificada", d: "Solo trabajamos con profesionales y marcas que cumplen." },
+  {
+    icon: BadgeCheck,
+    t: "Confianza verificada",
+    d: "Solo trabajamos con profesionales y marcas que cumplen.",
+  },
   { icon: ShieldCheck, t: "Responsabilidad", d: "Comunicamos salud con cuidado y para adultos." },
   { icon: Link2, t: "Coherencia", d: "Lo que prometemos es lo que hacemos." },
 ];
@@ -174,8 +202,19 @@ export function Valores() {
 }
 
 /* 5. Tono */
+const TONE_IMG: Record<Area, FnxImg> = {
+  estudio: IMG.tonoEstudio,
+  consultoria: IMG.tonoConsultoria,
+  salud: IMG.tonoSalud,
+  noticias: IMG.tonoNoticias,
+};
+
 const TONES: Record<Area, { name: string; tone: string; phrase: string }> = {
-  estudio: { name: "FNX Estudio", tone: "Directo, con carácter, seguro.", phrase: "Desatamos tu marca." },
+  estudio: {
+    name: "FNX Estudio",
+    tone: "Directo, con carácter, seguro.",
+    phrase: "Marcas que se destacan.",
+  },
   consultoria: {
     name: "FNX Consultoría",
     tone: "Experto, claro y sin juzgar.",
@@ -206,39 +245,40 @@ export function Tono() {
       >
         <AreaSelector value={area} onChange={setArea} label="Elegí un área" />
         <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-          <div className="flex flex-col gap-6 rounded-2xl border border-area bg-card p-7" aria-live="polite">
+          <div
+            className="flex flex-col gap-6 rounded-2xl border border-area bg-card p-7"
+            aria-live="polite"
+          >
             <span className="eyebrow text-area">{t.name}</span>
             <p className="text-lg font-semibold text-foreground">{t.tone}</p>
             <p className="headline phrase-in text-5xl text-area sm:text-6xl" key={area}>
               {t.phrase}
             </p>
           </div>
-          <div className="grid gap-4">
-            <div className="rounded-2xl border border-border p-6">
-              <p className="eyebrow mb-4 text-foreground">Así sí</p>
-              <ul className="flex flex-col gap-3">
-                {["Desatamos tu marca.", "Elegís vos.", "Te acompañamos en cada paso."].map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-sm text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-area" aria-hidden="true" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
+          <div className="tono-visual relative overflow-hidden rounded-2xl border border-border bg-card">
+            <div key={area} className="phrase-in h-full">
+              <FnxImage
+                img={TONE_IMG[area]}
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="tono-zoom aspect-[3/2] h-full w-full object-cover"
+              />
             </div>
-            <div className="rounded-2xl border border-border p-6">
-              <p className="eyebrow mb-4 text-foreground">Así no</p>
-              <ul className="flex flex-col gap-3">
-                {[
-                  "Frases largas.",
-                  "Promesas exageradas.",
-                  "Adjetivos vacíos como innovador o disruptivo.",
-                ].map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <X className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
+            <div className="tono-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+            <div
+              className="absolute bottom-4 left-4 flex items-end gap-1.5 rounded-full bg-background/70 px-4 py-2.5 backdrop-blur"
+              aria-hidden="true"
+            >
+              {[0, 1, 2, 3, 4].map((i) => (
+                <span
+                  key={i}
+                  className={cn(
+                    "tono-bar w-1.5 rounded-full",
+                    i === 2 ? "bg-area" : "bg-foreground/40",
+                  )}
+                  style={{ animationDelay: `${i * 120}ms` }}
+                />
+              ))}
+              <span className="ml-2 text-xs font-semibold text-foreground">La voz de {t.name}</span>
             </div>
           </div>
         </div>
@@ -249,10 +289,12 @@ export function Tono() {
 
 /* 6. A quién le hablamos */
 const PERSONA_ICONS = { naranja: PenTool, verde: HeartHandshake, azul: Scale } as const;
+const PERSONA_AREA = { naranja: "estudio", verde: "salud", azul: "consultoria" } as const;
 
 const PERSONAS = [
   {
     name: "Lucía",
+    img: IMG.personaLucia,
     area: "FNX Estudio",
     tone: "naranja" as const,
     who: "Dueña de una pyme de Mendoza, 35 a 45 años.",
@@ -262,6 +304,7 @@ const PERSONAS = [
   },
   {
     name: "Dr. Martín",
+    img: IMG.personaMartin,
     area: "FNX Salud",
     tone: "verde" as const,
     who: "Médico matriculado de 40 a 55 años con formación en cannabis medicinal.",
@@ -271,6 +314,7 @@ const PERSONAS = [
   },
   {
     name: "Sofía",
+    img: IMG.personaSofia,
     area: "FNX Salud",
     tone: "verde" as const,
     who: "Paciente adulta, mayor de 18.",
@@ -280,6 +324,7 @@ const PERSONAS = [
   },
   {
     name: "ONG",
+    img: IMG.personaOng,
     area: "FNX Salud",
     tone: "verde" as const,
     who: "Inscripta en REPROCANN, con director médico.",
@@ -289,6 +334,7 @@ const PERSONAS = [
   },
   {
     name: "Proyecto productivo",
+    img: IMG.personaProductor,
     area: "FNX Consultoría",
     tone: "azul" as const,
     who: "Productores, cooperativas, emprendimientos agrícolas y proyectos cannábicos que quieren profesionalizarse.",
@@ -304,39 +350,69 @@ export function Publico() {
       eyebrow="A quién le hablamos"
       lead="Cinco perfiles,"
       accent="un mensaje."
-      tldr="Lucía, Dr. Martín, Sofía, las ONGs y los proyectos productivos. Tocá para conocerlos."
+      tldr="Cada texto, post o propuesta de FNX está pensado para una de estas personas. Tocá cada perfil para conocerlo."
     >
+      <div className="grid gap-4 rounded-2xl border border-dashed border-border p-6 md:grid-cols-3">
+        <div className="flex flex-col gap-2">
+          <p className="eyebrow text-area">¿Qué es un perfil?</p>
+          <p className="text-sm text-foreground">
+            Es un personaje que representa a un grupo de personas a las que FNX ayuda: qué edad
+            tiene, qué necesita, qué la frena y qué mensaje le habla.
+          </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="eyebrow text-area">¿Para qué sirve?</p>
+          <p className="text-sm text-foreground">
+            Para que todo el equipo escriba y diseñe pensando en alguien concreto, y no en
+            &ldquo;todo el mundo&rdquo;. Así cada mensaje llega mejor.
+          </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="eyebrow text-area">Importante</p>
+          <p className="text-sm text-foreground">
+            No son clientes reales. Los nombres y las fotos son ilustrativos, creados para la marca.
+          </p>
+        </div>
+      </div>
       <div className="grid gap-4 md:grid-cols-2">
         {PERSONAS.map((p) => (
-          <ExpandCard
-            key={p.name}
-            title={p.name}
-            icon={PERSONA_ICONS[p.tone]}
-            kicker={
-              <Tag tone={p.tone} className="self-start">
-                {p.area}
-              </Tag>
-            }
-          >
-            <dl className="flex flex-col gap-4">
-              <div>
-                <dt className="eyebrow text-muted-foreground">Quién es</dt>
-                <dd className="mt-1 text-foreground">{p.who}</dd>
-              </div>
-              <div>
-                <dt className="eyebrow text-muted-foreground">Necesita</dt>
-                <dd className="mt-1 text-foreground">{p.needs}</dd>
-              </div>
-              <div>
-                <dt className="eyebrow text-muted-foreground">La frena</dt>
-                <dd className="mt-1 text-foreground">{p.blocks}</dd>
-              </div>
-              <div className="rounded-xl border border-border bg-background p-4">
-                <dt className="eyebrow text-muted-foreground">Mensaje</dt>
-                <dd className="mt-1 text-base font-bold text-foreground">“{p.message}”</dd>
-              </div>
-            </dl>
-          </ExpandCard>
+          <div key={p.name} data-area={PERSONA_AREA[p.tone]}>
+            <ExpandCard
+              title={p.name}
+              icon={PERSONA_ICONS[p.tone]}
+              media={
+                <FnxImage
+                  img={p.img}
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  className="photo-hover h-full w-full object-cover object-[50%_25%]"
+                />
+              }
+              kicker={
+                <Tag tone={p.tone} className="self-start">
+                  {p.area}
+                </Tag>
+              }
+            >
+              <dl className="flex flex-col gap-4">
+                <div>
+                  <dt className="eyebrow text-muted-foreground">Quién es</dt>
+                  <dd className="mt-1 text-foreground">{p.who}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-muted-foreground">Necesita</dt>
+                  <dd className="mt-1 text-foreground">{p.needs}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-muted-foreground">La frena</dt>
+                  <dd className="mt-1 text-foreground">{p.blocks}</dd>
+                </div>
+                <div className="rounded-xl border border-border bg-background p-4">
+                  <dt className="eyebrow text-muted-foreground">El mensaje que le habla</dt>
+                  <dd className="mt-1 text-base font-bold text-foreground">“{p.message}”</dd>
+                </div>
+              </dl>
+            </ExpandCard>
+          </div>
         ))}
       </div>
     </Panel>

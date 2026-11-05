@@ -61,9 +61,7 @@ export function AgeGate() {
         <h1 id="aviso-edad-titulo" className="headline text-4xl text-foreground sm:text-5xl">
           Este contenido es para <span className="text-area">mayores de 18 años.</span>
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Información de uso medicinal y responsable.
-        </p>
+        <p className="text-sm text-muted-foreground">Información de uso medicinal y responsable.</p>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button ref={acceptRef} variant="area" size="lg" onClick={accept}>
             Soy mayor de 18

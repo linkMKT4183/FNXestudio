@@ -6,6 +6,7 @@ import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/
 import { AgeGate } from "@/components/fnx/AgeGate";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
+import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import {
@@ -16,6 +17,45 @@ import {
 } from "@/components/ui/accordion";
 
 import { pageUrl } from "@/config/site";
+
+const PASOS_REPROCANN = [
+  {
+    titulo: "La consulta médica",
+    texto:
+      "Un médico habilitado evalúa tu caso y, si corresponde, te indica el tratamiento. Debe contar con matrícula vigente, inscripción en el REFEPS y firma digital registrada.",
+    fnx: "te conectamos con médicos verificados.",
+  },
+  {
+    titulo: "Tu cuenta en Mi Argentina",
+    texto:
+      "Creás o validás tu cuenta en Mi Argentina (web o app). El sistema la usa para verificar tu identidad.",
+    fnx: "te guiamos para crearla o validarla sin errores.",
+  },
+  {
+    titulo: "Inicio de la solicitud",
+    texto:
+      "Iniciás el trámite en el aplicativo del REPROCANN con tus datos y elegís la modalidad: cultivo propio, a través de un tercero o mediante una ONG inscripta.",
+    fnx: "te explicamos cada modalidad para que elijas con información.",
+  },
+  {
+    titulo: "Documentación del profesional",
+    texto:
+      "Firmás el consentimiento informado y la declaración jurada. El médico los adjunta en PDF y vincula la modalidad de cultivo elegida.",
+    fnx: "revisamos que la documentación esté completa antes de enviarla.",
+  },
+  {
+    titulo: "Autorización",
+    texto:
+      "El Ministerio de Salud de la Nación evalúa la solicitud y, si la aprueba, emite tu certificado. La inscripción es gratuita.",
+    fnx: "hacemos el seguimiento hasta que tengas tu certificado.",
+  },
+  {
+    titulo: "Vigencia y renovación",
+    texto:
+      "El certificado tiene una vigencia de tres años. No se renueva de forma automática: al vencer, hay que volver a tramitarlo.",
+    fnx: "te avisamos antes del vencimiento para que no se te pase la fecha.",
+  },
+];
 
 export const Route = createFileRoute("/salud")({
   head: () => ({
@@ -97,7 +137,7 @@ const FAQ = [
   },
 ];
 
-/** Preguntas frecuentes: la foto de al lado cambia según la pregunta abierta. */
+/** Preguntas frecuentes: el chat de WhatsApp de al lado muestra la pregunta abierta y su respuesta. */
 function FaqWithPhotos() {
   const [open, setOpen] = useState("");
   const idx = Math.max(
@@ -143,9 +183,7 @@ function FaqWithPhotos() {
         </Accordion>
       </Reveal>
       <Reveal delay={120}>
-        <div key={current.img.id} className="phrase-in">
-          <SidePhoto img={current.img} />
-        </div>
+        <WhatsAppChat question={current.q} answer={current.a} />
       </Reveal>
     </div>
   );
@@ -249,22 +287,32 @@ function Salud() {
               defaultValue="paso-1"
               className="flex flex-col gap-3"
             >
-              <AccordionItem
-                value="paso-1"
-                className="rounded-2xl border border-border bg-card px-6"
-              >
-                <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
-                  <span className="flex items-center gap-4">
-                    <span className="headline text-3xl text-area">01</span> La consulta médica
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-base text-muted-foreground">
-                  Todo empieza con un médico con formación en cannabis medicinal.
-                </AccordionContent>
-              </AccordionItem>
+              {PASOS_REPROCANN.map((p, i) => (
+                <AccordionItem
+                  key={p.titulo}
+                  value={`paso-${i + 1}`}
+                  className="rounded-2xl border border-border bg-card px-6"
+                >
+                  <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
+                    <span className="flex items-center gap-4">
+                      <span className="headline text-3xl text-area">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {p.titulo}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col gap-3 text-base text-muted-foreground">
+                    <p>{p.texto}</p>
+                    <p className="text-sm text-foreground">
+                      <span className="font-bold text-area">FNX te acompaña:</span> {p.fnx}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
-            <p className="mt-4 rounded-2xl border border-dashed border-border px-6 py-5 text-sm text-muted-foreground">
-              Próximos pasos en preparación
+            <p className="mt-4 text-xs text-muted-foreground">
+              Información basada en la normativa vigente del Ministerio de Salud de la Nación. El
+              trámite es personal y la aprobación depende exclusivamente del Ministerio.
             </p>
           </Reveal>
           <Reveal delay={120}>

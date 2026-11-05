@@ -32,9 +32,11 @@ describe("Galería de Marca", () => {
 });
 
 describe("Fotos de Consultoría", () => {
-  it("hay trece fotos de Consultoría y todas están en la galería", () => {
-    const ids = Object.values(IMG).filter((i) => i.area === "consultoria").map((i) => i.id);
-    expect(ids).toHaveLength(13);
+  it("hay diecisiete fotos de Consultoría y todas están en la galería", () => {
+    const ids = Object.values(IMG)
+      .filter((i) => i.area === "consultoria")
+      .map((i) => i.id);
+    expect(ids).toHaveLength(17);
     for (const id of ids) expect(GALERIA.find((g) => g.id === id)?.area).toBe("consultoria");
   });
 });

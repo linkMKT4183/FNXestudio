@@ -168,6 +168,7 @@ const COMBOS_AGRO: Combo[] = [
     name: "Proyecto a escala",
     forWho: "Proyectos agrícolas e industriales",
     includes: "Diseño de infraestructura + cotización + mentoría del proyecto.",
+    img: IMG.cEscala,
   },
 ];
 
@@ -264,6 +265,7 @@ const COMBOS_CANNABIS: Combo[] = [
     name: "Constitución con acompañamiento",
     forWho: "Toda estructura legal nueva",
     includes: "Constitución + 6 meses de mantenimiento.",
+    img: IMG.cConstitucion,
   },
   {
     name: "Regularización",

@@ -25,7 +25,8 @@ export function buildGallery(): GalleryItem[] {
     seen.add(img.id);
     out.push({ ...img, label });
   };
-  for (const img of Object.values(IMG)) if (img.area !== "noticias") add(img, img.label);
+  for (const img of Object.values(IMG))
+    if (img.area !== "noticias" || img.label) add(img, img.label);
   for (const n of NOTICIAS) add(n.image, `Noticia: ${n.title}`);
   return out;
 }

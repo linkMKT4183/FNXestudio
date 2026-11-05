@@ -289,3 +289,32 @@
     scroll-behavior: auto;
   }
 }
+
+/* Maqueta de WhatsApp (Salud) */
+.wa-wallpaper {
+  background-color: #0b141a;
+  background-image: radial-gradient(color-mix(in oklab, var(--area) 10%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+@keyframes wa-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.wa-in { animation: wa-in 0.35s ease-out both; }
+@keyframes wa-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+.wa-dot { animation: wa-dot 1s infinite ease-in-out; }
+
+/* Marca · Tono: imagen viva */
+@keyframes tono-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+.tono-zoom { animation: tono-zoom 12s ease-in-out infinite alternate; }
+@keyframes tono-glow { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.6; } }
+.tono-glow {
+  background: radial-gradient(circle at 50% 55%, color-mix(in oklab, var(--area) 35%, transparent), transparent 60%);
+  mix-blend-mode: screen;
+  animation: tono-glow 4s ease-in-out infinite;
+}
+@keyframes tono-bar { 0%, 100% { height: 0.5rem; } 50% { height: 1.4rem; } }
+.tono-bar { height: 0.5rem; animation: tono-bar 0.9s ease-in-out infinite; }

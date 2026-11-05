@@ -248,7 +248,7 @@ function Red() {
           <Reveal delay={120}>
             <div className="overflow-hidden rounded-3xl border border-border">
               <FnxImage
-                img={IMG.hero}
+                img={IMG.redHero}
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="hero-zoom aspect-[4/5] h-full w-full object-cover"
                 priority

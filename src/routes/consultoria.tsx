@@ -31,7 +31,7 @@ import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
-import { PARTNERS, buildPartnerInstagramLink, type PartnerId } from "@/config/site";
+import { PARTNERS, buildPartnerInstagramLink, type PartnerId, pageUrl } from "@/config/site";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/consultoria")({
@@ -50,8 +50,10 @@ export const Route = createFileRoute("/consultoria")({
           "Del campo al cultivo regulado: riego, tecnificación, estructuras legales y fortalecimiento organizacional, coordinado por FNX.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/consultoria") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/consultoria") }],
   }),
   component: Consultoria,
 });

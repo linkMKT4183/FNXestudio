@@ -15,6 +15,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrome";
 import { Toaster } from "@/components/ui/sonner";
+import { SITE_NAME } from "@/config/site";
 
 function NotFoundComponent() {
   return (
@@ -98,6 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_AR" },
+      { property: "og:site_name", content: SITE_NAME },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

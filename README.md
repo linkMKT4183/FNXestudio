@@ -79,7 +79,7 @@ Una página con navegación por secciones (menú de pestañas arriba y botones A
 
 This project was built with [Lovable](https://lovable.dev).
 
-**Live app**: https://fnxestudio.lovable.app
+**Web oficial**: https://fnxestudio.com (dirección anterior: https://fnxestudio.lovable.app)
 
 ## Build with Lovable
 

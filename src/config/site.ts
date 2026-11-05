@@ -28,6 +28,14 @@ export function buildWhatsAppLink(
 
 export const SITE_NAME = "FNX · Fénix Creativo";
 
+/** Dominio oficial de la web (comprado en Lovable el 05/11/2026). Sin barra al final. */
+export const SITE_URL = "https://fnxestudio.com";
+
+/** Dirección completa de una página, por ejemplo pageUrl("/salud"). */
+export function pageUrl(path: string = "/"): string {
+  return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`;
+}
+
 /**
  * Cuentas de Instagram de FNX. Son dos cuentas separadas que trabajan en colaboración.
  * HANDLE: completalo con el usuario sin "@", por ejemplo "fnxestudio".

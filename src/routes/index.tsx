@@ -18,6 +18,8 @@ import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
 
+import { pageUrl } from "@/config/site";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -33,8 +35,10 @@ export const Route = createFileRoute("/")({
         content: "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/") }],
   }),
   component: Home,
 });

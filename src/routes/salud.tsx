@@ -15,6 +15,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { pageUrl } from "@/config/site";
+
 export const Route = createFileRoute("/salud")({
   head: () => ({
     meta: [
@@ -30,8 +32,10 @@ export const Route = createFileRoute("/salud")({
         content: "Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/salud") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/salud") }],
   }),
   component: Salud,
 });

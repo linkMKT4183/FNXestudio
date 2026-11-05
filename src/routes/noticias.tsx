@@ -10,6 +10,8 @@ import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
 
 
+import { pageUrl } from "@/config/site";
+
 export const Route = createFileRoute("/noticias")({
   head: () => ({
     meta: [
@@ -25,8 +27,10 @@ export const Route = createFileRoute("/noticias")({
         content: "Marketing, negocios y cannabis medicinal, siempre con fuentes.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/noticias") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/noticias") }],
   }),
   component: Noticias,
 });

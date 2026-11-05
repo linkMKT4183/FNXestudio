@@ -9,6 +9,8 @@ import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG } from "@/data/imagenes";
 
 
+import { pageUrl } from "@/config/site";
+
 export const Route = createFileRoute("/estudio")({
   head: () => ({
     meta: [
@@ -24,8 +26,10 @@ export const Route = createFileRoute("/estudio")({
         content: "Branding, contenido y estrategia para marcas de cualquier rubro.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/estudio") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/estudio") }],
   }),
   component: Estudio,
 });

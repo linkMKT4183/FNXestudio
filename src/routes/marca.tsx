@@ -12,6 +12,8 @@ import { Headline, Logo } from "@/components/fnx/primitives";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { pageUrl } from "@/config/site";
+
 export const Route = createFileRoute("/marca")({
   head: () => ({
     meta: [
@@ -27,8 +29,10 @@ export const Route = createFileRoute("/marca")({
         content: "La identidad de Fénix Creativo, presentada de forma interactiva.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: pageUrl("/marca") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: pageUrl("/marca") }],
   }),
   component: Marca,
 });

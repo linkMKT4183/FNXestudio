@@ -135,7 +135,7 @@ export const IMG = {
     "c-derivaciones",
     "consultoria",
     "Una fila de compases negros con un solo compás azul.",
-    "Derivaciones a la red de profesionales",
+    "Red de especialistas de FNX",
   ),
   cLlave: img(
     "c-llave",
@@ -304,7 +304,7 @@ export const IMG = {
   mitoRealidad: img(
     "s-mito-realidad",
     "salud",
-    "Dos tarjetas: una negra con la palabra MITO tachada y una verde con la palabra REALIDAD.",
+    "Dos tarjetas: una negra que se deshace en polvo y una de vidrio verde con una tilde de luz.",
     "Pregunta: ¿Me garantizan la aprobación?",
   ),
   candado: img(

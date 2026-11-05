@@ -7,9 +7,25 @@ import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { IMG } from "@/data/imagenes";
 
 import { pageUrl } from "@/config/site";
+
+const CHAT_ESTUDIO = [
+  {
+    q: "Hola FNX, quiero renovar mi marca",
+    a: "¡Hola! Agendemos una charla de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
+  },
+  {
+    q: "Necesito contenido para redes",
+    a: "Armamos un plan con fotos, videos y publicaciones pensado para tu público. ¿Qué cuentas tenés hoy?",
+  },
+  {
+    q: "Quiero vender online",
+    a: "Te ayudamos a montar la tienda y a que tu marca se vea profesional desde el primer día.",
+  },
+];
 
 export const Route = createFileRoute("/estudio")({
   head: () => ({
@@ -158,22 +174,25 @@ function Estudio() {
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
         aria-labelledby="estudio-cta"
       >
-        <Reveal className="flex flex-col items-start gap-6 border-t border-border pt-16">
-          <Headline
-            id="estudio-cta"
-            lead="Tu marca está lista para"
-            accent="levantar vuelo."
-            className="text-5xl sm:text-7xl"
-          />
-          <p className="max-w-2xl text-lg text-muted-foreground">
-            Una charla de 15 minutos alcanza para saber dónde está tu marca hoy y hasta dónde puede
-            llegar. Sin costo y sin compromiso.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="marca" label="Agendá tu charla" />
-            <EmailButton account="estudio" topic="marca" />
-            <InstagramButton account="estudio" />
+        <Reveal className="grid items-center gap-10 border-t border-border pt-16 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex flex-col items-start gap-6">
+            <Headline
+              id="estudio-cta"
+              lead="Tu marca está lista para"
+              accent="levantar vuelo."
+              className="text-5xl sm:text-7xl"
+            />
+            <p className="max-w-2xl text-lg text-muted-foreground">
+              Una charla de 15 minutos alcanza para saber dónde está tu marca hoy y hasta dónde
+              puede llegar. Sin costo y sin compromiso.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton topic="marca" label="Agendá tu charla" />
+              <EmailButton account="estudio" topic="marca" />
+              <InstagramButton account="estudio" />
+            </div>
           </div>
+          <WhatsAppChatLoop name="FNX Estudio" pairs={CHAT_ESTUDIO} />
         </Reveal>
       </section>
     </div>

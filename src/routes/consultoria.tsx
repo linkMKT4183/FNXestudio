@@ -10,11 +10,12 @@ import {
   Instagram,
   MessagesSquare,
   Network,
+  PenTool,
   RefreshCw,
   Route as RouteIcon,
   Scale,
-  Share2,
   Ban,
+  Sprout,
   Stamp,
   Tractor,
   TrendingUp,
@@ -37,11 +38,36 @@ import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
+import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
 import { PARTNERS, buildPartnerInstagramLink, type PartnerId, pageUrl } from "@/config/site";
 import { Button } from "@/components/ui/button";
+
+const RED_CONSULTORIA: NetworkNode[] = [
+  { label: "Jurídico", icon: Scale, color: "var(--fnx-azul)" },
+  { label: "Técnico", icon: Wrench, color: "var(--fnx-azul)" },
+  { label: "Agronomía", icon: Sprout, color: "var(--fnx-azul)" },
+  { label: "Riego", icon: Droplets, color: "var(--fnx-azul)" },
+  { label: "Marca", icon: PenTool, color: "var(--fnx-naranja)" },
+];
+
+const CHAT_CONSULTORIA = [
+  {
+    q: "Hola FNX, quiero regularizar mi proyecto",
+    a: "¡Hola! Contanos en qué etapa está y qué documentación tenés. Relevamos y te pasamos un presupuesto a medida.",
+  },
+  {
+    q: "¿Pueden constituir la estructura legal?",
+    a: "Sí. La red jurídica de FNX se ocupa de la constitución y del mantenimiento posterior.",
+  },
+  {
+    q: "Necesito tecnificar el riego del campo",
+    a: "Coordinamos con los técnicos de la red el diseño, el dimensionamiento y la cotización.",
+  },
+];
 
 export const Route = createFileRoute("/consultoria")({
   head: () => ({
@@ -239,17 +265,22 @@ const SERVICES_CANNABIS: Service[] = [
       "Redacción de los documentos del director técnico.",
       "Trazabilidad y asesoramiento sobre genéticas registradas.",
       "Diseño, dimensionamiento y cotización de infraestructura por escala.",
-      "Asesoramiento en dirección técnica y conexión con profesionales que la asuman.",
+      "Dirección técnica a cargo de profesionales de la red.",
       "Mentoría de proyectos e industriales.",
     ],
   },
   {
-    icon: Share2,
-    id: "derivaciones",
-    label: "Derivaciones",
-    who: "Lo que Consultoría no hace se deriva a profesionales de la red.",
+    icon: Network,
+    id: "red",
+    label: "Red de especialistas",
+    who: "Todo lo que tu proyecto necesite se resuelve dentro de la red de FNX, con profesionales especializados y coordinados por nosotros.",
     img: IMG.cDerivaciones,
-    items: ["Derecho penal.", "Habilitaciones de alimentos.", "Casos en otras provincias."],
+    items: [
+      "Asesoramiento y defensa en derecho penal.",
+      "Habilitaciones bromatológicas y de alimentos.",
+      "Proyectos en otras provincias, con profesionales matriculados en cada jurisdicción.",
+      "Coordinación integral: un solo contacto, un solo presupuesto y una sola entrega.",
+    ],
   },
 ];
 
@@ -708,7 +739,7 @@ function Consultoria() {
 
       {/* Red de profesionales */}
       <section aria-labelledby="red-titulo" className="border-y border-border bg-card">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-center">
           <Reveal className="flex flex-col gap-6">
             <p className="eyebrow text-muted-foreground">Red de profesionales de FNX</p>
             <Headline
@@ -735,7 +766,7 @@ function Consultoria() {
             </ul>
           </Reveal>
           <Reveal delay={120}>
-            <Pieces lit={4} size="lg" />
+            <NetworkViz nodes={RED_CONSULTORIA} />
           </Reveal>
         </div>
       </section>
@@ -775,22 +806,25 @@ function Consultoria() {
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
         aria-labelledby="consultoria-cta"
       >
-        <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
-          <Pieces lit={1} />
-          <Headline
-            id="consultoria-cta"
-            lead="Contanos"
-            accent="tu proyecto."
-            className="text-5xl sm:text-7xl"
-          />
-          <p className="max-w-lg text-muted-foreground">
-            Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
-            <EmailButton account="estudio" topic="consultoria" />
-            <InstagramButton account="estudio" />
+        <Reveal className="grid items-center gap-10 rounded-3xl border border-border bg-card p-8 sm:p-14 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex flex-col items-start gap-8">
+            <Pieces lit={1} />
+            <Headline
+              id="consultoria-cta"
+              lead="Contanos"
+              accent="tu proyecto."
+              className="text-5xl sm:text-7xl"
+            />
+            <p className="max-w-lg text-muted-foreground">
+              Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+              <EmailButton account="estudio" topic="consultoria" />
+              <InstagramButton account="estudio" />
+            </div>
           </div>
+          <WhatsAppChatLoop name="FNX Consultoría" pairs={CHAT_CONSULTORIA} />
         </Reveal>
       </section>
     </div>

@@ -318,3 +318,19 @@
 }
 @keyframes tono-bar { 0%, 100% { height: 0.5rem; } 50% { height: 1.4rem; } }
 .tono-bar { height: 0.5rem; animation: tono-bar 0.9s ease-in-out infinite; }
+
+/* Red animada (NetworkViz) */
+@keyframes net-float { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, calc(-50% - 6px)); } }
+.net-node { animation: net-float 4.5s ease-in-out infinite; }
+@keyframes net-spin { to { transform: rotate(360deg); } }
+.net-ring { border-style: dashed; animation: net-spin 60s linear infinite; }
+.net-ring-2 { animation-direction: reverse; animation-duration: 40s; }
+@keyframes net-core { 0%, 100% { box-shadow: 0 0 30px -6px var(--area); } 50% { box-shadow: 0 0 60px 0 var(--area); } }
+.net-core { animation: net-core 3s ease-in-out infinite; }
+@keyframes net-line { 0%, 100% { stroke-opacity: 0.25; } 50% { stroke-opacity: 0.7; } }
+.net-line { animation: net-line 3s ease-in-out infinite; }
+
+/* Noticias: cinta de titulares */
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker { animation: ticker 60s linear infinite; }
+.ticker:hover { animation-play-state: paused; }

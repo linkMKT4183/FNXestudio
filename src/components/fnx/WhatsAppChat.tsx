@@ -16,8 +16,8 @@ export function WhatsAppChat({
 }: {
   question: string;
   answer: string;
-  name?: string;
-  className?: string;
+  name?: string | undefined;
+  className?: string | undefined;
 }) {
   const [typing, setTyping] = useState(true);
 
@@ -88,4 +88,25 @@ export function WhatsAppChat({
       </div>
     </figure>
   );
+}
+
+/** Chat que va rotando entre varias consultas, para los bloques de contacto. */
+export function WhatsAppChatLoop({
+  pairs,
+  name,
+  interval = 6000,
+  className,
+}: {
+  pairs: { q: string; a: string }[];
+  name?: string;
+  interval?: number;
+  className?: string;
+}) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = window.setInterval(() => setI((v) => (v + 1) % pairs.length), interval);
+    return () => window.clearInterval(t);
+  }, [pairs.length, interval]);
+  const p = pairs[i] ?? pairs[0]!;
+  return <WhatsAppChat question={p.q} answer={p.a} name={name} className={className} />;
 }

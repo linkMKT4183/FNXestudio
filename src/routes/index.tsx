@@ -21,14 +21,37 @@ import {
   Reveal,
   Section,
   Tag,
-  TenSeconds,
 } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
+import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { IMG, type FnxImg } from "@/data/imagenes";
 
 import { pageUrl } from "@/config/site";
+
+const AREA_NODES: NetworkNode[] = [
+  { label: "Estudio", icon: PenTool, color: "var(--fnx-naranja)" },
+  { label: "Consultoría", icon: Scale, color: "var(--fnx-azul)" },
+  { label: "Salud", icon: HeartHandshake, color: "var(--fnx-verde)" },
+  { label: "Noticias", icon: Newspaper, color: "var(--fnx-amarillo)" },
+];
+
+const CHAT_INICIO = [
+  {
+    q: "Hola FNX, quiero hacer crecer mi marca",
+    a: "¡Hola! Contanos a qué te dedicás y qué querés lograr, y te armamos una propuesta a medida.",
+  },
+  {
+    q: "Necesito asesoría para mi proyecto",
+    a: "Perfecto. Te hacemos 3 preguntas para entender tu caso y te decimos qué profesionales intervienen.",
+  },
+  {
+    q: "¿Mis datos quedan protegidos?",
+    a: "Sí. Lo que nos contás es confidencial y solo lo compartimos con tu acuerdo.",
+  },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -243,11 +266,8 @@ function Home() {
 
       {/* Propuesta de valor */}
       <section aria-labelledby="valor-titulo" className="border-y border-border bg-card">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.2fr_1fr]">
           <Reveal className="flex flex-col gap-6">
-            <TenSeconds className="max-w-2xl bg-background">
-              Sabemos del sector y tenemos los contactos.
-            </TenSeconds>
             <Headline
               id="valor-titulo"
               lead="Conocemos el sector y tenemos"
@@ -259,6 +279,9 @@ function Home() {
               verificados y Noticias informa con fuentes.
             </p>
             <Pieces lit={1} className="mt-4" />
+          </Reveal>
+          <Reveal delay={150}>
+            <NetworkViz nodes={AREA_NODES} />
           </Reveal>
         </div>
       </section>
@@ -332,21 +355,24 @@ function Home() {
         aria-labelledby="cta-titulo"
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
       >
-        <Reveal className="flex flex-col items-start gap-8 rounded-3xl border border-border bg-card p-8 sm:p-14">
-          <Pieces lit={4} />
-          <Headline
-            id="cta-titulo"
-            lead="¿Arrancamos?"
-            accent="Escribinos."
-            className="text-5xl sm:text-7xl"
-          />
-          <p className="max-w-lg text-muted-foreground">
-            Contanos qué necesitás y te respondemos por WhatsApp o por mail.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="marca" />
-            <EmailButton account="estudio" topic="general" />
+        <Reveal className="grid items-center gap-10 rounded-3xl border border-border bg-card p-8 sm:p-14 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex flex-col items-start gap-8">
+            <Pieces lit={4} />
+            <Headline
+              id="cta-titulo"
+              lead="¿Arrancamos?"
+              accent="Escribinos."
+              className="text-5xl sm:text-7xl"
+            />
+            <p className="max-w-lg text-muted-foreground">
+              Contanos qué necesitás y te respondemos por WhatsApp o por mail.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton topic="marca" />
+              <EmailButton account="estudio" topic="general" />
+            </div>
           </div>
+          <WhatsAppChatLoop name="FNX" pairs={CHAT_INICIO} />
         </Reveal>
       </section>
     </>

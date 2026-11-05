@@ -1,12 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { BadgeCheck, Compass, FileQuestion, Lock, Users } from "lucide-react";
+import {
+  BadgeCheck,
+  Compass,
+  FileCheck2,
+  FileQuestion,
+  Lock,
+  Scale,
+  Stethoscope,
+  Users,
+} from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
-import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
+import { Headline, Pieces, Reveal, Section } from "@/components/fnx/primitives";
 import { AgeGate } from "@/components/fnx/AgeGate";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
+import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import {
@@ -17,6 +27,14 @@ import {
 } from "@/components/ui/accordion";
 
 import { pageUrl } from "@/config/site";
+
+const RED_SALUD: NetworkNode[] = [
+  { label: "Médicos", icon: Stethoscope, color: "var(--fnx-verde)" },
+  { label: "Trámite", icon: FileCheck2, color: "var(--fnx-verde)" },
+  { label: "ONGs", icon: Users, color: "var(--fnx-verde)" },
+  { label: "Abogados", icon: Scale, color: "var(--fnx-verde)" },
+  { label: "Tus datos", icon: Lock, color: "var(--fnx-verde)" },
+];
 
 const PASOS_REPROCANN = [
   {
@@ -210,39 +228,41 @@ function Salud() {
         className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24"
         aria-labelledby="salud-titulo"
       >
-        <Reveal className="flex flex-col gap-8">
-          <p className="eyebrow text-area">FNX Salud · +18</p>
-          <Headline
-            as="h1"
-            id="salud-titulo"
-            lead="Te acompañamos en"
-            accent="cada paso."
-            className="text-6xl sm:text-8xl lg:text-9xl"
-          />
-          <p className="max-w-xl text-lg text-muted-foreground">
-            Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.
-          </p>
-          <p className="max-w-xl text-sm text-muted-foreground">
-            Atendemos a pacientes. Si representás una asociación o un proyecto, te acompaña{" "}
-            <Link
-              to="/consultoria"
-              className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
-            >
-              FNX Consultoría
-            </Link>
-            .
-          </p>
-          <TenSeconds className="max-w-2xl">
-            Te guiamos en el REPROCANN y te conectamos con gente verificada.
-          </TenSeconds>
-          <div className="flex flex-wrap items-center gap-6">
-            <WhatsAppButton topic="salud" />
-            <EmailButton account="salud" topic="salud" />
-            <InstagramButton account="salud" />
-            <Pieces lit={2} />
-          </div>
-          <AdultNote />
-        </Reveal>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal className="flex flex-col gap-8">
+            <p className="eyebrow text-area">FNX Salud · +18</p>
+            <Headline
+              as="h1"
+              id="salud-titulo"
+              lead="Te acompañamos en"
+              accent="cada paso."
+              className="text-6xl sm:text-7xl xl:text-8xl"
+            />
+            <p className="max-w-xl text-lg text-muted-foreground">
+              Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.
+            </p>
+            <p className="max-w-xl text-sm text-muted-foreground">
+              Atendemos a pacientes. Si representás una asociación o un proyecto, te acompaña{" "}
+              <Link
+                to="/consultoria"
+                className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
+              >
+                FNX Consultoría
+              </Link>
+              .
+            </p>
+            <div className="flex flex-wrap items-center gap-6">
+              <WhatsAppButton topic="salud" />
+              <EmailButton account="salud" topic="salud" />
+              <InstagramButton account="salud" />
+              <Pieces lit={2} />
+            </div>
+            <AdultNote />
+          </Reveal>
+          <Reveal delay={150}>
+            <NetworkViz nodes={RED_SALUD} />
+          </Reveal>
+        </div>
       </section>
 
       <Section

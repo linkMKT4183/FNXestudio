@@ -9,10 +9,12 @@ import {
 } from "lucide-react";
 import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useMemo, useState } from "react";
-import { IconBadge, Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
+import { IconBadge, Headline, Reveal, Tag } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
+import { NewsMosaic, NewsTicker } from "@/components/fnx/NewsHero";
 
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
@@ -42,6 +44,17 @@ export const Route = createFileRoute("/noticias")({
   component: Noticias,
 });
 
+const CHAT_NOTICIAS = [
+  {
+    q: "Hola FNX, quiero recibir las novedades",
+    a: "¡Listo! Te mandamos lo importante, corto y siempre con el link a la fuente.",
+  },
+  {
+    q: "¿Cada cuánto llegan?",
+    a: "Una vez por semana, con las noticias de marketing, negocios y del sector que te interesan.",
+  },
+];
+
 type Filter = "Todas" | NewsCategory;
 const FILTERS: Filter[] = ["Todas", ...NEWS_CATEGORIES];
 
@@ -62,26 +75,62 @@ function Noticias() {
   return (
     <div data-area="noticias">
       <section
-        className="mx-auto w-full max-w-6xl px-5 pb-10 pt-16 sm:px-8 sm:pt-24"
+        className="mx-auto w-full max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pt-24"
         aria-labelledby="noticias-titulo"
       >
-        <Reveal className="flex flex-col gap-8">
-          <p className="eyebrow text-area">FNX Noticias</p>
-          <Headline
-            as="h1"
-            id="noticias-titulo"
-            lead="Lo que pasa, contado"
-            accent="con fuentes."
-            className="text-6xl sm:text-8xl lg:text-9xl"
-          />
-          <TenSeconds className="max-w-2xl">
-            Noticias cortas de marketing, negocios y cannabis medicinal, con su fuente.
-          </TenSeconds>
-          <Pieces lit={4} />
-        </Reveal>
+        <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal className="flex flex-col gap-8">
+            <p className="eyebrow text-area">FNX Noticias</p>
+            <Headline
+              as="h1"
+              id="noticias-titulo"
+              lead="Lo que pasa, contado"
+              accent="con fuentes."
+              className="text-6xl sm:text-8xl"
+            />
+            <p className="max-w-xl text-lg text-muted-foreground">
+              Marketing, negocios y cannabis medicinal en noticias cortas, cada una con el link a su
+              fuente.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {NEWS_CATEGORIES.map((c) => {
+                const Icon = CATEGORY_ICONS[c];
+                const count = NOTICIAS.filter((n) => n.category === c).length;
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => {
+                      setFilter(c);
+                      document.getElementById("listado")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="group flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-left transition-colors hover:border-area"
+                  >
+                    {Icon ? <IconBadge icon={Icon} variant="outline" size="sm" /> : null}
+                    <span className="flex flex-col">
+                      <span className="text-sm font-bold text-foreground">{c}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {count} {count === 1 ? "noticia" : "noticias"}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+          <Reveal delay={150}>
+            <NewsMosaic items={NOTICIAS} icons={CATEGORY_ICONS} />
+          </Reveal>
+        </div>
       </section>
 
-      <section aria-label="Noticias" className="mx-auto w-full max-w-6xl px-5 pb-20 sm:px-8">
+      <NewsTicker items={NOTICIAS} icons={CATEGORY_ICONS} />
+
+      <section
+        id="listado"
+        aria-label="Noticias"
+        className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pb-20 pt-14 sm:px-8"
+      >
         <div role="group" aria-label="Filtrar por categoría" className="mb-8 flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
@@ -164,18 +213,21 @@ function Noticias() {
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
         aria-labelledby="noticias-cta"
       >
-        <Reveal className="flex flex-col items-start gap-6 rounded-3xl border border-border bg-card p-8 sm:p-14">
-          <Headline
-            id="noticias-cta"
-            lead="Recibí las novedades"
-            accent="por WhatsApp."
-            className="text-5xl sm:text-7xl"
-          />
-          <p className="text-muted-foreground">Lo importante, corto y con fuente.</p>
-          <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
-            <EmailButton account="estudio" topic="novedades" label="Recibirlas por mail" />
+        <Reveal className="grid items-center gap-10 rounded-3xl border border-border bg-card p-8 sm:p-14 lg:grid-cols-[1.2fr_1fr]">
+          <div className="flex flex-col items-start gap-6">
+            <Headline
+              id="noticias-cta"
+              lead="Recibí las novedades"
+              accent="por WhatsApp."
+              className="text-5xl sm:text-7xl"
+            />
+            <p className="text-muted-foreground">Lo importante, corto y con fuente.</p>
+            <div className="flex flex-wrap gap-3">
+              <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
+              <EmailButton account="estudio" topic="novedades" label="Recibirlas por mail" />
+            </div>
           </div>
+          <WhatsAppChatLoop name="FNX Noticias" pairs={CHAT_NOTICIAS} />
         </Reveal>
         <Reveal className="mt-8 flex flex-col gap-5">
           <p className="eyebrow text-muted-foreground">También en Instagram</p>

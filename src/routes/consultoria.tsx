@@ -14,7 +14,7 @@ import {
   Route as RouteIcon,
   Scale,
   Share2,
-  ShieldCheck,
+  Ban,
   Stamp,
   Tractor,
   TrendingUp,
@@ -291,16 +291,24 @@ const NETWORK_POINTS = [
   { title: "Una sola entrega", text: "Coordinamos y te entregamos todo terminado." },
 ];
 
-const LIMITS: { text: string; note?: string }[] = [
+const LIMITS: { no: string; text: string; note?: string }[] = [
   {
-    text: "Ante una zona gris, te mostramos el camino para regularizar, nunca el atajo.",
+    no: "No tomamos atajos.",
+    text: "Si algo de tu proyecto está pendiente de regularizar, te acompañamos a ponerlo en regla, paso a paso.",
     note: "Para cualquier proyecto, agrícola o cannábico",
   },
   {
-    text: "No armamos actas que no reflejen hechos reales ni declaramos más plantas de las que justifica el padrón.",
+    no: "No armamos actas",
+    text: "que no reflejen hechos reales, ni declaramos más plantas de las que justifica el padrón.",
   },
-  { text: "No prometemos protección penal ni plazos que dependen del Estado." },
-  { text: "Ningún documento legal hecho con IA se entrega sin revisión de un abogado de la red." },
+  {
+    no: "No prometemos",
+    text: "protección legal absoluta ni plazos que dependen de organismos públicos.",
+  },
+  {
+    no: "No entregamos",
+    text: "ningún documento legal hecho con IA sin la revisión de un abogado de la red.",
+  },
 ];
 
 const SECTORS: { v: Sector; l: string }[] = [
@@ -694,20 +702,22 @@ function Consultoria() {
       <Section
         id="limites"
         eyebrow="Nuestros límites"
-        lead="El camino,"
-        accent="nunca el atajo."
-        tldr="Hacemos las cosas en regla. Esto es lo que no hacemos."
+        lead="Lo que"
+        accent="NO hacemos."
+        tldr="Trabajamos siempre en regla. Estos límites no se negocian, para ningún cliente."
       >
         <Reveal>
           <ul className="grid gap-4 md:grid-cols-2">
             {LIMITS.map((l) => (
-              <li key={l.text} className="flex items-start gap-4 rounded-2xl border border-border p-6">
-                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-area text-area">
-                  <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+              <li key={l.no} className="flex items-start gap-4 rounded-2xl border border-border p-6">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground">
+                  <Ban className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <span className="flex flex-col gap-2">
-                  {l.note ? <span className="eyebrow text-area">{l.note}</span> : null}
-                  <span className="text-sm leading-relaxed text-foreground">{l.text}</span>
+                  {l.note ? <span className="eyebrow text-muted-foreground">{l.note}</span> : null}
+                  <span className="text-sm leading-relaxed text-foreground">
+                    <strong className="font-bold text-area">{l.no}</strong> {l.text}
+                  </span>
                 </span>
               </li>
             ))}

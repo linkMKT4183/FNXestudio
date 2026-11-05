@@ -76,7 +76,7 @@ export const Route = createFileRoute("/consultoria")({
       {
         name: "description",
         content:
-          "Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan, se regularicen y crezcan en regla. Desde Mendoza.",
+          "Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan, se regularicen y crezcan en regla. Con sedes en Mendoza y San Juan y alcance en todo el país.",
       },
       { property: "og:title", content: "FNX Consultoría · Crecer en regla" },
       {

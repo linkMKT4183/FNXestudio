@@ -207,13 +207,6 @@ export const IMG = {
     "Perfil: Sofía",
     [1024, 1024],
   ),
-  personaOng: img(
-    "persona-ong",
-    "salud",
-    "Retrato ilustrativo de tres adultos de distintas edades de una organización comunitaria.",
-    "Perfil: ONG",
-    [1024, 1024],
-  ),
   personaProductor: img(
     "persona-productor",
     "consultoria",

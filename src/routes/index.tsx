@@ -56,13 +56,16 @@ const CHAT_INICIO = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FNX · Fénix Creativo | Estudio creativo en Mendoza" },
+      { title: "FNX · Fénix Creativo | Estudio creativo · Mendoza, San Juan y todo el país" },
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Estudio creativo en Mendoza con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
+          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
       },
-      { property: "og:title", content: "FNX · Fénix Creativo | Estudio creativo en Mendoza" },
+      {
+        property: "og:title",
+        content: "FNX · Fénix Creativo | Creamos marcas y conectamos personas de confianza",
+      },
       {
         property: "og:description",
         content: "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas.",
@@ -175,7 +178,7 @@ function Home() {
           />
           <Reveal delay={120} className="flex flex-wrap items-center justify-between gap-6">
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio creativo en Mendoza. Una empresa, cuatro áreas.
+              Sedes en Mendoza y San Juan. Trabajamos en todo el país y en el exterior.
             </p>
             <Pieces lit={3} />
           </Reveal>
@@ -193,12 +196,12 @@ function Home() {
         </div>
       </section>
 
-      {/* Tres puertas */}
+      {/* Cuatro puertas */}
       <section
         aria-label="Elegí por dónde empezar"
         className="mx-auto w-full max-w-6xl px-5 pb-8 pt-6 sm:px-8"
       >
-        <Reveal className="grid gap-4 md:grid-cols-3">
+        <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Door
             to="/estudio"
             tone="naranja"
@@ -219,6 +222,13 @@ function Home() {
             kicker="FNX Salud · +18"
             title="Necesito orientación en cannabis medicinal (+18)"
             img={IMG.carpetas}
+          />
+          <Door
+            to="/noticias"
+            tone="amarillo"
+            kicker="FNX Noticias"
+            title="Quiero estar al día con noticias con fuentes"
+            img={IMG.tonoNoticias}
           />
         </Reveal>
       </section>
@@ -379,6 +389,13 @@ function Home() {
   );
 }
 
+const DOOR_AREA = {
+  naranja: "estudio",
+  azul: "consultoria",
+  verde: "salud",
+  amarillo: "noticias",
+} as const;
+
 function Door({
   to,
   tone,
@@ -386,8 +403,8 @@ function Door({
   title,
   img,
 }: {
-  to: "/estudio" | "/consultoria" | "/salud";
-  tone: "naranja" | "azul" | "verde";
+  to: "/estudio" | "/consultoria" | "/salud" | "/noticias";
+  tone: "naranja" | "azul" | "verde" | "amarillo";
   kicker: string;
   title: string;
   img: FnxImg;
@@ -395,25 +412,24 @@ function Door({
   return (
     <Link
       to={to}
+      data-area={DOOR_AREA[tone]}
       className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
     >
       <span className="block aspect-[16/9] overflow-hidden border-b border-border">
         <FnxImage
           img={img}
-          sizes="(min-width: 768px) 33vw, 100vw"
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="photo-hover h-full w-full object-cover"
         />
       </span>
-      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-9 md:p-6 lg:p-8">
+      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-8 lg:p-6">
         <Tag tone={tone} className="self-start">
           {kicker}
         </Tag>
         <span className="flex items-end justify-between gap-6">
-          <span className="headline text-4xl text-foreground sm:text-5xl md:text-3xl lg:text-4xl">
-            {title}
-          </span>
+          <span className="headline min-w-0 text-4xl text-foreground lg:text-[1.75rem]">{title}</span>
           <span
-            className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
+            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
             aria-hidden="true"
           >
             <ArrowRight className="h-6 w-6" />

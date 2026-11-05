@@ -110,7 +110,9 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-3">
           <Logo className="text-7xl" />
-          <p className="text-sm text-muted-foreground">Mendoza, Argentina</p>
+          <p className="text-sm text-muted-foreground">
+            Sedes en Mendoza y San Juan · Trabajamos en todo el país y en el exterior
+          </p>
           <SocialLinks />
           <a
             href={buildPartnerInstagramLink("aro")}

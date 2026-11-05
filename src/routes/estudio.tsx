@@ -15,7 +15,7 @@ import { pageUrl } from "@/config/site";
 const CHAT_ESTUDIO = [
   {
     q: "Hola FNX, quiero renovar mi marca",
-    a: "¡Hola! Agendemos una charla de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
+    a: "¡Hola! Agendemos una consultoría de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
   },
   {
     q: "Necesito contenido para redes",
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/estudio")({
       {
         name: "description",
         content:
-          "Marcas que se destacan. Branding, producción audiovisual, tienda online, redes y estrategia en Mendoza para que tu marca deje de ser una más.",
+          "Marcas que se destacan. Branding, producción audiovisual, tienda online, redes y estrategia para que tu marca deje de ser una más.",
       },
       { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
@@ -107,7 +107,7 @@ function Estudio() {
       >
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           <Reveal className="flex flex-col gap-8">
-            <p className="eyebrow text-area">FNX Estudio · Mendoza</p>
+            <p className="eyebrow text-area">FNX Estudio · Mendoza · San Juan · Todo el país</p>
             <Headline
               as="h1"
               id="estudio-titulo"
@@ -183,11 +183,11 @@ function Estudio() {
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Una charla de 15 minutos alcanza para saber dónde está tu marca hoy y hasta dónde
+              Una consultoría de 15 minutos alcanza para saber dónde está tu marca hoy y hasta dónde
               puede llegar. Sin costo y sin compromiso.
             </p>
             <div className="flex flex-wrap gap-3">
-              <WhatsAppButton topic="marca" label="Agendá tu charla" />
+              <WhatsAppButton topic="marca" label="Agendá tu consultoría" />
               <EmailButton account="estudio" topic="marca" />
               <InstagramButton account="estudio" />
             </div>

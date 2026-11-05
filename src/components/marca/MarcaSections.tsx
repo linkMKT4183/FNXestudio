@@ -14,6 +14,7 @@ import {
 import { IconBadge, Headline, Pieces, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { ExpandCard, FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
+import { LegalDocVisual } from "@/components/fnx/LegalDocVisual";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
 
@@ -99,9 +100,9 @@ export function Esencia() {
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-border bg-card p-7">
           <p className="text-lg leading-relaxed text-foreground">
-            Fénix Creativo es un equipo interdisciplinario con base en Mendoza. Reúne creatividad,
-            producción audiovisual, asesoría jurídica y técnica, y una red de profesionales de la
-            salud verificados.
+            Fénix Creativo es un equipo interdisciplinario con sedes en Mendoza y San Juan, que
+            trabaja a nivel nacional e internacional. Reúne creatividad, producción audiovisual,
+            asesoría jurídica y técnica, y una red de profesionales de la salud verificados.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
             Cada proyecto lo trabaja la red completa: un solo contacto, todo un equipo detrás.
@@ -121,6 +122,19 @@ export function Esencia() {
 }
 
 /* 2. Misión y visión */
+function MvMedia({ img }: { img: FnxImg }) {
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      <FnxImage
+        img={img}
+        sizes="(min-width: 768px) 45vw, 100vw"
+        className="tono-zoom h-full w-full object-cover"
+      />
+      <div className="tono-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+    </div>
+  );
+}
+
 export function MisionVision() {
   return (
     <Panel
@@ -134,6 +148,7 @@ export function MisionVision() {
           title="Misión"
           icon={Target}
           kicker={<span className="eyebrow text-area">Hoy</span>}
+          media={<MvMedia img={IMG.redHero} />}
           defaultOpen
         >
           Crear marcas con carácter y conectar a las personas con profesionales y organizaciones de
@@ -143,10 +158,11 @@ export function MisionVision() {
           title="Visión"
           icon={Telescope}
           kicker={<span className="eyebrow text-area">Mañana</span>}
+          media={<MvMedia img={IMG.nEndeavor} />}
           defaultOpen
         >
-          Ser la referencia en Argentina para las marcas que quieren destacarse y para quienes
-          buscan información y acompañamiento confiable en salud.
+          Ser la referencia, en Argentina y en el exterior, para las marcas que quieren destacarse y
+          para quienes buscan información y acompañamiento confiable en salud.
         </ExpandCard>
       </div>
     </Panel>
@@ -291,13 +307,30 @@ export function Tono() {
 const PERSONA_ICONS = { naranja: PenTool, verde: HeartHandshake, azul: Scale } as const;
 const PERSONA_AREA = { naranja: "estudio", verde: "salud", azul: "consultoria" } as const;
 
-const PERSONAS = [
+const ONG_REQUISITOS = [
+  "Personería jurídica vigente",
+  "Inscripción en el REPROCANN",
+  "Director médico designado",
+  "Normativa de Mendoza al día",
+  "Padrón de pacientes actualizado",
+];
+
+const PERSONAS: {
+  name: string;
+  img: FnxImg | null;
+  area: string;
+  tone: "naranja" | "verde" | "azul";
+  who: string;
+  needs: string;
+  blocks: string;
+  message: string;
+}[] = [
   {
     name: "Lucía",
     img: IMG.personaLucia,
     area: "FNX Estudio",
     tone: "naranja" as const,
-    who: "Dueña de una pyme de Mendoza, 35 a 45 años.",
+    who: "Dueña de una pyme, 35 a 45 años.",
     needs: "Una marca profesional, contenido constante y vender online.",
     blocks: "No tener tiempo ni saber a quién delegar.",
     message: "Que tu marca no pase desapercibida.",
@@ -324,7 +357,7 @@ const PERSONAS = [
   },
   {
     name: "ONG",
-    img: IMG.personaOng,
+    img: null,
     area: "FNX Salud",
     tone: "verde" as const,
     who: "Inscripta en REPROCANN, con director médico.",
@@ -381,11 +414,15 @@ export function Publico() {
               title={p.name}
               icon={PERSONA_ICONS[p.tone]}
               media={
-                <FnxImage
-                  img={p.img}
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                  className="photo-hover h-full w-full object-cover object-[50%_25%]"
-                />
+                p.img ? (
+                  <FnxImage
+                    img={p.img}
+                    sizes="(min-width: 768px) 45vw, 100vw"
+                    className="photo-hover h-full w-full object-cover object-[50%_25%]"
+                  />
+                ) : (
+                  <LegalDocVisual items={ONG_REQUISITOS} />
+                )
               }
               kicker={
                 <Tag tone={p.tone} className="self-start">

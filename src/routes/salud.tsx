@@ -4,7 +4,6 @@ import { BadgeCheck, Compass, FileQuestion, Lock, Users } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import { AgeGate } from "@/components/fnx/AgeGate";
-import { ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -282,34 +281,6 @@ function Salud() {
         footer={<AdultNote />}
       >
         <FaqWithPhotos />
-      </Section>
-
-      <Section
-        id="guia"
-        eyebrow="Recurso gratuito"
-        lead="Guía REPROCANN"
-        accent="paso a paso."
-        footer={<AdultNote />}
-      >
-        <Reveal>
-          <ResourceCard
-            media={
-              <FnxImage
-                img={IMG.guia}
-                sizes="(min-width: 768px) 40vw, 100vw"
-                className="photo-hover h-full w-full object-cover"
-              />
-            }
-            title="Guía REPROCANN paso a paso"
-            text="Te la mandamos por WhatsApp o por mail, sin costo."
-            action={
-              <div className="flex flex-wrap gap-3">
-                <WhatsAppButton topic="salud" label="Pedila gratis" />
-                <EmailButton account="salud" topic="guia" label="Pedila por mail" />
-              </div>
-            }
-          />
-        </Reveal>
       </Section>
     </div>
   );

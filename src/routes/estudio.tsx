@@ -2,10 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Pieces, Reveal, Section } from "@/components/fnx/primitives";
-import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
+import { ExpandCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
-import { LeadForm } from "@/components/fnx/LeadForm";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG } from "@/data/imagenes";
@@ -154,23 +153,6 @@ function Estudio() {
       </Section>
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
-
-      <Section id="recurso" eyebrow="Recurso gratuito" lead="¿FNX puede" accent="ayudarte?">
-        <Reveal>
-          <ResourceCard
-            media={
-              <FnxImage
-                img={IMG.checklist}
-                sizes="(min-width: 768px) 40vw, 100vw"
-                className="photo-hover h-full w-full object-cover"
-              />
-            }
-            title="Guía rápida: cómo saber si FNX es para vos"
-            text="En cinco minutos sabés si tu marca, tu proyecto o tu trámite es algo en lo que podemos acompañarte, y qué conviene tener a mano para empezar. Te la enviamos sin costo."
-            action={<LeadForm />}
-          />
-        </Reveal>
-      </Section>
 
       <section
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"

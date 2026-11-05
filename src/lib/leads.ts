@@ -54,15 +54,23 @@ export function buildLeadPayload(lead: Lead) {
   };
 }
 
-export async function sendLead(lead: Lead, fetchImpl: typeof fetch = fetch): Promise<boolean> {
+/** Envía un formulario a la casilla de FNX. Devuelve true si llegó bien. */
+export async function postForm(
+  payload: Record<string, string>,
+  fetchImpl: typeof fetch = fetch,
+): Promise<boolean> {
   try {
     const res = await fetchImpl(LEAD_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(buildLeadPayload(lead)),
+      body: JSON.stringify(payload),
     });
     return res.ok;
   } catch {
     return false;
   }
+}
+
+export function sendLead(lead: Lead, fetchImpl: typeof fetch = fetch): Promise<boolean> {
+  return postForm(buildLeadPayload(lead), fetchImpl);
 }

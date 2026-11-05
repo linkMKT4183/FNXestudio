@@ -5,6 +5,7 @@ import { Headline, Pieces, Reveal, Section, TenSeconds } from "@/components/fnx/
 import { ExpandCard, ResourceCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
+import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG } from "@/data/imagenes";
 
@@ -100,6 +101,7 @@ function Estudio() {
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
             <WhatsAppButton topic="marca" />
+            <EmailButton account="estudio" topic="marca" />
             <Pieces lit={0} />
           </div>
         </Reveal>
@@ -141,8 +143,13 @@ function Estudio() {
           <ResourceCard
             media={<FnxImage img={IMG.checklist} sizes="(min-width: 768px) 40vw, 100vw" className="photo-hover h-full w-full object-cover" />}
             title="Checklist de marca: 10 puntos antes de invertir en redes"
-            text="Te lo mandamos por WhatsApp, sin costo."
-            action={<WhatsAppButton topic="marca" label="Pedilo gratis" />}
+            text="Te lo mandamos por WhatsApp o por mail, sin costo."
+            action={
+              <div className="flex flex-wrap gap-3">
+                <WhatsAppButton topic="marca" label="Pedilo gratis" />
+                <EmailButton account="estudio" topic="checklist" label="Pedilo por mail" />
+              </div>
+            }
           />
         </Reveal>
       </Section>
@@ -157,6 +164,7 @@ function Estudio() {
           />
           <div className="flex flex-wrap gap-3">
             <WhatsAppButton topic="marca" />
+            <EmailButton account="estudio" topic="marca" />
             <InstagramButton account="estudio" />
           </div>
         </Reveal>

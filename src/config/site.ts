@@ -29,6 +29,34 @@ export function buildWhatsAppLink(
 
 export const SITE_NAME = "FNX · Fénix Creativo";
 
+/**
+ * Correos de FNX. Estudio atiende inicio, Estudio, Consultoría y Noticias; Salud tiene su propio correo.
+ */
+export const EMAILS = {
+  estudio: "fnxestudio22@gmail.com",
+  salud: "fnxsalud@gmail.com",
+} as const;
+
+export type EmailAccountId = keyof typeof EMAILS;
+
+/** Asunto precargado de cada botón de correo. */
+export const EMAIL_SUBJECTS = {
+  general: "Consulta desde la web de FNX",
+  marca: "Quiero hacer crecer mi marca",
+  consultoria: "Quiero asesoría para mi proyecto",
+  salud: "Consulta FNX Salud",
+  novedades: "Quiero recibir novedades por mail",
+  checklist: "Quiero el checklist de marca",
+  guia: "Quiero la guía paso a paso",
+} as const;
+
+export type EmailTopic = keyof typeof EMAIL_SUBJECTS;
+
+/** Link mailto con asunto precargado. */
+export function buildMailtoLink(account: EmailAccountId, topic: EmailTopic): string {
+  return `mailto:${EMAILS[account]}?subject=${encodeURIComponent(EMAIL_SUBJECTS[topic])}`;
+}
+
 /** Dominio oficial de la web (comprado en Lovable el 05/11/2026). Sin barra al final. */
 export const SITE_URL = "https://fnxestudio.com";
 

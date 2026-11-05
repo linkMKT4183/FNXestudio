@@ -4,6 +4,7 @@ import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useMemo, useState } from "react";
 import { IconBadge, Headline, Pieces, Reveal, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
+import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
@@ -155,7 +156,10 @@ function Noticias() {
             className="text-5xl sm:text-7xl"
           />
           <p className="text-muted-foreground">Lo importante, corto y con fuente.</p>
-          <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
+          <div className="flex flex-wrap gap-3">
+            <WhatsAppButton topic="novedades" label="Quiero recibir novedades" />
+            <EmailButton account="estudio" topic="novedades" label="Recibirlas por mail" />
+          </div>
         </Reveal>
         <Reveal className="mt-8 flex flex-col gap-5">
           <p className="eyebrow text-muted-foreground">También en Instagram</p>

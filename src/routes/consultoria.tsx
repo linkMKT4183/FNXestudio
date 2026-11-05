@@ -27,6 +27,7 @@ import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, IconBadge, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FlipCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
+import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
@@ -492,6 +493,7 @@ function Consultoria() {
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
             <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+            <EmailButton account="estudio" topic="consultoria" />
             <Pieces lit={1} />
           </div>
         </Reveal>
@@ -731,10 +733,11 @@ function Consultoria() {
           <Pieces lit={1} />
           <Headline id="consultoria-cta" lead="Contanos" accent="tu proyecto." className="text-5xl sm:text-7xl" />
           <p className="max-w-lg text-muted-foreground">
-            Te respondemos por WhatsApp y vemos juntos por dónde empezar.
+            Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar.
           </p>
           <div className="flex flex-wrap gap-3">
             <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+            <EmailButton account="estudio" topic="consultoria" />
             <InstagramButton account="estudio" />
           </div>
         </Reveal>

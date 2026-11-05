@@ -1,6 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Instagram, Menu, X } from "lucide-react";
-import { INSTAGRAM_ACCOUNTS, buildInstagramLink, buildWhatsAppLink, type InstagramAccountId } from "@/config/site";
+import { Instagram, Mail, Menu, X } from "lucide-react";
+import {
+  EMAILS,
+  INSTAGRAM_ACCOUNTS,
+  buildInstagramLink,
+  buildMailtoLink,
+  buildWhatsAppLink,
+  type InstagramAccountId,
+} from "@/config/site";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { useEffect, useState } from "react";
 import { Logo } from "./primitives";
@@ -132,7 +139,7 @@ export function SiteFooter() {
   );
 }
 
-/** Íconos de contacto del pie: WhatsApp y las dos cuentas de Instagram. */
+/** Contacto del pie: WhatsApp, los dos correos y las dos cuentas de Instagram. */
 function SocialLinks() {
   const wa = buildWhatsAppLink("marca");
   const ids = Object.keys(INSTAGRAM_ACCOUNTS) as InstagramAccountId[];
@@ -148,6 +155,18 @@ function SocialLinks() {
           </a>
         </li>
       ) : null}
+      <li>
+        <a href={buildMailtoLink("estudio", "general")} className={base}>
+          <Mail className="h-4 w-4" aria-hidden="true" />
+          {EMAILS.estudio}
+        </a>
+      </li>
+      <li>
+        <a href={buildMailtoLink("salud", "salud")} className={base}>
+          <Mail className="h-4 w-4" aria-hidden="true" />
+          {EMAILS.salud}
+        </a>
+      </li>
       {ids.map((id) => {
         const href = buildInstagramLink(id);
         const acc = INSTAGRAM_ACCOUNTS[id];

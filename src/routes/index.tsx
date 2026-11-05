@@ -15,6 +15,7 @@ import { InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
 import { IconBadge, Headline, Logo, Pieces, Reveal, Section, Tag, TenSeconds } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
+import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { IMG, type FnxImg } from "@/data/imagenes";
 
@@ -323,9 +324,12 @@ function Home() {
             className="text-5xl sm:text-7xl"
           />
           <p className="max-w-lg text-muted-foreground">
-            Contanos qué necesitás y te respondemos por WhatsApp.
+            Contanos qué necesitás y te respondemos por WhatsApp o por mail.
           </p>
-          <WhatsAppButton topic="marca" />
+          <div className="flex flex-wrap gap-3">
+            <WhatsAppButton topic="marca" />
+            <EmailButton account="estudio" topic="general" />
+          </div>
         </Reveal>
       </section>
     </>

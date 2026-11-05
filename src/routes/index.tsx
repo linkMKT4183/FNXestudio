@@ -305,7 +305,7 @@ function Home() {
         eyebrow="Instagram"
         lead="Dos cuentas,"
         accent="un equipo."
-        tldr="Dos perfiles que trabajan en colaboración: seguí el que más te sirva, o los dos."
+        tldr="Dos perfiles de FNX que trabajan juntos, y en colaboración con Aro, nuestro estudio jurídico partner. Seguí el que más te sirva."
       >
         <Reveal>
           <InstagramDuo />

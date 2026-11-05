@@ -653,11 +653,22 @@ function Consultoria() {
             combos={COMBOS_CANNABIS}
             extra={
               <div className="flex h-full min-h-40 flex-col justify-center gap-4 rounded-2xl border border-dashed border-border p-6">
-                <p className="eyebrow text-muted-foreground">Con FNX Estudio</p>
+                <p className="eyebrow text-area">Presupuesto a medida</p>
                 <p className="text-sm leading-relaxed text-foreground">
-                  Los combos que suman marca o redes se resuelven con FNX Estudio, en un solo
-                  presupuesto.
+                  Cada proyecto se presupuesta en forma individual, según su infraestructura, la
+                  documentación disponible y su situación legal y técnica actual. Primero
+                  relevamos; después cotizamos solo lo que efectivamente necesitás.
                 </p>
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Si el proyecto suma marca o redes, lo integramos con FNX Estudio en una única
+                  propuesta.
+                </p>
+                <WhatsAppButton
+                  topic="consultoria"
+                  label="Solicitar presupuesto"
+                  size="default"
+                  className="self-start"
+                />
               </div>
             }
           />

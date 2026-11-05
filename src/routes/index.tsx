@@ -258,7 +258,7 @@ function Home() {
         eyebrow="Proceso"
         lead="Cómo"
         accent="trabajamos."
-        tldr="Escribís, te preguntamos 3 cosas y recibís una propuesta clara."
+        tldr="Lo que nos contás es confidencial: cuidamos tus datos y solo los compartimos con los profesionales que trabajen en tu caso, con tu acuerdo."
       >
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -270,6 +270,9 @@ function Home() {
                 </div>
                 <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
+                {i === 0 ? (
+                  <WhatsAppButton topic="general" label="Escribinos" size="default" className="mt-auto self-start" />
+                ) : null}
               </div>
             </Reveal>
           ))}

@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { pageUrl } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 const RED_SALUD: NetworkNode[] = [
   { label: "Médicos", icon: Stethoscope, color: "var(--fnx-verde)" },
@@ -155,6 +156,87 @@ const FAQ = [
   },
 ];
 
+/** Pasos del trámite: acordeón a la izquierda y panel visual que sigue el paso abierto. */
+function PasosReprocann() {
+  const [open, setOpen] = useState("paso-1");
+  const idx = Math.max(0, Number(open.replace("paso-", "")) - 1);
+  const actual = PASOS_REPROCANN[idx] ?? PASOS_REPROCANN[0]!;
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+      <Reveal>
+        <Accordion
+          type="single"
+          collapsible
+          value={open}
+          onValueChange={(v) => setOpen(v || open)}
+          className="flex flex-col gap-3"
+        >
+          {PASOS_REPROCANN.map((p, i) => (
+            <AccordionItem
+              key={p.titulo}
+              value={`paso-${i + 1}`}
+              className="rounded-2xl border border-border bg-card px-6 data-[state=open]:border-area"
+            >
+              <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
+                <span className="flex items-center gap-4">
+                  <span className="headline text-3xl text-area">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {p.titulo}
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-3 text-base text-muted-foreground">
+                <p>{p.texto}</p>
+                <p className="text-sm text-foreground">
+                  <span className="font-bold text-area">FNX te acompaña:</span> {p.fnx}
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Información basada en la normativa vigente del Ministerio de Salud de la Nación. El
+          trámite es personal y la aprobación depende exclusivamente del Ministerio.
+        </p>
+      </Reveal>
+      <Reveal delay={120} className="h-full">
+        <div className="relative h-full min-h-[28rem] overflow-hidden rounded-2xl border border-border bg-card">
+          <FnxImage
+            img={IMG.escalera}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            className="tono-zoom absolute inset-0 h-full w-full object-cover object-[70%_50%]"
+          />
+          <div className="tono-glow pointer-events-none absolute inset-0" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/85 to-transparent p-6 pt-24">
+            <div key={idx} className="phrase-in flex flex-col gap-2" aria-live="polite">
+              <p className="eyebrow text-area">
+                Paso {String(idx + 1).padStart(2, "0")} de{" "}
+                {String(PASOS_REPROCANN.length).padStart(2, "0")}
+              </p>
+              <p className="headline text-4xl text-foreground">{actual.titulo}</p>
+              <p className="text-sm text-muted-foreground">FNX te acompaña: {actual.fnx}</p>
+            </div>
+            <div className="mt-5 flex gap-2" aria-hidden="true">
+              {PASOS_REPROCANN.map((p, i) => (
+                <button
+                  key={p.titulo}
+                  type="button"
+                  tabIndex={-1}
+                  onClick={() => setOpen(`paso-${i + 1}`)}
+                  className={cn(
+                    "h-2 flex-1 rounded-full transition-all duration-500",
+                    i < idx ? "bg-area/50" : i === idx ? "bg-area shadow-glow" : "bg-foreground/15",
+                  )}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  );
+}
+
 /** Preguntas frecuentes: el chat de WhatsApp de al lado muestra la pregunta abierta y su respuesta. */
 function FaqWithPhotos() {
   const [open, setOpen] = useState("");
@@ -203,18 +285,6 @@ function FaqWithPhotos() {
       <Reveal delay={120}>
         <WhatsAppChat question={current.q} answer={current.a} />
       </Reveal>
-    </div>
-  );
-}
-
-function SidePhoto({ img }: { img: FnxImg }) {
-  return (
-    <div className="group overflow-hidden rounded-2xl border border-border bg-card">
-      <FnxImage
-        img={img}
-        sizes="(min-width: 1024px) 40vw, 100vw"
-        className="photo-hover aspect-[3/2] h-full w-full object-cover"
-      />
     </div>
   );
 }
@@ -299,46 +369,7 @@ function Salud() {
         accent="sin vueltas."
         footer={<AdultNote />}
       >
-        <div className="grid items-start gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <Reveal>
-            <Accordion
-              type="single"
-              collapsible
-              defaultValue="paso-1"
-              className="flex flex-col gap-3"
-            >
-              {PASOS_REPROCANN.map((p, i) => (
-                <AccordionItem
-                  key={p.titulo}
-                  value={`paso-${i + 1}`}
-                  className="rounded-2xl border border-border bg-card px-6"
-                >
-                  <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
-                    <span className="flex items-center gap-4">
-                      <span className="headline text-3xl text-area">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {p.titulo}
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col gap-3 text-base text-muted-foreground">
-                    <p>{p.texto}</p>
-                    <p className="text-sm text-foreground">
-                      <span className="font-bold text-area">FNX te acompaña:</span> {p.fnx}
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-            <p className="mt-4 text-xs text-muted-foreground">
-              Información basada en la normativa vigente del Ministerio de Salud de la Nación. El
-              trámite es personal y la aprobación depende exclusivamente del Ministerio.
-            </p>
-          </Reveal>
-          <Reveal delay={120}>
-            <SidePhoto img={IMG.escalera} />
-          </Reveal>
-        </div>
+        <PasosReprocann />
       </Section>
 
       <Section

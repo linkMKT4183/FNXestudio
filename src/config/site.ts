@@ -14,6 +14,7 @@ export const WHATSAPP_MESSAGES = {
   salud: "Hola FNX, necesito orientación en cannabis medicinal",
   novedades: "Hola FNX, quiero recibir novedades",
   guia: "Hola FNX, quiero recibir la guía ¿FNX puede ayudarte?",
+  red: "Hola FNX, soy profesional y quiero postularme a la Red FNX",
 } as const;
 
 export type WhatsAppTopic = keyof typeof WHATSAPP_MESSAGES;
@@ -49,6 +50,7 @@ export const EMAIL_SUBJECTS = {
   novedades: "Quiero recibir novedades por mail",
   guia: "Quiero la guía paso a paso",
   guiaFnx: "Quiero la guía ¿FNX puede ayudarte?",
+  red: "Postulación a la Red de Profesionales FNX",
 } as const;
 
 export type EmailTopic = keyof typeof EMAIL_SUBJECTS;

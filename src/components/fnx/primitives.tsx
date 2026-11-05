@@ -105,16 +105,15 @@ export function Reveal({
   );
 }
 
-/** Recuadro "En resumen". */
+/** Recuadro destacado con una idea clave (sin etiqueta). */
 export function TenSeconds({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-1 rounded-2xl border border-border bg-card px-5 py-4 sm:flex-row sm:items-center sm:gap-4",
+        "rounded-2xl border border-l-4 border-border border-l-area bg-card px-5 py-4",
         className,
       )}
     >
-      <span className="eyebrow shrink-0 text-area">En resumen</span>
       <p className="text-sm font-medium text-foreground sm:text-base">{children}</p>
     </div>
   );
@@ -180,7 +179,7 @@ export function Section({
           id={headingId}
           lead={lead}
           accent={accent}
-          className="text-5xl sm:text-6xl lg:text-7xl"
+          className="text-[2.6rem] min-[420px]:text-5xl sm:text-6xl lg:text-7xl"
         />
         {tldr ? <TenSeconds className="max-w-3xl">{tldr}</TenSeconds> : null}
       </Reveal>

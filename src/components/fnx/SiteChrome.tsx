@@ -23,6 +23,7 @@ const NAV = [
   { to: "/salud", label: "Salud" },
   { to: "/noticias", label: "Noticias" },
   { to: "/marca", label: "Marca" },
+  { to: "/red", label: "Profesionales" },
 ] as const;
 
 export type Area = "estudio" | "consultoria" | "salud" | "noticias";

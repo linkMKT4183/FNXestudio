@@ -285,6 +285,12 @@ const STEPS = [
   "Te ofrecemos un servicio recurrente, como el mantenimiento, para seguir acompañándote.",
 ];
 
+const NETWORK_POINTS = [
+  { title: "Un solo contacto", text: "Todas tus consultas pasan por FNX." },
+  { title: "Un solo presupuesto", text: "Con el trabajo de todos los profesionales incluido." },
+  { title: "Una sola entrega", text: "Coordinamos y te entregamos todo terminado." },
+];
+
 const LIMITS: { text: string; note?: string }[] = [
   {
     text: "Ante una zona gris, te mostramos el camino para regularizar, nunca el atajo.",
@@ -644,6 +650,14 @@ function Consultoria() {
                   {STEP_ICONS[i] ? <IconBadge icon={STEP_ICONS[i]!} /> : null}
                 </div>
                 <p className="font-semibold leading-snug text-foreground">{s}</p>
+                {i === 0 ? (
+                  <WhatsAppButton
+                    topic="consultoria"
+                    label="Escribinos"
+                    size="default"
+                    className="mt-auto self-start"
+                  />
+                ) : null}
               </div>
             </Reveal>
           ))}
@@ -655,11 +669,20 @@ function Consultoria() {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-end">
           <Reveal className="flex flex-col gap-6">
             <p className="eyebrow text-muted-foreground">Red de profesionales de FNX</p>
-            <Headline id="red-titulo" lead="Vos sos cliente" accent="de FNX." className="text-5xl sm:text-7xl" />
+            <Headline id="red-titulo" lead="Un solo contacto," accent="todo un equipo." className="text-5xl sm:text-7xl" />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Trabajamos con una red de abogados y técnicos especializados. Vos sos siempre cliente
-              de FNX: nosotros coordinamos, presupuestamos y entregamos.
+              Detrás de FNX trabaja una red de abogados y técnicos especializados, como el estudio
+              jurídico Aro. No tenés que buscar ni coordinar a cada profesional: hablás solo con FNX
+              y nosotros organizamos todo el trabajo.
             </p>
+            <ul className="grid gap-3 sm:grid-cols-3">
+              {NETWORK_POINTS.map((pt) => (
+                <li key={pt.title} className="flex flex-col gap-1 rounded-2xl border border-border p-4">
+                  <span className="font-bold text-foreground">{pt.title}</span>
+                  <span className="text-sm text-muted-foreground">{pt.text}</span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
           <Reveal delay={120}>
             <Pieces lit={4} size="lg" />

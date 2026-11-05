@@ -70,7 +70,13 @@ const SERVICES = [
 ];
 
 const FAQ = [
-  { icon: Compass, q: "¿Por dónde empiezo?", a: "Escribinos y te orientamos según tu caso.", img: IMG.brujulas },
+  {
+    icon: Compass,
+    q: "¿Por dónde empiezo?",
+    a: "Escribinos y te orientamos según tu caso.",
+    img: IMG.brujulas,
+    whatsapp: true,
+  },
   {
     icon: FileQuestion,
     q: "¿Me garantizan la aprobación?",
@@ -108,7 +114,12 @@ function FaqWithPhotos() {
                   {f.q}
                 </span>
               </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground">{f.a}</AccordionContent>
+              <AccordionContent className="text-base text-muted-foreground">
+                <p>{f.a}</p>
+                {"whatsapp" in f && f.whatsapp ? (
+                  <WhatsAppButton topic="salud" label="Escribinos" size="default" className="mt-4" />
+                ) : null}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

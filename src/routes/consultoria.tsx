@@ -76,7 +76,7 @@ export const Route = createFileRoute("/consultoria")({
       {
         name: "description",
         content:
-          "Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan, se regularicen y crezcan en regla. Con sedes en Mendoza y San Juan y alcance en todo el país.",
+          "Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan, se regularicen y crezcan en regla. Con sedes en Mendoza y San Juan y alcance en todo el país.",
       },
       { property: "og:title", content: "FNX Consultoría · Crecer en regla" },
       {
@@ -93,7 +93,7 @@ export const Route = createFileRoute("/consultoria")({
   component: Consultoria,
 });
 
-type Sector = "agro" | "cannabis";
+type Sector = "agro" | "regulado";
 
 interface Audience {
   icon?: LucideIcon;
@@ -198,9 +198,9 @@ const COMBOS_AGRO: Combo[] = [
   },
 ];
 
-/* ---------- Cannabis ---------- */
+/* ---------- Sector regulado ---------- */
 
-const AUDIENCE_CANNABIS: Audience[] = [
+const AUDIENCE_REGULADO: Audience[] = [
   {
     icon: Users,
     who: "Grupos que quieren constituir una estructura legal",
@@ -234,7 +234,7 @@ const AUDIENCE_CANNABIS: Audience[] = [
   },
 ];
 
-const SERVICES_CANNABIS: Service[] = [
+const SERVICES_REGULADO: Service[] = [
   {
     icon: Scale,
     id: "juridico",
@@ -284,7 +284,7 @@ const SERVICES_CANNABIS: Service[] = [
   },
 ];
 
-const COMBOS_CANNABIS: Combo[] = [
+const COMBOS_REGULADO: Combo[] = [
   {
     name: "Estructura legal llave en mano",
     forWho: "Grupos que arrancan de cero",
@@ -346,7 +346,7 @@ const LIMITS: { no: string; text: string; note?: string }[] = [
   {
     no: "No tomamos atajos.",
     text: "Si algo de tu proyecto está pendiente de regularizar, te acompañamos a ponerlo en regla, paso a paso.",
-    note: "Para cualquier proyecto, agrícola o cannábico",
+    note: "Para cualquier proyecto, agrícola o del sector regulado",
   },
   {
     no: "No armamos actas",
@@ -364,7 +364,7 @@ const LIMITS: { no: string; text: string; note?: string }[] = [
 
 const SECTORS: { v: Sector; l: string }[] = [
   { v: "agro", l: "Agro" },
-  { v: "cannabis", l: "Cannabis" },
+  { v: "regulado", l: "Sector regulado" },
 ];
 
 function Bullet() {
@@ -538,7 +538,7 @@ function Consultoria() {
             className="text-7xl sm:text-8xl lg:text-9xl"
           />
           <p className="max-w-xl text-lg text-muted-foreground">
-            Asesoría jurídica y técnica para proyectos agrícolas y cannábicos: que se constituyan,
+            Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan,
             se regularicen y crezcan en regla.
           </p>
           <TenSeconds className="max-w-2xl">
@@ -638,14 +638,14 @@ function Consultoria() {
           </Section>
         </TabsContent>
 
-        <TabsContent value="cannabis" className="mt-0">
+        <TabsContent value="regulado" className="mt-0">
           <Section
             id="a-quien"
-            eyebrow="A quién le hablamos · Cannabis"
+            eyebrow="A quién le hablamos · Sector regulado"
             lead="Cada proyecto tiene"
             accent="su puerta."
           >
-            <AudienceGrid items={AUDIENCE_CANNABIS} />
+            <AudienceGrid items={AUDIENCE_REGULADO} />
             <Reveal className="mt-6">
               <p className="text-sm text-muted-foreground">
                 Si sos paciente, te acompaña{" "}
@@ -662,11 +662,11 @@ function Consultoria() {
 
           <Section
             id="servicios"
-            eyebrow="Servicios · Cannabis"
+            eyebrow="Servicios · Sector regulado"
             lead="Jurídico y"
             accent="técnico."
           >
-            <ServiceTabs services={SERVICES_CANNABIS} />
+            <ServiceTabs services={SERVICES_REGULADO} />
           </Section>
         </TabsContent>
       </Tabs>
@@ -682,8 +682,8 @@ function Consultoria() {
         <div className="flex flex-col gap-14">
           <ComboGroup tag="Agro" combos={COMBOS_AGRO} />
           <ComboGroup
-            tag="Cannabis"
-            combos={COMBOS_CANNABIS}
+            tag="Sector regulado"
+            combos={COMBOS_REGULADO}
             extra={
               <div className="flex h-full min-h-40 flex-col justify-center gap-4 rounded-2xl border border-dashed border-border p-6">
                 <p className="eyebrow text-area">Presupuesto a medida</p>

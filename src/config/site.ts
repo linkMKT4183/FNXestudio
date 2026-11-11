@@ -10,8 +10,8 @@ export const MANUAL_URL = "https://www.canva.com/d/SYr8B-ZM5BWGkRt";
 export const WHATSAPP_MESSAGES = {
   general: "Hola FNX, quiero hacer una consulta",
   marca: "Hola FNX, quiero hacer crecer mi marca",
-  consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o cannábico",
-  salud: "Hola FNX, necesito orientación en cannabis medicinal",
+  consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o del sector regulado",
+  salud: "Hola FNX, necesito orientación de FNX Salud (+18)",
   novedades: "Hola FNX, quiero recibir novedades",
   guia: "Hola FNX, quiero recibir la guía ¿FNX puede ayudarte?",
   red: "Hola FNX, soy profesional y quiero postularme a la Red FNX",

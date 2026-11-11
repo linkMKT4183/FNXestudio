@@ -19,13 +19,13 @@ describe("WhatsApp links", () => {
 
   it("builds the health message link", () => {
     expect(buildWhatsAppLink("salud", "5492611234567")).toBe(
-      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito orientación en cannabis medicinal")}`,
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito orientación de FNX Salud (+18)")}`,
     );
   });
 
   it("builds the consultoría message link", () => {
     expect(buildWhatsAppLink("consultoria", "5492611234567")).toBe(
-      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito asesoría para mi proyecto agrícola o cannábico")}`,
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito asesoría para mi proyecto agrícola o del sector regulado")}`,
     );
   });
 

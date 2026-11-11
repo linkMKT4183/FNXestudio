@@ -24,16 +24,16 @@ import { pageUrl } from "@/config/site";
 export const Route = createFileRoute("/noticias")({
   head: () => ({
     meta: [
-      { title: "FNX Noticias · Marketing, negocios y cannabis medicinal | FNX · Fénix Creativo" },
+      { title: "FNX Noticias · Marketing, negocios y sector regulado | FNX · Fénix Creativo" },
       {
         name: "description",
         content:
-          "Lo que pasa, contado con fuentes. Noticias de marketing, negocios, emprendimiento y cannabis medicinal, con link a cada fuente.",
+          "Lo que pasa, contado con fuentes. Noticias de marketing, negocios, emprendimiento y sector regulado, con link a cada fuente.",
       },
       { property: "og:title", content: "FNX Noticias · Lo que pasa, contado con fuentes" },
       {
         property: "og:description",
-        content: "Marketing, negocios y cannabis medicinal, siempre con fuentes.",
+        content: "Marketing, negocios y sector regulado, siempre con fuentes.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/noticias") },
@@ -62,7 +62,7 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   Todas: LayoutGrid,
   Marketing: Megaphone,
   Negocios: Briefcase,
-  "Cannabis medicinal": Landmark,
+  "Sector regulado": Landmark,
 };
 
 function Noticias() {
@@ -89,7 +89,7 @@ function Noticias() {
               className="text-6xl sm:text-8xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Marketing, negocios y cannabis medicinal en noticias cortas, cada una con el link a su
+              Marketing, negocios y sector regulado en noticias cortas, cada una con el link a su
               fuente.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -195,7 +195,7 @@ function Noticias() {
                         <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                         <span className="sr-only">(se abre en una pestaña nueva)</span>
                       </a>
-                      {n.category === "Cannabis medicinal" ? (
+                      {n.category === "Sector regulado" ? (
                         <p className="text-xs text-muted-foreground">
                           Contenido para mayores de 18 años
                         </p>

@@ -94,7 +94,7 @@ const AREAS = [
     tone: "azul" as const,
     to: "/consultoria" as const,
     img: IMG.cHero,
-    items: ["Asesoría jurídica y técnica para proyectos agrícolas y cannábicos."],
+    items: ["Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado."],
   },
   {
     name: "FNX Salud",
@@ -110,7 +110,7 @@ const AREAS = [
     tone: "amarillo" as const,
     to: "/noticias" as const,
     img: IMG.nCarteles,
-    items: ["Marketing", "Negocios", "Emprendimiento", "Cannabis medicinal, siempre con fuentes"],
+    items: ["Marketing", "Negocios", "Emprendimiento", "Sector regulado, siempre con fuentes"],
   },
 ];
 
@@ -213,14 +213,14 @@ function Home() {
             to="/consultoria"
             tone="azul"
             kicker="FNX Consultoría"
-            title="Necesito asesoría para mi proyecto agrícola o cannábico"
+            title="Necesito asesoría para mi proyecto agrícola o del sector regulado"
             img={IMG.cHero}
           />
           <Door
             to="/salud"
             tone="verde"
             kicker="FNX Salud · +18"
-            title="Necesito orientación en cannabis medicinal (+18)"
+            title="Necesito orientación en salud (+18)"
             img={IMG.carpetas}
           />
           <Door

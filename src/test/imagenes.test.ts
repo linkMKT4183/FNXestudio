@@ -23,7 +23,7 @@ describe("Galería de Marca", () => {
 
   it("cada noticia aparece con el título de la noticia", () => {
     const expo = GALERIA.find((g) => g.id === IMG.nExpo.id);
-    expect(expo?.label).toBe("Noticia: Expo Cannabis 2026: más de 300 marcas en La Rural");
+    expect(expo?.label).toBe("Noticia: La expo del sector reunió más de 300 marcas en La Rural");
   });
 
   it("cada foto tiene texto alternativo", () => {

@@ -1,11 +1,11 @@
 /**
  * Noticias de FNX Noticias. Para sumar una nueva, agregá un objeto al principio del array.
- * category: "Marketing" | "Negocios" | "Cannabis medicinal"
+ * category: "Marketing" | "Negocios" | "Sector regulado"
  * image: la foto propia de la noticia (registrala en src/data/imagenes.ts).
  */
 import { IMG, type FnxImg } from "@/data/imagenes";
 
-export type NewsCategory = "Marketing" | "Negocios" | "Cannabis medicinal";
+export type NewsCategory = "Marketing" | "Negocios" | "Sector regulado";
 
 export interface NewsItem {
   id: string;
@@ -18,9 +18,9 @@ export interface NewsItem {
   image: FnxImg;
 }
 
-export const NEWS_CATEGORIES: NewsCategory[] = ["Marketing", "Negocios", "Cannabis medicinal"];
+export const NEWS_CATEGORIES: NewsCategory[] = ["Marketing", "Negocios", "Sector regulado"];
 
-const AGENDA_CANNABIS_URL =
+const AGENDA_URL =
   "https://agendacannabis.com.ar/2026/10/13/cannabis-en-argentina-industria-en-expansion-ley-penal-congelada/";
 
 export const NOTICIAS: NewsItem[] = [
@@ -66,9 +66,9 @@ export const NOTICIAS: NewsItem[] = [
     image: IMG.nEndeavor,
   },
   {
-    id: "expo-cannabis-300-marcas",
-    category: "Cannabis medicinal",
-    title: "Expo Cannabis 2026: más de 300 marcas en La Rural",
+    id: "expo-sector-300-marcas",
+    category: "Sector regulado",
+    title: "La expo del sector reunió más de 300 marcas en La Rural",
     summary: "Del 23 al 25 de octubre, en Buenos Aires.",
     source: "MDZ",
     date: "26/10/2026",
@@ -77,7 +77,7 @@ export const NOTICIAS: NewsItem[] = [
   },
   {
     id: "conicet-muestras",
-    category: "Cannabis medicinal",
+    category: "Sector regulado",
     title: "El CONICET analizó más de 60 muestras en la Expo",
     summary: "Con el servicio de control de calidad de la unidad ENyS.",
     source: "ENyS-CONICET",
@@ -87,10 +87,10 @@ export const NOTICIAS: NewsItem[] = [
   },
   {
     id: "mercado-834-millones",
-    category: "Cannabis medicinal",
+    category: "Sector regulado",
     title: "Un mercado potencial de US$ 834 millones",
     summary:
-      "Es una proyección del informe El Otro Blanqueo para el cannabis medicinal, no ventas reales.",
+      "Es una proyección del informe El Otro Blanqueo para el sector medicinal, no ventas reales.",
     source: "Análisis Digital",
     date: "13/10/2026",
     url: "https://www.analisisdigital.com.ar/interes-general/2026/10/13/cannabis-medicinal-un-mercado-potencial-de-us-834-millones-que-la-falta-de-regulacion-mantiene-frenado",
@@ -98,27 +98,27 @@ export const NOTICIAS: NewsItem[] = [
   },
   {
     id: "ariccame-prorroga",
-    category: "Cannabis medicinal",
+    category: "Sector regulado",
     title: "Prorrogan un año la intervención de ARICCAME",
     summary: "Lo dispuso el Decreto 1147/2026, del 6 de octubre.",
     source: "Agenda Cannabis",
     date: "13/10/2026",
-    url: AGENDA_CANNABIS_URL,
+    url: AGENDA_URL,
     image: IMG.nAriccame,
   },
   {
     id: "canamo-licencias",
-    category: "Cannabis medicinal",
+    category: "Sector regulado",
     title: "Cáñamo hortícola: nuevas licencias por 5 años",
     summary: "La Resolución 69/2026 de ARICCAME crea cuatro tipos de licencia.",
     source: "Agenda Cannabis",
     date: "13/10/2026",
-    url: AGENDA_CANNABIS_URL,
+    url: AGENDA_URL,
     image: IMG.nLicencias,
   },
   {
     id: "reprocann-sedronar",
-    category: "Cannabis medicinal",
+    category: "Sector regulado",
     title: "El REPROCANN ahora depende de la SEDRONAR",
     summary: "El cambio llegó con el Decreto 27/2026; el sector sigue reclamando por las demoras.",
     source: "Revista THC",

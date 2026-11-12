@@ -8,6 +8,7 @@ import {
   type InstagramAccountId,
 } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/track";
 
 /** Botón al perfil de Instagram. Sin usuario cargado: "Instagram próximamente" deshabilitado. */
 export function InstagramButton({
@@ -43,7 +44,12 @@ export function InstagramButton({
   }
   return (
     <Button asChild variant={variant} size={size} className={className}>
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackEvent("instagram_click", { account })}
+      >
         <Instagram aria-hidden="true" />
         {text}
         <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
@@ -117,7 +123,12 @@ export function PartnerAro({ className }: { className?: string }) {
         </div>
       </div>
       <Button asChild variant="outline" size="default" className="self-start sm:self-center">
-        <a href={buildPartnerInstagramLink("aro")} target="_blank" rel="noopener noreferrer">
+        <a
+          href={buildPartnerInstagramLink("aro")}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent("instagram_click", { account: "aro" })}
+        >
           <Instagram aria-hidden="true" />
           Seguir @{aro.handle}
           <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>

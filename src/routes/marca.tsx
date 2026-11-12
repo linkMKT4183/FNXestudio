@@ -6,7 +6,7 @@ import { Headline, Logo } from "@/components/fnx/primitives";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { pageUrl } from "@/config/site";
+import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
 export const Route = createFileRoute("/marca")({
   head: () => ({
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/marca")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/marca") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/marca") }],

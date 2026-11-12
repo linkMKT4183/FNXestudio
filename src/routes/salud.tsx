@@ -26,7 +26,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { pageUrl } from "@/config/site";
+import { OG_IMAGE_META, pageUrl } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const RED_SALUD: NetworkNode[] = [
@@ -92,6 +92,7 @@ export const Route = createFileRoute("/salud")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/salud") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/salud") }],

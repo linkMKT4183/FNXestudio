@@ -10,7 +10,7 @@ import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { IMG } from "@/data/imagenes";
 
-import { pageUrl } from "@/config/site";
+import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
 const CHAT_ESTUDIO = [
   {
@@ -43,6 +43,7 @@ export const Route = createFileRoute("/estudio")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/estudio") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/estudio") }],

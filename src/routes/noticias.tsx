@@ -19,7 +19,7 @@ import { NewsMosaic, NewsTicker } from "@/components/fnx/NewsHero";
 import { NEWS_CATEGORIES, NOTICIAS, type NewsCategory } from "@/data/noticias";
 import { cn } from "@/lib/utils";
 
-import { pageUrl } from "@/config/site";
+import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
 export const Route = createFileRoute("/noticias")({
   head: () => ({
@@ -37,6 +37,7 @@ export const Route = createFileRoute("/noticias")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/noticias") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/noticias") }],

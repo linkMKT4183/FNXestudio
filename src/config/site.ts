@@ -63,6 +63,16 @@ export function buildMailtoLink(account: EmailAccountId, topic: EmailTopic): str
 /** Dominio oficial de la web (comprado en Lovable el 05/11/2026). Sin barra al final. */
 export const SITE_URL = "https://fnxestudio.com";
 
+/** Imagen al compartir (1200×630, en public/). */
+export const OG_IMAGE_URL = `${SITE_URL}/og-fnx.jpg`;
+export const OG_IMAGE_META = [
+  { property: "og:image", content: OG_IMAGE_URL },
+  { property: "og:image:width", content: "1200" },
+  { property: "og:image:height", content: "630" },
+  { property: "og:image:alt", content: "FNX · Fénix Creativo" },
+  { name: "twitter:image", content: OG_IMAGE_URL },
+];
+
 /** Dirección completa de una página, por ejemplo pageUrl("/salud"). */
 export function pageUrl(path: string = "/"): string {
   return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`;

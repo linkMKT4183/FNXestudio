@@ -32,7 +32,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { IMG, type FnxImg } from "@/data/imagenes";
-import { pageUrl } from "@/config/site";
+import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
 export const Route = createFileRoute("/red")({
   head: () => ({
@@ -51,6 +51,7 @@ export const Route = createFileRoute("/red")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/red") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/red") }],

@@ -17,6 +17,8 @@ import { SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrom
 import { Toaster } from "@/components/ui/sonner";
 import { SITE_NAME } from "@/config/site";
 
+const ORG_LD = {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://fnxestudio.com/#org","name":"Fénix Creativo","alternateName":"FNX","url":"https://fnxestudio.com/","logo":"https://fnxestudio.com/icon-512.png","image":"https://fnxestudio.com/og-fnx.jpg","email":"fnxestudio22@gmail.com","telephone":"+54 9 261 630-6508","sameAs":["https://www.instagram.com/fnx.estudio/"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","telephone":"+54 9 261 630-6508","availableLanguage":"es","areaServed":"AR"}},{"@type":"ProfessionalService","@id":"https://fnxestudio.com/#estudio","name":"FNX · Fénix Creativo","url":"https://fnxestudio.com/","image":"https://fnxestudio.com/og-fnx.jpg","telephone":"+54 9 261 630-6508","parentOrganization":{"@id":"https://fnxestudio.com/#org"},"areaServed":[{"@type":"Country","name":"Argentina"}],"address":[{"@type":"PostalAddress","addressLocality":"Mendoza","addressRegion":"Mendoza","addressCountry":"AR"},{"@type":"PostalAddress","addressLocality":"San Juan","addressRegion":"San Juan","addressCountry":"AR"}],"knowsAbout":["Branding","Producción audiovisual","Tienda online","Estrategia de redes","Asesoría jurídica y técnica para proyectos agrícolas"]},{"@type":"WebSite","@id":"https://fnxestudio.com/#web","url":"https://fnxestudio.com/","name":"FNX · Fénix Creativo","inLanguage":"es-AR","publisher":{"@id":"https://fnxestudio.com/#org"}}]};
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center bg-background px-4">
@@ -116,6 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(ORG_LD) }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

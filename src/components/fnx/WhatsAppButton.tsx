@@ -2,6 +2,7 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { buildWhatsAppLink, type WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { trackEvent } from "@/lib/track";
 
 interface Props {
   topic: WhatsAppTopic;
@@ -39,7 +40,12 @@ export function WhatsAppButton({
   }
   return (
     <Button asChild variant={variant} size={size} className={className}>
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackEvent("whatsapp_click", { topic, page: window.location.pathname })}
+      >
         {showIcon ? <WhatsAppIcon className="h-5 w-5 shrink-0" /> : null}
         {label}
         <span className="sr-only"> (se abre WhatsApp en una pestaña nueva)</span>

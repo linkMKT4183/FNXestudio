@@ -43,7 +43,7 @@ import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import { cn } from "@/lib/utils";
-import { PARTNERS, buildPartnerInstagramLink, type PartnerId, pageUrl } from "@/config/site";
+import { PARTNERS, buildPartnerInstagramLink, type PartnerId, pageUrl, OG_IMAGE_META } from "@/config/site";
 import { Button } from "@/components/ui/button";
 
 const RED_CONSULTORIA: NetworkNode[] = [
@@ -86,6 +86,7 @@ export const Route = createFileRoute("/consultoria")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/consultoria") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/consultoria") }],

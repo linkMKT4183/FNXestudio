@@ -16,7 +16,6 @@ import { useEffect, useRef } from "react";
 import {
   IconBadge,
   Headline,
-  Logo,
   Pieces,
   Reveal,
   Section,
@@ -29,7 +28,8 @@ import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { IMG, type FnxImg } from "@/data/imagenes";
 
-import { pageUrl } from "@/config/site";
+import { pageUrl, OG_IMAGE_META } from "@/config/site";
+import { trackEvent } from "@/lib/track";
 
 const AREA_NODES: NetworkNode[] = [
   { label: "Estudio", icon: PenTool, color: "var(--fnx-naranja)" },
@@ -72,47 +72,13 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/") },
+      ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: pageUrl("/") }],
   }),
   component: Home,
 });
-
-const AREAS = [
-  {
-    name: "FNX Estudio",
-    icon: PenTool,
-    tone: "naranja" as const,
-    to: "/estudio" as const,
-    img: IMG.rey,
-    items: ["Branding", "Producción audiovisual", "Tienda online", "Redes y estrategia"],
-  },
-  {
-    name: "FNX Consultoría",
-    icon: Scale,
-    tone: "azul" as const,
-    to: "/consultoria" as const,
-    img: IMG.cHero,
-    items: ["Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado."],
-  },
-  {
-    name: "FNX Salud",
-    icon: HeartHandshake,
-    tone: "verde" as const,
-    to: "/salud" as const,
-    img: IMG.lupa,
-    items: ["Gestión del trámite REPROCANN", "Profesionales verificados", "Vinculación con ONGs"],
-  },
-  {
-    name: "FNX Noticias",
-    icon: Newspaper,
-    tone: "amarillo" as const,
-    to: "/noticias" as const,
-    img: IMG.nCarteles,
-    items: ["Marketing", "Negocios", "Emprendimiento", "Sector regulado, siempre con fuentes"],
-  },
-];
 
 const STEPS = [
   {
@@ -163,116 +129,71 @@ function Home() {
   const parallaxRef = useParallax<HTMLDivElement>();
   return (
     <>
-      {/* Hero */}
-      <section aria-labelledby="hero-titulo" className="relative overflow-hidden">
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-8 px-5 pt-10 sm:px-8 sm:pt-16">
-          <Reveal>
-            <Logo className="-ml-2 block text-[8rem] sm:text-[12rem] lg:text-[14rem]" as="p" />
-          </Reveal>
-          <Headline
-            as="h1"
-            id="hero-titulo"
-            lead="Creamos marcas y conectamos personas de"
-            accent="confianza."
-            className="max-w-5xl text-6xl sm:text-7xl lg:text-8xl"
-          />
-          <Reveal delay={120} className="flex flex-wrap items-center justify-between gap-6">
-            <p className="max-w-xl text-lg text-muted-foreground">
-              Sedes en Mendoza y San Juan. Trabajamos en todo el país y en el exterior.
-            </p>
-            <Pieces lit={3} />
-          </Reveal>
-        </div>
-
-        <div className="fade-top relative -mt-6 h-[19rem] overflow-hidden sm:-mt-28 sm:h-[30rem] lg:-mt-44 lg:h-[40rem]">
-          <div ref={parallaxRef} className="absolute inset-x-0 -top-24 bottom-0">
+      {/* Hero + cuatro puertas: todo en el primer pantallazo */}
+      <section aria-labelledby="hero-titulo" className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10" aria-hidden="true">
+          <div ref={parallaxRef} className="absolute inset-x-0 -top-16 bottom-0">
             <FnxImage
               img={IMG.hero}
               priority
               sizes="100vw"
               className="hero-zoom h-full w-full object-cover object-[72%_70%]"
             />
+            <span className="hero-glow" />
           </div>
+          <span className="hero-sweep" />
+          <span className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/10" />
+          <span className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         </div>
-      </section>
 
-      {/* Cuatro puertas */}
-      <section
-        aria-label="Elegí por dónde empezar"
-        className="mx-auto w-full max-w-6xl px-5 pb-8 pt-6 sm:px-8"
-      >
-        <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Door
-            to="/estudio"
-            tone="naranja"
-            kicker="FNX Estudio"
-            title="Quiero hacer crecer mi marca"
-            img={IMG.rey}
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 pb-8 pt-10 sm:px-8 sm:pt-14 lg:pt-12">
+          <Headline
+            as="h1"
+            id="hero-titulo"
+            lead="Creamos marcas y conectamos personas de"
+            accent="confianza."
+            className="max-w-4xl text-5xl sm:text-6xl lg:text-7xl"
           />
-          <Door
-            to="/consultoria"
-            tone="azul"
-            kicker="FNX Consultoría"
-            title="Necesito asesoría para mi proyecto agrícola o del sector regulado"
-            img={IMG.cHero}
-          />
-          <Door
-            to="/salud"
-            tone="verde"
-            kicker="FNX Salud · +18"
-            title="Necesito orientación en salud (+18)"
-            img={IMG.carpetas}
-          />
-          <Door
-            to="/noticias"
-            tone="amarillo"
-            kicker="FNX Noticias"
-            title="Quiero estar al día con noticias con fuentes"
-            img={IMG.tonoNoticias}
-          />
-        </Reveal>
-      </section>
+          <Reveal delay={120}>
+            <p className="max-w-xl text-lg text-muted-foreground">
+              Sedes en Mendoza y San Juan. Trabajamos en todo el país y en el exterior.
+            </p>
+          </Reveal>
 
-      {/* Cuatro áreas */}
-      <Section id="areas" eyebrow="Una empresa" lead="Cuatro áreas," accent="una mirada.">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {AREAS.map((a, i) => (
-            <Reveal key={a.name} delay={i * 90}>
-              <Link
-                to={a.to}
-                className="group flex h-full flex-col gap-6 rounded-2xl border border-border bg-card p-4 pb-6 transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
-              >
-                <div className="aspect-[16/9] overflow-hidden rounded-xl">
-                  <FnxImage img={a.img} className="photo-hover h-full w-full object-cover" />
-                </div>
-                <div className="flex items-center justify-between px-2">
-                  <span className="flex min-w-0 items-center gap-2">
-                    <IconBadge icon={a.icon} variant="neutral" size="sm" className="shrink-0" />
-                    <Tag tone={a.tone} className="whitespace-nowrap">
-                      {a.name}
-                    </Tag>
-                  </span>
-                  <ArrowRight
-                    className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
-                    aria-hidden="true"
-                  />
-                </div>
-                <ul className="flex flex-col gap-3 px-2">
-                  {a.items.map((it) => (
-                    <li key={it} className="flex items-start gap-3 text-sm text-foreground">
-                      <span
-                        className="mt-1.5 block h-2.5 w-2 shrink-0 rounded-[3px] bg-area"
-                        aria-hidden="true"
-                      />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </Link>
+          <nav aria-label="Elegí por dónde empezar" className="mt-4 sm:mt-6">
+            <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Door
+                to="/estudio"
+                tone="naranja"
+                kicker="FNX Estudio"
+                title="Quiero hacer crecer mi marca"
+                img={IMG.rey}
+              />
+              <Door
+                to="/consultoria"
+                tone="azul"
+                kicker="FNX Consultoría"
+                title="Necesito asesoría para mi proyecto agrícola o del sector regulado"
+                img={IMG.cHero}
+              />
+              <Door
+                to="/salud"
+                tone="verde"
+                kicker="FNX Salud · +18"
+                title="Necesito orientación en salud (+18)"
+                img={IMG.carpetas}
+              />
+              <Door
+                to="/noticias"
+                tone="amarillo"
+                kicker="FNX Noticias"
+                title="Quiero estar al día con noticias con fuentes"
+                img={IMG.tonoNoticias}
+              />
             </Reveal>
-          ))}
+          </nav>
         </div>
-      </Section>
+      </section>
 
       {/* Propuesta de valor */}
       <section aria-labelledby="valor-titulo" className="border-y border-border bg-card">
@@ -413,23 +334,24 @@ function Door({
     <Link
       to={to}
       data-area={DOOR_AREA[tone]}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
+      onClick={() => trackEvent("door_click", { area: DOOR_AREA[tone] })}
+      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card/90 transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
     >
-      <span className="block aspect-[16/9] overflow-hidden border-b border-border">
+      <span className="block aspect-[16/9] overflow-hidden border-b lg:aspect-[2/1] border-border">
         <FnxImage
           img={img}
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="photo-hover h-full w-full object-cover"
         />
       </span>
-      <span className="flex flex-1 flex-col justify-between gap-8 p-7 sm:p-8 lg:p-6">
+      <span className="flex flex-1 flex-col justify-between gap-6 p-6 sm:p-7 lg:gap-4 lg:p-5">
         <Tag tone={tone} className="self-start">
           {kicker}
         </Tag>
         <span className="flex items-end justify-between gap-6">
-          <span className="headline min-w-0 text-4xl text-foreground lg:text-[1.75rem]">{title}</span>
+          <span className="headline min-w-0 text-3xl text-foreground sm:text-4xl lg:text-2xl">{title}</span>
           <span
-            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] group-hover:translate-x-1 group-hover:shadow-glow"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] duration-200 ease-out group-hover:translate-x-1 group-hover:shadow-glow"
             aria-hidden="true"
           >
             <ArrowRight className="h-6 w-6" />

@@ -1,4 +1,5 @@
 import { Mail } from "lucide-react";
+import { trackEvent } from "@/lib/track";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { buildMailtoLink, type EmailAccountId, type EmailTopic } from "@/config/site";
 
@@ -20,7 +21,10 @@ export function EmailButton({
 }) {
   return (
     <Button asChild variant={variant} size={size} className={className}>
-      <a href={buildMailtoLink(account, topic)}>
+      <a
+        href={buildMailtoLink(account, topic)}
+        onClick={() => trackEvent("email_click", { account, topic })}
+      >
         <Mail aria-hidden="true" />
         {label}
       </a>

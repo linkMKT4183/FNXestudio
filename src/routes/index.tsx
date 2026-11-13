@@ -9,6 +9,8 @@ import {
   MessagesSquare,
   PenTool,
   Scale,
+  Users,
+  type LucideIcon,
 } from "lucide-react";
 import { InstagramButton, InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
@@ -20,12 +22,10 @@ import {
   Section,
   Tag,
 } from "@/components/fnx/primitives";
-import { FnxImage } from "@/components/fnx/FnxImage";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
-import { IMG, type FnxImg } from "@/data/imagenes";
 
 import { pageUrl, OG_IMAGE_META } from "@/config/site";
 import { trackEvent } from "@/lib/track";
@@ -130,18 +130,29 @@ function Home() {
       {/* Hero + cuatro puertas: todo en el primer pantallazo */}
       <section aria-labelledby="hero-titulo" className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10" aria-hidden="true">
-          <div ref={parallaxRef} className="absolute inset-x-0 -top-16 bottom-0">
-            <FnxImage
-              img={IMG.hero}
-              priority
-              sizes="100vw"
-              className="hero-zoom h-full w-full object-cover object-[72%_70%]"
-            />
-            <span className="hero-glow" />
+          {/* Video de fondo (pin naranja y personas en camino). Vertical: en celular ocupa todo el
+              fondo; en computadora va a la derecha y el degradé deja el título legible. */}
+          <div
+            ref={parallaxRef}
+            className="absolute inset-x-0 -top-16 bottom-0 md:left-auto md:w-[62%] md:[mask-image:linear-gradient(to_right,transparent,black_35%)] lg:w-[55%]"
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/media/inicio-fondo-poster.webp"
+              aria-hidden="true"
+              className="h-full w-full object-cover object-[50%_20%]"
+            >
+              <source src="/media/inicio-fondo-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+              <source src="/media/inicio-fondo.mp4" type="video/mp4" />
+            </video>
           </div>
           <span className="hero-sweep" />
-          <span className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/10" />
-          <span className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <span className="absolute inset-0 bg-background/45 md:bg-transparent md:bg-gradient-to-r md:from-background md:via-background/60 md:to-transparent" />
+          <span className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
         </div>
 
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-8 pt-5 md:gap-5 md:px-5 sm:px-8 sm:pt-14 lg:pt-12">
@@ -186,21 +197,21 @@ function Home() {
                 tone="naranja"
                 kicker="FNX Estudio"
                 title="Quiero hacer crecer mi marca"
-                img={IMG.rey}
+                icon={PenTool}
               />
               <Door
                 to="/consultoria"
                 tone="azul"
                 kicker="FNX Consultoría"
                 title="Necesito asesoría para mi proyecto agrícola o del sector regulado"
-                img={IMG.cHero}
+                icon={Scale}
               />
               <Door
                 to="/salud"
                 tone="verde"
                 kicker="FNX Salud · +18"
                 title="Necesito orientación en salud (+18)"
-                img={IMG.carpetas}
+                icon={HeartHandshake}
               />
             </Reveal>
           </nav>
@@ -335,24 +346,32 @@ const MOBILE_BLOCKS: {
   area?: "estudio" | "consultoria" | "salud" | "noticias";
   label: string;
   text: string;
-  img: FnxImg;
+  icon: LucideIcon;
 }[] = [
-  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
-  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
-  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
-  { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
+  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", icon: PenTool },
+  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", icon: Scale },
+  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", icon: HeartHandshake },
+  { to: "/red", label: "Profesionales", text: "La red de profesionales", icon: Users },
 ];
 
-function MobileBlock({ to, area, label, text, img }: (typeof MOBILE_BLOCKS)[number]) {
+function MobileBlock({ to, area, label, text, icon: Icon }: (typeof MOBILE_BLOCKS)[number]) {
   return (
     <Link
       to={to}
       data-area={area}
       onClick={() => trackEvent("nav_click", { section: label, source: "home_blocks" })}
-      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card/70 backdrop-blur-md transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
     >
-      <span className="block aspect-[2/1] overflow-hidden border-b border-border">
-        <FnxImage img={img} sizes="50vw" className="h-full w-full object-cover" />
+      <span className="px-3 pt-3">
+        <span
+          className={
+            area
+              ? "inline-flex h-11 w-11 items-center justify-center rounded-xl border border-area/50 bg-area/15 text-area"
+              : "inline-flex h-11 w-11 items-center justify-center rounded-xl border border-fnx-crema/40 bg-fnx-crema/10 text-fnx-crema"
+          }
+        >
+          <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+        </span>
       </span>
       <span className="flex flex-1 flex-col gap-1.5 p-3">
         <span className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-foreground">
@@ -373,27 +392,25 @@ function Door({
   tone,
   kicker,
   title,
-  img,
+  icon: Icon,
 }: {
   to: "/estudio" | "/consultoria" | "/salud" | "/noticias";
   tone: "naranja" | "azul" | "verde" | "amarillo";
   kicker: string;
   title: string;
-  img: FnxImg;
+  icon: LucideIcon;
 }) {
   return (
     <Link
       to={to}
       data-area={DOOR_AREA[tone]}
       onClick={() => trackEvent("door_click", { area: DOOR_AREA[tone] })}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card/90 transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
+      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card/70 backdrop-blur-md transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
     >
-      <span className="block aspect-[16/9] overflow-hidden border-b lg:aspect-[2/1] border-border">
-        <FnxImage
-          img={img}
-          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-          className="photo-hover h-full w-full object-cover"
-        />
+      <span className="flex items-start justify-between gap-4 px-6 pt-6 sm:px-7 sm:pt-7 lg:px-5 lg:pt-5">
+        <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-area/50 bg-area/15 text-area transition-transform duration-200 group-hover:scale-105">
+          <Icon className="h-8 w-8" strokeWidth={1.75} aria-hidden="true" />
+        </span>
       </span>
       <span className="flex flex-1 flex-col justify-between gap-6 p-6 sm:p-7 lg:gap-4 lg:p-5">
         <Tag tone={tone} className="self-start">

@@ -34,19 +34,19 @@ const NAV_AREA: Record<string, Area | undefined> = {
   "/noticias": "noticias",
 };
 
-/** Mobile-only (<768px): sticky row of section chips under the header. */
+/** Sticky row of section chips under the header, on every screen size (phone, tablet, desktop). */
 export function MobileNavBlocks() {
   // The chips "beat" softly (see .fnx-chip-pulse in styles.css) to invite people to switch
   // section. The beat stops once the visitor scrolls the row or taps a chip.
   const [calm, setCalm] = useState(false);
   return (
-    <div className="sticky top-16 z-30 h-[60px] border-b border-border bg-background/95 backdrop-blur-md sm:top-20 md:hidden">
+    <div className="sticky top-16 z-30 h-[60px] border-b border-border bg-background/95 backdrop-blur-md sm:top-20">
       <nav
         aria-label="Secciones"
         className="no-scrollbar h-full overflow-x-auto"
         onScroll={() => setCalm(true)}
       >
-        <ul className="flex h-full w-max items-center gap-2 px-4 pr-10">
+        <ul className="mx-auto flex h-full w-max items-center gap-2 px-4 pr-10 md:gap-3 md:pr-4">
           {NAV.map((item, i) => {
             const area = NAV_AREA[item.to];
             return (
@@ -64,7 +64,7 @@ export function MobileNavBlocks() {
                     } as CSSProperties
                   }
                   className={cn(
-                    "relative flex h-11 items-center gap-2 whitespace-nowrap rounded-full border border-border px-4 text-sm font-semibold text-foreground transition-colors",
+                    "relative flex h-11 items-center gap-2 whitespace-nowrap rounded-full border border-border px-4 text-sm font-semibold text-foreground transition-colors hover:border-[var(--chip-glow)] md:px-5",
                     !calm && "fnx-chip-pulse",
                   )}
                   activeProps={{
@@ -92,7 +92,7 @@ export function MobileNavBlocks() {
       </nav>
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent md:hidden"
       />
     </div>
   );
@@ -128,23 +128,16 @@ export function SiteHeader() {
           <Logo className="block pt-4 text-[2.6rem] sm:text-5xl" />
         </Link>
 
-        <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground", "aria-current": "page" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <WhatsAppButton topic={topic} label="Escribinos" size="default" className="ml-3" />
-        </nav>
+        <WhatsAppButton
+          topic={topic}
+          label="Escribinos"
+          size="default"
+          className="hidden md:inline-flex"
+        />
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground md:hidden"
           aria-expanded={open}
           aria-controls="menu-movil"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
@@ -156,7 +149,7 @@ export function SiteHeader() {
 
       <div
         id="menu-movil"
-        className={cn("border-t border-border bg-background lg:hidden", open ? "block" : "hidden")}
+        className={cn("border-t border-border bg-background md:hidden", open ? "block" : "hidden")}
       >
         <nav aria-label="Menú móvil" className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-6">
           {NAV.map((item) => (

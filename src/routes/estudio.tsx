@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
-import { Headline, Pieces, Reveal, Section } from "@/components/fnx/primitives";
+import { Headline, Reveal, Section } from "@/components/fnx/primitives";
 import { ExpandCard } from "@/components/fnx/cards";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
@@ -136,18 +136,27 @@ function Estudio() {
             </div>
           </Reveal>
           <Reveal delay={120} className="relative">
-            <div className="overflow-hidden rounded-3xl border border-border shadow-glow-soft">
-              <FnxImage
-                img={IMG.rey}
-                priority
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="hero-zoom aspect-[4/5] h-full w-full object-cover"
-              />
+            {/* Animación de FNX Estudio (post de Instagram "Tu potencial necesita dirección").
+                Video liviano en loop en lugar del GIF original de 29 MB; versión 720 para celular. */}
+            <div className="overflow-hidden rounded-3xl border border-border bg-background shadow-glow-soft">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/media/estudio-hero-poster.webp"
+                aria-label="Animación de FNX Estudio: una mano con luz naranja sostiene a una persona pequeña. Texto: Tu potencial necesita dirección. Las ideas crecen más rápido cuando la estrategia marca el camino."
+                className="aspect-[4/5] h-full w-full object-cover"
+              >
+                <source
+                  src="/media/estudio-hero-720.mp4"
+                  type="video/mp4"
+                  media="(max-width: 767px)"
+                />
+                <source src="/media/estudio-hero.mp4" type="video/mp4" />
+              </video>
             </div>
-            <Pieces
-              lit={0}
-              className="absolute -bottom-6 left-6 rounded-2xl bg-background/80 p-3 backdrop-blur"
-            />
           </Reveal>
         </div>
       </section>

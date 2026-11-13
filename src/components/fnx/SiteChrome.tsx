@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Instagram, Mail, Menu, Scale, X } from "lucide-react";
+import { ArrowRight, ArrowUp, Instagram, Mail, Menu, Scale, X } from "lucide-react";
 import {
   EMAILS,
   INSTAGRAM_ACCOUNTS,
@@ -11,10 +11,12 @@ import {
   type InstagramAccountId,
 } from "@/config/site";
 import { WhatsAppIcon } from "./WhatsAppIcon";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
+import { FnxImage } from "./FnxImage";
+import { IMG, type FnxImg } from "@/data/imagenes";
 import type { WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/track";
@@ -26,6 +28,9 @@ const NAV = [
   { to: "/noticias", label: "Noticias" },
   { to: "/red", label: "Profesionales" },
 ] as const;
+
+/** Chips include "Inicio" so visitors always have a visible way back home. */
+const CHIPS = [{ to: "/", label: "Inicio" }, ...NAV] as const;
 
 const NAV_AREA: Record<string, Area | undefined> = {
   "/estudio": "estudio",
@@ -39,20 +44,38 @@ export function MobileNavBlocks() {
   // The chips "beat" softly (see .fnx-chip-pulse in styles.css) to invite people to switch
   // section. The beat stops once the visitor scrolls the row or taps a chip.
   const [calm, setCalm] = useState(false);
+  const pathname = useRouterState({ select: (st) => st.location.pathname });
+  const navRef = useRef<HTMLElement>(null);
+  const ignoreScrollUntil = useRef(0);
+
+  // Keep the current section's chip in view so people always see where they are.
+  useEffect(() => {
+    const nav = navRef.current;
+    const active = nav?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!nav || !active) return;
+    const target = active.offsetLeft - (nav.clientWidth - active.offsetWidth) / 2;
+    ignoreScrollUntil.current = Date.now() + 800;
+    nav.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+  }, [pathname]);
+
   return (
     <div className="sticky top-16 z-30 h-[60px] border-b border-border bg-background/95 backdrop-blur-md sm:top-20">
       <nav
         aria-label="Secciones"
+        ref={navRef}
         className="no-scrollbar h-full overflow-x-auto"
-        onScroll={() => setCalm(true)}
+        onScroll={() => {
+          if (Date.now() > ignoreScrollUntil.current) setCalm(true);
+        }}
       >
         <ul className="mx-auto flex h-full w-max items-center gap-2 px-4 pr-10 md:gap-3 md:pr-4">
-          {NAV.map((item, i) => {
+          {CHIPS.map((item, i) => {
             const area = NAV_AREA[item.to];
             return (
               <li key={item.to} data-area={area}>
                 <Link
                   to={item.to}
+                  activeOptions={{ exact: item.to === "/" }}
                   onClick={() => {
                     setCalm(true);
                     trackEvent("nav_click", { section: item.label, source: "chips" });
@@ -60,7 +83,7 @@ export function MobileNavBlocks() {
                   style={
                     {
                       "--chip-glow": area ? "var(--area)" : "var(--fnx-crema)",
-                      "--chip-delay": `${i * 0.45}s`,
+                      "--chip-delay": `${i * 0.4}s`,
                     } as CSSProperties
                   }
                   className={cn(
@@ -95,6 +118,84 @@ export function MobileNavBlocks() {
         className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent md:hidden"
       />
     </div>
+  );
+}
+
+const EXPLORE: { to: (typeof NAV)[number]["to"]; area?: Area; label: string; text: string; img: FnxImg }[] = [
+  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
+  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
+  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
+  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
+  { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
+];
+
+/** End-of-page block on every section page, so nobody hits a dead end. */
+export function ExploreMore() {
+  const pathname = useRouterState({ select: (st) => st.location.pathname });
+  if (pathname === "/") return null;
+  const items = EXPLORE.filter((e) => !pathname.startsWith(e.to));
+  return (
+    <section
+      aria-labelledby="explorar-titulo"
+      className="mx-auto w-full max-w-6xl border-t border-border px-5 py-14 sm:px-8 sm:py-20"
+    >
+      <p className="eyebrow text-muted-foreground">¿Y ahora?</p>
+      <h2 id="explorar-titulo" className="headline mt-2 text-4xl text-foreground sm:text-5xl">
+        Seguí explorando FNX
+      </h2>
+      <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        {items.map((e) => (
+          <li key={e.to} data-area={e.area}>
+            <Link
+              to={e.to}
+              onClick={() => trackEvent("nav_click", { section: e.label, source: "explorar" })}
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-area active:scale-[0.98] motion-reduce:transition-none"
+            >
+              <span className="block aspect-[2/1] overflow-hidden border-b border-border">
+                <FnxImage img={e.img} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover" />
+              </span>
+              <span className="flex flex-1 flex-col gap-1.5 p-3 sm:p-4">
+                <span className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-foreground">
+                  <span aria-hidden="true" className={e.area ? "h-2 w-2 shrink-0 rounded-full bg-area" : "h-2 w-2 shrink-0 rounded-full bg-fnx-crema"} />
+                  {e.label}
+                </span>
+                <span className="flex items-end justify-between gap-2">
+                  <span className="min-w-0 text-sm font-semibold leading-snug text-muted-foreground">{e.text}</span>
+                  <ArrowRight aria-hidden="true" className={e.area ? "h-4 w-4 shrink-0 text-area" : "h-4 w-4 shrink-0 text-fnx-crema"} />
+                </span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** Floating "back to top" button that appears after scrolling down a screen and a half. */
+export function BackToTop() {
+  const pathname = useRouterState({ select: (st) => st.location.pathname });
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 1.5);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <button
+      type="button"
+      aria-label="Volver arriba"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={cn(
+        "fixed right-4 z-30 inline-flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/90 text-foreground shadow-lg backdrop-blur-md transition-[opacity,transform] duration-200 hover:border-area motion-reduce:transition-none",
+        // On the phone home page the WhatsApp bar sits at the bottom, so lift the button above it.
+        pathname === "/" ? "bottom-24 md:bottom-6" : "bottom-6",
+        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
+      )}
+    >
+      <ArrowUp className="h-5 w-5" aria-hidden="true" />
+    </button>
   );
 }
 

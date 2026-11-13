@@ -13,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { MobileNavBlocks, SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrome";
+import { BackToTop, ExploreMore, MobileNavBlocks, SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrome";
 import { Toaster } from "@/components/ui/sonner";
 import { SITE_NAME } from "@/config/site";
 
@@ -158,7 +158,9 @@ function RootComponent() {
           <MobileNavBlocks />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <ExploreMore />
         </main>
+        <BackToTop />
         <SiteFooter />
         <Toaster position="bottom-center" theme="dark" />
       </div>

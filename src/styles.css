@@ -130,6 +130,8 @@
     background-color: var(--color-background);
     color-scheme: dark;
     scroll-behavior: smooth;
+    /* header + section chips stay on top: jumps to #anchors land below them */
+    scroll-padding-top: 140px;
   }
 
   body {
@@ -529,7 +531,8 @@
   pointer-events: none;
   animation: fnx-chip-pulse 3.2s ease-in-out var(--chip-delay, 0s) infinite;
 }
-.fnx-chip-pulse[aria-current="page"]::after {
+.fnx-chip-pulse[aria-current="page"]::after,
+.fnx-chip-pulse[data-state="active"]::after {
   animation: none;
   opacity: 0;
 }

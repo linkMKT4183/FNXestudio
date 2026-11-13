@@ -93,7 +93,7 @@ export function MobileNavBlocks() {
                   activeProps={{
                     className: cn(
                       "border-transparent",
-                      area ? "bg-area text-area-foreground" : "bg-fnx-crema text-fnx-negro",
+                      area ? "bg-area text-area-foreground!" : "bg-fnx-crema text-fnx-negro!",
                     ),
                     "aria-current": "page",
                   }}

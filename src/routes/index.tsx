@@ -144,7 +144,7 @@ function Home() {
               preload="metadata"
               poster="/media/inicio-fondo-poster.webp"
               aria-hidden="true"
-              className="h-full w-full object-cover object-[50%_20%]"
+              className="h-full w-full object-cover object-[50%_0%] md:pt-16"
             >
               <source src="/media/inicio-fondo-720.mp4" type="video/mp4" media="(max-width: 767px)" />
               <source src="/media/inicio-fondo.mp4" type="video/mp4" />

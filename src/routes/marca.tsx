@@ -101,7 +101,7 @@ function Marca() {
 
       <div
         ref={topRef}
-        className="sticky top-16 z-30 scroll-mt-16 border-y border-border bg-background/95 backdrop-blur-md sm:top-20 sm:scroll-mt-20"
+        className="sticky top-[124px] z-30 scroll-mt-[124px] border-y border-border bg-background/95 backdrop-blur-md sm:top-[140px] sm:scroll-mt-[140px] md:top-20 md:scroll-mt-20"
       >
         <div
           role="tablist"

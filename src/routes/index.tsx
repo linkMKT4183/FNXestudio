@@ -146,21 +146,35 @@ function Home() {
           <span className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         </div>
 
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 pb-8 pt-10 sm:px-8 sm:pt-14 lg:pt-12">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-8 pt-5 md:gap-5 md:px-5 sm:px-8 sm:pt-14 lg:pt-12">
           <Headline
             as="h1"
             id="hero-titulo"
             lead="Creamos marcas y conectamos personas de"
             accent="confianza."
-            className="max-w-4xl text-5xl sm:text-6xl lg:text-7xl"
+            className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl"
           />
           <Reveal delay={120}>
-            <p className="max-w-xl text-lg text-muted-foreground">
+            <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
               Sedes en Mendoza y San Juan. Trabajamos en todo el país y en el exterior.
             </p>
           </Reveal>
 
-          <nav aria-label="Elegí por dónde empezar" className="mt-4 sm:mt-6">
+          <nav aria-label="Secciones de FNX" className="md:hidden">
+            <ul className="grid grid-cols-2 gap-3">
+              {MOBILE_BLOCKS.map((b) => (
+                <li key={b.to}>
+                  <MobileBlock {...b} />
+                </li>
+              ))}
+            </ul>
+            <div className="h-16" aria-hidden="true" />
+            <div className="fixed inset-x-4 bottom-4 z-30">
+              <WhatsAppButton topic="marca" label="Escribinos" className="w-full shadow-lg" />
+            </div>
+          </nav>
+
+          <nav aria-label="Elegí por dónde empezar" className="mt-4 hidden sm:mt-6 md:block">
             <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <Door
                 to="/estudio"
@@ -316,6 +330,47 @@ const DOOR_AREA = {
   verde: "salud",
   amarillo: "noticias",
 } as const;
+
+type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/noticias" | "/marca" | "/red";
+const MOBILE_BLOCKS: {
+  to: BlockTo;
+  area?: "estudio" | "consultoria" | "salud" | "noticias";
+  label: string;
+  text: string;
+  img: FnxImg;
+}[] = [
+  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
+  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
+  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
+  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
+  { to: "/marca", label: "Marca", text: "Así es Fénix Creativo", img: IMG.manoFigura },
+  { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
+];
+
+function MobileBlock({ to, area, label, text, img }: (typeof MOBILE_BLOCKS)[number]) {
+  return (
+    <Link
+      to={to}
+      data-area={area}
+      onClick={() => trackEvent("nav_click", { section: label, source: "home_blocks" })}
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
+    >
+      <span className="block aspect-[2/1] overflow-hidden border-b border-border">
+        <FnxImage img={img} sizes="50vw" className="h-full w-full object-cover" />
+      </span>
+      <span className="flex flex-1 flex-col gap-1.5 p-3">
+        <span className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-foreground">
+          <span aria-hidden="true" className={area ? "h-2 w-2 shrink-0 rounded-full bg-area" : "h-2 w-2 shrink-0 rounded-full bg-fnx-crema"} />
+          <span className="truncate">{label}</span>
+        </span>
+        <span className="flex items-end justify-between gap-2">
+          <span className="min-w-0 text-sm font-semibold leading-snug text-muted-foreground">{text}</span>
+          <ArrowRight aria-hidden="true" className={area ? "h-4 w-4 shrink-0 text-area" : "h-4 w-4 shrink-0 text-fnx-crema"} />
+        </span>
+      </span>
+    </Link>
+  );
+}
 
 function Door({
   to,

@@ -578,7 +578,7 @@ function Consultoria() {
 
       {/* Selector de sector: controla "A quién le hablamos" y "Servicios" */}
       <Tabs defaultValue="agro" className="block">
-        <div className="sticky top-16 z-30 border-b border-border bg-background/90 backdrop-blur-md sm:top-20">
+        <div className="sticky top-[124px] z-30 border-b border-border bg-background/90 backdrop-blur-md sm:top-[140px] md:top-20">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:px-8">
             <p className="eyebrow hidden text-muted-foreground sm:block" aria-hidden="true">
               Elegí tu sector

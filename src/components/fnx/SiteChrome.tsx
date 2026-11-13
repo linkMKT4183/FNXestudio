@@ -16,6 +16,7 @@ import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
 import type { WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/track";
 
 const NAV = [
   { to: "/estudio", label: "Estudio" },
@@ -33,25 +34,48 @@ const NAV_AREA: Record<string, Area | undefined> = {
   "/noticias": "noticias",
 };
 
-/** Mobile-only: menu items shown as visible blocks right under the header. */
+/** Mobile-only (<768px): sticky row of section chips under the header. */
 export function MobileNavBlocks() {
   return (
-    <nav aria-label="Secciones" className="border-b border-border bg-background px-4 py-3 lg:hidden">
-      <ul className="grid grid-cols-3 gap-2">
-        {NAV.map((item) => (
-          <li key={item.to} data-area={NAV_AREA[item.to] ?? "estudio"}>
-            <Link
-              to={item.to}
-              className="flex h-11 min-w-0 items-center gap-1.5 rounded-lg border border-border bg-card px-2 text-[0.7rem] font-semibold text-muted-foreground"
-              activeProps={{ className: "border-area text-foreground", "aria-current": "page" }}
-            >
-              <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-area" />
-              <span className="truncate">{item.label}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="sticky top-16 z-30 h-[60px] border-b border-border bg-background/95 backdrop-blur-md sm:top-20 md:hidden">
+      <nav aria-label="Secciones" className="no-scrollbar h-full overflow-x-auto">
+        <ul className="flex h-full w-max items-center gap-2 px-4 pr-10">
+          {NAV.map((item) => {
+            const area = NAV_AREA[item.to];
+            return (
+              <li key={item.to} data-area={area}>
+                <Link
+                  to={item.to}
+                  onClick={() => trackEvent("nav_click", { section: item.label, source: "chips" })}
+                  className="flex h-11 items-center gap-2 whitespace-nowrap rounded-full border border-border px-4 text-sm font-semibold text-foreground transition-colors"
+                  activeProps={{
+                    className: cn(
+                      "border-transparent",
+                      area ? "bg-area text-area-foreground" : "bg-fnx-crema text-fnx-negro",
+                    ),
+                    "aria-current": "page",
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "h-2 w-2 shrink-0 rounded-full",
+                      area ? "bg-area" : "bg-fnx-crema",
+                      "[[aria-current=page]_&]:bg-fnx-negro",
+                    )}
+                  />
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent"
+      />
+    </div>
   );
 }
 

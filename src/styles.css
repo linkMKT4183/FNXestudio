@@ -506,3 +506,10 @@
 .ticker:hover {
   animation-play-state: paused;
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

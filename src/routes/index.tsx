@@ -162,8 +162,15 @@ function Home() {
 
           <nav aria-label="Secciones de FNX" className="md:hidden">
             <ul className="grid grid-cols-2 gap-3">
-              {MOBILE_BLOCKS.map((b) => (
-                <li key={b.to}>
+              {MOBILE_BLOCKS.map((b, i) => (
+                <li
+                  key={b.to}
+                  className={
+                    MOBILE_BLOCKS.length % 2 === 1 && i === MOBILE_BLOCKS.length - 1
+                      ? "col-span-2"
+                      : undefined
+                  }
+                >
                   <MobileBlock {...b} />
                 </li>
               ))}
@@ -331,7 +338,7 @@ const DOOR_AREA = {
   amarillo: "noticias",
 } as const;
 
-type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/noticias" | "/marca" | "/red";
+type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/noticias" | "/red";
 const MOBILE_BLOCKS: {
   to: BlockTo;
   area?: "estudio" | "consultoria" | "salud" | "noticias";
@@ -343,7 +350,6 @@ const MOBILE_BLOCKS: {
   { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
   { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
   { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
-  { to: "/marca", label: "Marca", text: "Así es Fénix Creativo", img: IMG.manoFigura },
   { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
 ];
 

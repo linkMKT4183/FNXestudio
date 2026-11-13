@@ -513,3 +513,30 @@
     display: none;
   }
 }
+
+/* Mobile section chips: a soft "beat" that lights the chip up to invite a tap.
+   Only opacity/transform are animated (on a pseudo-element). Off for the current page
+   and for people who ask for reduced motion. */
+.fnx-chip-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  border: 1px solid var(--chip-glow);
+  box-shadow: 0 0 14px -2px var(--chip-glow);
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+  animation: fnx-chip-pulse 3.2s ease-in-out var(--chip-delay, 0s) infinite;
+}
+.fnx-chip-pulse[aria-current="page"]::after {
+  animation: none;
+  opacity: 0;
+}
+@keyframes fnx-chip-pulse {
+  0%, 60%, 100% { opacity: 0; transform: scale(1); }
+  25% { opacity: 0.9; transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fnx-chip-pulse::after { animation: none; opacity: 0; }
+}

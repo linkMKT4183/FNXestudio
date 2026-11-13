@@ -12,6 +12,7 @@ import {
 } from "@/config/site";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
 import type { WhatsAppTopic } from "@/config/site";
@@ -23,7 +24,6 @@ const NAV = [
   { to: "/consultoria", label: "Consultoría" },
   { to: "/salud", label: "Salud" },
   { to: "/noticias", label: "Noticias" },
-  { to: "/marca", label: "Marca" },
   { to: "/red", label: "Profesionales" },
 ] as const;
 
@@ -36,18 +36,37 @@ const NAV_AREA: Record<string, Area | undefined> = {
 
 /** Mobile-only (<768px): sticky row of section chips under the header. */
 export function MobileNavBlocks() {
+  // The chips "beat" softly (see .fnx-chip-pulse in styles.css) to invite people to switch
+  // section. The beat stops once the visitor scrolls the row or taps a chip.
+  const [calm, setCalm] = useState(false);
   return (
     <div className="sticky top-16 z-30 h-[60px] border-b border-border bg-background/95 backdrop-blur-md sm:top-20 md:hidden">
-      <nav aria-label="Secciones" className="no-scrollbar h-full overflow-x-auto">
+      <nav
+        aria-label="Secciones"
+        className="no-scrollbar h-full overflow-x-auto"
+        onScroll={() => setCalm(true)}
+      >
         <ul className="flex h-full w-max items-center gap-2 px-4 pr-10">
-          {NAV.map((item) => {
+          {NAV.map((item, i) => {
             const area = NAV_AREA[item.to];
             return (
               <li key={item.to} data-area={area}>
                 <Link
                   to={item.to}
-                  onClick={() => trackEvent("nav_click", { section: item.label, source: "chips" })}
-                  className="flex h-11 items-center gap-2 whitespace-nowrap rounded-full border border-border px-4 text-sm font-semibold text-foreground transition-colors"
+                  onClick={() => {
+                    setCalm(true);
+                    trackEvent("nav_click", { section: item.label, source: "chips" });
+                  }}
+                  style={
+                    {
+                      "--chip-glow": area ? "var(--area)" : "var(--fnx-crema)",
+                      "--chip-delay": `${i * 0.45}s`,
+                    } as CSSProperties
+                  }
+                  className={cn(
+                    "relative flex h-11 items-center gap-2 whitespace-nowrap rounded-full border border-border px-4 text-sm font-semibold text-foreground transition-colors",
+                    !calm && "fnx-chip-pulse",
+                  )}
                   activeProps={{
                     className: cn(
                       "border-transparent",

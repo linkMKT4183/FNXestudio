@@ -25,7 +25,6 @@ const NAV = [
   { to: "/estudio", label: "Estudio" },
   { to: "/consultoria", label: "Consultoría" },
   { to: "/salud", label: "Salud" },
-  { to: "/noticias", label: "Noticias" },
   { to: "/red", label: "Profesionales" },
 ] as const;
 
@@ -125,7 +124,6 @@ const EXPLORE: { to: (typeof NAV)[number]["to"]; area?: Area; label: string; tex
   { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
   { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
   { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
-  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
   { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
 ];
 

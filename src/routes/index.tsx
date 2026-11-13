@@ -7,7 +7,6 @@ import {
   FolderOpen,
   HeartHandshake,
   MessagesSquare,
-  Newspaper,
   PenTool,
   Scale,
 } from "lucide-react";
@@ -35,7 +34,6 @@ const AREA_NODES: NetworkNode[] = [
   { label: "Estudio", icon: PenTool, color: "var(--fnx-naranja)" },
   { label: "Consultoría", icon: Scale, color: "var(--fnx-azul)" },
   { label: "Salud", icon: HeartHandshake, color: "var(--fnx-verde)" },
-  { label: "Noticias", icon: Newspaper, color: "var(--fnx-amarillo)" },
 ];
 
 const CHAT_INICIO = [
@@ -60,7 +58,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
+          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con tres áreas: Estudio, Consultoría y Salud, y una red de profesionales.",
       },
       {
         property: "og:title",
@@ -182,7 +180,7 @@ function Home() {
           </nav>
 
           <nav aria-label="Elegí por dónde empezar" className="mt-4 hidden sm:mt-6 md:block">
-            <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Reveal className="grid gap-4 md:grid-cols-3">
               <Door
                 to="/estudio"
                 tone="naranja"
@@ -204,13 +202,6 @@ function Home() {
                 title="Necesito orientación en salud (+18)"
                 img={IMG.carpetas}
               />
-              <Door
-                to="/noticias"
-                tone="amarillo"
-                kicker="FNX Noticias"
-                title="Quiero estar al día con noticias con fuentes"
-                img={IMG.tonoNoticias}
-              />
             </Reveal>
           </nav>
         </div>
@@ -227,8 +218,8 @@ function Home() {
               className="max-w-4xl text-5xl sm:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio crea la marca, Consultoría ordena el proyecto, Salud conecta con profesionales
-              verificados y Noticias informa con fuentes.
+              Estudio crea la marca, Consultoría ordena el proyecto y Salud conecta con profesionales
+              verificados.
             </p>
             <Pieces lit={1} className="mt-4" />
           </Reveal>
@@ -338,7 +329,7 @@ const DOOR_AREA = {
   amarillo: "noticias",
 } as const;
 
-type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/noticias" | "/red";
+type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/red";
 const MOBILE_BLOCKS: {
   to: BlockTo;
   area?: "estudio" | "consultoria" | "salud" | "noticias";
@@ -349,7 +340,6 @@ const MOBILE_BLOCKS: {
   { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
   { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
   { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
-  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
   { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
 ];
 

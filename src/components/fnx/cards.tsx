@@ -95,10 +95,10 @@ export function FlipCard({
       <div className={cn("flip-inner", heightClass, shown && "is-flipped")}>
         {media ? (
           <div
-            className=cn(
+            className={cn(
               "flip-face flex flex-col rounded-2xl border border-border bg-card transition-colors group-hover:border-area",
               !touched && "fnx-chip-pulse",
-            )
+            )}
             aria-hidden={shown}
           >
             <div className="aspect-[16/9] shrink-0 overflow-hidden rounded-t-2xl border-b border-border">

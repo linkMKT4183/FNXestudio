@@ -75,7 +75,7 @@ export function MobileNavBlocks() {
               <li key={item.to} data-area={area}>
                 <Link
                   to={item.to}
-                  activeOptions={{ exact: item.to === "/" }}
+                  activeOptions={{ exact: item.to === "/", includeSearch: false }}
                   onClick={() => {
                     setCalm(true);
                     trackEvent("nav_click", { section: item.label, source: "chips" });

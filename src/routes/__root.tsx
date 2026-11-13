@@ -13,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrome";
+import { MobileNavBlocks, SiteHeader, SiteFooter, areaFromPath } from "@/components/fnx/SiteChrome";
 import { Toaster } from "@/components/ui/sonner";
 import { SITE_NAME } from "@/config/site";
 
@@ -155,6 +155,7 @@ function RootComponent() {
         </a>
         <SiteHeader />
         <main id="contenido" className="flex-1 pt-16 sm:pt-20">
+          <MobileNavBlocks />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>

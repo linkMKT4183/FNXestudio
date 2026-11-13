@@ -26,6 +26,35 @@ const NAV = [
   { to: "/red", label: "Profesionales" },
 ] as const;
 
+const NAV_AREA: Record<string, Area | undefined> = {
+  "/estudio": "estudio",
+  "/consultoria": "consultoria",
+  "/salud": "salud",
+  "/noticias": "noticias",
+};
+
+/** Mobile-only: menu items shown as visible blocks right under the header. */
+export function MobileNavBlocks() {
+  return (
+    <nav aria-label="Secciones" className="border-b border-border bg-background px-4 py-3 lg:hidden">
+      <ul className="grid grid-cols-3 gap-2">
+        {NAV.map((item) => (
+          <li key={item.to} data-area={NAV_AREA[item.to] ?? "estudio"}>
+            <Link
+              to={item.to}
+              className="flex h-11 min-w-0 items-center gap-1.5 rounded-lg border border-border bg-card px-2 text-[0.7rem] font-semibold text-muted-foreground"
+              activeProps={{ className: "border-area text-foreground", "aria-current": "page" }}
+            >
+              <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-area" />
+              <span className="truncate">{item.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 export type Area = "estudio" | "consultoria" | "salud" | "noticias";
 
 export function areaFromPath(pathname: string): Area {

@@ -360,7 +360,7 @@ function MobileBlock({ to, area, label, text, icon: Icon }: (typeof MOBILE_BLOCK
       to={to}
       data-area={area}
       onClick={() => trackEvent("nav_click", { section: label, source: "home_blocks" })}
-      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card/70 backdrop-blur-md transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/15 bg-background/20 backdrop-blur-[3px] transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
     >
       <span className="px-3 pt-3">
         <span

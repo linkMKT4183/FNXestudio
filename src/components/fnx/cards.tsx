@@ -1,9 +1,22 @@
-import { useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Plus, RotateCw, type LucideIcon } from "lucide-react";
 import { IconBadge } from "./primitives";
 import { cn } from "@/lib/utils";
 
-/** Tarjeta que se da vuelta al tocarla. Opcionalmente lleva una foto arriba en el frente. */
+/** Hint shown on the front: the arrow spins every few seconds so people see the card turns. */
+function FlipHint() {
+  return (
+    <span className="inline-flex items-center gap-2 self-start rounded-full border border-area/60 bg-area/10 px-3 py-1.5 text-xs font-semibold text-area">
+      <RotateCw className="fnx-hint-spin h-3.5 w-3.5" aria-hidden="true" /> Tocá para dar vuelta
+    </span>
+  );
+}
+
+/**
+ * Tarjeta que se da vuelta al tocarla. Opcionalmente lleva una foto arriba en el frente.
+ * Mientras nadie la toca, se da vuelta sola cada tanto (solo cuando está a la vista) para
+ * mostrar que es interactiva; `autoDelay` (ms) escalona las tarjetas de una misma grilla.
+ */
 export function FlipCard({
   front,
   back,
@@ -11,6 +24,7 @@ export function FlipCard({
   className,
   media,
   heightClass = "h-56",
+  autoDelay = 0,
 }: {
   front: ReactNode;
   back: ReactNode;
@@ -18,30 +32,81 @@ export function FlipCard({
   className?: string;
   media?: ReactNode;
   heightClass?: string;
+  autoDelay?: number;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [autoFlipped, setAutoFlipped] = useState(false);
+  const ref = useRef<HTMLButtonElement>(null);
+
+  // Auto-flip: show the back for ~2.8s every ~9s while the card is on screen and untouched.
+  useEffect(() => {
+    const el = ref.current;
+    if (touched || !el || typeof IntersectionObserver === "undefined") return;
+    let start: number | undefined;
+    let cycle: number | undefined;
+    let back: number | undefined;
+    const showBack = () => {
+      setAutoFlipped(true);
+      back = window.setTimeout(() => setAutoFlipped(false), 2800);
+    };
+    const stop = () => {
+      window.clearTimeout(start);
+      window.clearInterval(cycle);
+      window.clearTimeout(back);
+      start = cycle = back = undefined;
+      setAutoFlipped(false);
+    };
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.6) {
+          if (start === undefined && cycle === undefined) {
+            start = window.setTimeout(() => {
+              showBack();
+              cycle = window.setInterval(showBack, 9000);
+            }, 1600 + autoDelay);
+          }
+        } else {
+          stop();
+        }
+      },
+      { threshold: [0, 0.6] },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      stop();
+    };
+  }, [touched, autoDelay]);
+
+  const shown = touched ? flipped : autoFlipped;
   return (
     <button
+      ref={ref}
       type="button"
-      onClick={() => setFlipped((v) => !v)}
-      aria-pressed={flipped}
-      aria-label={`${label}. ${flipped ? "Tocá para volver" : "Tocá para ver más"}`}
+      onClick={() => {
+        setTouched(true);
+        setFlipped(!shown);
+      }}
+      aria-pressed={shown}
+      aria-label={`${label}. ${shown ? "Tocá para volver" : "Tocá para ver más"}`}
       className={cn("flip-scene group block w-full rounded-2xl text-left", className)}
     >
-      <div className={cn("flip-inner", heightClass, flipped && "is-flipped")}>
+      <div className={cn("flip-inner", heightClass, shown && "is-flipped")}>
         {media ? (
           <div
-            className="flip-face flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors group-hover:border-area"
-            aria-hidden={flipped}
+            className=cn(
+              "flip-face flex flex-col rounded-2xl border border-border bg-card transition-colors group-hover:border-area",
+              !touched && "fnx-chip-pulse",
+            )
+            aria-hidden={shown}
           >
-            <div className="aspect-[16/9] shrink-0 overflow-hidden border-b border-border">
+            <div className="aspect-[16/9] shrink-0 overflow-hidden rounded-t-2xl border-b border-border">
               {media}
             </div>
             <div className="flex flex-1 flex-col justify-between gap-4 p-6">
               {front}
-              <span className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-                <RotateCw className="h-3.5 w-3.5" aria-hidden="true" /> Tocá para dar vuelta
-              </span>
+              <FlipHint />
             </div>
           </div>
         ) : null}
@@ -49,19 +114,21 @@ export function FlipCard({
           className={cn(
             "flip-face flex flex-col justify-between rounded-2xl border border-border bg-card p-6",
             media && "hidden",
+            !touched && "fnx-chip-pulse",
           )}
-          aria-hidden={flipped}
+          aria-hidden={shown}
         >
           {front}
-          <span className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-            <RotateCw className="h-3.5 w-3.5" aria-hidden="true" /> Tocá para dar vuelta
-          </span>
+          <FlipHint />
         </div>
         <div
           className="flip-face flip-back flex flex-col justify-center rounded-2xl bg-area p-6 text-area-foreground"
-          aria-hidden={!flipped}
+          aria-hidden={!shown}
         >
           {back}
+          <span className="absolute bottom-5 left-6 inline-flex items-center gap-2 text-xs font-semibold opacity-80">
+            <RotateCw className="h-3.5 w-3.5 -scale-x-100" aria-hidden="true" /> Tocá para volver
+          </span>
         </div>
       </div>
     </button>
@@ -116,7 +183,8 @@ export function ExpandCard({
         </span>
         <span
           className={cn(
-            "mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all",
+            "relative mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all",
+            !open && "fnx-chip-pulse",
             open
               ? "rotate-45 border-area bg-area text-area-foreground"
               : "border-border text-foreground group-hover:border-foreground",

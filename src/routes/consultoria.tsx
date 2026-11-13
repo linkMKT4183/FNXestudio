@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import {
   ClipboardCheck,
   ClipboardList,
@@ -491,6 +490,7 @@ function ComboGroup({ tag, combos, extra }: { tag: string; combos: Combo[]; extr
           <Reveal key={c.name} delay={i * 70}>
             <FlipCard
               label={c.name}
+              autoDelay={i * 1800}
               heightClass="h-[24rem]"
               media={
                 c.img ? (
@@ -523,8 +523,6 @@ function ComboGroup({ tag, combos, extra }: { tag: string; combos: Combo[]; extr
 }
 
 function Consultoria() {
-  // The sector tabs beat softly until the visitor switches once.
-  const [sectorTouched, setSectorTouched] = useState(false);
   return (
     <div data-area="consultoria">
       {/* Hero */}
@@ -580,7 +578,7 @@ function Consultoria() {
       </div>
 
       {/* Selector de sector: controla "A quién le hablamos" y "Servicios" */}
-      <Tabs defaultValue="agro" className="block" onValueChange={() => setSectorTouched(true)}>
+      <Tabs defaultValue="agro" className="block">
         <div className="sticky top-[124px] z-20 border-b border-border bg-background/90 backdrop-blur-md sm:top-[140px]">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:px-8">
             <p className="eyebrow hidden text-muted-foreground sm:block" aria-hidden="true">
@@ -594,11 +592,7 @@ function Consultoria() {
                 <TabsTrigger
                   key={s.v}
                   value={s.v}
-                  className={cn(
-                    "relative h-10 rounded-full px-6 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none",
-                    !sectorTouched && "fnx-chip-pulse",
-                  )}
-                  style={{ "--chip-glow": "var(--area)", "--chip-delay": "0.6s" } as CSSProperties}
+                  className="h-10 rounded-full px-6 text-sm font-semibold text-muted-foreground hover:text-foreground data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none"
                 >
                   {s.l}
                 </TabsTrigger>

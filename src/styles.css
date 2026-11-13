@@ -523,16 +523,25 @@
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 9999px;
-  border: 1px solid var(--chip-glow);
-  box-shadow: 0 0 14px -2px var(--chip-glow);
+  border-radius: inherit;
+  border: 1px solid var(--chip-glow, var(--area, var(--fnx-crema)));
+  box-shadow: 0 0 14px -2px var(--chip-glow, var(--area, var(--fnx-crema)));
   opacity: 0;
   transform: scale(1);
   pointer-events: none;
-  animation: fnx-chip-pulse 3.2s ease-in-out var(--chip-delay, 0s) infinite;
+  animation: fnx-chip-pulse 3.2s ease-in-out var(--chip-delay, var(--nth-delay, 0s)) infinite;
 }
+/* stagger buttons that sit side by side (tabs, filters) so the light travels along the row */
+.fnx-chip-pulse:nth-child(2) { --nth-delay: 0.4s; }
+.fnx-chip-pulse:nth-child(3) { --nth-delay: 0.8s; }
+.fnx-chip-pulse:nth-child(4) { --nth-delay: 1.2s; }
+.fnx-chip-pulse:nth-child(5) { --nth-delay: 1.6s; }
+.fnx-chip-pulse:nth-child(n + 6) { --nth-delay: 2s; }
+/* the selected button never beats; a group stops beating once the visitor has used it */
 .fnx-chip-pulse[aria-current="page"]::after,
-.fnx-chip-pulse[data-state="active"]::after {
+.fnx-chip-pulse[data-state="active"]::after,
+.fnx-chip-pulse[aria-pressed="true"]::after,
+[data-touched] > .fnx-chip-pulse::after {
   animation: none;
   opacity: 0;
 }
@@ -540,6 +549,11 @@
   0%, 60%, 100% { opacity: 0; transform: scale(1); }
   25% { opacity: 0.9; transform: scale(1.04); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .fnx-chip-pulse::after { animation: none; opacity: 0; }
+/* "Tocá para dar vuelta" arrow: one turn every 3.5s */
+.fnx-hint-spin {
+  animation: fnx-hint-spin 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes fnx-hint-spin {
+  0%, 70% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

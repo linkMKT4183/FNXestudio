@@ -34,6 +34,7 @@ function AreaTag({ area }: { area: ImageArea }) {
  */
 export function Gallery({ images }: { images: GalleryItem[] }) {
   const [filter, setFilter] = useState<Filter>("todas");
+  const [filtersTouched, setFiltersTouched] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
 
   const groups = useMemo(
@@ -50,15 +51,18 @@ export function Gallery({ images }: { images: GalleryItem[] }) {
 
   return (
     <div className="flex flex-col gap-8">
-      <div role="group" aria-label="Filtrar fotos por área" className="flex flex-wrap gap-2">
+      <div role="group" aria-label="Filtrar fotos por área" data-touched={filtersTouched ? "" : undefined} className="flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <button
             key={f.v}
             type="button"
             aria-pressed={filter === f.v}
-            onClick={() => setFilter(f.v)}
+            onClick={() => {
+                setFilter(f.v);
+                setFiltersTouched(true);
+              }}
             className={cn(
-              "h-10 rounded-full border px-5 text-sm font-semibold transition-colors",
+              "fnx-chip-pulse relative h-10 rounded-full border px-5 text-sm font-semibold transition-colors",
               filter === f.v
                 ? "border-area bg-area text-area-foreground"
                 : "border-border text-muted-foreground hover:border-foreground hover:text-foreground",

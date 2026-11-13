@@ -68,6 +68,7 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
 
 function Noticias() {
   const [filter, setFilter] = useState<Filter>("Todas");
+  const [filtersTouched, setFiltersTouched] = useState(false);
   const items = useMemo(
     () => (filter === "Todas" ? NOTICIAS : NOTICIAS.filter((n) => n.category === filter)),
     [filter],
@@ -132,15 +133,18 @@ function Noticias() {
         aria-label="Noticias"
         className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pb-20 pt-14 sm:px-8"
       >
-        <div role="group" aria-label="Filtrar por categoría" className="mb-8 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filtrar por categoría" data-touched={filtersTouched ? "" : undefined} className="mb-8 flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
               key={f}
               type="button"
               aria-pressed={filter === f}
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                setFiltersTouched(true);
+              }}
               className={cn(
-                "h-10 rounded-full border px-5 text-sm font-semibold transition-colors",
+                "fnx-chip-pulse relative h-10 rounded-full border px-5 text-sm font-semibold transition-colors",
                 filter === f
                   ? "border-area bg-area text-area-foreground"
                   : "border-border text-muted-foreground hover:text-foreground",

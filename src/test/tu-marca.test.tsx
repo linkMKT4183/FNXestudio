@@ -45,11 +45,10 @@ import { TuMarca } from "@/routes/tu-marca";
   });
 });
 
-describe("carrusel animado", () => {
-  it("tiene las 9 placas y sus controles", () => {
-    render(<TuMarca />);
-    expect(screen.getAllByRole("group", { name: /de 9:/ }).length).toBe(9);
-    expect(screen.getByLabelText("Placa siguiente")).toBeTruthy();
+describe("animación de la portada", () => {
+  it("muestra el video y no repite el titular", () => {
+    const { container } = render(<TuMarca />);
+    expect(container.querySelector('video source[src="/media/tu-marca-animacion.mp4"]')).toBeTruthy();
     expect(screen.queryByText(/Uno que se destaca/)).toBeNull();
   });
 });

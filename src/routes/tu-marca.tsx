@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Headline, IconBadge, Reveal, Section } from "@/components/fnx/primitives";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
-import { CarruselTuMarca } from "@/components/tu-marca/CarruselTuMarca";
+import { AnimacionTuMarca } from "@/components/tu-marca/AnimacionTuMarca";
 import { PruebaMarca } from "@/components/tu-marca/PruebaMarca";
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
@@ -62,7 +62,7 @@ export function TuMarca() {
           </div>
         </Reveal>
               <Reveal delay={200} variant="zoom" className="mx-auto w-full">
-          <CarruselTuMarca />
+          <AnimacionTuMarca />
         </Reveal>
       </section>
       </div>

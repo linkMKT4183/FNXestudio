@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { PruebaMarca, resultadoMarca } from "@/components/tu-marca/PruebaMarca";
 
@@ -19,9 +19,37 @@ describe("/tu-marca prueba", () => {
 });
 
 import { TuMarca } from "@/routes/tu-marca";
-describe("/tu-marca página", () => {
+  // embla (el carrusel) necesita IntersectionObserver; jsdom no lo trae. Solo se simula en este bloque.
+  beforeAll(() => {
+    class IO {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+      takeRecords() {
+        return [];
+      }
+    }
+    (globalThis as unknown as { IntersectionObserver: unknown }).IntersectionObserver = IO;
+    (globalThis as unknown as { ResizeObserver: unknown }).ResizeObserver = IO;
+    HTMLMediaElement.prototype.pause = () => {};
+    HTMLMediaElement.prototype.play = () => Promise.resolve();
+  });
+  afterAll(() => {
+    delete (globalThis as unknown as { IntersectionObserver?: unknown }).IntersectionObserver;
+    delete (globalThis as unknown as { ResizeObserver?: unknown }).ResizeObserver;
+  });describe("/tu-marca página", () => {
+
   it("renderiza el titular", () => {
     render(<TuMarca />);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("Tu marca pasa desapercibida.");
+  });
+});
+
+describe("carrusel animado", () => {
+  it("tiene las 9 placas y sus controles", () => {
+    render(<TuMarca />);
+    expect(screen.getAllByRole("group", { name: /de 9:/ }).length).toBe(9);
+    expect(screen.getByLabelText("Placa siguiente")).toBeTruthy();
+    expect(screen.queryByText(/Uno que se destaca/)).toBeNull();
   });
 });

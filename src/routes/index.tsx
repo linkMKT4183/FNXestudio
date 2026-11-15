@@ -23,7 +23,7 @@ import {
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
-import { RedVidrio } from "@/components/fnx/RedVidrio";
+import { RedVidrio, RedVidrioAncha } from "@/components/fnx/RedVidrio";
 import { Puertas } from "@/components/fnx/Puertas";
 
 import { pageUrl, OG_IMAGE_META } from "@/config/site";
@@ -173,14 +173,18 @@ function Home() {
       </section>
 
       {/* Propuesta de valor */}
-      <section aria-labelledby="valor-titulo" className="border-y border-border bg-background">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.2fr_1fr]">
-          <Reveal className="flex flex-col gap-6">
+      <section
+        aria-labelledby="valor-titulo"
+        className="relative overflow-hidden border-y border-border bg-background lg:flex lg:aspect-video lg:min-h-[36rem] lg:items-center"
+      >
+        <RedVidrioAncha />
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28 lg:py-0">
+          <Reveal className="flex max-w-xl flex-col gap-6 lg:max-w-[44%]">
             <Headline
               id="valor-titulo"
               lead="Conocemos el sector y tenemos"
               accent="la red."
-              className="max-w-4xl text-5xl sm:text-7xl"
+              className="max-w-4xl text-5xl sm:text-7xl lg:text-6xl xl:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
               Estudio crea la marca, Consultoría ordena el proyecto, Salud conecta con profesionales
@@ -188,9 +192,9 @@ function Home() {
             </p>
             <Pieces lit={1} className="mt-4" />
           </Reveal>
-          <Reveal delay={150}>
-            <RedVidrio />
-          </Reveal>
+        </div>
+        <div className="red-aura relative z-10 -mt-6 pb-16 lg:hidden">
+          <RedVidrio />
         </div>
       </section>
 

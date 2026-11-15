@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardList, FileCheck2, MessagesSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Headline, IconBadge, Pieces, Reveal, Section } from "@/components/fnx/primitives";
+import { Headline, IconBadge, Reveal, Section } from "@/components/fnx/primitives";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { CarruselTuMarca } from "@/components/tu-marca/CarruselTuMarca";
 import { PruebaMarca } from "@/components/tu-marca/PruebaMarca";
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
-import logoCrema from "@/assets/brand/fnx-logo-crema.png";
 
 const TITLE = "Tu marca pasa desapercibida | FNX Estudio · Mendoza";
 const DESC =
@@ -61,14 +61,8 @@ export function TuMarca() {
             </Button>
           </div>
         </Reveal>
-              <Reveal delay={200} variant="zoom" className="mx-auto w-full max-w-sm">
-          <div className="tarjeta-neon flex flex-col items-center gap-7 px-8 py-12 text-center">
-            <img src={logoCrema} alt="Fnx" width={986} height={551} className="h-20 w-auto" draggable={false} />
-            <Pieces lit={3} size="lg" />
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Uno que se destaca entre muchos
-            </p>
-          </div>
+              <Reveal delay={200} variant="zoom" className="mx-auto w-full">
+          <CarruselTuMarca />
         </Reveal>
       </section>
       </div>

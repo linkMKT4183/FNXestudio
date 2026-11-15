@@ -27,11 +27,14 @@ describe("Inicio", () => {
     expect(hrefs).toEqual(["/estudio", "/consultoria", "/salud", "/noticias", "/red"]);
   });
 
-  it("la cadena enlaza cada área con su página", async () => {
+  it("la cadena enlaza cada área con su página (a pantalla completa y en celular)", async () => {
     await abrir("/");
-    const grupo = await screen.findByRole("group", { name: /cuatro áreas de FNX/ });
-    const hrefs = Array.from(grupo.querySelectorAll("a")).map((a) => a.getAttribute("href"));
-    expect(hrefs).toEqual(["/estudio", "/consultoria", "/salud", "/noticias"]);
+    const grupos = await screen.findAllByRole("group", { name: /cuatro áreas de FNX/ });
+    expect(grupos.length).toBe(2);
+    for (const g of grupos) {
+      const hrefs = Array.from(g.querySelectorAll("a")).map((x) => x.getAttribute("href"));
+      expect(hrefs).toEqual(["/estudio", "/consultoria", "/salud", "/noticias"]);
+    }
   });
 
   it("Noticias es una página y no una redirección", async () => {

@@ -1290,3 +1290,54 @@
     inset 0 1px 0 rgb(243 238 228 / 0.14),
     0 30px 80px -40px color-mix(in oklab, var(--area) 60%, transparent);
 }
+
+/* Cadena en celular y tablet: el resplandor naranja ocupa todo el ancho de la pantalla */
+.red-aura {
+  background: radial-gradient(ellipse 80% 55% at 50% 52%, color-mix(in oklab, var(--fnx-naranja) 20%, transparent), transparent 72%);
+}
+
+/* Carrusel animado de Tu marca (marco de vidrio con borde de neón) */
+.carrusel-marco {
+  border: 1px solid color-mix(in oklab, var(--fnx-naranja) 50%, transparent);
+  background: linear-gradient(160deg, color-mix(in oklab, var(--fnx-naranja) 10%, var(--fnx-grafito)), color-mix(in oklab, var(--fnx-negro) 94%, transparent));
+  box-shadow:
+    0 0 60px -14px color-mix(in oklab, var(--fnx-naranja) 62%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--fnx-crema) 20%, transparent);
+  backdrop-filter: blur(10px);
+}
+.carrusel-boton {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgb(243 238 228 / 0.16);
+  background: linear-gradient(180deg, rgb(243 238 228 / 0.08), rgb(243 238 228 / 0.02));
+  color: var(--fnx-crema);
+  transition: border-color 0.2s ease, transform 0.25s var(--ease-fnx), background-color 0.2s ease;
+}
+.carrusel-boton:hover {
+  border-color: var(--fnx-naranja);
+  transform: scale(1.08);
+}
+.carrusel-boton:active {
+  transform: scale(0.94);
+}
+.carrusel-prog {
+  transform-origin: left;
+  animation-name: carrusel-prog;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.carrusel-prog-quieto {
+  animation-play-state: paused;
+}
+@keyframes carrusel-prog {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carrusel-prog { animation: none; transform: scaleX(1); }
+  .carrusel-boton, .carrusel-boton:hover { transform: none; transition: none; }
+}

@@ -45,10 +45,11 @@ import { TuMarca } from "@/routes/tu-marca";
   });
 });
 
-describe("animación de la portada", () => {
-  it("muestra el video y no repite el titular", () => {
-    const { container } = render(<TuMarca />);
-    expect(container.querySelector('video source[src="/media/tu-marca-animacion.mp4"]')).toBeTruthy();
+describe("carrusel animado", () => {
+  it("tiene las 9 placas, sin repetir el titular, con el botón de WhatsApp abajo", () => {
+    render(<TuMarca />);
+    expect(screen.getAllByRole("group", { name: /de 9:/ }).length).toBe(9);
     expect(screen.queryByText(/Uno que se destaca/)).toBeNull();
+    expect(screen.getAllByText("Escribinos por WhatsApp").length).toBeGreaterThan(0);
   });
 });

@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Camera, Fingerprint, ShoppingBag, Target, type LucideIcon } from "lucide-react";
 import { IconBadge, TenSeconds } from "@/components/fnx/primitives";
+import { PlacaMini } from "@/components/tu-marca/PlacaMini";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { trackEvent } from "@/lib/track";
 import { playSound } from "@/lib/sonido";
 import { cn } from "@/lib/utils";
 
-export const SENALES: { id: string; icon: LucideIcon; title: string; text: string }[] = [
-  { id: "identidad", icon: Fingerprint, title: "Identidad", text: "Si cada posteo usa otro color y otra letra, nadie te recuerda. Un logo fijo, dos colores y un manual alcanzan para que te reconozcan antes de leer tu nombre." },
-  { id: "imagen", icon: Camera, title: "Imagen", text: "Una foto sacada a las apuradas dice «improvisado». Con una idea, buena luz y edición, lo mismo se ve como una marca." },
-  { id: "tienda", icon: ShoppingBag, title: "Tienda", text: "Si cada venta depende de que contestes un mensaje, perdés las que llegan a la noche. Una tienda online cobra mientras dormís." },
-  { id: "constancia", icon: Calendar, title: "Constancia", text: "Tres posteos en una semana y después nada: tu público se olvida rápido. Con un calendario, vos aprobás y nosotros publicamos." },
-  { id: "estrategia", icon: Target, title: "Estrategia", text: "Pauta sin objetivo es plata que se va. Primero el público y el mensaje; después la inversión." },
+export const SENALES: { id: string; icon: LucideIcon; title: string; text: string; placa: string }[] = [
+  { id: "identidad", placa: "03", icon: Fingerprint, title: "Identidad", text: "Si cada posteo usa otro color y otra letra, nadie te recuerda. Un logo fijo, dos colores y un manual alcanzan para que te reconozcan antes de leer tu nombre." },
+  { id: "imagen", placa: "04", icon: Camera, title: "Imagen", text: "Una foto sacada a las apuradas dice «improvisado». Con una idea, buena luz y edición, lo mismo se ve como una marca." },
+  { id: "tienda", placa: "05", icon: ShoppingBag, title: "Tienda", text: "Si cada venta depende de que contestes un mensaje, perdés las que llegan a la noche. Una tienda online cobra mientras dormís." },
+  { id: "constancia", placa: "06", icon: Calendar, title: "Constancia", text: "Tres posteos en una semana y después nada: tu público se olvida rápido. Con un calendario, vos aprobás y nosotros publicamos." },
+  { id: "estrategia", placa: "07", icon: Target, title: "Estrategia", text: "Pauta sin objetivo es plata que se va. Primero el público y el mensaje; después la inversión." },
 ];
 
 export function resultadoMarca(n: number): string {
@@ -64,13 +65,14 @@ export function PruebaMarca() {
                 checked={on}
                 onChange={() => toggle(s.id)}
               />
-              <div className="flex flex-col gap-2">
+              <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <div className="flex items-center gap-3">
                   <IconBadge icon={s.icon} size="sm" variant={on ? "solid" : "outline"} className={on ? "icon-pop" : ""} />
                   <span className="text-lg font-bold text-foreground">{s.title}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
               </div>
+              <PlacaMini n={s.placa} className="hidden w-28 shrink-0 self-start sm:block lg:w-32" />
             </label>
           );
         })}

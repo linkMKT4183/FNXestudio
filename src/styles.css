@@ -1341,3 +1341,19 @@
   .carrusel-prog { animation: none; transform: scaleX(1); }
   .carrusel-boton, .carrusel-boton:hover { transform: none; transition: none; }
 }
+
+/* Placa 1 del carrusel: el motion graphic flota sin el fondo negro (el negro se funde con el vidrio del marco) */
+.placa-luz {
+  background:
+    radial-gradient(ellipse at 50% 46%, color-mix(in oklab, var(--fnx-naranja) 30%, transparent), transparent 62%),
+    linear-gradient(180deg, var(--fnx-negro), color-mix(in oklab, var(--fnx-naranja) 8%, var(--fnx-negro)));
+}
+.placa-sin-fondo {
+  mix-blend-mode: screen;
+  aspect-ratio: 900 / 584;
+  width: 128%;
+  max-width: none;
+  transform: translateX(-1%);
+  object-fit: cover;
+  filter: saturate(1.1) contrast(1.08);
+}

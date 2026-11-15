@@ -695,7 +695,7 @@
   }
 }
 /* Etiqueta sobre el titular: entra desde la izquierda (sin cambiar su ancho: sin saltos de layout) */
-.is-visible .eyebrow {
+.is-visible:not(.reveal-stagger) .eyebrow {
   animation: eyebrow-in 0.6s var(--ease-fnx) 0.1s both;
 }
 @keyframes eyebrow-in {
@@ -866,7 +866,7 @@
   .btn-pulse,
   .num-roll,
   .icon-pop,
-  .is-visible .eyebrow {
+  .is-visible:not(.reveal-stagger) .eyebrow {
     animation: none !important;
   }
   .u-draw {

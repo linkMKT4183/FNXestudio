@@ -50,7 +50,7 @@ export function WhatsAppButton({
         onClick={() => trackEvent("whatsapp_click", { topic, page: window.location.pathname })}
       >
         {showIcon ? <WhatsAppIcon className="h-5 w-5 shrink-0" /> : null}
-        {label}
+        <span className="min-w-0 text-balance text-center">{label}</span>
         <span className="sr-only"> (se abre WhatsApp en una pestaña nueva)</span>
       </a>
     </Button>

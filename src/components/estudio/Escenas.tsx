@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  * negro, grafito, crema y naranja; curva de entrada suave y siempre algo en movimiento. Corren solo mientras se ven
  * y con «reducir movimiento» quedan en su estado final.
  */
-function Escena({ children, etiqueta, className }: { children: ReactNode; etiqueta: string; className?: string }) {
+function Escena({ children, etiqueta, className }: { children: ReactNode | ((play: boolean) => ReactNode); etiqueta: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [play, setPlay] = useState(false);
   useEffect(() => {
@@ -29,59 +29,91 @@ function Escena({ children, etiqueta, className }: { children: ReactNode; etique
       aria-label={etiqueta}
       className={cn("ev-escena relative aspect-[16/10] w-full overflow-hidden", className)}
     >
-      {children}
+      {typeof children === "function" ? children(play) : children}
     </div>
   );
 }
+
+/** Un número que sube mientras la escena se ve. */
+function useCuenta(play: boolean, desde: number, paso: number, cada = 140, tope = 99999) {
+  const [n, setN] = useState(desde);
+  useEffect(() => {
+    if (!play) return;
+    const t = window.setInterval(() => setN((v) => (v + paso > tope ? desde : v + paso)), cada);
+    return () => window.clearInterval(t);
+  }, [play, desde, paso, cada, tope]);
+  return n;
+}
+const miles = (n: number) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const d = (s: number) => ({ animationDelay: `${s}s` });
 
 export function EscenaBranding() {
   return (
-    <Escena etiqueta="Animación: un logo se dibuja, aparecen los colores de la marca y la tipografía.">
-      <p className="ev-tag">Logo · colores · tipografía</p>
-      <div className="ev-logo ev-pop" style={d(0.1)}>
+    <Escena etiqueta="Animación: el logo y los colores de FNX aplicados en una tarjeta, un perfil de Instagram y una bolsa.">
+      <p className="ev-tag">Tu identidad, aplicada</p>
+      <div className="ev-logo ev-logo-s ev-pop" style={d(0.1)}>
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
-          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--fnx-naranja)" strokeWidth="2.5" className="ev-trazo" pathLength={1} />
+          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--fnx-naranja)" strokeWidth="3" className="ev-trazo" pathLength={1} />
         </svg>
-        <span className="headline text-3xl text-fnx-crema">FNX</span>
+        <span className="headline text-xl text-fnx-crema">FNX</span>
       </div>
-      <div className="ev-colores">
+      <div className="ev-colores ev-colores-s">
         {["#0B0B0B", "#1C1C1C", "#F3EEE4", "#F2552C"].map((c, i) => (
-          <span key={c} className="ev-pop" style={{ background: c, ...d(0.9 + i * 0.25) }} />
+          <span key={c} className="ev-pop" style={{ background: c, ...d(0.7 + i * 0.2) }} />
         ))}
       </div>
-      <div className="ev-aa ev-sube" style={d(1.2)}>
-        <span className="headline text-4xl text-fnx-crema">Aa</span>
-        <i>Anton · Montserrat</i>
-      </div>
-      <div className="ev-manual ev-sube" style={d(1.8)} aria-hidden="true">
-        <b /> <b /> <b />
+      <div className="ev-apps">
+        <div className="ev-app ev-tarjeta ev-pop" style={d(1.4)} aria-hidden="true">
+          <span className="headline text-base text-fnx-negro">FNX</span>
+          <i /> <i /> <b />
+        </div>
+        <div className="ev-app ev-perfil ev-pop" style={d(1.9)} aria-hidden="true">
+          <span className="ev-avatar"><span className="headline text-[0.6rem] text-fnx-crema">FNX</span></span>
+          <div className="ev-grilla"><i className="bg-fnx-naranja" /><i /><i /><i /><i className="bg-fnx-naranja" /><i /></div>
+        </div>
+        <div className="ev-app ev-bolsa ev-pop" style={d(2.4)} aria-hidden="true">
+          <u />
+          <span className="headline text-sm text-fnx-negro">FNX</span>
+        </div>
       </div>
     </Escena>
   );
 }
 
+
 export function EscenaAudiovisual() {
+  const reloj = (n: number) => `00:0${Math.floor(n / 24) % 10}:${String(n % 24).padStart(2, "0")}`;
   return (
-    <Escena etiqueta="Animación: una línea de tiempo de video con clips que se acomodan y un cursor que avanza.">
+    <Escena etiqueta="Animación: una línea de tiempo de edición de video con varias pistas, un cursor que avanza y un corte de cuchilla.">
+      {(play) => <Edicion play={play} reloj={reloj} />}
+    </Escena>
+  );
+}
+
+function Edicion({ play, reloj }: { play: boolean; reloj: (n: number) => string }) {
+  const f = useCuenta(play, 0, 1, 42, 239);
+  return (
+    <>
       <p className="ev-tag">Idea · filmación · edición</p>
-      <div className="ev-monitor ev-pop" style={d(0.1)}>
-        <Play className="h-7 w-7 fill-fnx-crema text-fnx-crema" aria-hidden="true" />
+      <div className="ev-monitor" aria-hidden="true">
+        <Play className="h-6 w-6 fill-fnx-crema text-fnx-crema" />
         <span className="ev-rec">REC</span>
+        <span className="ev-codigo">{reloj(f)}</span>
       </div>
       <div className="ev-onda" aria-hidden="true">
-        {Array.from({ length: 14 }, (_, i) => (
+        {Array.from({ length: 12 }, (_, i) => (
           <i key={i} style={{ animationDelay: `${i * 0.09}s` }} />
         ))}
       </div>
-      <div className="ev-timeline" aria-hidden="true">
-        <span className="ev-clip ev-entra" style={{ left: "2%", width: "30%", ...d(0.6) }} />
-        <span className="ev-clip ev-entra ev-clip-n" style={{ left: "34%", width: "22%", ...d(0.9) }} />
-        <span className="ev-clip ev-entra" style={{ left: "58%", width: "38%", ...d(1.2) }} />
+      <div className="ev-timeline ev-pistas" aria-hidden="true">
+        <div className="ev-regla">{Array.from({ length: 13 }, (_, i) => <i key={i} />)}</div>
+        <div className="ev-pista"><span className="ev-clip ev-entra" style={{ left: "0%", width: "26%", ...d(0.2) }} /><span className="ev-clip ev-clip-n ev-entra" style={{ left: "28%", width: "20%", ...d(0.4) }} /><span className="ev-clip ev-entra ev-corte" style={{ left: "50%", width: "48%", ...d(0.6) }} /></div>
+        <div className="ev-pista"><span className="ev-clip ev-clip-g ev-entra" style={{ left: "10%", width: "34%", ...d(0.8) }} /><span className="ev-clip ev-clip-g ev-entra" style={{ left: "46%", width: "30%", ...d(1.0) }} /></div>
+        <div className="ev-pista"><span className="ev-clip ev-clip-a ev-entra" style={{ left: "0%", width: "96%", ...d(1.2) }} /></div>
         <span className="ev-cursor" />
       </div>
-    </Escena>
+    </>
   );
 }
 
@@ -112,21 +144,41 @@ export function EscenaTienda() {
 
 export function EscenaRedes() {
   return (
-    <Escena etiqueta="Animación: un calendario semanal donde cada publicación se enciende y suma me gusta.">
+    <Escena etiqueta="Animación: un panel de redes con una publicación programada, el alcance que sube y un calendario que se enciende día por día.">
+      {(play) => <PanelRedes play={play} />}
+    </Escena>
+  );
+}
+
+function PanelRedes({ play }: { play: boolean }) {
+  const alcance = useCuenta(play, 12400, 173, 120, 48000);
+  return (
+    <>
       <p className="ev-tag">Calendario · diseño · textos</p>
-      <div className="ev-calendario" aria-hidden="true">
-        {Array.from({ length: 14 }, (_, i) => (
-          <span key={i} className={cn("ev-dia", i % 2 === 0 || i === 5 ? "ev-dia-on" : "")} style={{ animationDelay: `${0.3 + (i % 7) * 0.22}s` }} />
+      <div className="ev-post ev-pop" style={d(0.1)} aria-hidden="true">
+        <div className="ev-post-img"><span className="headline text-lg text-fnx-crema">FNX</span></div>
+        <div className="flex items-center justify-between px-1.5 pt-1">
+          <Heart className="h-3.5 w-3.5 fill-fnx-naranja text-fnx-naranja" />
+          <span className="ev-estado"><b>Programado</b><b>Publicado</b></span>
+        </div>
+      </div>
+      <div className="ev-kpi ev-sube" style={d(0.6)} aria-hidden="true">
+        <span>Alcance</span>
+        <strong className="headline text-2xl text-fnx-crema tabular-nums">{miles(alcance)}</strong>
+        <span className="ev-delta">↑ en vivo</span>
+      </div>
+      <div className="ev-barras" aria-hidden="true">
+        {[34, 48, 40, 62, 55, 78, 92].map((h, i) => (
+          <i key={i} style={{ height: `${h}%`, animationDelay: `${0.9 + i * 0.12}s` }} />
         ))}
       </div>
-      <div className="ev-likes ev-pop" style={d(1.8)}>
-        <Heart className="h-5 w-5 fill-fnx-naranja text-fnx-naranja" aria-hidden="true" />
-        <b className="headline text-xl text-fnx-crema">+1.240</b>
+      <div className="ev-dias" aria-hidden="true">
+        {["L", "M", "X", "J", "V", "S", "D"].map((l, i) => (
+          <span key={l} className="ev-dia2" style={{ animationDelay: `${0.8 + i * 0.5}s` }}>{l}</span>
+        ))}
+        <em className="ev-barrido" />
       </div>
-      <p className="ev-aprueba ev-sube" style={d(2.4)}>
-        Vos aprobás · nosotros publicamos
-      </p>
-    </Escena>
+    </>
   );
 }
 

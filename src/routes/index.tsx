@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
+  ArrowDown,
   ArrowRight,
   ClipboardList,
   FileCheck2,
@@ -176,7 +177,7 @@ function Home() {
       {/* Propuesta de valor */}
       <section
         aria-labelledby="valor-titulo"
-        className="red-fondo-movil relative overflow-hidden border-y border-border bg-background max-lg:flex max-lg:min-h-[100svh] max-lg:flex-col lg:flex lg:aspect-video lg:min-h-[36rem] lg:items-center"
+        className="red-fondo-movil relative overflow-hidden border-y border-border bg-background max-lg:flex max-lg:min-h-[max(100svh,46rem)] max-lg:flex-col lg:flex lg:aspect-video lg:min-h-[36rem] lg:items-center"
       >
         <RedVidrioAncha />
         <div className="relative z-10 mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28 lg:py-0">
@@ -194,18 +195,28 @@ function Home() {
             <Pieces lit={1} className="mt-4" />
           </Reveal>
         </div>
-        <div className="relative z-10 flex flex-1 items-center overflow-hidden lg:hidden">
-          <RedVidrio className="w-[128%] max-w-none -translate-x-[3%]" />
+        <div className="absolute inset-x-0 bottom-0 z-0 lg:hidden">
+          <RedVidrio />
         </div>
       </section>
 
-      {/* Prueba de marca */}
+      {/* Prueba de marca: las 5 señales se encienden de a una y la luz lleva hasta el botón */}
       <Section id="prueba-marca" lead="¿Tu marca" accent="pasa desapercibida?" className="pb-0 pt-12 sm:pt-16">
-        <Reveal className="flex flex-col items-start gap-6">
+        <Reveal className="flex flex-col items-start gap-5">
           <p className="max-w-2xl text-lg text-muted-foreground">
             Hacé la prueba de 1 minuto y mirá cuántas de las 5 señales te pasan.
           </p>
-          <Button asChild variant="area" size="lg">
+          <ul className="guia-senales flex flex-wrap gap-2" aria-label="Las 5 señales de una marca que pasa desapercibida">
+            {["Identidad", "Imagen", "Tienda", "Constancia", "Estrategia"].map((t, i) => (
+              <li key={t} className="guia-chip" style={{ animationDelay: `${i * 0.45}s` }}>
+                {t}
+              </li>
+            ))}
+          </ul>
+          <div className="guia-flecha" aria-hidden="true">
+            <ArrowDown className="h-6 w-6" />
+          </div>
+          <Button asChild variant="area" size="lg" pulse className="guia-boton">
             <Link to="/tu-marca">Hacé la prueba</Link>
           </Button>
         </Reveal>

@@ -176,7 +176,7 @@ function Home() {
       {/* Propuesta de valor */}
       <section
         aria-labelledby="valor-titulo"
-        className="relative overflow-hidden border-y border-border bg-background lg:flex lg:aspect-video lg:min-h-[36rem] lg:items-center"
+        className="red-fondo-movil relative overflow-hidden border-y border-border bg-background max-lg:flex max-lg:min-h-[100svh] max-lg:flex-col lg:flex lg:aspect-video lg:min-h-[36rem] lg:items-center"
       >
         <RedVidrioAncha />
         <div className="relative z-10 mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28 lg:py-0">
@@ -194,13 +194,13 @@ function Home() {
             <Pieces lit={1} className="mt-4" />
           </Reveal>
         </div>
-        <div className="red-aura relative z-10 -mt-6 pb-16 lg:hidden">
-          <RedVidrio />
+        <div className="relative z-10 flex flex-1 items-center overflow-hidden lg:hidden">
+          <RedVidrio className="w-[128%] max-w-none -translate-x-[3%]" />
         </div>
       </section>
 
       {/* Prueba de marca */}
-      <Section id="prueba-marca" lead="¿Tu marca" accent="pasa desapercibida?" className="py-16 sm:py-20">
+      <Section id="prueba-marca" lead="¿Tu marca" accent="pasa desapercibida?" className="pb-0 pt-12 sm:pt-16">
         <Reveal className="flex flex-col items-start gap-6">
           <p className="max-w-2xl text-lg text-muted-foreground">
             Hacé la prueba de 1 minuto y mirá cuántas de las 5 señales te pasan.
@@ -217,6 +217,7 @@ function Home() {
         eyebrow="Proceso"
         lead="Cómo"
         accent="trabajamos."
+        className="pt-10 sm:pt-14"
         tldr="Lo que nos contás es confidencial: cuidamos tus datos y solo los compartimos con los profesionales que trabajen en tu caso, con tu acuerdo."
       >
         <ol className="grid gap-4 md:grid-cols-3">

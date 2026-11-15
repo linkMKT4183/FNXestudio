@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Reveal, Section } from "@/components/fnx/primitives";
-import { ExpandCard } from "@/components/fnx/cards";
-import { FnxImage } from "@/components/fnx/FnxImage";
+import { EscenaAudiovisual, EscenaBranding, EscenaEstrategia, EscenaRedes, EscenaTienda } from "@/components/estudio/Escenas";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
@@ -59,35 +58,35 @@ const SERVICES = [
     short: "Que tu marca se reconozca.",
     detail:
       "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
-    img: IMG.branding,
+    escena: EscenaBranding,
   },
   {
     icon: Clapperboard,
     title: "Producción audiovisual",
     short: "Foto y video con idea.",
     detail: "Piezas para redes, campañas y web. Planificadas, filmadas y editadas por nosotros.",
-    img: IMG.audiovisual,
+    escena: EscenaAudiovisual,
   },
   {
     icon: ShoppingBag,
     title: "Tienda online",
     short: "Vender mientras dormís.",
     detail: "Armamos tu tienda, cargamos productos y la dejamos lista para cobrar.",
-    img: IMG.tienda,
+    escena: EscenaTienda,
   },
   {
     icon: Smartphone,
     title: "Redes y contenido",
     short: "Constancia sin perder tiempo.",
     detail: "Calendario, diseño y textos. Vos aprobás, nosotros publicamos.",
-    img: IMG.redes,
+    escena: EscenaRedes,
   },
   {
     icon: Target,
     title: "Estrategia",
     short: "Ver la jugada antes.",
     detail: "Ordenamos objetivos, público y mensajes antes de invertir en pauta.",
-    img: IMG.estrategia,
+    escena: EscenaEstrategia,
   },
 ];
 
@@ -163,20 +162,31 @@ function Estudio() {
       </section>
 
       <Section id="servicios" eyebrow="Servicios" lead="Lo que" accent="hacemos.">
-        <div className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 70}>
-              <ExpandCard
-                title={s.title}
-                icon={s.icon}
-                kicker={<span className="text-sm text-muted-foreground">{s.short}</span>}
-                media={<FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />}
-              >
-                {s.detail}
-              </ExpandCard>
-            </Reveal>
-          ))}
-        </div>
+        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((s, i) => {
+            const Escena = s.escena;
+            return (
+              <Reveal as="li" key={s.title} delay={i * 70}>
+                <article className="carrusel-marco flex h-full flex-col gap-4 rounded-[1.6rem] p-2.5">
+                  <div className="overflow-hidden rounded-[1.2rem]">
+                    <Escena />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 px-3.5 pb-4">
+                    <p className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                      <span>
+                        <span className="text-foreground">{String(i + 1).padStart(2, "0")}</span> / {String(SERVICES.length).padStart(2, "0")}
+                      </span>
+                      <s.icon className="h-4 w-4 text-area" aria-hidden="true" />
+                    </p>
+                    <h3 className="headline text-3xl text-foreground">{s.title}</h3>
+                    <p className="font-semibold text-area">{s.short}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{s.detail}</p>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </ol>
       </Section>
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />

@@ -38,4 +38,9 @@ describe("WhatsApp links", () => {
   it("points the manual to the Canva link", () => {
     expect(MANUAL_URL).toBe("https://www.canva.com/d/SYr8B-ZM5BWGkRt");
   });
+  it("builds the 15-minute consultation message link", () => {
+    expect(buildWhatsAppLink("consultoria15", "5492611234567")).toBe(
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, escribo MARCA: quiero mi consultoría de 15 minutos")}`,
+    );
+  });
 });

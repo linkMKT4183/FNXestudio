@@ -14,6 +14,7 @@ export const WHATSAPP_MESSAGES = {
   salud: "Hola FNX, necesito orientación de FNX Salud (+18)",
   novedades: "Hola FNX, quiero recibir novedades",
   guia: "Hola FNX, quiero recibir la guía ¿FNX puede ayudarte?",
+  consultoria15: "Hola FNX, escribo MARCA: quiero mi consultoría de 15 minutos",
   red: "Hola FNX, soy profesional y quiero postularme a la Red FNX",
 } as const;
 
@@ -50,6 +51,7 @@ export const EMAIL_SUBJECTS = {
   novedades: "Quiero recibir novedades por mail",
   guia: "Quiero la guía paso a paso",
   guiaFnx: "Quiero la guía ¿FNX puede ayudarte?",
+  consultoria15: "Quiero mi consultoría de 15 minutos",
   red: "Postulación a la Red de Profesionales FNX",
 } as const;
 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   ClipboardList,
@@ -39,7 +40,7 @@ const AREA_NODES: NetworkNode[] = [
 const CHAT_INICIO = [
   {
     q: "Hola FNX, quiero hacer crecer mi marca",
-    a: "¡Hola! Contanos a qué te dedicás y qué querés lograr, y te armamos una propuesta a medida.",
+    a: "Hola. Contanos a qué te dedicás y qué querés lograr, y te armamos una propuesta a medida.",
   },
   {
     q: "Necesito asesoría para mi proyecto",
@@ -239,6 +240,18 @@ function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* Prueba de marca */}
+      <Section id="prueba-marca" lead="¿Tu marca" accent="pasa desapercibida?" className="py-16 sm:py-20">
+        <Reveal className="flex flex-col items-start gap-6">
+          <p className="max-w-2xl text-lg text-muted-foreground">
+            Hacé la prueba de 1 minuto y mirá cuántas de las 5 señales te pasan.
+          </p>
+          <Button asChild variant="area" size="lg">
+            <Link to="/tu-marca">Hacé la prueba</Link>
+          </Button>
+        </Reveal>
+      </Section>
 
       {/* Cómo trabajamos */}
       <Section

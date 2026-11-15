@@ -59,7 +59,7 @@ export function FlipCard({
     };
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.intersectionRatio >= 0.6) {
+        if (entry && entry.intersectionRatio >= 0.6) {
           if (start === undefined && cycle === undefined) {
             start = window.setTimeout(() => {
               showBack();

@@ -57,7 +57,7 @@ const RED_CONSULTORIA: NetworkNode[] = [
 const CHAT_CONSULTORIA = [
   {
     q: "Hola FNX, quiero regularizar mi proyecto",
-    a: "¡Hola! Contanos en qué etapa está y qué documentación tenés. Relevamos y te pasamos un presupuesto a medida.",
+    a: "Hola. Contanos en qué etapa está y qué documentación tenés. Relevamos y te pasamos un presupuesto a medida.",
   },
   {
     q: "¿Pueden constituir la estructura legal?",
@@ -280,7 +280,7 @@ const SERVICES_REGULADO: Service[] = [
       "Asesoramiento y defensa en derecho penal.",
       "Habilitaciones bromatológicas y de alimentos.",
       "Proyectos en otras provincias, con profesionales matriculados en cada jurisdicción.",
-      "Coordinación integral: un solo contacto, un solo presupuesto y una sola entrega.",
+      "Coordinación completa: un solo contacto, un solo presupuesto y una sola entrega.",
     ],
   },
 ];
@@ -332,7 +332,7 @@ const STEPS = [
   "Nos escribís por WhatsApp o redes.",
   "Completás un formulario con tus datos y lo que necesitás.",
   "Entrevista inicial: definimos qué necesitás y qué profesionales intervienen.",
-  "Recibís un presupuesto integral antes de empezar (presupuesto firmado y 50% de anticipo).",
+  "Recibís un presupuesto completo antes de empezar (presupuesto firmado y 50% de anticipo).",
   "La red de profesionales de FNX hace su parte y FNX coordina y entrega.",
   "Te ofrecemos un servicio recurrente, como el mantenimiento, para seguir acompañándote.",
 ];

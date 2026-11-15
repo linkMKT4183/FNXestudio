@@ -16,6 +16,7 @@ import { Route as MarcaRouteImport } from './routes/marca'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as RedRouteImport } from './routes/red'
 import { Route as SaludRouteImport } from './routes/salud'
+import { Route as TuMarcaRouteImport } from './routes/tu-marca'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const SaludRoute = SaludRouteImport.update({
   path: '/salud',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TuMarcaRoute = TuMarcaRouteImport.update({
+  id: '/tu-marca',
+  path: '/tu-marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/tu-marca': typeof TuMarcaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/tu-marca': typeof TuMarcaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/tu-marca': typeof TuMarcaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/tu-marca'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/tu-marca'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/tu-marca'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   NoticiasRoute: typeof NoticiasRoute
   RedRoute: typeof RedRoute
   SaludRoute: typeof SaludRoute
+  TuMarcaRoute: typeof TuMarcaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SaludRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tu-marca': {
+      id: '/tu-marca'
+      path: '/tu-marca'
+      fullPath: '/tu-marca'
+      preLoaderRoute: typeof TuMarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   NoticiasRoute: NoticiasRoute,
   RedRoute: RedRoute,
   SaludRoute: SaludRoute,
+  TuMarcaRoute: TuMarcaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

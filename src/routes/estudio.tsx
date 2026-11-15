@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Reveal, Section } from "@/components/fnx/primitives";
@@ -15,7 +16,7 @@ import { OG_IMAGE_META, pageUrl } from "@/config/site";
 const CHAT_ESTUDIO = [
   {
     q: "Hola FNX, quiero renovar mi marca",
-    a: "¡Hola! Agendemos una consultoría de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
+    a: "Hola. Agendemos una consultoría de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
   },
   {
     q: "Necesito contenido para redes",
@@ -179,6 +180,17 @@ function Estudio() {
       </Section>
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
+
+      <section className="mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8" aria-label="Prueba de marca">
+        <Reveal className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-base font-semibold text-foreground">
+            ¿Tu marca pasa desapercibida? Hacé la prueba de 1 minuto con las 5 señales.
+          </p>
+          <Button asChild variant="area" size="default">
+            <Link to="/tu-marca">Hacé la prueba</Link>
+          </Button>
+        </Reveal>
+      </section>
 
       <section
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"

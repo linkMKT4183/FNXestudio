@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake, Newspaper, PenTool, Scale, Users, type LucideIcon } from "lucide-react";
+import { ArrowDown, ArrowRight, HeartHandshake, Newspaper, PenTool, Scale, Users, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/fnx/primitives";
 import { trackEvent } from "@/lib/track";
 import { cn } from "@/lib/utils";
@@ -31,6 +31,10 @@ const PUERTAS: Puerta[] = [
 export function Puertas() {
   return (
     <nav aria-label="Elegí por dónde empezar">
+      <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-fnx-crema/70 md:hidden">
+        Elegí por dónde empezar
+        <ArrowDown className="h-4 w-4 text-area" aria-hidden="true" />
+      </p>
       <Reveal as="ul" stagger variant="left" className="grid gap-2.5 md:grid-cols-4 md:gap-4">
         {PUERTAS.map((p) => (
           <li key={p.to} data-area={p.area} className={cn("min-w-0", p.soloCelular && "md:hidden")}>
@@ -44,6 +48,8 @@ export function Puertas() {
 
 function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
   const color = area ? "area" : "crema";
+  // En celular un solo color: la puerta principal (Estudio) va en naranja y las demás en neutro, para que se vea dónde tocar.
+  const principal = area === "estudio";
   return (
     <Link
       to={to}
@@ -51,7 +57,9 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
       className={cn(
         "puerta spot group relative flex h-[68px] min-w-0 items-center gap-3 rounded-full border bg-background/60 p-2.5 pr-3 backdrop-blur-md md:h-[76px]",
         color === "area"
-          ? "border-area/40 hover:border-area"
+          ? principal
+            ? "border-area/60 hover:border-area"
+            : "border-fnx-crema/20 hover:border-area md:border-area/40"
           : "border-fnx-crema/30 hover:border-fnx-crema",
       )}
     >
@@ -59,7 +67,11 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         aria-hidden="true"
         className={cn(
           "puerta-icono inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full md:h-[52px] md:w-[52px]",
-          color === "area" ? "bg-area text-area-foreground icon-glossy" : "bg-fnx-crema text-fnx-negro",
+          color === "area"
+            ? principal
+              ? "bg-area text-area-foreground icon-glossy"
+              : "bg-fnx-grafito text-fnx-crema ring-1 ring-fnx-crema/15 md:bg-area md:text-area-foreground md:ring-0 md:icon-glossy"
+            : "bg-fnx-grafito text-fnx-crema ring-1 ring-fnx-crema/15 md:bg-fnx-crema md:text-fnx-negro md:ring-0",
         )}
       >
         <Icon className="h-6 w-6" strokeWidth={1.9} />
@@ -68,10 +80,11 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         <span
           className={cn(
             "truncate text-[0.62rem] font-bold uppercase tracking-[0.14em]",
-            color === "area" ? "text-area" : "text-fnx-crema",
+            color === "area" ? (principal ? "text-area" : "text-fnx-crema/70 md:text-area") : "text-fnx-crema",
           )}
         >
           {kicker}
+          {principal ? <span className="ml-2 rounded-full bg-area/15 px-2 py-0.5 text-[0.58rem] tracking-[0.1em] text-area md:hidden">Empezá acá</span> : null}
         </span>
         <span className="headline line-clamp-2 pt-[0.28em] text-[0.98rem] leading-[1.05] text-foreground md:text-[1.02rem]">
           {title}
@@ -81,7 +94,11 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         aria-hidden="true"
         className={cn(
           "puerta-flecha inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full md:h-10 md:w-10",
-          color === "area" ? "bg-area text-area-foreground icon-glossy" : "bg-fnx-crema text-fnx-negro",
+          color === "area"
+            ? principal
+              ? "bg-area text-area-foreground icon-glossy"
+              : "bg-fnx-crema/10 text-fnx-crema md:bg-area md:text-area-foreground md:icon-glossy"
+            : "bg-fnx-crema/10 text-fnx-crema md:bg-fnx-crema md:text-fnx-negro",
         )}
       >
         <ArrowRight className="h-[1.1rem] w-[1.1rem]" strokeWidth={2.2} />

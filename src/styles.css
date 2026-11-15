@@ -1357,3 +1357,113 @@
   object-fit: cover;
   filter: saturate(1.1) contrast(1.08);
 }
+
+/* Tu marca: la home actual flotando + panel de crecimiento (sin recuadro ni fondo) */
+.crec-halo {
+  position: absolute;
+  inset: -10% -14%;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--fnx-naranja) 32%, transparent), transparent 72%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+.crec-navegador {
+  border-radius: 1.1rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--fnx-naranja) 55%, transparent);
+  background: var(--fnx-negro);
+  box-shadow:
+    0 30px 70px -20px rgb(0 0 0 / 0.8),
+    0 0 60px -12px color-mix(in oklab, var(--fnx-naranja) 55%, transparent);
+  transform: perspective(1400px) rotateY(-9deg) rotateX(4deg) rotateZ(-1.5deg);
+  width: 88%;
+  margin-left: 12%;
+}
+.crec-barra {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.8rem;
+  background: color-mix(in oklab, var(--fnx-grafito) 90%, black);
+}
+.crec-barra span {
+  height: 0.55rem;
+  width: 0.55rem;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--fnx-naranja) 70%, var(--fnx-crema));
+  opacity: 0.8;
+}
+.crec-barra em {
+  margin-left: 0.6rem;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: rgb(243 238 228 / 0.6);
+}
+.crec-globo {
+  position: absolute;
+  left: 0;
+  top: 18%;
+  display: grid;
+  height: 4.6rem;
+  width: 4.6rem;
+  place-items: center;
+  border-radius: 1.2rem;
+  box-shadow: 0 18px 40px -10px color-mix(in oklab, var(--fnx-naranja) 70%, transparent);
+}
+.crec-panel {
+  position: absolute;
+  right: -2%;
+  bottom: 0;
+  width: min(66%, 20rem);
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, var(--fnx-naranja) 55%, transparent);
+  background: linear-gradient(160deg, color-mix(in oklab, var(--fnx-naranja) 12%, var(--fnx-grafito)), color-mix(in oklab, var(--fnx-negro) 92%, transparent));
+  box-shadow: 0 24px 50px -16px rgb(0 0 0 / 0.85), 0 0 40px -10px color-mix(in oklab, var(--fnx-naranja) 55%, transparent);
+  backdrop-filter: blur(8px);
+}
+.crec-aviso {
+  position: absolute;
+  right: 4%;
+  top: -0.4rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--fnx-naranja) 60%, transparent);
+  background: color-mix(in oklab, var(--fnx-negro) 85%, transparent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--fnx-crema);
+  animation: crec-aviso 2.4s var(--ease-fnx) forwards;
+}
+.crec-pulso {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: crec-pulso 1.4s ease-out infinite;
+}
+.crec-flota { animation: crec-flota 7s ease-in-out infinite; }
+.crec-flota-b { animation: crec-flota 5.5s ease-in-out -2s infinite; }
+.crec-flota-c { animation: crec-flota 6.2s ease-in-out -1s infinite; }
+@keyframes crec-flota {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+@keyframes crec-pulso {
+  from { transform: scale(0.5); opacity: 0.6; }
+  to { transform: scale(1.8); opacity: 0; }
+}
+@keyframes crec-aviso {
+  0% { opacity: 0; transform: translateY(14px) scale(0.9); }
+  15%, 70% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-16px) scale(0.98); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crec-flota, .crec-flota-b, .crec-flota-c, .crec-pulso, .crec-aviso { animation: none; }
+}
+
+/* Celular: menos colores. Los chips no laten ni brillan en el color del área: se ve claro dónde tocar. */
+@media (max-width: 767px) {
+  .fnx-chip-pulse::after { animation: none; box-shadow: none; opacity: 0; }
+}

@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 /** Las 9 placas del carrusel «Tu marca pasa desapercibida», con la duración de cada animación en segundos. */
 export const PLACAS = [
-  { n: "01", dur: 8, label: "Tu web con crecimiento" },
   { n: "02", dur: 6, label: "Las cinco señales" },
   { n: "03", dur: 6, label: "Señal 1: identidad" },
   { n: "04", dur: 6, label: "Señal 2: imagen" },
@@ -141,7 +140,7 @@ export function CarruselTuMarca({ className }: { className?: string }) {
                 aria-label={`${k + 1} de ${PLACAS.length}: ${p.label}`}
                 className="min-w-0 shrink-0 grow-0 basis-full"
               >
-                <div className={cn("relative aspect-[4/5]", k === 0 ? "placa-luz grid place-items-center" : "bg-background")}>
+                <div className="relative aspect-[4/5] bg-background">
                   <video
                     ref={(el) => {
                       videos.current[k] = el;
@@ -152,7 +151,7 @@ export function CarruselTuMarca({ className }: { className?: string }) {
                     preload={k === actual || k === (actual + 1) % PLACAS.length ? "auto" : "none"}
                     poster={`/media/carrusel/placa-${p.n}.webp`}
                     aria-hidden="true"
-                    className={cn("w-full", k === 0 ? "placa-sin-fondo" : "h-full object-cover")}
+                    className="h-full w-full object-cover"
                   >
                     <source src={`/media/carrusel/placa-${p.n}.mp4`} type="video/mp4" />
                   </video>

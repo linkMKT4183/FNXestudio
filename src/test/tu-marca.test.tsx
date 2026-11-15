@@ -46,9 +46,9 @@ import { TuMarca } from "@/routes/tu-marca";
 });
 
 describe("carrusel animado", () => {
-  it("tiene las 9 placas, sin repetir el titular, con el botón de WhatsApp abajo", () => {
+  it("tiene las 8 placas, sin repetir el titular, con el botón de WhatsApp abajo", () => {
     render(<TuMarca />);
-    expect(screen.getAllByRole("group", { name: /de 9:/ }).length).toBe(9);
+    expect(screen.getAllByRole("group", { name: /de 8:/ }).length).toBe(8);
     expect(screen.queryByText(/Uno que se destaca/)).toBeNull();
     expect(screen.getAllByText("Escribinos por WhatsApp").length).toBeGreaterThan(0);
   });

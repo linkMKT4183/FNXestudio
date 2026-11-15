@@ -127,7 +127,8 @@ function Home() {
               fondo; en computadora va a la derecha y el degradé deja el título legible. */}
           <div
             ref={parallaxRef}
-            className="absolute inset-x-0 -top-16 bottom-0 md:left-auto md:w-[62%] md:[mask-image:linear-gradient(to_right,transparent,black_35%)] lg:w-[55%]"
+            style={{ backgroundImage: "url(/media/inicio-fondo-poster.webp)" }}
+            className="absolute inset-x-0 -top-16 bottom-0 bg-cover bg-[position:50%_0%] opacity-70 md:left-auto md:bg-none md:opacity-100 md:w-[62%] md:[mask-image:linear-gradient(to_right,transparent,black_35%)] lg:w-[55%]"
           >
             <video
               autoPlay
@@ -137,14 +138,14 @@ function Home() {
               preload="metadata"
               poster="/media/inicio-fondo-poster.webp"
               aria-hidden="true"
-              className="h-full w-full object-cover object-[50%_0%] md:pt-16"
+              className="h-full w-full object-cover object-[50%_0%] max-md:hidden md:pt-16"
             >
               <source src="/media/inicio-fondo-720.mp4" type="video/mp4" media="(max-width: 767px)" />
               <source src="/media/inicio-fondo.mp4" type="video/mp4" />
             </video>
           </div>
           <span className="hero-sweep" />
-          <span className="absolute inset-0 bg-background/45 md:bg-transparent md:bg-gradient-to-r md:from-background md:via-background/60 md:to-transparent" />
+          <span className="absolute inset-0 bg-background/75 md:bg-transparent md:bg-gradient-to-r md:from-background md:via-background/60 md:to-transparent" />
           <span className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
         </div>
 

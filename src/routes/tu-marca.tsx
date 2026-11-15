@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Headline, IconBadge, Reveal, Section } from "@/components/fnx/primitives";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { CrecimientoFlotante } from "@/components/tu-marca/CrecimientoFlotante";
 import { CarruselTuMarca } from "@/components/tu-marca/CarruselTuMarca";
 import { PruebaMarca } from "@/components/tu-marca/PruebaMarca";
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
@@ -62,10 +63,16 @@ export function TuMarca() {
           </div>
         </Reveal>
               <Reveal delay={200} variant="zoom" className="mx-auto w-full">
-          <CarruselTuMarca />
+          <CrecimientoFlotante />
         </Reveal>
       </section>
       </div>
+
+      <Section id="carrusel" eyebrow="El carrusel" lead="Mirá cómo se ve una marca" accent="que se nota.">
+        <Reveal variant="zoom">
+          <CarruselTuMarca />
+        </Reveal>
+      </Section>
 
       <Section id="prueba" eyebrow="Prueba de 1 minuto" lead="Marcá cuántas te pasan" accent="a vos.">
         <PruebaMarca />

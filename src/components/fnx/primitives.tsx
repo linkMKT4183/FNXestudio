@@ -1,4 +1,5 @@
 import {
+  Fragment,
   useEffect,
   useRef,
   useState,
@@ -7,6 +8,7 @@ import {
   type RefObject,
 } from "react";
 import type { LucideIcon } from "lucide-react";
+import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 import logoCrema from "@/assets/brand/fnx-logo-crema.png";
 
@@ -95,17 +97,20 @@ export function Reveal({
   className,
   delay = 0,
   as: Tag = "div",
+  stagger = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   as?: ElementType;
+  /** Los hijos directos entran uno tras otro (80 ms entre cada uno). */
+  stagger?: boolean;
 }) {
   const [ref, visible] = useInView<HTMLElement>();
   return (
     <Tag
       ref={ref}
-      className={cn("reveal", visible && "is-visible", className)}
+      className={cn("reveal", stagger && "reveal-stagger", visible && "is-visible", className)}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
@@ -127,29 +132,60 @@ export function TenSeconds({ children, className }: { children: ReactNode; class
   );
 }
 
-/** Titular Anton con la última palabra/frase en el color de acento. */
+/**
+ * Titular Anton con la última palabra/frase en el color de acento.
+ * Entra por palabras (suben y pasan de borroso a nítido); la parte en color entra después y un brillo la cruza una vez.
+ * El texto completo queda en aria-label: los lectores de pantalla no leen palabra por palabra.
+ */
 export function Headline({
   lead,
   accent,
   as: Tag = "h2",
   className,
   id,
+  underline = false,
 }: {
   lead?: string | undefined;
   accent: string;
   as?: ElementType;
   className?: string;
   id?: string | undefined;
+  /** Dibuja un subrayado bajo la última palabra. */
+  underline?: boolean;
 }) {
   const [ref, visible] = useInView<HTMLElement>();
+  const leadWords = lead ? lead.split(" ").filter(Boolean) : [];
+  const accentWords = accent.split(" ").filter(Boolean);
+  const total = leadWords.length + accentWords.length;
+  const label = [...leadWords, ...accentWords].join(" ");
+  const words = [
+    ...leadWords.map((w, k) => ({ w, k, acc: false })),
+    ...accentWords.map((w, k) => ({ w, k: leadWords.length + k, acc: true })),
+  ];
   return (
     <Tag
       ref={ref}
       id={id}
-      className={cn("headline headline-reveal text-foreground", visible && "is-visible", className)}
+      aria-label={label}
+      className={cn("headline text-foreground", visible && "is-visible", className)}
     >
-      {lead ? <>{lead} </> : null}
-      <span className="text-area">{accent}</span>
+      {words.map(({ w, k, acc }) => (
+        <Fragment key={`${k}-${w}`}>
+          <span
+            aria-hidden="true"
+            data-t={acc ? w : undefined}
+            className={cn(
+              "w-reveal",
+              acc && "w-accent text-area",
+              acc && underline && k === total - 1 && "u-draw",
+            )}
+            style={{ "--i": k + (acc ? 2 : 0) } as CSSProperties}
+          >
+            {w}
+          </span>
+          {k < total - 1 ? " " : null}
+        </Fragment>
+      ))}
     </Tag>
   );
 }

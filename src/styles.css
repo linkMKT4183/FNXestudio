@@ -557,3 +557,334 @@
   0%, 70% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* =====================================================================================================
+   MOVIMIENTO DE TEXTOS Y BOTONES (lenguaje de movimiento de FNX: natural, sin rebotes)
+   Curva .16,1,.3,1 · entradas de 700-900 ms · microinteracciones de 180-300 ms.
+   Con "reducir movimiento" quedan quietos; sin JavaScript todo se ve (ver @media (scripting: none)).
+   ===================================================================================================== */
+:root {
+  --ease-fnx: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Titular por palabras */
+.w-reveal {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(14px);
+}
+.is-visible > .w-reveal {
+  animation: w-in 0.9s var(--ease-fnx) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes w-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+/* La parte en color: un brillo tenue la cruza una sola vez */
+.w-accent {
+  position: relative;
+}
+.w-accent::after {
+  content: attr(data-t);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: linear-gradient(100deg, transparent 40%, rgb(255 255 255 / 0.85) 50%, transparent 60%)
+    no-repeat;
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+}
+.is-visible > .w-accent::after {
+  animation: w-sheen 1.2s var(--ease-fnx) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 500ms);
+}
+@keyframes w-sheen {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+/* Subrayado que se dibuja */
+.u-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 3px;
+  padding-bottom: 0.04em;
+}
+.is-visible > .u-draw {
+  animation:
+    w-in 0.9s var(--ease-fnx) both,
+    u-draw 0.9s var(--ease-fnx) 0.9s forwards;
+  animation-delay: calc(var(--i, 0) * 70ms), 0.9s;
+}
+@keyframes u-draw {
+  to {
+    background-size: 100% 3px;
+  }
+}
+
+/* Párrafos, listas y tarjetas: suben y se enfocan; los hijos de .reveal-stagger entran de a uno */
+.reveal {
+  filter: blur(8px);
+  transition:
+    opacity 0.7s var(--ease-fnx),
+    transform 0.7s var(--ease-fnx),
+    filter 0.7s var(--ease-fnx);
+}
+.reveal.is-visible {
+  filter: blur(0);
+}
+.reveal-stagger {
+  filter: none;
+}
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(8px);
+}
+.reveal-stagger.is-visible > * {
+  animation: reveal-child 0.7s var(--ease-fnx) both;
+}
+.reveal-stagger.is-visible > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.reveal-stagger.is-visible > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.reveal-stagger.is-visible > :nth-child(4) {
+  animation-delay: 240ms;
+}
+.reveal-stagger.is-visible > :nth-child(5) {
+  animation-delay: 320ms;
+}
+.reveal-stagger.is-visible > :nth-child(6) {
+  animation-delay: 400ms;
+}
+.reveal-stagger.is-visible > :nth-child(7) {
+  animation-delay: 480ms;
+}
+.reveal-stagger.is-visible > :nth-child(n + 8) {
+  animation-delay: 560ms;
+}
+@keyframes reveal-child {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+/* Etiqueta sobre el titular: entra desde la izquierda (sin cambiar su ancho: sin saltos de layout) */
+.is-visible .eyebrow {
+  animation: eyebrow-in 0.6s var(--ease-fnx) 0.1s both;
+}
+@keyframes eyebrow-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Número que cambia (contador de la prueba): el nuevo entra desde abajo */
+.num-roll {
+  display: inline-block;
+  animation: num-roll 0.35s var(--ease-fnx) both;
+}
+@keyframes num-roll {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+/* Ícono que se enciende al tildar: pop de escala 1 → 1.12 → 1 */
+.icon-pop {
+  animation: icon-pop 0.26s var(--ease-fnx) both;
+}
+@keyframes icon-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Botones principales: levantan, brillan y se hunden al apretar */
+.btn-cta {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.22s var(--ease-fnx),
+    box-shadow 0.3s var(--ease-fnx),
+    filter 0.2s ease;
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+}
+.btn-cta:active {
+  transform: scale(0.97);
+  transition-duration: 0.12s;
+}
+.btn-cta svg {
+  transition: transform 0.25s var(--ease-fnx);
+}
+.btn-cta:hover svg:last-child {
+  transform: translateX(4px);
+}
+.btn-cta:focus-visible {
+  outline: 2px solid var(--area);
+  outline-offset: 4px;
+}
+/* Brillo que cruza el botón (1 s cada 6 s) */
+.btn-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%);
+  animation: btn-shimmer 6s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+.btn-cta:hover::after {
+  animation-play-state: paused;
+  opacity: 0;
+}
+@keyframes btn-shimmer {
+  0%,
+  82% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+/* Botón principal de la sección: halo que late dos veces cada 4 s */
+.btn-pulse {
+  animation: btn-pulse 4s ease-out 1.5s infinite;
+}
+.btn-pulse:hover {
+  animation: none;
+}
+@keyframes btn-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--area) 55%, transparent);
+  }
+  18% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+  20% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--area) 55%, transparent);
+  }
+  38%,
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+/* Botones de contorno: el borde se enciende y una línea se dibuja bajo el texto */
+.btn-ol::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 0.5rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-fnx);
+  pointer-events: none;
+}
+.btn-ol:hover::after {
+  transform: scaleX(1);
+}
+/* Links de texto (pie): subrayado que se dibuja de izquierda a derecha */
+.link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-bottom: 2px;
+  transition: background-size 0.3s var(--ease-fnx);
+}
+.link-draw:hover,
+.link-draw[aria-current="page"] {
+  background-size: 100% 1px;
+}
+
+/* Reducir movimiento: los efectos nuevos quedan quietos y el texto se ve completo */
+@media (prefers-reduced-motion: reduce) {
+  .w-reveal,
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .w-accent::after,
+  .btn-cta::after {
+    display: none;
+  }
+  .btn-pulse,
+  .num-roll,
+  .icon-pop,
+  .is-visible .eyebrow {
+    animation: none !important;
+  }
+  .u-draw {
+    background-size: 100% 3px;
+  }
+  .btn-cta,
+  .btn-cta:hover,
+  .btn-cta:active {
+    transform: none;
+  }
+}
+/* Sin JavaScript no hay observador de scroll: todo se ve */
+@media (scripting: none) {
+  .w-reveal,
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}

@@ -548,7 +548,7 @@ function Consultoria() {
             al cultivo regulado, coordinado por FNX y resuelto por profesionales especializados.
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
-            <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+            <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" pulse />
             <EmailButton account="estudio" topic="consultoria" />
             <Pieces lit={1} />
           </div>

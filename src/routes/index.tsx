@@ -335,7 +335,7 @@ function Home() {
               Contanos qué necesitás y te respondemos por WhatsApp o por mail.
             </p>
             <div className="flex flex-wrap gap-3">
-              <WhatsAppButton topic="marca" />
+              <WhatsAppButton topic="marca" pulse />
               <EmailButton account="estudio" topic="general" />
             </div>
           </div>

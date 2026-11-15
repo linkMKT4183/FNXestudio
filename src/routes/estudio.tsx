@@ -132,7 +132,7 @@ function Estudio() {
               ))}
             </ul>
             <div className="flex flex-wrap items-center gap-3">
-              <WhatsAppButton topic="marca" />
+              <WhatsAppButton topic="marca" pulse />
               <EmailButton account="estudio" topic="marca" />
             </div>
           </Reveal>

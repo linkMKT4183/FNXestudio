@@ -15,6 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
+import { SoundDelegate, SoundToggle } from "./SoundToggle";
 import { FnxImage } from "./FnxImage";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import type { WhatsAppTopic } from "@/config/site";
@@ -222,17 +223,21 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
+      <SoundDelegate />
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-20 sm:px-8">
         <Link to="/" className="rounded-md px-1" aria-label="Fnx, ir al inicio">
           <Logo className="block pt-4 text-[2.6rem] sm:text-5xl" />
         </Link>
 
-        <WhatsAppButton
-          topic={topic}
-          label="Escribinos"
-          size="default"
-          className="hidden md:inline-flex"
-        />
+        <div className="flex items-center gap-2">
+          <SoundToggle />
+          <WhatsAppButton
+            topic={topic}
+            label="Escribinos"
+            size="default"
+            className="hidden md:inline-flex"
+          />
+        </div>
 
         <button
           type="button"
@@ -295,7 +300,7 @@ export function SiteFooter() {
         <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3">
           <Link
             to="/"
-            className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+            className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
           >
             Inicio
           </Link>
@@ -303,7 +308,7 @@ export function SiteFooter() {
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+              className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
             >
               {item.label}
             </Link>

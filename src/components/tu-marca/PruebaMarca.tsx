@@ -3,6 +3,7 @@ import { Calendar, Camera, Fingerprint, ShoppingBag, Target, type LucideIcon } f
 import { IconBadge, TenSeconds } from "@/components/fnx/primitives";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { trackEvent } from "@/lib/track";
+import { playSound } from "@/lib/sonido";
 import { cn } from "@/lib/utils";
 
 export const SENALES: { id: string; icon: LucideIcon; title: string; text: string }[] = [
@@ -25,17 +26,23 @@ export function PruebaMarca() {
   const tier = n <= 1 ? 0 : 1;
   const prev = useRef<number | null>(null);
   useEffect(() => {
-    if (prev.current !== null && prev.current !== tier) trackEvent("test_marca_resultado", { senales: n });
+    if (prev.current !== null && prev.current !== tier) {
+      trackEvent("test_marca_resultado", { senales: n });
+      playSound(tier === 1 ? "correcto" : "suave");
+    }
     prev.current = tier;
   }, [tier, n]);
 
-  const toggle = (id: string) =>
+  const toggle = (id: string) => {
+    const eraMarcada = marcadas.has(id);
+    playSound(eraMarcada ? "popDown" : "pop", eraMarcada ? 0 : n);
     setMarcadas((s) => {
       const next = new Set(s);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return next;
     });
+  };
 
   return (
     <div className="flex flex-col gap-8">
@@ -59,7 +66,7 @@ export function PruebaMarca() {
               />
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-3">
-                  <IconBadge icon={s.icon} size="sm" variant={on ? "solid" : "outline"} />
+                  <IconBadge icon={s.icon} size="sm" variant={on ? "solid" : "outline"} className={on ? "icon-pop" : ""} />
                   <span className="text-lg font-bold text-foreground">{s.title}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
@@ -70,7 +77,11 @@ export function PruebaMarca() {
       </fieldset>
       <div className="flex flex-col items-start gap-4" aria-live="polite">
         <p className="headline text-4xl text-foreground">
-          Te pasan <span className="text-area">{n}</span> de 5
+          Te pasan{" "}
+          <span key={n} className="num-roll text-area">
+            {n}
+          </span>{" "}
+          de 5
         </p>
         <TenSeconds className="max-w-3xl">{resultadoMarca(n)}</TenSeconds>
         <WhatsAppButton topic="consultoria15" label="Quiero mi consultoría de 15 minutos" />

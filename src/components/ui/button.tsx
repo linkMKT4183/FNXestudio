@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:brightness-110",
+        default: "btn-cta bg-primary text-primary-foreground hover:brightness-110",
         destructive: "bg-destructive text-destructive-foreground hover:brightness-110",
         outline:
-          "border border-border bg-transparent text-foreground hover:border-foreground hover:bg-secondary",
+          "btn-ol relative border border-border bg-transparent text-foreground hover:border-area hover:bg-secondary",
         secondary: "bg-secondary text-secondary-foreground hover:bg-accent",
         ghost: "text-foreground hover:bg-secondary",
         link: "text-area underline-offset-4 hover:underline",
-        area: "bg-area text-area-foreground hover:brightness-110 hover:shadow-glow",
+        area: "btn-cta bg-area text-area-foreground hover:brightness-110 hover:shadow-glow",
         "area-outline":
           "border border-area text-area bg-transparent hover:bg-area hover:text-area-foreground",
         disabled: "border border-border bg-secondary text-muted-foreground",
@@ -38,13 +38,21 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  /** Pulso suave del halo cada 4 s. Solo para el botón principal de cada sección. */
+  pulse?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, pulse = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+    const sonoro = variant == null || variant === "default" || variant === "area";
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp
+        data-sonido={sonoro ? "hover" : undefined}
+        className={cn(buttonVariants({ variant, size, className }), pulse && "btn-pulse")}
+        ref={ref}
+        {...props}
+      />
     );
   },
 );

@@ -38,12 +38,13 @@ export function TuMarca() {
   return (
     <div data-area="estudio">
       <section className="mx-auto w-full max-w-6xl px-5 pb-16 pt-28 sm:px-8 sm:pt-36">
-        <Reveal className="flex flex-col items-start gap-6">
+        <Reveal stagger className="flex flex-col items-start gap-6">
           <p className="eyebrow text-muted-foreground">FNX Estudio · Mendoza · San Juan · Todo el país</p>
           <Headline
             as="h1"
             lead="Tu marca"
             accent="pasa desapercibida."
+            underline
             className="text-5xl min-[420px]:text-6xl sm:text-7xl lg:text-8xl"
           />
           <p className="max-w-2xl text-lg text-muted-foreground">
@@ -51,7 +52,7 @@ export function TuMarca() {
             suerte ni falta de talento: es que no se nota.
           </p>
           <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="consultoria15" label="Quiero mi consultoría de 15 minutos" />
+            <WhatsAppButton topic="consultoria15" label="Quiero mi consultoría de 15 minutos" pulse />
             <Button asChild variant="outline" size="lg">
               <a href="#prueba">Hacé la prueba de 1 minuto</a>
             </Button>

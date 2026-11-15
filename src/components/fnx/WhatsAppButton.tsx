@@ -11,6 +11,8 @@ interface Props {
   variant?: ButtonProps["variant"];
   className?: string;
   showIcon?: boolean;
+  /** Pulso suave del halo: solo en el botón principal de la sección. */
+  pulse?: boolean;
 }
 
 /** Botón de WhatsApp con mensaje precargado. Sin número: "WhatsApp próximamente" deshabilitado. */
@@ -21,6 +23,7 @@ export function WhatsAppButton({
   variant = "area",
   className,
   showIcon = true,
+  pulse = false,
 }: Props) {
   const href = buildWhatsAppLink(topic);
   if (!href) {
@@ -39,7 +42,7 @@ export function WhatsAppButton({
     );
   }
   return (
-    <Button asChild variant={variant} size={size} className={className}>
+    <Button asChild variant={variant} size={size} className={className} pulse={pulse}>
       <a
         href={href}
         target="_blank"

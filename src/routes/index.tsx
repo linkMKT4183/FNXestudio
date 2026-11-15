@@ -8,6 +8,7 @@ import {
   FolderOpen,
   HeartHandshake,
   MessagesSquare,
+  Newspaper,
   PenTool,
   Scale,
   Users,
@@ -27,6 +28,7 @@ import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
+import { Puertas } from "@/components/fnx/Puertas";
 
 import { pageUrl, OG_IMAGE_META } from "@/config/site";
 import { trackEvent } from "@/lib/track";
@@ -35,6 +37,7 @@ const AREA_NODES: NetworkNode[] = [
   { label: "Estudio", icon: PenTool, color: "var(--fnx-naranja)" },
   { label: "Consultoría", icon: Scale, color: "var(--fnx-azul)" },
   { label: "Salud", icon: HeartHandshake, color: "var(--fnx-verde)" },
+  { label: "Noticias", icon: Newspaper, color: "var(--fnx-amarillo)" },
 ];
 
 const CHAT_INICIO = [
@@ -59,7 +62,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con tres áreas: Estudio, Consultoría y Salud, y una red de profesionales.",
+          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
       },
       {
         property: "og:title",
@@ -170,52 +173,13 @@ function Home() {
             </p>
           </Reveal>
 
-          <nav aria-label="Secciones de FNX" className="md:hidden">
-            <ul className="grid grid-cols-2 gap-3">
-              {MOBILE_BLOCKS.map((b, i) => (
-                <li
-                  key={b.to}
-                  className={
-                    MOBILE_BLOCKS.length % 2 === 1 && i === MOBILE_BLOCKS.length - 1
-                      ? "col-span-2"
-                      : undefined
-                  }
-                >
-                  <MobileBlock {...b} />
-                </li>
-              ))}
-            </ul>
-            <div className="h-16" aria-hidden="true" />
-            <div className="fixed inset-x-4 bottom-4 z-30">
-              <WhatsAppButton topic="marca" label="Escribinos" className="w-full shadow-lg" />
-            </div>
-          </nav>
-
-          <nav aria-label="Elegí por dónde empezar" className="mt-4 hidden sm:mt-6 md:block">
-            <Reveal className="grid gap-4 md:grid-cols-3">
-              <Door
-                to="/estudio"
-                tone="naranja"
-                kicker="FNX Estudio"
-                title="Quiero hacer crecer mi marca"
-                icon={PenTool}
-              />
-              <Door
-                to="/consultoria"
-                tone="azul"
-                kicker="FNX Consultoría"
-                title="Necesito asesoría para mi proyecto agrícola o del sector regulado"
-                icon={Scale}
-              />
-              <Door
-                to="/salud"
-                tone="verde"
-                kicker="FNX Salud · +18"
-                title="Necesito orientación en salud (+18)"
-                icon={HeartHandshake}
-              />
-            </Reveal>
-          </nav>
+          <div className="mt-2 sm:mt-4">
+            <Puertas />
+          </div>
+          <div className="h-16 md:hidden" aria-hidden="true" />
+          <div className="fixed inset-x-4 bottom-4 z-30 md:hidden">
+            <WhatsAppButton topic="marca" label="Escribinos" className="w-full shadow-lg" />
+          </div>
         </div>
       </section>
 
@@ -230,8 +194,8 @@ function Home() {
               className="max-w-4xl text-5xl sm:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio crea la marca, Consultoría ordena el proyecto y Salud conecta con profesionales
-              verificados.
+              Estudio crea la marca, Consultoría ordena el proyecto, Salud conecta con profesionales
+              verificados y Noticias informa con fuentes.
             </p>
             <Pieces lit={1} className="mt-4" />
           </Reveal>
@@ -264,7 +228,7 @@ function Home() {
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
-              <div className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div className="spot flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
                 <div className="flex items-center justify-between">
                   <span className="headline text-5xl text-area">{s.n}</span>
                   <IconBadge icon={s.icon} />
@@ -343,102 +307,5 @@ function Home() {
         </Reveal>
       </section>
     </>
-  );
-}
-
-const DOOR_AREA = {
-  naranja: "estudio",
-  azul: "consultoria",
-  verde: "salud",
-  amarillo: "noticias",
-} as const;
-
-type BlockTo = "/estudio" | "/consultoria" | "/salud" | "/red";
-const MOBILE_BLOCKS: {
-  to: BlockTo;
-  area?: "estudio" | "consultoria" | "salud" | "noticias";
-  label: string;
-  text: string;
-  icon: LucideIcon;
-}[] = [
-  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", icon: PenTool },
-  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", icon: Scale },
-  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", icon: HeartHandshake },
-  { to: "/red", label: "Profesionales", text: "La red de profesionales", icon: Users },
-];
-
-function MobileBlock({ to, area, label, text, icon: Icon }: (typeof MOBILE_BLOCKS)[number]) {
-  return (
-    <Link
-      to={to}
-      data-area={area}
-      onClick={() => trackEvent("nav_click", { section: label, source: "home_blocks" })}
-      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/15 bg-background/20 backdrop-blur-[3px] transition-transform duration-200 ease-out active:scale-[0.98] motion-reduce:transition-none"
-    >
-      <span className="px-3 pt-3">
-        <span
-          className={
-            area
-              ? "inline-flex h-11 w-11 items-center justify-center rounded-xl border border-area/50 bg-area/15 text-area"
-              : "inline-flex h-11 w-11 items-center justify-center rounded-xl border border-fnx-crema/40 bg-fnx-crema/10 text-fnx-crema"
-          }
-        >
-          <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
-        </span>
-      </span>
-      <span className="flex flex-1 flex-col gap-1.5 p-3">
-        <span className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-foreground">
-          <span aria-hidden="true" className={area ? "h-2 w-2 shrink-0 rounded-full bg-area" : "h-2 w-2 shrink-0 rounded-full bg-fnx-crema"} />
-          <span className="truncate">{label}</span>
-        </span>
-        <span className="flex items-end justify-between gap-2">
-          <span className="min-w-0 text-sm font-semibold leading-snug text-muted-foreground">{text}</span>
-          <ArrowRight aria-hidden="true" className={area ? "h-4 w-4 shrink-0 text-area" : "h-4 w-4 shrink-0 text-fnx-crema"} />
-        </span>
-      </span>
-    </Link>
-  );
-}
-
-function Door({
-  to,
-  tone,
-  kicker,
-  title,
-  icon: Icon,
-}: {
-  to: "/estudio" | "/consultoria" | "/salud" | "/noticias";
-  tone: "naranja" | "azul" | "verde" | "amarillo";
-  kicker: string;
-  title: string;
-  icon: LucideIcon;
-}) {
-  return (
-    <Link
-      to={to}
-      data-area={DOOR_AREA[tone]}
-      onClick={() => trackEvent("door_click", { area: DOOR_AREA[tone] })}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card/70 backdrop-blur-md transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-area hover:shadow-glow-soft"
-    >
-      <span className="flex items-start justify-between gap-4 px-6 pt-6 sm:px-7 sm:pt-7 lg:px-5 lg:pt-5">
-        <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-area/50 bg-area/15 text-area transition-transform duration-200 group-hover:scale-105">
-          <Icon className="h-8 w-8" strokeWidth={1.75} aria-hidden="true" />
-        </span>
-      </span>
-      <span className="flex flex-1 flex-col justify-between gap-6 p-6 sm:p-7 lg:gap-4 lg:p-5">
-        <Tag tone={tone} className="self-start">
-          {kicker}
-        </Tag>
-        <span className="flex items-end justify-between gap-6">
-          <span className="headline min-w-0 text-3xl text-foreground sm:text-4xl lg:text-2xl">{title}</span>
-          <span
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-area text-area-foreground transition-[transform,box-shadow] duration-200 ease-out group-hover:translate-x-1 group-hover:shadow-glow"
-            aria-hidden="true"
-          >
-            <ArrowRight className="h-6 w-6" />
-          </span>
-        </span>
-      </span>
-    </Link>
   );
 }

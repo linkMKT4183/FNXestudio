@@ -98,6 +98,7 @@ export function Reveal({
   delay = 0,
   as: Tag = "div",
   stagger = false,
+  variant = "up",
 }: {
   children: ReactNode;
   className?: string;
@@ -105,12 +106,20 @@ export function Reveal({
   as?: ElementType;
   /** Los hijos directos entran uno tras otro (80 ms entre cada uno). */
   stagger?: boolean;
+  /** De dónde entra: arriba (por defecto), desde la izquierda, la derecha o con zoom. */
+  variant?: "up" | "left" | "right" | "zoom";
 }) {
   const [ref, visible] = useInView<HTMLElement>();
   return (
     <Tag
       ref={ref}
-      className={cn("reveal", stagger && "reveal-stagger", visible && "is-visible", className)}
+      className={cn(
+        "reveal",
+        stagger && "reveal-stagger",
+        variant !== "up" && `rv-${variant}`,
+        visible && "is-visible",
+        className,
+      )}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

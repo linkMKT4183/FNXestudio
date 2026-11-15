@@ -69,7 +69,7 @@ export function TuMarca() {
         <ol className="grid gap-4 md:grid-cols-3">
           {PASOS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
-              <div className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div className="spot flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
                 <div className="flex items-center justify-between">
                   <span className="headline text-5xl text-area">{s.n}</span>
                   <IconBadge icon={s.icon} />

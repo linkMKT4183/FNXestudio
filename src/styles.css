@@ -888,3 +888,131 @@
     filter: none;
   }
 }
+
+/* =====================================================================================================
+   MÁS MOVIMIENTO: bloques que entran de costado, cursor que ilumina las tarjetas, onda al tocar un botón,
+   transición entre páginas y las puertas del inicio.
+   ===================================================================================================== */
+/* De dónde entra cada bloque */
+.reveal.rv-left:not(.is-visible) { transform: translateX(-28px); }
+.reveal.rv-right:not(.is-visible) { transform: translateX(28px); }
+.reveal.rv-zoom:not(.is-visible) { transform: scale(0.94); }
+.reveal-stagger.rv-left > * { transform: translateX(-28px); }
+.reveal-stagger.rv-right > * { transform: translateX(28px); }
+.reveal-stagger.rv-zoom > * { transform: scale(0.94); }
+.reveal-stagger.rv-left.is-visible > * { animation-name: reveal-child-left; }
+.reveal-stagger.rv-right.is-visible > * { animation-name: reveal-child-right; }
+.reveal-stagger.rv-zoom.is-visible > * { animation-name: reveal-child-zoom; }
+@keyframes reveal-child-left {
+  from { opacity: 0; transform: translateX(-28px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes reveal-child-right {
+  from { opacity: 0; transform: translateX(28px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes reveal-child-zoom {
+  from { opacity: 0; transform: scale(0.94); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* Tarjetas con luz que sigue al cursor (--mx / --my los pone EfectosGlobales) */
+.spot {
+  position: relative;
+  overflow: hidden;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--area) 30%, transparent), transparent 70%);
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* Puertas del inicio (barras) */
+.puerta {
+  transition:
+    transform 0.25s var(--ease-fnx),
+    border-color 0.2s ease,
+    box-shadow 0.3s var(--ease-fnx);
+}
+.puerta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow-soft);
+}
+.puerta:active {
+  transform: scale(0.98);
+  transition-duration: 0.12s;
+}
+.puerta-icono {
+  transition: transform 0.35s var(--ease-fnx);
+}
+.puerta:hover .puerta-icono {
+  transform: rotate(-8deg) scale(1.08);
+}
+.puerta-flecha {
+  transition: transform 0.3s var(--ease-fnx);
+}
+.puerta:hover .puerta-flecha {
+  transform: translateX(4px);
+}
+
+/* Onda que sale del punto donde se toca un botón principal */
+.btn-cta::before {
+  content: "";
+  position: absolute;
+  left: var(--rx, 50%);
+  top: var(--ry, 50%);
+  width: 320px;
+  height: 320px;
+  margin: -160px 0 0 -160px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.45);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+.btn-cta.rip::before {
+  animation: btn-rip 0.6s var(--ease-fnx) both;
+}
+@keyframes btn-rip {
+  from { transform: scale(0); opacity: 0.7; }
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* Al cambiar de página, el contenido entra suave */
+.page-in {
+  animation: page-in 0.55s var(--ease-fnx) both;
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.rv-left,
+  .reveal.rv-right,
+  .reveal.rv-zoom {
+    transform: none !important;
+  }
+  .puerta,
+  .puerta:hover,
+  .puerta-icono,
+  .puerta-flecha {
+    transform: none !important;
+    transition: none !important;
+  }
+  .btn-cta::before,
+  .page-in {
+    animation: none !important;
+  }
+  .spot::before {
+    display: none;
+  }
+}

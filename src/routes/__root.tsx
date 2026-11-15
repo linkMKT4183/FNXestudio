@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Estudio creativo con sedes en Mendoza y San Juan, con alcance nacional e internacional. Una empresa, tres áreas: FNX Estudio, FNX Consultoría y FNX Salud, y una red de profesionales.",
+          "Estudio creativo con sedes en Mendoza y San Juan, con alcance nacional e internacional. Una empresa, cuatro áreas: FNX Estudio, FNX Consultoría, FNX Salud y FNX Noticias.",
       },
       { name: "author", content: "Fénix Creativo" },
       { name: "theme-color", content: "#0B0B0B" },
@@ -157,7 +157,9 @@ function RootComponent() {
         <main id="contenido" className="flex-1 pt-16 sm:pt-20">
           <MobileNavBlocks />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+          <div key={pathname} className="page-in">
+            <Outlet />
+          </div>
           <ExploreMore />
         </main>
         <BackToTop />

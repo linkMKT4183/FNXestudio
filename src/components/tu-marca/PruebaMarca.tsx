@@ -54,7 +54,7 @@ export function PruebaMarca() {
             <label
               key={s.id}
               className={cn(
-                "flex cursor-pointer gap-4 rounded-2xl border bg-card p-5 transition-[border-color,transform] duration-300 motion-reduce:transition-none",
+                "spot flex cursor-pointer gap-4 rounded-2xl border bg-card p-5 transition-[border-color,transform] duration-300 motion-reduce:transition-none",
                 on ? "border-area" : "border-border hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
               )}
             >

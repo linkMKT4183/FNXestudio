@@ -16,6 +16,7 @@ import type { CSSProperties } from "react";
 import { Logo } from "./primitives";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { SoundDelegate, SoundToggle } from "./SoundToggle";
+import { EfectosGlobales } from "./EfectosGlobales";
 import { FnxImage } from "./FnxImage";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import type { WhatsAppTopic } from "@/config/site";
@@ -26,6 +27,7 @@ const NAV = [
   { to: "/estudio", label: "Estudio" },
   { to: "/consultoria", label: "Consultoría" },
   { to: "/salud", label: "Salud" },
+  { to: "/noticias", label: "Noticias" },
   { to: "/red", label: "Profesionales" },
 ] as const;
 
@@ -125,6 +127,7 @@ const EXPLORE: { to: (typeof NAV)[number]["to"]; area?: Area; label: string; tex
   { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
   { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
   { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
+  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
   { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
 ];
 
@@ -224,6 +227,7 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
       <SoundDelegate />
+      <EfectosGlobales />
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:h-20 sm:px-8">
         <Link to="/" className="rounded-md px-1" aria-label="Fnx, ir al inicio">
           <Logo className="block pt-4 text-[2.6rem] sm:text-5xl" />

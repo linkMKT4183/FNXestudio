@@ -6,11 +6,7 @@ import {
   FileCheck2,
   FileSignature,
   FolderOpen,
-  HeartHandshake,
   MessagesSquare,
-  Newspaper,
-  PenTool,
-  Scale,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -27,18 +23,11 @@ import {
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
-import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
+import { RedVidrio } from "@/components/fnx/RedVidrio";
 import { Puertas } from "@/components/fnx/Puertas";
 
 import { pageUrl, OG_IMAGE_META } from "@/config/site";
 import { trackEvent } from "@/lib/track";
-
-const AREA_NODES: NetworkNode[] = [
-  { label: "Estudio", icon: PenTool, color: "var(--fnx-naranja)" },
-  { label: "Consultoría", icon: Scale, color: "var(--fnx-azul)" },
-  { label: "Salud", icon: HeartHandshake, color: "var(--fnx-verde)" },
-  { label: "Noticias", icon: Newspaper, color: "var(--fnx-amarillo)" },
-];
 
 const CHAT_INICIO = [
   {
@@ -184,7 +173,7 @@ function Home() {
       </section>
 
       {/* Propuesta de valor */}
-      <section aria-labelledby="valor-titulo" className="border-y border-border bg-card">
+      <section aria-labelledby="valor-titulo" className="border-y border-border bg-background">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1.2fr_1fr]">
           <Reveal className="flex flex-col gap-6">
             <Headline
@@ -200,7 +189,7 @@ function Home() {
             <Pieces lit={1} className="mt-4" />
           </Reveal>
           <Reveal delay={150}>
-            <NetworkViz nodes={AREA_NODES} />
+            <RedVidrio />
           </Reveal>
         </div>
       </section>
@@ -228,7 +217,7 @@ function Home() {
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
-              <div className="spot flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
                 <div className="flex items-center justify-between">
                   <span className="headline text-5xl text-area">{s.n}</span>
                   <IconBadge icon={s.icon} />
@@ -286,7 +275,7 @@ function Home() {
         aria-labelledby="cta-titulo"
         className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8"
       >
-        <Reveal className="grid items-center gap-10 rounded-3xl border border-border bg-card p-8 sm:p-14 lg:grid-cols-[1.2fr_1fr]">
+        <Reveal className="cta-vidrio grid items-center gap-10 rounded-3xl border border-border p-8 sm:p-14 lg:grid-cols-[1.2fr_1fr]">
           <div className="flex flex-col items-start gap-8">
             <Pieces lit={4} />
             <Headline

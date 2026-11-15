@@ -87,7 +87,6 @@ export function NetworkViz({ nodes, className }: { nodes: NetworkNode[]; classNa
         {/* Conexiones */}
         {pts.map((p, i) => {
           const color = nodes[i]!.color;
-          const path = `M${p.x1},${p.y1} L${p.x2},${p.y2}`;
           return (
             <g key={i}>
               <line
@@ -101,30 +100,37 @@ export function NetworkViz({ nodes, className }: { nodes: NetworkNode[]; classNa
                 className="net-line"
                 style={{ animationDelay: `${(i * 3) / n}s` }}
               />
-              <circle r="0.8" fill={color}>
-                <animateMotion
-                  dur="2.4s"
-                  begin={`${(i * 2.4) / n}s`}
-                  repeatCount="indefinite"
-                  path={path}
-                />
-                <animate
-                  attributeName="opacity"
-                  values="0;1;1;0"
-                  keyTimes="0;0.15;0.8;1"
-                  dur="2.4s"
-                  begin={`${(i * 2.4) / n}s`}
-                  repeatCount="indefinite"
-                />
-              </circle>
+              <line
+                x1={p.x1}
+                y1={p.y1}
+                x2={p.x2}
+                y2={p.y2}
+                pathLength="100"
+                stroke="currentColor"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+                className="net-cometa"
+                style={{ color, animationDelay: `${(i * 2.8) / n}s` }}
+              />
             </g>
           );
         })}
       </svg>
 
+      {/* Barrido de luz alrededor del núcleo */}
+      <div
+        aria-hidden="true"
+        className="net-sweep absolute rounded-full"
+        style={{
+          left: `${C - CORE * 1.45}%`,
+          top: `${C - CORE * 1.45}%`,
+          width: `${CORE * 2.9}%`,
+          height: `${CORE * 2.9}%`,
+        }}
+      />
       {/* Núcleo */}
       <div
-        className="net-core absolute flex items-center justify-center rounded-full border border-area bg-background"
+        className="net-core net-orb absolute flex items-center justify-center rounded-full border border-area"
         style={{
           left: `${C - CORE}%`,
           top: `${C - CORE}%`,
@@ -159,7 +165,7 @@ export function NetworkViz({ nodes, className }: { nodes: NetworkNode[]; classNa
             }}
           >
             <span
-              className="net-node flex h-full w-full items-center justify-center rounded-2xl border bg-card"
+              className="net-node net-vidrio flex h-full w-full items-center justify-center rounded-2xl border"
               style={{
                 borderColor: node.color,
                 color: node.color,

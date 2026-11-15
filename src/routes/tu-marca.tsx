@@ -6,6 +6,7 @@ import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { PruebaMarca } from "@/components/tu-marca/PruebaMarca";
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
+import logoCrema from "@/assets/brand/fnx-logo-crema.png";
 
 const TITLE = "Tu marca pasa desapercibida | FNX Estudio · Mendoza";
 const DESC =
@@ -37,8 +38,10 @@ const PASOS = [
 export function TuMarca() {
   return (
     <div data-area="estudio">
-      <section className="mx-auto w-full max-w-6xl px-5 pb-16 pt-28 sm:px-8 sm:pt-36">
-        <Reveal stagger className="flex flex-col items-start gap-6">
+      <div className="luz-diagonal">
+        <span className="luz-linea" aria-hidden="true" />
+      <section className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-12 px-5 pb-20 pt-28 sm:px-8 sm:pt-36 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <Reveal stagger className="flex min-w-0 flex-col items-start gap-6">
           <p className="eyebrow text-muted-foreground">FNX Estudio · Mendoza · San Juan · Todo el país</p>
           <Headline
             as="h1"
@@ -52,14 +55,23 @@ export function TuMarca() {
             suerte ni falta de talento: es que no se nota.
           </p>
           <div className="flex flex-wrap gap-3">
-            <WhatsAppButton topic="consultoria15" label="Quiero mi consultoría de 15 minutos" pulse />
+            <WhatsAppButton topic="consultoria15" label="Quiero mi consultoría de 15 minutos" pulse className="h-auto min-h-14 max-w-full whitespace-normal py-3 text-center" />
             <Button asChild variant="outline" size="lg">
               <a href="#prueba">Hacé la prueba de 1 minuto</a>
             </Button>
           </div>
-          <Pieces lit={3} size="lg" className="mt-6" />
+        </Reveal>
+              <Reveal delay={200} variant="zoom" className="mx-auto w-full max-w-sm">
+          <div className="tarjeta-neon flex flex-col items-center gap-7 px-8 py-12 text-center">
+            <img src={logoCrema} alt="Fnx" width={986} height={551} className="h-20 w-auto" draggable={false} />
+            <Pieces lit={3} size="lg" />
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Uno que se destaca entre muchos
+            </p>
+          </div>
         </Reveal>
       </section>
+      </div>
 
       <Section id="prueba" eyebrow="Prueba de 1 minuto" lead="Marcá cuántas te pasan" accent="a vos.">
         <PruebaMarca />
@@ -69,7 +81,7 @@ export function TuMarca() {
         <ol className="grid gap-4 md:grid-cols-3">
           {PASOS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
-              <div className="spot flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
                 <div className="flex items-center justify-between">
                   <span className="headline text-5xl text-area">{s.n}</span>
                   <IconBadge icon={s.icon} />

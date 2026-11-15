@@ -79,10 +79,10 @@ export function Pieces({
           key={i}
           className={cn(
             sizes.piece,
-            "block border transition-[background-color,border-color,transform] duration-700 ease-out",
+            "pieza block border transition-[background-color,border-color,transform] duration-700 ease-out",
             i === lit && on
               ? "piece-lit -translate-y-1 border-transparent"
-              : "border-border bg-card",
+              : "pieza-negra border-border",
           )}
           style={i === lit ? { transitionDelay: "350ms" } : undefined}
         />
@@ -286,8 +286,8 @@ export function IconBadge({
   className?: string;
 }) {
   const variants = {
-    solid: "bg-area text-area-foreground",
-    outline: "border border-area text-area",
+    solid: "bg-area text-area-foreground icon-glossy",
+    outline: "border border-area text-area icon-glass",
     neutral: "border border-border text-foreground",
   };
   return (

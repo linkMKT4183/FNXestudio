@@ -59,7 +59,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         aria-hidden="true"
         className={cn(
           "puerta-icono inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full md:h-[52px] md:w-[52px]",
-          color === "area" ? "bg-area text-area-foreground" : "bg-fnx-crema text-fnx-negro",
+          color === "area" ? "bg-area text-area-foreground icon-glossy" : "bg-fnx-crema text-fnx-negro",
         )}
       >
         <Icon className="h-6 w-6" strokeWidth={1.9} />
@@ -73,7 +73,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         >
           {kicker}
         </span>
-        <span className="headline mt-0.5 line-clamp-2 text-[0.98rem] leading-[1.05] text-foreground md:text-[1.02rem]">
+        <span className="headline line-clamp-2 pt-[0.28em] text-[0.98rem] leading-[1.05] text-foreground md:text-[1.02rem]">
           {title}
         </span>
       </span>
@@ -81,7 +81,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         aria-hidden="true"
         className={cn(
           "puerta-flecha inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full md:h-10 md:w-10",
-          color === "area" ? "bg-area text-area-foreground" : "bg-fnx-crema text-fnx-negro",
+          color === "area" ? "bg-area text-area-foreground icon-glossy" : "bg-fnx-crema text-fnx-negro",
         )}
       >
         <ArrowRight className="h-[1.1rem] w-[1.1rem]" strokeWidth={2.2} />

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Camera, Fingerprint, ShoppingBag, Target, type LucideIcon } from "lucide-react";
 import { IconBadge, TenSeconds } from "@/components/fnx/primitives";
-import { PlacaMini } from "@/components/tu-marca/PlacaMini";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { trackEvent } from "@/lib/track";
 import { playSound } from "@/lib/sonido";
@@ -67,12 +66,11 @@ export function PruebaMarca() {
               />
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <div className="flex items-center gap-3">
-                  <IconBadge icon={s.icon} size="sm" variant={on ? "solid" : "outline"} className={on ? "icon-pop" : ""} />
+                  <IconBadge icon={s.icon} size="sm" variant={on ? "solid" : "outline"} className={cn("senal-icono", `senal-${s.id}`, on && "icon-pop")} />
                   <span className="text-lg font-bold text-foreground">{s.title}</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
               </div>
-              <PlacaMini n={s.placa} className="hidden w-28 shrink-0 self-start sm:block lg:w-32" />
             </label>
           );
         })}

@@ -1625,3 +1625,16 @@
 
 .ev-clip, .ev-cursor { position: absolute; }
 .ev-cursor { top: 0; bottom: 0; }
+
+/* Íconos animados de las 5 señales (cada uno hace lo suyo, en loop suave) */
+.senal-icono svg { animation-duration: 3.2s; animation-iteration-count: infinite; animation-timing-function: var(--ease-fnx); transform-origin: center; }
+.senal-identidad svg { animation-name: senal-latido; }
+.senal-imagen svg { animation-name: senal-flash; }
+.senal-tienda svg { animation-name: senal-rebote; }
+.senal-constancia svg { animation-name: senal-giro; }
+.senal-estrategia svg { animation-name: senal-latido; animation-duration: 2.4s; }
+@keyframes senal-latido { 0%, 60%, 100% { transform: scale(1); } 20% { transform: scale(1.22); } 35% { transform: scale(0.96); } }
+@keyframes senal-flash { 0%, 70%, 100% { transform: scale(1); filter: none; } 80% { transform: scale(1.18); filter: drop-shadow(0 0 6px var(--fnx-naranja)); } }
+@keyframes senal-rebote { 0%, 55%, 100% { transform: translateY(0); } 15% { transform: translateY(-4px); } 30% { transform: translateY(0); } 40% { transform: translateY(-2px); } }
+@keyframes senal-giro { 0%, 60%, 100% { transform: rotate(0); } 75% { transform: rotate(-14deg); } 88% { transform: rotate(10deg); } }
+@media (prefers-reduced-motion: reduce) { .senal-icono svg { animation: none; } }

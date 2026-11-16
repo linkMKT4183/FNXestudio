@@ -20,8 +20,8 @@ const PUERTAS: Puerta[] = [
   { to: "/estudio", area: "estudio", kicker: "FNX Estudio", title: "Quiero hacer crecer mi marca", icon: PenTool },
   { to: "/consultoria", area: "consultoria", kicker: "FNX Consultoría", title: "Asesoría para mi proyecto", icon: Scale },
   { to: "/salud", area: "salud", kicker: "FNX Salud · +18", title: "Orientación en salud (+18)", icon: HeartHandshake },
-  { to: "/noticias", area: "noticias", kicker: "FNX Noticias", title: "Noticias con fuentes", icon: Newspaper },
-  { to: "/red", kicker: "Profesionales", title: "La red de profesionales", icon: Users, soloCelular: true },
+  { to: "/noticias", area: "noticias", kicker: "FNX Noticias", title: "Quiero recibir novedades", icon: Newspaper },
+  { to: "/red", kicker: "Profesionales", title: "Soy profesional y quiero sumarme", icon: Users, soloCelular: true },
 ];
 
 /**
@@ -30,9 +30,9 @@ const PUERTAS: Puerta[] = [
  */
 export function Puertas() {
   return (
-    <nav aria-label="Elegí por dónde empezar">
+    <nav aria-label="¿Qué necesitás hoy?">
       <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-fnx-crema/70 md:hidden">
-        Elegí por dónde empezar
+        ¿Qué necesitás hoy?
         <ArrowDown className="h-4 w-4 text-area" aria-hidden="true" />
       </p>
       <Reveal as="ul" stagger variant="left" className="grid gap-2.5 md:grid-cols-4 md:gap-4">

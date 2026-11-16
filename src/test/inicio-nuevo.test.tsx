@@ -22,7 +22,7 @@ beforeAll(() => {
 describe("Inicio", () => {
   it("las puertas son cuatro y Noticias vuelve a ser una de ellas", async () => {
     await abrir("/");
-    const nav = await screen.findByRole("navigation", { name: "Elegí por dónde empezar" });
+    const nav = await screen.findByRole("navigation", { name: "¿Qué necesitás hoy?" });
     const hrefs = Array.from(nav.querySelectorAll("a")).map((a) => a.getAttribute("href"));
     expect(hrefs).toEqual(["/estudio", "/consultoria", "/salud", "/noticias", "/red"]);
   });
@@ -44,7 +44,7 @@ describe("Inicio", () => {
 
   it("no se usa la tipografía de la firma en los titulares", async () => {
     const { container } = await abrir("/");
-    await screen.findByRole("navigation", { name: "Elegí por dónde empezar" });
+    await screen.findByRole("navigation", { name: "¿Qué necesitás hoy?" });
     expect(container.querySelectorAll(".w-script")).toHaveLength(0);
   });
 });

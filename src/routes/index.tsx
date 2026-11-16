@@ -37,7 +37,7 @@ const CHAT_INICIO = [
   },
   {
     q: "Necesito asesoría para mi proyecto",
-    a: "Perfecto. Te hacemos 3 preguntas para entender tu caso y te decimos qué profesionales intervienen.",
+    a: "Perfecto. ¿Es un proyecto agro o del sector regulado? Según eso, te decimos qué profesionales lo resuelven.",
   },
   {
     q: "¿Mis datos quedan protegidos?",
@@ -48,11 +48,11 @@ const CHAT_INICIO = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FNX · Fénix Creativo | Estudio creativo · Mendoza, San Juan y todo el país" },
+      { title: "FNX · Fénix Creativo | Estudio creativo · San Juan, Mendoza y todo el país" },
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Estudio creativo con sedes en Mendoza y San Juan y alcance nacional e internacional, con cuatro áreas: Estudio, Consultoría, Salud y Noticias.",
+          "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas: Estudio, Consultoría, Salud y Noticias. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       {
         property: "og:title",
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content: "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas.",
+        content: "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/") },
@@ -89,7 +89,7 @@ const STEPS = [
     n: "03",
     icon: FileCheck2,
     title: "Te pasamos una propuesta clara",
-    text: "Qué hacemos, cuándo y cómo.",
+    text: "Qué hacemos, cuándo y cuánto sale.",
   },
 ];
 
@@ -160,7 +160,7 @@ function Home() {
           />
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
-              Sedes en Mendoza y San Juan. Trabajamos en todo el país y en el exterior.
+              Una empresa, cuatro áreas. Con sedes en San Juan y Mendoza, trabajamos en todo el país.
             </p>
           </Reveal>
 
@@ -184,13 +184,14 @@ function Home() {
           <Reveal className="flex max-w-xl flex-col gap-6 lg:max-w-[44%]">
             <Headline
               id="valor-titulo"
-              lead="Conocemos el sector y tenemos"
-              accent="la red."
+              lead="Todo lo que necesitás,"
+              accent="en un solo lugar."
               className="max-w-4xl text-5xl sm:text-7xl lg:text-6xl xl:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio crea la marca, Consultoría ordena el proyecto, Salud conecta con profesionales
-              verificados y Noticias informa con fuentes.
+              Estudio le da forma a tu marca. Consultoría pone tu proyecto en regla. Salud te orienta con
+              profesionales verificados. Noticias te cuenta lo que pasa en tu rubro, con fuentes. Y si tu caso
+              necesita más de un área, lo coordinamos nosotros.
             </p>
             <Pieces lit={1} className="mt-4" />
           </Reveal>
@@ -201,10 +202,10 @@ function Home() {
       </section>
 
       {/* Prueba de marca: las 5 señales se encienden de a una y la luz lleva hasta el botón */}
-      <Section id="prueba-marca" lead="¿Tu marca" accent="pasa desapercibida?" className="pb-0 pt-12 sm:pt-16">
+      <Section id="prueba-marca" lead="¿Te ven o te pasan" accent="de largo?" className="pb-0 pt-12 sm:pt-16">
         <Reveal className="flex flex-col items-start gap-5">
           <p className="max-w-2xl text-lg text-muted-foreground">
-            Hacé la prueba de 1 minuto y mirá cuántas de las 5 señales te pasan.
+            5 señales, 1 minuto. Marcá las que te pasan y sabé por dónde empezar.
           </p>
           <ul className="guia-senales flex flex-wrap gap-2" aria-label="Las 5 señales de una marca que pasa desapercibida">
             {["Identidad", "Imagen", "Tienda", "Constancia", "Estrategia"].map((t, i) => (
@@ -217,7 +218,7 @@ function Home() {
             <ArrowDown className="h-6 w-6" />
           </div>
           <Button asChild variant="area" size="lg" pulse className="guia-boton">
-            <Link to="/tu-marca">Hacé la prueba</Link>
+            <Link to="/tu-marca">Hacer la prueba</Link>
           </Button>
         </Reveal>
       </Section>
@@ -226,10 +227,10 @@ function Home() {
       <Section
         id="como-trabajamos"
         eyebrow="Proceso"
-        lead="Cómo"
-        accent="trabajamos."
+        lead="Así"
+        accent="arrancamos."
         className="pt-10 sm:pt-14"
-        tldr="Lo que nos contás es confidencial: cuidamos tus datos y solo los compartimos con los profesionales que trabajen en tu caso, con tu acuerdo."
+        tldr="Del primer mensaje a la entrega, hablás siempre con FNX."
       >
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -258,7 +259,7 @@ function Home() {
               Para empezar
             </p>
             <p className="mt-2 font-semibold text-foreground">
-              Presupuesto firmado y 50% de anticipo.
+              Firmás el presupuesto y abonás el 50%.
             </p>
           </div>
           <div className="rounded-2xl border border-border p-6">
@@ -267,7 +268,7 @@ function Home() {
               Al terminar
             </p>
             <p className="mt-2 font-semibold text-foreground">
-              Archivos editables con el 100% pago.
+              Con el 100% pago, te llevás todos los archivos editables. Son tuyos.
             </p>
           </div>
         </Reveal>
@@ -277,9 +278,9 @@ function Home() {
       <Section
         id="instagram"
         eyebrow="Instagram"
-        lead="Dos cuentas,"
+        lead="Tres cuentas,"
         accent="un equipo."
-        tldr="Seguinos para ver trabajos, novedades y consejos antes que nadie."
+        tldr="@fnx.estudio muestra cómo nace cada marca. FNX Noticias cuenta lo que pasa en marketing, negocios, emprendimiento y sector regulado. @fnx.salud orienta a mayores de 18."
       >
         <Reveal>
           <InstagramDuo />
@@ -302,7 +303,7 @@ function Home() {
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">
-              Contanos qué necesitás y te respondemos por WhatsApp o por mail.
+              Contanos a qué te dedicás y qué querés lograr. Con eso ya podemos empezar.
             </p>
             <div className="flex flex-wrap gap-3">
               <WhatsAppButton topic="marca" pulse />

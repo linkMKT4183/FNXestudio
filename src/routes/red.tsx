@@ -136,7 +136,7 @@ const BENEFICIOS: { icon: LucideIcon; titulo: string; texto: string }[] = [
     icon: Megaphone,
     titulo: "Visibilidad profesional",
     texto:
-      "Perfil en la web de FNX y difusión en nuestras redes, con el cuidado de marca que nos caracteriza.",
+      "Difusión en nuestras redes, con tu acuerdo y con el cuidado de marca que nos caracteriza.",
   },
   {
     icon: GraduationCap,

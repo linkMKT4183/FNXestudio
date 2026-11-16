@@ -71,8 +71,8 @@ export function buildPostulacionPayload(p: Postulacion): Record<string, string> 
     _replyto: p.mail.trim(),
     _autoresponse:
       `Estimado/a ${nombre}: recibimos su postulación a la Red de Profesionales FNX. ` +
-      "Nuestro equipo verificará la información y la documentación presentadas y se comunicará con usted para coordinar una entrevista. " +
-      "Sus datos se tratan con estricta confidencialidad, conforme a la Ley 25.326 de Protección de Datos Personales. — Equipo FNX",
+      "Vamos a verificar tus datos y tu documentación, y te escribimos para coordinar una entrevista. " +
+      "Tus datos se tratan con estricta confidencialidad, según la Ley 25.326 de Protección de Datos Personales. Equipo FNX",
     "Nombre y apellido": nombre,
     "Correo electrónico": p.mail.trim(),
     WhatsApp: p.whatsapp.trim(),

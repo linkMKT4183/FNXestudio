@@ -90,14 +90,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Estudio creativo con sedes en Mendoza y San Juan, con alcance nacional e internacional. Una empresa, cuatro áreas: FNX Estudio, FNX Consultoría, FNX Salud y FNX Noticias.",
+          "Estudio creativo con sedes en San Juan y Mendoza y trabajo en todo el país. Una empresa, cuatro áreas: FNX Estudio, FNX Consultoría, FNX Salud y FNX Noticias.",
       },
       { name: "author", content: "Fénix Creativo" },
       { name: "theme-color", content: "#0B0B0B" },
       { property: "og:title", content: "FNX · Fénix Creativo" },
       {
         property: "og:description",
-        content: "Estudio creativo de alcance nacional e internacional. Una empresa, cuatro áreas.",
+        content: "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_AR" },

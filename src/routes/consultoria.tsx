@@ -76,7 +76,7 @@ export const Route = createFileRoute("/consultoria")({
       {
         name: "description",
         content:
-          "Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan, se regularicen y crezcan en regla. Con sedes en Mendoza y San Juan y alcance en todo el país.",
+          "Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan, se regularicen y crezcan en regla. Con sedes en San Juan y Mendoza y trabajo en todo el país.",
       },
       { property: "og:title", content: "FNX Consultoría · Crecer en regla" },
       {
@@ -252,7 +252,7 @@ const SERVICES_REGULADO: Service[] = [
       "Contratos y acuerdos entre socios.",
       "Revisión de estatutos y documentación institucional.",
       "Trámites y recursos ante organismos públicos y amparos de salud.",
-      "Asesoramiento regulatorio para licencias de CBD y capacitación jurídica.",
+      "Asesoramiento regulatorio para licencias y capacitación jurídica.",
     ],
   },
   {
@@ -277,10 +277,8 @@ const SERVICES_REGULADO: Service[] = [
     who: "Todo lo que tu proyecto necesite se resuelve dentro de la red de FNX, con profesionales especializados y coordinados por nosotros.",
     img: IMG.cDerivaciones,
     items: [
-      "Asesoramiento y defensa en derecho penal.",
       "Habilitaciones bromatológicas y de alimentos.",
       "Proyectos en otras provincias, con profesionales matriculados en cada jurisdicción.",
-      "Coordinación completa: un solo contacto, un solo presupuesto y una sola entrega.",
     ],
   },
 ];
@@ -329,16 +327,16 @@ const STEP_ICONS: LucideIcon[] = [
 ];
 
 const STEPS = [
-  "Nos escribís por WhatsApp o redes.",
+  "Nos contás tu proyecto por WhatsApp o redes.",
   "Completás un formulario con tus datos y lo que necesitás.",
   "Entrevista inicial: definimos qué necesitás y qué profesionales intervienen.",
-  "Recibís un presupuesto completo antes de empezar (presupuesto firmado y 50% de anticipo).",
+  "Recibís el presupuesto completo antes de empezar. Sin sorpresas después.",
   "La red de profesionales de FNX hace su parte y FNX coordina y entrega.",
   "Te ofrecemos un servicio recurrente, como el mantenimiento, para seguir acompañándote.",
 ];
 
 const NETWORK_POINTS = [
-  { title: "Un solo contacto", text: "Todas tus consultas pasan por FNX." },
+  { title: "Una sola conversación", text: "Todas tus consultas pasan por FNX." },
   { title: "Un solo presupuesto", text: "Con el trabajo de todos los profesionales incluido." },
   { title: "Una sola entrega", text: "Coordinamos y te entregamos todo terminado." },
 ];
@@ -544,8 +542,8 @@ function Consultoria() {
             se regularicen y crezcan en regla.
           </p>
           <TenSeconds className="max-w-2xl">
-            Todo lo que un proyecto productivo necesita para funcionar en regla y crecer, del campo
-            al cultivo regulado, coordinado por FNX y resuelto por profesionales especializados.
+            Del riego de un campo a la estructura legal de un proyecto del sector regulado: te decimos
+            qué necesitás y quién lo hace.
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
             <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" pulse />
@@ -633,8 +631,8 @@ function Consultoria() {
           <Section
             id="servicios-agro"
             eyebrow="Servicios · Agro"
-            lead="Técnico y"
-            accent="jurídico."
+            lead="Del agua"
+            accent="al contrato."
           >
             <ServiceTabs services={SERVICES_AGRO} />
           </Section>
@@ -665,8 +663,8 @@ function Consultoria() {
           <Section
             id="servicios"
             eyebrow="Servicios · Sector regulado"
-            lead="Jurídico y"
-            accent="técnico."
+            lead="Respaldo legal y"
+            accent="dirección técnica."
           >
             <ServiceTabs services={SERVICES_REGULADO} />
           </Section>
@@ -813,8 +811,8 @@ function Consultoria() {
             <Pieces lit={1} />
             <Headline
               id="consultoria-cta"
-              lead="Contanos"
-              accent="tu proyecto."
+              lead="Tu proyecto,"
+              accent="en regla desde hoy."
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">

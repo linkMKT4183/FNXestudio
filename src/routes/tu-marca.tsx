@@ -9,7 +9,7 @@ import { CarruselTuMarca } from "@/components/tu-marca/CarruselTuMarca";
 import { PruebaMarca } from "@/components/tu-marca/PruebaMarca";
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
-const TITLE = "Tu marca pasa desapercibida | FNX Estudio · Mendoza";
+const TITLE = "¿Tu marca pasa desapercibida? Prueba de 1 minuto | FNX Estudio · San Juan, Mendoza y todo el país";
 const DESC =
   "Hacé la prueba de 1 minuto: 5 señales de que tu marca no se nota. Identidad, imagen, tienda, constancia y estrategia. Consultoría de 15 minutos gratis.";
 
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/tu-marca")({
 const PASOS = [
   { n: "01", icon: MessagesSquare, title: "Nos escribís MARCA por WhatsApp" },
   { n: "02", icon: ClipboardList, title: "Te regalamos 15 minutos de consultoría para ver dónde está tu marca hoy" },
-  { n: "03", icon: FileCheck2, title: "Te pasamos una propuesta clara, sin costo y sin compromiso" },
+  { n: "03", icon: FileCheck2, title: "Si decidís avanzar, te decimos qué hacemos primero y cuánto sale" },
 ];
 
 export function TuMarca() {
@@ -43,7 +43,7 @@ export function TuMarca() {
         <span className="luz-linea" aria-hidden="true" />
       <section className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)] items-center gap-12 px-5 pb-20 pt-28 sm:px-8 sm:pt-36 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <Reveal stagger className="flex min-w-0 flex-col items-start gap-6">
-          <p className="eyebrow text-muted-foreground">FNX Estudio · Mendoza · San Juan · Todo el país</p>
+          <p className="eyebrow text-muted-foreground">Prueba de marca · FNX Estudio</p>
           <Headline
             as="h1"
             lead="Tu marca"

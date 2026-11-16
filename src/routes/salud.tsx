@@ -71,7 +71,7 @@ const PASOS_REPROCANN = [
   {
     titulo: "Vigencia y renovación",
     texto:
-      "El certificado tiene una vigencia de tres años. No se renueva de forma automática: al vencer, hay que volver a tramitarlo.",
+      "El certificado dura 3 años si cultivás vos y 1 año si lo hacés a través de una ONG. No se renueva solo: al vencer, hay que volver a tramitarlo.",
     fnx: "te avisamos antes del vencimiento para que no se te pase la fecha.",
   },
 ];
@@ -148,6 +148,12 @@ const FAQ = [
     q: "¿Me garantizan la aprobación?",
     a: "No. La aprobación depende de la evaluación oficial; te ayudamos a presentar todo correctamente.",
     img: IMG.mitoRealidad,
+  },
+  {
+    icon: FileCheck2,
+    q: "¿Cuánto cuesta?",
+    a: "La inscripción es gratuita. Nuestro acompañamiento tiene un valor, y te lo pasamos antes de empezar.",
+    img: IMG.carpetas,
   },
   {
     icon: Lock,

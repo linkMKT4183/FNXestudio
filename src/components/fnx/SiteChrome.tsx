@@ -124,11 +124,11 @@ export function MobileNavBlocks() {
 }
 
 const EXPLORE: { to: (typeof NAV)[number]["to"]; area?: Area; label: string; text: string; img: FnxImg }[] = [
-  { to: "/estudio", area: "estudio", label: "Estudio", text: "Hacer crecer mi marca", img: IMG.rey },
-  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Asesoría para mi proyecto", img: IMG.cHero },
-  { to: "/salud", area: "salud", label: "Salud · +18", text: "Orientación en salud", img: IMG.carpetas },
-  { to: "/noticias", area: "noticias", label: "Noticias", text: "Noticias con fuentes", img: IMG.tonoNoticias },
-  { to: "/red", label: "Profesionales", text: "La red de profesionales", img: IMG.redHero },
+  { to: "/estudio", area: "estudio", label: "Estudio", text: "Marcas que se destacan", img: IMG.rey },
+  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Crecer en regla", img: IMG.cHero },
+  { to: "/salud", area: "salud", label: "Salud · +18", text: "Te acompañamos en cada paso", img: IMG.carpetas },
+  { to: "/noticias", area: "noticias", label: "Noticias", text: "Lo que pasa, contado con fuentes", img: IMG.tonoNoticias },
+  { to: "/red", label: "Profesionales", text: "Para profesionales que quieren sumarse", img: IMG.redHero },
 ];
 
 /** End-of-page block on every section page, so nobody hits a dead end. */
@@ -284,7 +284,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-3">
           <Logo className="text-7xl" />
           <p className="text-sm text-muted-foreground">
-            Sedes en Mendoza y San Juan · Trabajamos en todo el país y en el exterior
+            Sedes en San Juan y Mendoza · Todo el país
           </p>
           <SocialLinks />
           <a
@@ -328,7 +328,7 @@ export function SiteFooter() {
   );
 }
 
-/** Contacto del pie: WhatsApp, los dos correos y las dos cuentas de Instagram. */
+/** Contacto del pie: WhatsApp, los dos correos y las cuentas de Instagram. */
 function SocialLinks() {
   const wa = buildWhatsAppLink("marca");
   const ids = Object.keys(INSTAGRAM_ACCOUNTS) as InstagramAccountId[];

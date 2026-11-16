@@ -62,7 +62,7 @@ export function InstagramButton({
 export function InstagramDuo({ className }: { className?: string }) {
   const ids = Object.keys(INSTAGRAM_ACCOUNTS) as InstagramAccountId[];
   return (
-    <div className={cn("grid gap-4 md:grid-cols-2", className)}>
+    <div className={cn("grid gap-4 md:grid-cols-3", className)}>
       {ids.map((id) => {
         const acc = INSTAGRAM_ACCOUNTS[id];
         return (

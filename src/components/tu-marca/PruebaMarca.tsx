@@ -7,11 +7,11 @@ import { playSound } from "@/lib/sonido";
 import { cn } from "@/lib/utils";
 
 export const SENALES: { id: string; icon: LucideIcon; title: string; text: string; placa: string }[] = [
-  { id: "identidad", placa: "03", icon: Fingerprint, title: "Identidad", text: "Si cada posteo usa otro color y otra letra, nadie te recuerda. Un logo fijo, dos colores y un manual alcanzan para que te reconozcan antes de leer tu nombre." },
+  { id: "identidad", placa: "03", icon: Fingerprint, title: "Identidad", text: "Si cada posteo usa otro color y otra letra, nadie te recuerda. Con un logo fijo, dos colores y un manual, tu marca empieza a ser reconocible." },
   { id: "imagen", placa: "04", icon: Camera, title: "Imagen", text: "Una foto sacada a las apuradas dice «improvisado». Con una idea, buena luz y edición, lo mismo se ve como una marca." },
-  { id: "tienda", placa: "05", icon: ShoppingBag, title: "Tienda", text: "Si cada venta depende de que contestes un mensaje, perdés las que llegan a la noche. Una tienda online cobra mientras dormís." },
-  { id: "constancia", placa: "06", icon: Calendar, title: "Constancia", text: "Tres posteos en una semana y después nada: tu público se olvida rápido. Con un calendario, vos aprobás y nosotros publicamos." },
-  { id: "estrategia", placa: "07", icon: Target, title: "Estrategia", text: "Pauta sin objetivo es plata que se va. Primero el público y el mensaje; después la inversión." },
+  { id: "tienda", placa: "05", icon: ShoppingBag, title: "Tienda", text: "Si cada venta depende de que contestes un mensaje, perdés las que llegan a la noche. Con una tienda online, esas ventas no se pierden." },
+  { id: "constancia", placa: "06", icon: Calendar, title: "Constancia", text: "Tres posteos en una semana y después nada: tu público se olvida rápido. Un calendario mensual sostiene el ritmo aunque no tengas tiempo." },
+  { id: "estrategia", placa: "07", icon: Target, title: "Estrategia", text: "Pauta sin objetivo es plata que se va. Con un público claro, cada peso trabaja." },
 ];
 
 export function resultadoMarca(n: number): string {

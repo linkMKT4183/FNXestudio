@@ -81,7 +81,7 @@ export function pageUrl(path: string = "/"): string {
 }
 
 /**
- * Cuentas de Instagram de FNX. Son dos cuentas separadas que trabajan en colaboración.
+ * Cuentas de Instagram de FNX: Estudio, Salud y Noticias, cuentas separadas que trabajan en colaboración.
  * HANDLE: completalo con el usuario sin "@", por ejemplo "fnxestudio".
  * Mientras esté vacío, el botón muestra "Instagram próximamente".
  * Los nombres y las áreas de cada cuenta son provisorios: cambialos cuando estén definidas.
@@ -92,7 +92,7 @@ export interface InstagramAccount {
   covers: string;
 }
 
-export const INSTAGRAM_ACCOUNTS: Record<"estudio" | "salud", InstagramAccount> = {
+export const INSTAGRAM_ACCOUNTS: Record<"estudio" | "salud" | "noticias", InstagramAccount> = {
   estudio: {
     name: "FNX Estudio",
     handle: "fnx.estudio",
@@ -102,6 +102,12 @@ export const INSTAGRAM_ACCOUNTS: Record<"estudio" | "salud", InstagramAccount> =
     name: "FNX Salud",
     handle: "fnx.salud",
     covers: "Orientación +18 y noticias del sector",
+  },
+  noticias: {
+    name: "FNX Noticias",
+    // Completá el usuario cuando la cuenta esté creada (por ejemplo "fnx.noticias").
+    handle: "",
+    covers: "Marketing, negocios, emprendimiento y sector regulado, con fuentes",
   },
 };
 

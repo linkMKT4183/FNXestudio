@@ -15,7 +15,7 @@ import { OG_IMAGE_META, pageUrl } from "@/config/site";
 const CHAT_ESTUDIO = [
   {
     q: "Hola FNX, quiero renovar mi marca",
-    a: "Hola. Agendemos una consultoría de 15 minutos: vemos dónde está tu marca hoy y hasta dónde puede llegar.",
+    a: "Hola. Arranquemos con 15 minutos sin costo: miramos tu marca juntos y te decimos qué cambiaríamos primero.",
   },
   {
     q: "Necesito contenido para redes",
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/estudio")({
       {
         name: "description",
         content:
-          "Marcas que se destacan. Branding, producción audiovisual, tienda online, redes y estrategia para que tu marca deje de ser una más.",
+          "Identidad, contenido, redes y tienda online para marcas de todo el país, con sedes en San Juan y Mendoza. Consultoría de 15 minutos sin costo.",
       },
       { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
@@ -54,10 +54,10 @@ export const Route = createFileRoute("/estudio")({
 const SERVICES = [
   {
     icon: Palette,
-    title: "Branding e identidad",
-    short: "Que tu marca se reconozca.",
+    title: "Identidad de marca",
+    short: "Que te reconozcan de lejos.",
     detail:
-      "Nombre, logo, colores, tipografías y manual. Una identidad que funciona en todos lados.",
+      "Nombre, logo, colores, tipografías y manual de uso. La misma marca en el local, las redes, el packaging y la web.",
     escena: EscenaBranding,
   },
   {
@@ -70,8 +70,8 @@ const SERVICES = [
   {
     icon: ShoppingBag,
     title: "Tienda online",
-    short: "Vender mientras dormís.",
-    detail: "Armamos tu tienda, cargamos productos y la dejamos lista para cobrar.",
+    short: "Tu local, abierto las 24 horas.",
+    detail: "Armamos tu tienda, cargamos tus productos y la dejamos lista para cobrar.",
     escena: EscenaTienda,
   },
   {
@@ -84,20 +84,20 @@ const SERVICES = [
   {
     icon: Target,
     title: "Estrategia",
-    short: "Ver la jugada antes.",
-    detail: "Ordenamos objetivos, público y mensajes antes de invertir en pauta.",
+    short: "Saber a quién le hablás.",
+    detail: "Ordenamos objetivo, público y mensaje antes de que inviertas un peso en publicidad.",
     escena: EscenaEstrategia,
   },
 ];
 
 const PHRASES: PhraseSlide[] = [
-  { text: "Tu potencial necesita dirección.", img: IMG.manoFigura, focusX: "45%" },
-  { text: "Ver la jugada antes que el mercado.", img: IMG.caminoLuz, focusX: "40%" },
+  { text: "Una buena idea también necesita un camino.", img: IMG.manoFigura, focusX: "45%" },
+  { text: "Si no te eligen, no siempre es el precio.", img: IMG.caminoLuz, focusX: "40%" },
   { text: "Primero la marca. Después la pauta.", img: IMG.cerebro, focusX: "55%" },
-  { text: "Anuncios que se escuchan.", img: IMG.megafonos, focusX: "76%" },
+  { text: "Tu marca habla antes que vos.", img: IMG.megafonos, focusX: "76%" },
 ];
 
-const HERO_TAGS = ["Branding", "Redes y contenido", "Audiovisual", "Tienda online", "Estrategia"];
+const HERO_TAGS = ["Identidad", "Redes y contenido", "Audiovisual", "Tienda online", "Estrategia"];
 
 function Estudio() {
   return (
@@ -108,7 +108,7 @@ function Estudio() {
       >
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           <Reveal className="flex flex-col gap-8">
-            <p className="eyebrow text-area">FNX Estudio · Mendoza · San Juan · Todo el país</p>
+            <p className="eyebrow text-area">FNX Estudio · Sedes en San Juan y Mendoza · Todo el país</p>
             <Headline
               as="h1"
               id="estudio-titulo"
@@ -194,10 +194,10 @@ function Estudio() {
       <section className="mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8" aria-label="Prueba de marca">
         <Reveal className="flex flex-col items-start gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-base font-semibold text-foreground">
-            ¿Tu marca pasa desapercibida? Hacé la prueba de 1 minuto con las 5 señales.
+            ¿Cuántas de las 5 señales te pasan? Descubrilo en 1 minuto.
           </p>
           <Button asChild variant="area" size="default">
-            <Link to="/tu-marca">Hacé la prueba</Link>
+            <Link to="/tu-marca">Hacer la prueba</Link>
           </Button>
         </Reveal>
       </section>
@@ -219,7 +219,7 @@ function Estudio() {
               puede llegar. Sin costo y sin compromiso.
             </p>
             <div className="flex flex-wrap gap-3">
-              <WhatsAppButton topic="marca" label="Agendá tu consultoría" />
+              <WhatsAppButton topic="marca" label="Agendá tus 15 minutos gratis" />
               <EmailButton account="estudio" topic="marca" />
               <InstagramButton account="estudio" />
             </div>

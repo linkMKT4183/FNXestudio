@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { INSTAGRAM_ACCOUNTS, buildInstagramLink } from "@/config/site";
 
 describe("Instagram links", () => {
-  it("has two accounts", () => {
-    expect(Object.keys(INSTAGRAM_ACCOUNTS)).toEqual(["estudio", "salud"]);
+  it("has three accounts", () => {
+    expect(Object.keys(INSTAGRAM_ACCOUNTS)).toEqual(["estudio", "salud", "noticias"]);
   });
   it("returns no link while the handle is empty", () => {
     expect(buildInstagramLink("estudio", "")).toBeNull();

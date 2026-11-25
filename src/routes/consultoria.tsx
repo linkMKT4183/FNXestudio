@@ -580,7 +580,7 @@ function Consultoria() {
       <Tabs defaultValue="agro" className="block">
         <div className="sticky top-[124px] z-20 border-b border-border bg-background/90 backdrop-blur-md sm:top-[140px]">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-3 sm:px-8">
-            <p className="eyebrow w-full text-foreground" aria-hidden="true">
+            <p className="eyebrow w-full text-[11px] text-foreground sm:text-xs" aria-hidden="true">
               Elegí tu sector <span className="text-muted-foreground">· tocá una opción</span>
             </p>
             <TabsList
@@ -591,15 +591,15 @@ function Consultoria() {
                 <TabsTrigger
                   key={s.v}
                   value={s.v}
-                  className="group/sector sector-boton flex h-auto min-h-14 items-center justify-start gap-3 rounded-2xl border-2 border-area/60 bg-card px-4 py-2.5 text-left text-foreground shadow-none transition-[background-color,border-color,transform] hover:-translate-y-0.5 hover:border-area active:translate-y-0 data-[state=active]:border-area data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none sm:min-w-56"
+                  className="group/sector sector-boton flex h-auto min-h-12 items-center justify-start gap-2 rounded-2xl border-2 border-area/60 bg-card px-3 py-2 sm:min-h-14 sm:gap-3 sm:px-4 sm:py-2.5 text-left text-foreground shadow-none transition-[background-color,border-color,transform] hover:-translate-y-0.5 hover:border-area active:translate-y-0 data-[state=active]:border-area data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none sm:min-w-56"
                 >
                   <s.icon className="h-5 w-5 shrink-0 text-area group-data-[state=active]/sector:text-area-foreground" aria-hidden="true" />
                   <span className="flex min-w-0 flex-col">
-                    <span className="text-sm font-bold leading-tight">{s.l}</span>
-                    <span className="text-xs font-medium leading-tight opacity-75">{s.sub}</span>
+                    <span className="text-[13px] font-bold leading-tight sm:text-sm">{s.l}</span>
+                    <span className="hidden text-xs font-medium leading-tight opacity-75 sm:block">{s.sub}</span>
                   </span>
                   <CheckCircle2
-                    className="ml-auto hidden h-5 w-5 shrink-0 group-data-[state=active]/sector:block"
+                    className="ml-auto hidden h-5 w-5 shrink-0 sm:group-data-[state=active]/sector:block"
                     aria-hidden="true"
                   />
                 </TabsTrigger>

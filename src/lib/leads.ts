@@ -23,6 +23,8 @@ export interface Lead {
   mail: string;
   whatsapp: string;
   area: LeadArea | "";
+  /** Aceptó la política de privacidad. La casilla arranca sin marcar. */
+  consentimiento: boolean;
 }
 
 export type LeadErrors = Partial<Record<keyof Lead, string>>;
@@ -34,6 +36,8 @@ export function validateLead(lead: Lead): LeadErrors {
   if (lead.whatsapp.replace(/\D/g, "").length < 8)
     errors.whatsapp = "Dejanos un WhatsApp con código de área.";
   if (!lead.area) errors.area = "Elegí un área.";
+  if (!lead.consentimiento)
+    errors.consentimiento = "Para mandarte la guía necesitamos que aceptes la política de privacidad.";
   return errors;
 }
 
@@ -50,6 +54,7 @@ export function buildLeadPayload(lead: Lead) {
     Mail: lead.mail.trim(),
     WhatsApp: lead.whatsapp.trim(),
     "Área que le interesa": lead.area,
+    Consentimiento: "Aceptó la política de privacidad (Ley 25.326)",
     Origen: "fnxestudio.com · Guía ¿FNX puede ayudarte?",
   };
 }

@@ -1,8 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, ArrowUp, Instagram, Mail, Menu, Scale, X } from "lucide-react";
 import {
+  DEFENSA_CONSUMIDOR,
   EMAILS,
   INSTAGRAM_ACCOUNTS,
+  LEGAL,
   PARTNERS,
   buildInstagramLink,
   buildMailtoLink,
@@ -320,9 +322,31 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-border">
-        <p className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted-foreground sm:px-8">
-          © 2026 Fénix Creativo
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-6 text-xs text-muted-foreground sm:px-8">
+          <p>
+            © 2026 Fénix Creativo
+            {LEGAL.titular ? ` · Titular: ${LEGAL.titular}` : ""}
+            {LEGAL.cuit ? ` · CUIT ${LEGAL.cuit}` : ""}
+            {LEGAL.domicilio ? ` · ${LEGAL.domicilio}` : ""}
+          </p>
+          <nav aria-label="Información legal" className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link to="/legal" hash="privacidad" className="underline hover:text-foreground">
+              Política de privacidad
+            </Link>
+            <Link to="/legal" hash="terminos" className="underline hover:text-foreground">
+              Términos y condiciones
+            </Link>
+            <a
+              href={DEFENSA_CONSUMIDOR.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground"
+            >
+              {DEFENSA_CONSUMIDOR.texto}
+              <span className="sr-only"> (abre en una pestaña nueva)</span>
+            </a>
+          </nav>
+        </div>
       </div>
     </footer>
   );

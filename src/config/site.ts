@@ -140,3 +140,30 @@ export type PartnerId = keyof typeof PARTNERS;
 export function buildPartnerInstagramLink(id: PartnerId): string {
   return `https://www.instagram.com/${PARTNERS[id].handle}/`;
 }
+
+/**
+ * Datos legales del titular de FNX (pie de página y página Legal).
+ * Completalos con los datos reales: los mismos que van al registro de marca en el INPI.
+ * Mientras un dato esté vacío, no se muestra.
+ */
+export const LEGAL = {
+  /** Nombre y apellido o razón social del titular. */
+  titular: "",
+  cuit: "",
+  /** Domicilio legal completo. */
+  domicilio: "",
+  /** Fecha de la última actualización de la página Legal. */
+  actualizado: "25 de noviembre de 2026",
+} as const;
+
+/**
+ * Enlace obligatorio a la Ventanilla Federal Única de reclamos de Defensa del Consumidor
+ * (Resolución 274/2021 de la Secretaría de Comercio Interior). El texto del enlace es fijo.
+ */
+export const DEFENSA_CONSUMIDOR = {
+  url: "https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario",
+  texto: "Defensa de las y los Consumidores. Para reclamos ingrese aquí",
+} as const;
+
+/** Sitio de la Agencia de Acceso a la Información Pública, órgano de control de la Ley 25.326. */
+export const AAIP_URL = "https://www.argentina.gob.ar/aaip";

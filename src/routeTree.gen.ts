@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsultoriaRouteImport } from './routes/consultoria'
 import { Route as EstudioRouteImport } from './routes/estudio'
 import { Route as MarcaRouteImport } from './routes/marca'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as RedRouteImport } from './routes/red'
 import { Route as SaludRouteImport } from './routes/salud'
@@ -36,6 +37,11 @@ const EstudioRoute = EstudioRouteImport.update({
 const MarcaRoute = MarcaRouteImport.update({
   id: '/marca',
   path: '/marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticiasRoute = NoticiasRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
   '/marca': typeof MarcaRoute
+  '/legal': typeof LegalRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
   '/marca': typeof MarcaRoute
+  '/legal': typeof LegalRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
   '/marca': typeof MarcaRoute
+  '/legal': typeof LegalRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/consultoria'
     | '/estudio'
     | '/marca'
+    | '/legal'
     | '/noticias'
     | '/red'
     | '/salud'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/consultoria'
     | '/estudio'
     | '/marca'
+    | '/legal'
     | '/noticias'
     | '/red'
     | '/salud'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/consultoria'
     | '/estudio'
     | '/marca'
+    | '/legal'
     | '/noticias'
     | '/red'
     | '/salud'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   ConsultoriaRoute: typeof ConsultoriaRoute
   EstudioRoute: typeof EstudioRoute
   MarcaRoute: typeof MarcaRoute
+  LegalRoute: typeof LegalRoute
   NoticiasRoute: typeof NoticiasRoute
   RedRoute: typeof RedRoute
   SaludRoute: typeof SaludRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/marca'
       fullPath: '/marca'
       preLoaderRoute: typeof MarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/noticias': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConsultoriaRoute: ConsultoriaRoute,
   EstudioRoute: EstudioRoute,
   MarcaRoute: MarcaRoute,
+  LegalRoute: LegalRoute,
   NoticiasRoute: NoticiasRoute,
   RedRoute: RedRoute,
   SaludRoute: SaludRoute,

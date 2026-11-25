@@ -6,13 +6,14 @@ const ok: Lead = {
   mail: "ana@mail.com",
   whatsapp: "261 555 1234",
   area: "Todavía no sé",
+  consentimiento: true,
 };
 
 describe("leads", () => {
   it("valida campos obligatorios", () => {
     expect(validateLead(ok)).toEqual({});
-    const e = validateLead({ nombre: "", mail: "x", whatsapp: "12", area: "" });
-    expect(Object.keys(e).sort()).toEqual(["area", "mail", "nombre", "whatsapp"]);
+    const e = validateLead({ nombre: "", mail: "x", whatsapp: "12", area: "", consentimiento: false });
+    expect(Object.keys(e).sort()).toEqual(["area", "consentimiento", "mail", "nombre", "whatsapp"]);
   });
 
   it("arma el mail con todos los datos", () => {

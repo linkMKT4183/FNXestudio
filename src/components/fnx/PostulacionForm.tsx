@@ -1,4 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
 import { CheckCircle2, Lock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -168,7 +169,11 @@ export function PostulacionForm() {
         <span>
           Declaro que la información es veraz y presto consentimiento para que FNX trate mis datos
           personales con el único fin de evaluar mi incorporación a la red, conforme a la Ley 25.326
-          de Protección de Datos Personales.
+          de Protección de Datos Personales. Leí la{" "}
+          <Link to="/legal" hash="privacidad" className="underline hover:text-foreground">
+            política de privacidad
+          </Link>
+          .
           {error("consentimiento") ? (
             <span className="mt-1 block">{error("consentimiento")}</span>
           ) : null}

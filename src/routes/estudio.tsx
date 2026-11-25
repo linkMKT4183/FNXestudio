@@ -91,8 +91,8 @@ const SERVICES = [
 ];
 
 const PHRASES: PhraseSlide[] = [
-  { text: "Una buena idea también necesita un camino.", img: IMG.manoFigura, focusX: "45%" },
-  { text: "Si no te eligen, no siempre es el precio.", img: IMG.caminoLuz, focusX: "40%" },
+  { text: "Una buena idea también necesita un camino.", img: IMG.caminoLuz, focusX: "40%" },
+  { text: "Si no te eligen, no siempre es el precio.", img: IMG.manoFigura, focusX: "45%" },
   { text: "Primero la marca. Después la pauta.", img: IMG.cerebro, focusX: "55%" },
   { text: "Tu marca habla antes que vos.", img: IMG.megafonos, focusX: "76%" },
 ];

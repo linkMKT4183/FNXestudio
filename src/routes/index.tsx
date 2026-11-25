@@ -226,8 +226,8 @@ function Home() {
       <Section
         id="como-trabajamos"
         eyebrow="Proceso"
-        lead="Así"
-        accent="arrancamos."
+        lead="Cómo"
+        accent="trabajamos."
         className="pt-10 sm:pt-14"
         tldr="Del primer mensaje a la entrega, hablás siempre con FNX."
       >

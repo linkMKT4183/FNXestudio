@@ -337,7 +337,7 @@ const STEPS = [
 ];
 
 const NETWORK_POINTS = [
-  { title: "Una sola conversación", text: "Todas tus consultas pasan por FNX." },
+  { title: "Un solo contacto", text: "Todas tus consultas pasan por FNX." },
   { title: "Un solo presupuesto", text: "Con el trabajo de todos los profesionales incluido." },
   { title: "Una sola entrega", text: "Coordinamos y te entregamos todo terminado." },
 ];
@@ -640,8 +640,8 @@ function Consultoria() {
           <Section
             id="servicios-agro"
             eyebrow="Servicios · Agro"
-            lead="Del agua"
-            accent="al contrato."
+            lead="Respaldo técnico"
+            accent="y legal."
           >
             <ServiceTabs services={SERVICES_AGRO} />
           </Section>
@@ -820,8 +820,8 @@ function Consultoria() {
             <Pieces lit={1} />
             <Headline
               id="consultoria-cta"
-              lead="Tu proyecto,"
-              accent="en regla desde hoy."
+              lead="Contanos"
+              accent="tu proyecto."
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">

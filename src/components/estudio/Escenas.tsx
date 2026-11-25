@@ -50,9 +50,9 @@ const d = (s: number) => ({ animationDelay: `${s}s` });
 
 export function EscenaBranding() {
   return (
-    <Escena etiqueta="Animación: el logo y los colores de FNX aplicados en una tarjeta, un perfil de Instagram y una bolsa.">
+    <Escena etiqueta="Animación: se dibuja el logo de FNX y una chispa naranja lo lleva a una tarjeta, un perfil de Instagram y una bolsa, que se encienden una por una.">
       <p className="ev-tag">Tu identidad, aplicada</p>
-      <div className="ev-logo ev-logo-s ev-pop" style={d(0.1)}>
+      <div className="ev-logo ev-logo-s ev-logo-late">
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
           <circle cx="50" cy="50" r="46" fill="none" stroke="var(--fnx-naranja)" strokeWidth="3" className="ev-trazo" pathLength={1} />
         </svg>
@@ -60,21 +60,22 @@ export function EscenaBranding() {
       </div>
       <div className="ev-colores ev-colores-s">
         {["#0B0B0B", "#1C1C1C", "#F3EEE4", "#F2552C"].map((c, i) => (
-          <span key={c} className="ev-pop" style={{ background: c, ...d(0.7 + i * 0.2) }} />
+          <span key={c} className={cn("ev-pop", i === 3 && "ev-color-marca")} style={{ background: c, ...d(0.5 + i * 0.15) }} />
         ))}
       </div>
-      <div className="ev-apps">
-        <div className="ev-app ev-tarjeta ev-pop" style={d(1.4)} aria-hidden="true">
-          <span className="headline text-base text-fnx-negro">FNX</span>
+      <span className="ev-chispa" aria-hidden="true" />
+      <div className="ev-apps ev-flota">
+        <div className="ev-app ev-tarjeta ev-enciende" style={d(1.92)} aria-hidden="true">
+          <span className="headline ev-sello text-base text-fnx-negro" style={d(1.92)}>FNX</span>
           <i /> <i /> <b />
         </div>
-        <div className="ev-app ev-perfil ev-pop" style={d(1.9)} aria-hidden="true">
-          <span className="ev-avatar"><span className="headline text-[0.6rem] text-fnx-crema">FNX</span></span>
+        <div className="ev-app ev-perfil ev-enciende" style={d(2.76)} aria-hidden="true">
+          <span className="ev-avatar ev-sello" style={d(2.76)}><span className="headline text-[0.6rem] text-fnx-crema">FNX</span></span>
           <div className="ev-grilla"><i className="bg-fnx-naranja" /><i /><i /><i /><i className="bg-fnx-naranja" /><i /></div>
         </div>
-        <div className="ev-app ev-bolsa ev-pop" style={d(2.4)} aria-hidden="true">
+        <div className="ev-app ev-bolsa ev-enciende" style={d(3.48)} aria-hidden="true">
           <u />
-          <span className="headline text-sm text-fnx-negro">FNX</span>
+          <span className="headline ev-sello text-sm text-fnx-negro" style={d(3.48)}>FNX</span>
         </div>
       </div>
     </Escena>

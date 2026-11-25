@@ -193,7 +193,6 @@ function Home() {
               profesionales verificados. Noticias te cuenta lo que pasa en tu rubro, con fuentes. Y si tu caso
               necesita más de un área, lo coordinamos nosotros.
             </p>
-            <Pieces lit={1} className="mt-4" />
           </Reveal>
         </div>
         <div className="absolute inset-x-0 bottom-0 z-0 lg:hidden">

@@ -1581,6 +1581,42 @@
 .ev-bolsa { height: 82%; background: linear-gradient(160deg, color-mix(in oklab, var(--fnx-naranja) 90%, white), var(--fnx-naranja)); display: grid; place-items: center; clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%); border-radius: 0.3rem; box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.7); transform: rotate(3deg); }
 .ev-bolsa u { position: absolute; top: -0.9rem; left: 28%; width: 44%; height: 1rem; border: 2px solid var(--fnx-crema); border-bottom: 0; border-radius: 9999px 9999px 0 0; }
 
+/* Branding aplicado: la chispa lleva el logo a cada pieza y cada una se enciende (loop perfecto de 6 s) */
+.ev-colores-s span { border-color: rgb(243 238 228 / 0.5); }
+.ev-color-marca { box-shadow: 0 0 14px -1px color-mix(in oklab, var(--fnx-naranja) 85%, transparent); }
+.ev-logo-late { animation: ev-latido 6s var(--ease-fnx) infinite both; }
+@keyframes ev-latido { 0%, 26%, 40%, 100% { box-shadow: 0 0 30px -6px color-mix(in oklab, var(--fnx-naranja) 45%, transparent); } 30% { box-shadow: 0 0 44px 0 color-mix(in oklab, var(--fnx-naranja) 85%, transparent); } }
+.ev-chispa { left: 14.5%; top: 31%; width: 0.7rem; height: 0.7rem; margin: -0.35rem 0 0 -0.35rem; border-radius: 9999px; background: var(--fnx-naranja); box-shadow: 0 0 12px 3px var(--fnx-naranja), 0 0 28px 6px color-mix(in oklab, var(--fnx-naranja) 60%, transparent); z-index: 3; animation: ev-chispa 6s ease-in-out infinite both; }
+@keyframes ev-chispa {
+  0%, 22% { left: 14.5%; top: 31%; opacity: 0; transform: scale(0.4); }
+  25% { left: 14.5%; top: 31%; opacity: 1; transform: scale(1); }
+  32%, 34% { left: 23%; top: 72%; opacity: 1; transform: scale(1); }
+  46% { left: 55%; top: 64%; opacity: 1; transform: scale(1); }
+  58% { left: 82%; top: 70%; opacity: 1; transform: scale(1.3); }
+  63%, 100% { left: 82%; top: 70%; opacity: 0; transform: scale(0.4); }
+}
+.ev-enciende { animation: ev-enciende 6s var(--ease-fnx) infinite both; }
+@keyframes ev-enciende {
+  0% { opacity: 0.28; filter: saturate(0.2) brightness(0.7); }
+  4% { opacity: 1; filter: saturate(1.2) brightness(1.25); box-shadow: 0 0 34px -2px color-mix(in oklab, var(--fnx-naranja) 85%, transparent); }
+  12%, 55% { opacity: 1; filter: none; box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.7); }
+  68%, 100% { opacity: 0.28; filter: saturate(0.2) brightness(0.7); box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.7); }
+}
+.ev-sello { display: inline-block; transform-origin: center; animation: ev-sello 6s var(--ease-fnx) infinite both; }
+.ev-tarjeta .ev-sello { transform-origin: left center; align-self: flex-start; }
+@keyframes ev-sello { 0% { transform: scale(1.4); opacity: 0; } 5%, 60% { transform: scale(1); opacity: 1; } 68%, 100% { transform: scale(1); opacity: 0.5; } }
+.ev-flota { animation: ev-flota 6s ease-in-out infinite; }
+@keyframes ev-flota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) {
+  .ev-chispa { display: none; }
+  .ev-enciende, .ev-sello, .ev-flota, .ev-logo-late { animation: none !important; opacity: 1; filter: none; transform: none; }
+}
+
+/* Selector de sector (Consultoría): la opción no elegida late suave para que se note que se puede tocar */
+.sector-boton[data-state="inactive"] { animation: sector-llama 2.4s ease-in-out infinite; }
+@keyframes sector-llama { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--area) 0%, transparent); } 50% { box-shadow: 0 0 0 4px color-mix(in oklab, var(--area) 28%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .sector-boton[data-state="inactive"] { animation: none; } }
+
 /* Edición de video: pistas, regla y corte */
 .ev-monitor { left: 6%; top: 16%; width: 42%; height: 30%; display: grid; place-items: center; border-radius: 0.7rem; border: 1px solid color-mix(in oklab, var(--fnx-naranja) 55%, transparent); background: linear-gradient(135deg, color-mix(in oklab, var(--fnx-naranja) 22%, var(--fnx-grafito)), var(--fnx-negro)); }
 .ev-codigo { position: absolute; right: 0.5rem; bottom: 0.35rem; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.08em; color: var(--fnx-crema); font-variant-numeric: tabular-nums; }

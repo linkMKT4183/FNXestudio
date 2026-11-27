@@ -162,7 +162,7 @@ function Home() {
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
               Branding y marketing para tu marca, asesoría para proyectos agro y regulados,
-              orientación en salud y noticias de tu rubro. Elegí tu área y te respondemos por
+              acompañamiento en el REPROCANN y noticias de tu rubro. Elegí tu área y te respondemos por
               WhatsApp.
             </p>
           </Reveal>
@@ -193,7 +193,7 @@ function Home() {
             />
             <p className="max-w-xl text-lg text-muted-foreground">
               Estudio le da forma a tu marca. Consultoría pone tu proyecto en regla. Salud te
-              orienta con profesionales verificados. Noticias te cuenta lo que pasa en tu rubro, con
+              acompaña en el trámite del REPROCANN. Noticias te cuenta lo que pasa en tu rubro, con
               fuentes. Y si tu caso necesita más de un área, lo coordinamos nosotros.
             </p>
           </Reveal>

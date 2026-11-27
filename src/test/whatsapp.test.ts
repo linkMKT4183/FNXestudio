@@ -19,7 +19,7 @@ describe("WhatsApp links", () => {
 
   it("builds the health message link", () => {
     expect(buildWhatsAppLink("salud", "5492611234567")).toBe(
-      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, necesito orientación de FNX Salud (+18)")}`,
+      `https://wa.me/5492611234567?text=${encodeURIComponent("Hola FNX, vengo de la web: quiero hacer mi REPROCANN (+18)")}`,
     );
   });
 

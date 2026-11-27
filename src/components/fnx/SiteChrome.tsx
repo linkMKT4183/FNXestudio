@@ -452,7 +452,8 @@ export function SiteFooter() {
 
 /** Contacto del pie: WhatsApp, los dos correos y las cuentas de Instagram. */
 function SocialLinks() {
-  const wa = buildWhatsAppLink("marca");
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const wa = buildWhatsAppLink(topicFromPath(pathname));
   const ids = Object.keys(INSTAGRAM_ACCOUNTS) as InstagramAccountId[];
   const base =
     "inline-flex h-11 items-center gap-2 rounded-full border border-border px-4 text-sm font-semibold text-muted-foreground transition-colors hover:border-foreground hover:text-foreground";

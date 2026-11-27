@@ -2,12 +2,24 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   BadgeCheck,
+  BellRing,
+  CalendarClock,
+  ClipboardCheck,
   Compass,
   FileCheck2,
   FileQuestion,
+  Gift,
+  HandHeart,
+  Landmark,
+  Leaf,
   Lock,
+  MapPin,
   Scale,
+  ShieldCheck,
+  Sprout,
   Stethoscope,
+  Timer,
+  UserRound,
   Users,
 } from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
@@ -18,15 +30,14 @@ import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
-import { IMG, type FnxImg } from "@/data/imagenes";
+import { IMG } from "@/data/imagenes";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-import { OG_IMAGE_META, pageUrl } from "@/config/site";
+import { breadcrumbLd, faqLd, pageHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 const RED_SALUD: NetworkNode[] = [
@@ -37,11 +48,35 @@ const RED_SALUD: NetworkNode[] = [
   { label: "Tus datos", icon: Lock, color: "var(--fnx-verde)" },
 ];
 
+/** Lo básico del REPROCANN, para quien llega sin saber qué es. */
+const BASICO = [
+  {
+    icon: Landmark,
+    title: "Un registro oficial",
+    text: "Es el Registro del Programa de Cannabis, creado a partir de la Ley 27.350. Desde 2026 lo opera la SEDRONAR, dentro del Ministerio de Salud de la Nación.",
+  },
+  {
+    icon: Leaf,
+    title: "Te habilita a cultivar",
+    text: "Con el certificado accedés al cultivo controlado de cannabis con fines medicinales, terapéuticos o para aliviar el dolor, dentro de la ley.",
+  },
+  {
+    icon: Sprout,
+    title: "Tres formas de cultivo",
+    text: "Cultivás vos, lo hace una persona de tu confianza (cultivador solidario) o una ONG inscripta en el registro.",
+  },
+  {
+    icon: Gift,
+    title: "Inscripción gratuita",
+    text: "El trámite ante el Estado no tiene costo. El certificado dura 3 años si cultivás vos y 1 año si es a través de una ONG.",
+  },
+];
+
 const PASOS_REPROCANN = [
   {
     titulo: "La consulta médica",
     texto:
-      "Un médico habilitado evalúa tu caso y, si corresponde, te indica el tratamiento. Debe contar con matrícula vigente, inscripción en el REFEPS y firma digital registrada.",
+      "Un médico habilitado evalúa tu caso y, si corresponde, te indica el tratamiento. Debe tener matrícula vigente, inscripción en el REFEPS y la formación que hoy exige la normativa.",
     fnx: "te conectamos con médicos verificados.",
   },
   {
@@ -65,7 +100,7 @@ const PASOS_REPROCANN = [
   {
     titulo: "Autorización",
     texto:
-      "El Ministerio de Salud de la Nación evalúa la solicitud y, si la aprueba, emite tu certificado. La inscripción es gratuita.",
+      "El programa evalúa la solicitud y, si la aprueba, emite tu certificado. Los casos simples con todo completo pueden salir más rápido; el resto pasa por revisión manual y puede demorar.",
     fnx: "hacemos el seguimiento hasta que tengas tu certificado.",
   },
   {
@@ -76,27 +111,137 @@ const PASOS_REPROCANN = [
   },
 ];
 
-export const Route = createFileRoute("/salud")({
-  head: () => ({
-    meta: [
-      { title: "FNX Salud · Orientación REPROCANN | FNX · Fénix Creativo" },
-      {
-        name: "description",
-        content:
-          "Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica. Profesionales y ONGs verificados. Contenido para mayores de 18 años.",
-      },
-      { property: "og:title", content: "FNX Salud · Te acompañamos en cada paso" },
-      {
-        property: "og:description",
-        content: "Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: pageUrl("/salud") },
-      ...OG_IMAGE_META,
-      { name: "twitter:card", content: "summary_large_image" },
+/** Qué hace FNX Salud, en concreto. */
+const INCLUYE = [
+  {
+    icon: Compass,
+    title: "Te explicamos todo",
+    text: "Qué necesitás, en qué orden y qué modalidad de cultivo te conviene, en un lenguaje simple.",
+    img: IMG.brujulas,
+  },
+  {
+    icon: BadgeCheck,
+    title: "Médicos y ONGs verificados",
+    text: "Te conectamos con médicos habilitados para indicar el tratamiento y con ONGs inscriptas que cumplen.",
+    img: IMG.lupa,
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Revisamos y seguimos tu trámite",
+    text: "Chequeamos que la documentación esté completa antes de enviarla y te acompañamos hasta que tenés el certificado.",
+    img: IMG.carpetas,
+  },
+  {
+    icon: BellRing,
+    title: "Te avisamos la renovación",
+    text: "El certificado no se renueva solo. Te avisamos antes de que venza para que no te quedes sin él.",
+    img: IMG.ongs,
+  },
+];
+
+/** Normativa vigente, por jurisdicción. Revisar cada vez que cambie la ley. */
+const NORMATIVA = [
+  {
+    lugar: "Nación",
+    puntos: [
+      "Ley 27.350: uso medicinal del cannabis y creación del registro.",
+      "Resolución 1780/2025: nuevos requisitos, categorías y vigencia (3 años autocultivo, 1 año ONG).",
+      "Decreto 27/2026: el REPROCANN pasa a ser operado por la SEDRONAR, dentro del Ministerio de Salud.",
+      "2026: circuito más ágil para casos simples con documentación completa.",
     ],
-    links: [{ rel: "canonical", href: pageUrl("/salud") }],
-  }),
+  },
+  {
+    lugar: "Mendoza",
+    puntos: [
+      "Ley 9617 y Decreto 1928/2025: marco para la cadena de valor del cannabis medicinal y el cáñamo.",
+      "Resolución 151/2026: registro provincial REPRO-Mendoza para pacientes, terceros cultivadores y asociaciones.",
+      "Resolución 526/2026: registro provincial de médicos que indican cannabis.",
+    ],
+  },
+  {
+    lugar: "San Juan",
+    puntos: [
+      "Ley 1926-Q: adhesión a la Ley 27.350.",
+      "El trámite de pacientes se hace por el REPROCANN nacional.",
+    ],
+  },
+];
+
+const PARA_QUIEN = [
+  {
+    icon: UserRound,
+    title: "Querés empezar tu tratamiento",
+    text: "Nunca hiciste el trámite y querés saber por dónde arrancar.",
+  },
+  {
+    icon: HandHeart,
+    title: "Acompañás a alguien",
+    text: "Sos familiar o responsable de un paciente y hacés el trámite por él o ella.",
+  },
+  {
+    icon: CalendarClock,
+    title: "Tu certificado vence",
+    text: "Ya tenés REPROCANN y necesitás renovarlo a tiempo.",
+  },
+];
+
+const FAQ = [
+  {
+    icon: Compass,
+    q: "¿Por dónde empiezo?",
+    a: "Escribinos por WhatsApp y contanos si es tu primer trámite o una renovación. Te decimos qué necesitás y en qué orden.",
+    whatsapp: true,
+  },
+  {
+    icon: ShieldCheck,
+    q: "¿Es legal?",
+    a: "Sí. El uso medicinal del cannabis está regulado por la Ley 27.350, y el certificado del REPROCANN acredita que tu cultivo cumple las condiciones del programa.",
+  },
+  {
+    icon: Stethoscope,
+    q: "¿Necesito una consulta médica?",
+    a: "Sí. El trámite empieza con la indicación de un médico con matrícula vigente e inscripto en el REFEPS. Si no tenés uno, te conectamos con médicos verificados.",
+  },
+  {
+    icon: Timer,
+    q: "¿Cuánto tarda?",
+    a: "Depende de la evaluación oficial. Desde 2026 los casos simples con documentación completa pueden resolverse más rápido; otros siguen en revisión manual y demoran. Por eso nos ocupamos de que tu solicitud salga completa.",
+  },
+  {
+    icon: FileQuestion,
+    q: "¿Me garantizan la aprobación?",
+    a: "No. La aprobación depende de la evaluación oficial; te ayudamos a presentar todo correctamente.",
+  },
+  {
+    icon: FileCheck2,
+    q: "¿Cuánto cuesta?",
+    a: "La inscripción ante el Estado es gratuita. Nuestro acompañamiento tiene un valor, y te lo pasamos antes de empezar.",
+  },
+  {
+    icon: MapPin,
+    q: "¿Vivo en Mendoza o San Juan, cambia algo?",
+    a: "En San Juan el trámite se hace por el REPROCANN nacional. En Mendoza, además, existe el registro provincial (REPRO-Mendoza). Te decimos cuál te conviene según tu caso.",
+  },
+  {
+    icon: Lock,
+    q: "¿Qué pasa con mis datos?",
+    a: "Te pedimos consentimiento, tratamos tu información con reserva y solo la compartimos con el profesional que elijas.",
+  },
+];
+
+const TITULO = "REPROCANN: te acompañamos en el trámite | FNX Salud (+18)";
+const DESCRIPCION =
+  "Te acompañamos a tramitar o renovar tu REPROCANN: consulta médica, documentación y seguimiento hasta tu certificado. Médicos y ONGs verificados. Solo mayores de 18 años.";
+
+export const Route = createFileRoute("/salud")({
+  head: () =>
+    pageHead(TITULO, DESCRIPCION, "/salud", [
+      faqLd(FAQ.map((f) => ({ question: f.q, answer: f.a }))),
+      breadcrumbLd([
+        { name: "Inicio", path: "/" },
+        { name: "FNX Salud", path: "/salud" },
+      ]),
+    ]),
   component: Salud,
 });
 
@@ -107,61 +252,6 @@ function AdultNote() {
     </p>
   );
 }
-
-const SERVICES = [
-  {
-    icon: Compass,
-    title: "Orientación en el trámite REPROCANN",
-    text: "Te explicamos qué necesitás y en qué orden.",
-    img: IMG.carpetas,
-  },
-  {
-    icon: BadgeCheck,
-    title: "Profesionales verificados",
-    text: "Médicos y abogados que chequeamos antes de recomendarte.",
-    img: IMG.lupa,
-  },
-  {
-    icon: Users,
-    title: "Vinculación con ONGs verificadas",
-    text: "Te conectamos con organizaciones que cumplen.",
-    img: IMG.ongs,
-  },
-  {
-    icon: Lock,
-    title: "Tus datos, protegidos",
-    text: "Te pedimos consentimiento, tratamos tu información con reserva y solo la compartimos con el profesional que elijas.",
-    img: IMG.candado,
-  },
-];
-
-const FAQ = [
-  {
-    icon: Compass,
-    q: "¿Por dónde empiezo?",
-    a: "Escribinos y te orientamos según tu caso.",
-    img: IMG.brujulas,
-    whatsapp: true,
-  },
-  {
-    icon: FileQuestion,
-    q: "¿Me garantizan la aprobación?",
-    a: "No. La aprobación depende de la evaluación oficial; te ayudamos a presentar todo correctamente.",
-    img: IMG.mitoRealidad,
-  },
-  {
-    icon: FileCheck2,
-    q: "¿Cuánto cuesta?",
-    a: "La inscripción es gratuita. Nuestro acompañamiento tiene un valor, y te lo pasamos antes de empezar.",
-    img: IMG.carpetas,
-  },
-  {
-    icon: Lock,
-    q: "¿Qué pasa con mis datos?",
-    a: "Pedimos tu consentimiento y tratamos tu información con reserva.",
-    img: IMG.candado,
-  },
-];
 
 /** Pasos del trámite: acordeón a la izquierda y panel visual que sigue el paso abierto. */
 function PasosReprocann() {
@@ -186,7 +276,7 @@ function PasosReprocann() {
             >
               <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
                 <span className="flex items-center gap-4">
-                  <span className="headline text-3xl text-area">
+                  <span className="headline paso-num text-3xl text-area">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {p.titulo}
@@ -202,8 +292,8 @@ function PasosReprocann() {
           ))}
         </Accordion>
         <p className="mt-4 text-xs text-muted-foreground">
-          Información basada en la normativa vigente del Ministerio de Salud de la Nación. El
-          trámite es personal y la aprobación depende exclusivamente del Ministerio.
+          Información basada en la Ley 27.350, la Resolución 1780/2025 y el Decreto 27/2026. El
+          trámite es personal y la aprobación depende exclusivamente del organismo oficial.
         </p>
       </Reveal>
       <Reveal delay={120} className="h-full">
@@ -268,7 +358,7 @@ function FaqWithPhotos() {
               value={`faq-${i}`}
               className="rounded-2xl border border-border bg-card px-6"
             >
-              <AccordionTrigger className="py-5 text-base font-bold text-foreground hover:no-underline">
+              <AccordionTrigger className="py-5 text-left text-base font-bold text-foreground hover:no-underline">
                 <span className="flex items-center gap-3">
                   <f.icon className="h-5 w-5 shrink-0 text-area" aria-hidden="true" />
                   {f.q}
@@ -289,7 +379,7 @@ function FaqWithPhotos() {
           ))}
         </Accordion>
       </Reveal>
-      <Reveal delay={120}>
+      <Reveal delay={120} className="max-lg:hidden">
         <WhatsAppChat question={current.q} answer={current.a} />
       </Reveal>
     </div>
@@ -306,33 +396,23 @@ function Salud() {
         aria-labelledby="salud-titulo"
       >
         <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
-          <Reveal className="flex flex-col gap-8">
-            <p className="eyebrow text-area">FNX Salud · +18</p>
+          <Reveal className="flex flex-col gap-7">
+            <p className="eyebrow text-area">FNX Salud · +18 · Cannabis medicinal</p>
             <Headline
               as="h1"
               id="salud-titulo"
-              lead="Te acompañamos en"
-              accent="cada paso."
-              className="text-6xl sm:text-7xl xl:text-8xl"
+              lead="Te acompañamos con tu"
+              accent="REPROCANN."
+              className="text-5xl sm:text-7xl xl:text-8xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Orientación clara sobre el trámite REPROCANN, sin estigma y sin letra chica.
+              El REPROCANN es el registro nacional que te autoriza a cultivar cannabis con fines
+              medicinales. Te guiamos desde la consulta médica hasta que tenés tu certificado, y te
+              avisamos cuando toca renovarlo.
             </p>
-            <p className="max-w-xl text-sm text-muted-foreground">
-              Atendemos a pacientes. Si representás una asociación o un proyecto, te acompaña{" "}
-              <Link
-                to="/consultoria"
-                className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
-              >
-                FNX Consultoría
-              </Link>
-              .
-            </p>
-            <div className="flex flex-wrap items-center gap-6">
-              <WhatsAppButton topic="salud" />
-              <EmailButton account="salud" topic="salud" />
-              <InstagramButton account="salud" />
-              <Pieces lit={2} />
+            <div className="flex flex-wrap items-center gap-3">
+              <WhatsAppButton topic="salud" label="Quiero hacer mi REPROCANN" pulse />
+              <WhatsAppButton topic="renovacion" label="Quiero renovarlo" variant="outline" />
             </div>
             <AdultNote />
           </Reveal>
@@ -343,40 +423,122 @@ function Salud() {
       </section>
 
       <Section
-        id="que-hacemos"
-        eyebrow="Qué hacemos"
-        lead="Orientación con"
-        accent="confianza."
-        footer={<AdultNote />}
+        id="que-es"
+        eyebrow="Lo básico"
+        lead="¿Qué es el"
+        accent="REPROCANN?"
+        tldr="En Argentina el cannabis medicinal está regulado. Pacientes, cultivadores solidarios y ONGs se inscriben en un registro oficial y cumplen reglas claras. Trabajamos siempre dentro de ese marco."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 80}>
-              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-area hover:shadow-glow-soft">
-                <div className="aspect-[16/9] overflow-hidden border-b border-border">
-                  <FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />
-                </div>
-                <div className="flex flex-1 flex-col gap-5 p-6">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-area text-area-foreground">
-                    <s.icon className="h-6 w-6" aria-hidden="true" />
-                  </span>
-                  <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground">{s.text}</p>
-                </div>
-              </div>
-            </Reveal>
+        <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {BASICO.map((b) => (
+            <li
+              key={b.title}
+              className="tarjeta-viva flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6"
+            >
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-area text-area-foreground">
+                <b.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <h3 className="text-lg font-bold text-foreground">{b.title}</h3>
+              <p className="text-sm text-muted-foreground">{b.text}</p>
+            </li>
           ))}
-        </div>
+        </Reveal>
       </Section>
 
       <Section
-        id="reprocann-sin-vueltas"
-        eyebrow="Serie"
-        lead="REPROCANN"
+        id="ley-al-dia"
+        eyebrow="Actualizado a noviembre de 2026"
+        lead="La ley,"
+        accent="al día."
+        tldr="Las reglas cambiaron en los últimos meses. Esto es lo que rige hoy en el país, en Mendoza y en San Juan."
+      >
+        <Reveal as="ul" stagger className="grid gap-4 md:grid-cols-3">
+          {NORMATIVA.map((n) => (
+            <li
+              key={n.lugar}
+              className="flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6"
+            >
+              <p className="headline text-3xl text-area">{n.lugar}</p>
+              <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+                {n.puntos.map((pt) => (
+                  <li key={pt} className="flex gap-2">
+                    <span
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-area"
+                      aria-hidden="true"
+                    />
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </Reveal>
+      </Section>
+
+      <Section
+        id="que-hacemos"
+        eyebrow="Qué hacemos"
+        lead="Lo que incluye el"
+        accent="acompañamiento."
+        footer={<AdultNote />}
+      >
+        <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {INCLUYE.map((s) => (
+            <li
+              key={s.title}
+              className="group tarjeta-viva flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,box-shadow] duration-300 hover:border-area hover:shadow-glow-soft"
+            >
+              <div className="cam-marco aspect-[16/9] border-b border-border">
+                <FnxImage img={s.img} className="photo-hover h-full w-full object-cover" />
+              </div>
+              <div className="flex flex-1 flex-col gap-4 p-6">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-area text-area-foreground">
+                  <s.icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
+                <p className="text-sm text-muted-foreground">{s.text}</p>
+              </div>
+            </li>
+          ))}
+        </Reveal>
+      </Section>
+
+      <Section
+        id="reprocann-paso-a-paso"
+        eyebrow="Paso a paso"
+        lead="Cómo se tramita,"
         accent="sin vueltas."
         footer={<AdultNote />}
       >
         <PasosReprocann />
+      </Section>
+
+      <Section id="para-quien" eyebrow="Para quién es" lead="¿Es para" accent="vos?">
+        <Reveal as="ul" stagger className="grid gap-4 md:grid-cols-3">
+          {PARA_QUIEN.map((p) => (
+            <li
+              key={p.title}
+              className="tarjeta-viva flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-6"
+            >
+              <p.icon className="h-6 w-6 text-area" aria-hidden="true" />
+              <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
+              <p className="text-sm text-muted-foreground">{p.text}</p>
+            </li>
+          ))}
+        </Reveal>
+        <Reveal className="mt-4 rounded-2xl border border-border p-6">
+          <p className="eyebrow text-muted-foreground">Sector regulado</p>
+          <p className="mt-2 text-foreground">
+            ¿Tenés una ONG, un proyecto de cultivo o una empresa del sector? Para eso está{" "}
+            <Link
+              to="/consultoria"
+              className="font-semibold underline underline-offset-4 hover:text-area"
+            >
+              FNX Consultoría
+            </Link>
+            : inscripción, plan de cultivo, documentación y respaldo legal.
+          </p>
+        </Reveal>
       </Section>
 
       <Section
@@ -388,6 +550,27 @@ function Salud() {
       >
         <FaqWithPhotos />
       </Section>
+
+      <section className="mx-auto w-full max-w-6xl px-5 pb-24 sm:px-8" aria-labelledby="salud-cta">
+        <Reveal className="cta-vidrio flex flex-col items-start gap-6 rounded-3xl border border-border p-8 sm:p-14">
+          <Pieces lit={2} />
+          <Headline
+            id="salud-cta"
+            lead="Empezá tu REPROCANN"
+            accent="hoy."
+            className="text-5xl sm:text-7xl"
+          />
+          <p className="max-w-lg text-muted-foreground">
+            Escribinos por WhatsApp y te respondemos con los pasos para tu caso.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <WhatsAppButton topic="salud" label="Quiero hacer mi REPROCANN" pulse />
+            <EmailButton account="salud" topic="salud" />
+            <InstagramButton account="salud" />
+          </div>
+          <AdultNote />
+        </Reveal>
+      </section>
     </div>
   );
 }

@@ -19,7 +19,7 @@ interface Puerta {
 const PUERTAS: Puerta[] = [
   { to: "/estudio", area: "estudio", kicker: "FNX Estudio", title: "Quiero hacer crecer mi marca", icon: PenTool },
   { to: "/consultoria", area: "consultoria", kicker: "FNX Consultoría", title: "Necesito asesoría para mi proyecto", icon: Scale },
-  { to: "/salud", area: "salud", kicker: "FNX Salud · +18", title: "Necesito orientación en salud (+18)", icon: HeartHandshake },
+  { to: "/salud", area: "salud", kicker: "FNX Salud · +18", title: "Quiero hacer mi REPROCANN (+18)", icon: HeartHandshake },
   { to: "/noticias", area: "noticias", kicker: "FNX Noticias", title: "Quiero estar al día", icon: Newspaper },
   { to: "/red", kicker: "Profesionales", title: "Soy profesional y quiero sumarme", icon: Users, soloCelular: true },
 ];

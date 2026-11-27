@@ -1,14 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Clapperboard, Palette, ShoppingBag, Smartphone, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Clapperboard,
+  MapPin,
+  Palette,
+  ShoppingBag,
+  Smartphone,
+  Target,
+} from "lucide-react";
 import { InstagramButton } from "@/components/fnx/InstagramButton";
 import { Headline, Reveal, Section } from "@/components/fnx/primitives";
-import { EscenaAudiovisual, EscenaBranding, EscenaEstrategia, EscenaRedes, EscenaTienda } from "@/components/estudio/Escenas";
+import {
+  EscenaAudiovisual,
+  EscenaBranding,
+  EscenaEstrategia,
+  EscenaRedes,
+  EscenaTienda,
+} from "@/components/estudio/Escenas";
 import { PhraseCarousel, type PhraseSlide } from "@/components/fnx/PhraseCarousel";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { IMG } from "@/data/imagenes";
+import { FnxImage } from "@/components/fnx/FnxImage";
 
 import { OG_IMAGE_META, pageUrl } from "@/config/site";
 
@@ -30,11 +46,11 @@ const CHAT_ESTUDIO = [
 export const Route = createFileRoute("/estudio")({
   head: () => ({
     meta: [
-      { title: "FNX Estudio · Branding, contenido y estrategia | FNX · Fénix Creativo" },
+      { title: "Agencia de branding y marketing en Mendoza y San Juan | FNX Estudio" },
       {
         name: "description",
         content:
-          "Identidad, contenido, redes y tienda online para marcas de todo el país, con sedes en San Juan y Mendoza. Consultoría de 15 minutos sin costo.",
+          "Identidad de marca, redes y contenido, producción audiovisual, tienda online, estrategia y registro de marca. Sedes en San Juan y Mendoza y trabajo en todo el país. 15 minutos sin costo.",
       },
       { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
@@ -55,6 +71,7 @@ const SERVICES = [
   {
     icon: Palette,
     title: "Identidad de marca",
+    to: "/estudio/identidad-de-marca",
     short: "Que te reconozcan de lejos.",
     detail:
       "Nombre, logo, colores, tipografías y manual de uso. La misma marca en el local, las redes, el packaging y la web.",
@@ -63,6 +80,7 @@ const SERVICES = [
   {
     icon: Clapperboard,
     title: "Producción audiovisual",
+    to: "/estudio/produccion-audiovisual",
     short: "Foto y video con idea.",
     detail: "Piezas para redes, campañas y web. Planificadas, filmadas y editadas por nosotros.",
     escena: EscenaAudiovisual,
@@ -70,6 +88,7 @@ const SERVICES = [
   {
     icon: ShoppingBag,
     title: "Tienda online",
+    to: "/estudio/tienda-online",
     short: "Tu local, abierto las 24 horas.",
     detail: "Armamos tu tienda, cargamos tus productos y la dejamos lista para cobrar.",
     escena: EscenaTienda,
@@ -77,6 +96,7 @@ const SERVICES = [
   {
     icon: Smartphone,
     title: "Redes y contenido",
+    to: "/estudio/redes-y-contenido",
     short: "Constancia sin perder tiempo.",
     detail: "Calendario, diseño y textos. Vos aprobás, nosotros publicamos.",
     escena: EscenaRedes,
@@ -84,11 +104,25 @@ const SERVICES = [
   {
     icon: Target,
     title: "Estrategia",
+    to: "/estudio/estrategia",
     short: "Saber a quién le hablás.",
     detail: "Ordenamos objetivo, público y mensaje antes de que inviertas un peso en publicidad.",
     escena: EscenaEstrategia,
   },
+  {
+    icon: BadgeCheck,
+    title: "Registro de marca",
+    to: "/estudio/registro-de-marca",
+    short: "Que tu marca sea tuya.",
+    detail: "Junto a Aro · Estudio Jurídico, te acompañamos a proteger tu marca ante el INPI.",
+    escena: EscenaRegistro,
+  },
 ];
+
+/** Escena del registro de marca: la imagen del checklist con una tilde naranja. */
+function EscenaRegistro() {
+  return <FnxImage img={IMG.checklist} className="aspect-[4/3] w-full object-cover" />;
+}
 
 const PHRASES: PhraseSlide[] = [
   { text: "Una buena idea también necesita un camino.", img: IMG.caminoLuz, focusX: "40%" },
@@ -108,7 +142,10 @@ function Estudio() {
       >
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           <Reveal className="flex flex-col gap-8">
-            <p className="eyebrow text-area">FNX Estudio · Sedes en San Juan y Mendoza · Todo el país</p>
+            <p className="eyebrow text-area">
+              FNX Estudio · Agencia de branding y marketing · Sedes en San Juan y Mendoza · Todo el
+              país
+            </p>
             <Headline
               as="h1"
               id="estudio-titulo"
@@ -167,27 +204,70 @@ function Estudio() {
             const Escena = s.escena;
             return (
               <Reveal as="li" key={s.title} delay={i * 70}>
-                <article className="carrusel-marco flex h-full flex-col gap-4 rounded-[1.6rem] p-2.5">
+                <Link
+                  to={s.to}
+                  className="carrusel-marco group flex h-full flex-col gap-4 rounded-[1.6rem] p-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-area"
+                >
                   <div className="overflow-hidden rounded-[1.2rem]">
                     <Escena />
                   </div>
                   <div className="flex flex-1 flex-col gap-2 px-3.5 pb-4">
                     <p className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
                       <span>
-                        <span className="text-foreground">{String(i + 1).padStart(2, "0")}</span> / {String(SERVICES.length).padStart(2, "0")}
+                        <span className="text-foreground">{String(i + 1).padStart(2, "0")}</span> /{" "}
+                        {String(SERVICES.length).padStart(2, "0")}
                       </span>
                       <s.icon className="h-4 w-4 text-area" aria-hidden="true" />
                     </p>
                     <h3 className="headline text-3xl text-foreground">{s.title}</h3>
                     <p className="font-semibold text-area">{s.short}</p>
                     <p className="text-sm leading-relaxed text-muted-foreground">{s.detail}</p>
+                    <span className="mt-auto flex items-center gap-2 pt-2 text-sm font-semibold text-area">
+                      Ver más{" "}
+                      <ArrowRight
+                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">sobre {s.title}</span>
+                    </span>
                   </div>
-                </article>
+                </Link>
               </Reveal>
             );
           })}
         </ol>
       </Section>
+
+      <section
+        className="mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8"
+        aria-labelledby="estudio-donde"
+      >
+        <Reveal className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+          <h2
+            id="estudio-donde"
+            className="flex items-center gap-2 text-base font-semibold text-foreground"
+          >
+            <MapPin className="h-5 w-5 text-area" aria-hidden="true" />
+            Dónde trabajamos
+          </h2>
+          <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {[
+              { to: "/mendoza", name: "Mendoza" },
+              { to: "/san-juan", name: "San Juan" },
+            ].map((c) => (
+              <li key={c.to}>
+                <Link
+                  to={c.to}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-area underline-offset-4 hover:underline"
+                >
+                  Agencia de branding y marketing en {c.name}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
 
       <PhraseCarousel title="Cómo pensamos" slides={PHRASES} />
 

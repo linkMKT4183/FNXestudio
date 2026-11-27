@@ -19,7 +19,11 @@ export function LeadForm() {
 
   const set = (key: Exclude<keyof Lead, "consentimiento">) => (value: string) => {
     setLead((prev) => ({ ...prev, [key]: value }));
-    setErrors((prev) => ({ ...prev, [key]: undefined }));
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
   };
 
   async function onSubmit(event: FormEvent) {
@@ -127,7 +131,11 @@ export function LeadForm() {
           onChange={(e) => {
             const checked = e.target.checked;
             setLead((prev) => ({ ...prev, consentimiento: checked }));
-            setErrors((prev) => ({ ...prev, consentimiento: undefined }));
+            setErrors((prev) => {
+              const next = { ...prev };
+              delete next.consentimiento;
+              return next;
+            });
           }}
           {...aria("consentimiento")}
         />

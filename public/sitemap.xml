@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fnxestudio.com/</loc></url>
+  <url><loc>https://fnxestudio.com/</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://fnxestudio.com/consultoria</loc></url>
-  <url><loc>https://fnxestudio.com/estudio</loc></url>
+  <url><loc>https://fnxestudio.com/estudio</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://fnxestudio.com/noticias</loc></url>
   <url><loc>https://fnxestudio.com/red</loc></url>
   <url><loc>https://fnxestudio.com/salud</loc></url>
   <url><loc>https://fnxestudio.com/tu-marca</loc></url>
+  <url><loc>https://fnxestudio.com/estudio/identidad-de-marca</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/estudio/produccion-audiovisual</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/estudio/tienda-online</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/estudio/redes-y-contenido</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/estudio/estrategia</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/estudio/registro-de-marca</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/mendoza</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/san-juan</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/notas</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/notas/tu-marca-pasa-desapercibida-5-senales</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://fnxestudio.com/notas/registrar-tu-marca-antes-de-invertir</loc><lastmod>2026-11-27</lastmod></url>
 </urlset>

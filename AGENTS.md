@@ -15,3 +15,6 @@
 - News content lives in `src/data/noticias.ts` as plain data so new items are added without touching UI.
 - Shared brand primitives (Logo, Pieces, Reveal, TenSeconds, Headline, Section) live in `src/components/fnx/`; reuse them instead of re-styling per page.
 - Site photos are registered only in `src/data/imagenes.ts` (webp, sm+lg, Spanish alt) and rendered through `FnxImage` — so sizes, lazy-loading and alt text stay consistent; each news record carries its own `image`, and the Marca gallery list is built in `src/data/galeria.ts` from `IMG` plus news.
+- Studio service and city pages use shared templates fed by plain data (`src/data/servicios.ts`, `src/data/ciudades.ts`); standalone service routes use the `estudio_` prefix so /estudio keeps rendering on its own.
+- Original articles live in `src/data/notas.ts` (separate from external news); route heads build metadata and JSON-LD from the same data via `src/lib/seo.ts`.
+- When adding a service, city or note, also add its URL to `public/sitemap.xml` (a test checks it).

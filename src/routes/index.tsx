@@ -13,14 +13,7 @@ import {
 } from "lucide-react";
 import { InstagramButton, InstagramDuo } from "@/components/fnx/InstagramButton";
 import { useEffect, useRef } from "react";
-import {
-  IconBadge,
-  Headline,
-  Pieces,
-  Reveal,
-  Section,
-  Tag,
-} from "@/components/fnx/primitives";
+import { IconBadge, Headline, Pieces, Reveal, Section, Tag } from "@/components/fnx/primitives";
 import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
@@ -48,11 +41,11 @@ const CHAT_INICIO = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FNX · Fénix Creativo | Estudio creativo · San Juan, Mendoza y todo el país" },
+      { title: "FNX · Agencia de branding y marketing en Mendoza y San Juan | Fénix Creativo" },
       {
         name: "description",
         content:
-          "Creamos marcas y conectamos personas de confianza. Una empresa, cuatro áreas: Estudio, Consultoría, Salud y Noticias. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
+          "Branding, redes, contenido, tienda online y estrategia para pymes y emprendedores. Sedes en San Juan y Mendoza y trabajo en todo el país. Primera charla de 15 minutos sin costo.",
       },
       {
         property: "og:title",
@@ -60,7 +53,8 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content: "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
+        content:
+          "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/") },
@@ -141,7 +135,11 @@ function Home() {
               aria-hidden="true"
               className="h-full w-full object-cover object-[50%_0%] max-md:hidden md:pt-16"
             >
-              <source src="/media/inicio-fondo-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+              <source
+                src="/media/inicio-fondo-720.mp4"
+                type="video/mp4"
+                media="(max-width: 767px)"
+              />
               <source src="/media/inicio-fondo.mp4" type="video/mp4" />
             </video>
           </div>
@@ -151,6 +149,9 @@ function Home() {
         </div>
 
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-8 pt-5 md:gap-5 md:px-5 sm:px-8 sm:pt-14 lg:pt-12">
+          <p className="eyebrow text-area">
+            Agencia de branding y marketing · Sedes en San Juan y Mendoza · Todo el país
+          </p>
           <Headline
             as="h1"
             id="hero-titulo"
@@ -160,7 +161,8 @@ function Home() {
           />
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
-              Una empresa, cuatro áreas. Con sedes en San Juan y Mendoza, trabajamos en todo el país.
+              Una empresa, cuatro áreas. Con sedes en San Juan y Mendoza, trabajamos en todo el
+              país.
             </p>
           </Reveal>
 
@@ -189,9 +191,9 @@ function Home() {
               className="max-w-4xl text-5xl sm:text-7xl lg:text-6xl xl:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio le da forma a tu marca. Consultoría pone tu proyecto en regla. Salud te orienta con
-              profesionales verificados. Noticias te cuenta lo que pasa en tu rubro, con fuentes. Y si tu caso
-              necesita más de un área, lo coordinamos nosotros.
+              Estudio le da forma a tu marca. Consultoría pone tu proyecto en regla. Salud te
+              orienta con profesionales verificados. Noticias te cuenta lo que pasa en tu rubro, con
+              fuentes. Y si tu caso necesita más de un área, lo coordinamos nosotros.
             </p>
           </Reveal>
         </div>
@@ -201,12 +203,20 @@ function Home() {
       </section>
 
       {/* Prueba de marca: las 5 señales se encienden de a una y la luz lleva hasta el botón */}
-      <Section id="prueba-marca" lead="¿Te ven o te pasan" accent="de largo?" className="pb-0 pt-12 sm:pt-16">
+      <Section
+        id="prueba-marca"
+        lead="¿Te ven o te pasan"
+        accent="de largo?"
+        className="pb-0 pt-12 sm:pt-16"
+      >
         <Reveal className="flex flex-col items-start gap-5">
           <p className="max-w-2xl text-lg text-muted-foreground">
             5 señales, 1 minuto. Marcá las que te pasan y sabé por dónde empezar.
           </p>
-          <ul className="guia-senales flex flex-wrap gap-2" aria-label="Las 5 señales de una marca que pasa desapercibida">
+          <ul
+            className="guia-senales flex flex-wrap gap-2"
+            aria-label="Las 5 señales de una marca que pasa desapercibida"
+          >
             {["Identidad", "Imagen", "Tienda", "Constancia", "Estrategia"].map((t, i) => (
               <li key={t} className="guia-chip" style={{ animationDelay: `${i * 0.45}s` }}>
                 {t}

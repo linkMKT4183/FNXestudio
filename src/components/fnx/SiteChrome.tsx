@@ -23,6 +23,8 @@ import { FnxImage } from "./FnxImage";
 import { IMG, type FnxImg } from "@/data/imagenes";
 import type { WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { SERVICIOS } from "@/data/servicios";
+import { CIUDADES } from "@/data/ciudades";
 import { trackEvent } from "@/lib/track";
 
 const NAV = [
@@ -125,12 +127,47 @@ export function MobileNavBlocks() {
   );
 }
 
-const EXPLORE: { to: (typeof NAV)[number]["to"]; area?: Area; label: string; text: string; img: FnxImg }[] = [
-  { to: "/estudio", area: "estudio", label: "Estudio", text: "Marcas que se destacan", img: IMG.rey },
-  { to: "/consultoria", area: "consultoria", label: "Consultoría", text: "Crecer en regla", img: IMG.cHero },
-  { to: "/salud", area: "salud", label: "Salud · +18", text: "Te acompañamos en cada paso", img: IMG.carpetas },
-  { to: "/noticias", area: "noticias", label: "Noticias", text: "Lo que pasa, contado con fuentes", img: IMG.tonoNoticias },
-  { to: "/red", label: "Profesionales", text: "Para profesionales que quieren sumarse", img: IMG.redHero },
+const EXPLORE: {
+  to: (typeof NAV)[number]["to"];
+  area?: Area;
+  label: string;
+  text: string;
+  img: FnxImg;
+}[] = [
+  {
+    to: "/estudio",
+    area: "estudio",
+    label: "Estudio",
+    text: "Marcas que se destacan",
+    img: IMG.rey,
+  },
+  {
+    to: "/consultoria",
+    area: "consultoria",
+    label: "Consultoría",
+    text: "Crecer en regla",
+    img: IMG.cHero,
+  },
+  {
+    to: "/salud",
+    area: "salud",
+    label: "Salud · +18",
+    text: "Te acompañamos en cada paso",
+    img: IMG.carpetas,
+  },
+  {
+    to: "/noticias",
+    area: "noticias",
+    label: "Noticias",
+    text: "Lo que pasa, contado con fuentes",
+    img: IMG.tonoNoticias,
+  },
+  {
+    to: "/red",
+    label: "Profesionales",
+    text: "Para profesionales que quieren sumarse",
+    img: IMG.redHero,
+  },
 ];
 
 /** End-of-page block on every section page, so nobody hits a dead end. */
@@ -156,16 +193,34 @@ export function ExploreMore() {
               className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-area active:scale-[0.98] motion-reduce:transition-none"
             >
               <span className="block aspect-[2/1] overflow-hidden border-b border-border">
-                <FnxImage img={e.img} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover" />
+                <FnxImage
+                  img={e.img}
+                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  className="h-full w-full object-cover"
+                />
               </span>
               <span className="flex flex-1 flex-col gap-1.5 p-3 sm:p-4">
                 <span className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wide text-foreground">
-                  <span aria-hidden="true" className={e.area ? "h-2 w-2 shrink-0 rounded-full bg-area" : "h-2 w-2 shrink-0 rounded-full bg-fnx-crema"} />
+                  <span
+                    aria-hidden="true"
+                    className={
+                      e.area
+                        ? "h-2 w-2 shrink-0 rounded-full bg-area"
+                        : "h-2 w-2 shrink-0 rounded-full bg-fnx-crema"
+                    }
+                  />
                   {e.label}
                 </span>
                 <span className="flex items-end justify-between gap-2">
-                  <span className="min-w-0 text-sm font-semibold leading-snug text-muted-foreground">{e.text}</span>
-                  <ArrowRight aria-hidden="true" className={e.area ? "h-4 w-4 shrink-0 text-area" : "h-4 w-4 shrink-0 text-fnx-crema"} />
+                  <span className="min-w-0 text-sm font-semibold leading-snug text-muted-foreground">
+                    {e.text}
+                  </span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className={
+                      e.area ? "h-4 w-4 shrink-0 text-area" : "h-4 w-4 shrink-0 text-fnx-crema"
+                    }
+                  />
                 </span>
               </span>
             </Link>
@@ -213,6 +268,10 @@ export function areaFromPath(pathname: string): Area {
 }
 
 function topicFromPath(pathname: string): WhatsAppTopic {
+  const servicio = SERVICIOS.find((s) => pathname.startsWith(s.path));
+  if (servicio) return servicio.topic;
+  const ciudad = CIUDADES.find((c) => pathname.startsWith(c.path));
+  if (ciudad) return ciudad.topic;
   if (pathname.startsWith("/consultoria")) return "consultoria";
   if (pathname.startsWith("/salud")) return "salud";
   if (pathname.startsWith("/noticias")) return "novedades";
@@ -282,7 +341,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-end md:justify-between">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:px-8 md:flex-row md:items-start md:justify-between">
         <div className="flex flex-col gap-3">
           <Logo className="text-7xl" />
           <p className="text-sm text-muted-foreground">
@@ -303,22 +362,59 @@ export function SiteFooter() {
             <span className="sr-only"> (abre Instagram en una pestaña nueva)</span>
           </a>
         </div>
-        <nav aria-label="Pie de página" className="flex flex-wrap gap-x-6 gap-y-3">
-          <Link
-            to="/"
-            className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
-          >
-            Inicio
-          </Link>
-          {NAV.map((item) => (
+        <nav
+          aria-label="Pie de página"
+          className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:max-w-xl"
+        >
+          <div className="flex flex-col gap-3">
+            <p className="eyebrow text-muted-foreground">FNX</p>
             <Link
-              key={item.to}
-              to={item.to}
+              to="/"
               className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
             >
-              {item.label}
+              Inicio
             </Link>
-          ))}
+            {NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              to="/notas"
+              className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
+            >
+              Notas
+            </Link>
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="eyebrow text-muted-foreground">Servicios</p>
+            {SERVICIOS.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+          <div className="col-span-2 flex flex-col gap-3 sm:col-span-1">
+            <p className="eyebrow text-muted-foreground">Dónde trabajamos</p>
+            {CIUDADES.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="link-draw text-sm font-semibold text-muted-foreground hover:text-foreground"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <span className="text-sm text-muted-foreground">Y todo el país</span>
+          </div>
         </nav>
       </div>
       <div className="border-t border-border">
@@ -371,13 +467,17 @@ function SocialLinks() {
       <li>
         <a href={buildMailtoLink("estudio", "general")} className={base}>
           <Mail className="h-4 w-4" aria-hidden="true" />
-          {EMAILS.estudio}
+          <span>
+            <span className="text-foreground">Estudio</span> · {EMAILS.estudio}
+          </span>
         </a>
       </li>
       <li>
         <a href={buildMailtoLink("salud", "salud")} className={base}>
           <Mail className="h-4 w-4" aria-hidden="true" />
-          {EMAILS.salud}
+          <span>
+            <span className="text-foreground">Salud</span> · {EMAILS.salud}
+          </span>
         </a>
       </li>
       {ids.map((id) => {

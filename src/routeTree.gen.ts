@@ -12,12 +12,22 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsultoriaRouteImport } from './routes/consultoria'
 import { Route as EstudioRouteImport } from './routes/estudio'
-import { Route as MarcaRouteImport } from './routes/marca'
 import { Route as LegalRouteImport } from './routes/legal'
+import { Route as MarcaRouteImport } from './routes/marca'
+import { Route as MendozaRouteImport } from './routes/mendoza'
 import { Route as NoticiasRouteImport } from './routes/noticias'
 import { Route as RedRouteImport } from './routes/red'
 import { Route as SaludRouteImport } from './routes/salud'
+import { Route as SanJuanRouteImport } from './routes/san-juan'
 import { Route as TuMarcaRouteImport } from './routes/tu-marca'
+import { Route as EstudioEstrategiaRouteImport } from './routes/estudio_.estrategia'
+import { Route as EstudioIdentidadDeMarcaRouteImport } from './routes/estudio_.identidad-de-marca'
+import { Route as EstudioProduccionAudiovisualRouteImport } from './routes/estudio_.produccion-audiovisual'
+import { Route as EstudioRedesYContenidoRouteImport } from './routes/estudio_.redes-y-contenido'
+import { Route as EstudioRegistroDeMarcaRouteImport } from './routes/estudio_.registro-de-marca'
+import { Route as EstudioTiendaOnlineRouteImport } from './routes/estudio_.tienda-online'
+import { Route as NotasIndexRouteImport } from './routes/notas.index'
+import { Route as NotasSlugRouteImport } from './routes/notas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,14 +44,19 @@ const EstudioRoute = EstudioRouteImport.update({
   path: '/estudio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarcaRoute = MarcaRouteImport.update({
   id: '/marca',
   path: '/marca',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LegalRoute = LegalRouteImport.update({
-  id: '/legal',
-  path: '/legal',
+const MendozaRoute = MendozaRouteImport.update({
+  id: '/mendoza',
+  path: '/mendoza',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NoticiasRoute = NoticiasRouteImport.update({
@@ -59,9 +74,55 @@ const SaludRoute = SaludRouteImport.update({
   path: '/salud',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SanJuanRoute = SanJuanRouteImport.update({
+  id: '/san-juan',
+  path: '/san-juan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TuMarcaRoute = TuMarcaRouteImport.update({
   id: '/tu-marca',
   path: '/tu-marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioEstrategiaRoute = EstudioEstrategiaRouteImport.update({
+  id: '/estudio_/estrategia',
+  path: '/estudio/estrategia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioIdentidadDeMarcaRoute = EstudioIdentidadDeMarcaRouteImport.update({
+  id: '/estudio_/identidad-de-marca',
+  path: '/estudio/identidad-de-marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioProduccionAudiovisualRoute =
+  EstudioProduccionAudiovisualRouteImport.update({
+    id: '/estudio_/produccion-audiovisual',
+    path: '/estudio/produccion-audiovisual',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EstudioRedesYContenidoRoute = EstudioRedesYContenidoRouteImport.update({
+  id: '/estudio_/redes-y-contenido',
+  path: '/estudio/redes-y-contenido',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioRegistroDeMarcaRoute = EstudioRegistroDeMarcaRouteImport.update({
+  id: '/estudio_/registro-de-marca',
+  path: '/estudio/registro-de-marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioTiendaOnlineRoute = EstudioTiendaOnlineRouteImport.update({
+  id: '/estudio_/tienda-online',
+  path: '/estudio/tienda-online',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotasIndexRoute = NotasIndexRouteImport.update({
+  id: '/notas/',
+  path: '/notas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotasSlugRoute = NotasSlugRouteImport.update({
+  id: '/notas/$slug',
+  path: '/notas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -69,35 +130,65 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
-  '/marca': typeof MarcaRoute
   '/legal': typeof LegalRoute
+  '/marca': typeof MarcaRoute
+  '/mendoza': typeof MendozaRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/san-juan': typeof SanJuanRoute
   '/tu-marca': typeof TuMarcaRoute
+  '/estudio/estrategia': typeof EstudioEstrategiaRoute
+  '/estudio/identidad-de-marca': typeof EstudioIdentidadDeMarcaRoute
+  '/estudio/produccion-audiovisual': typeof EstudioProduccionAudiovisualRoute
+  '/estudio/redes-y-contenido': typeof EstudioRedesYContenidoRoute
+  '/estudio/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
+  '/estudio/tienda-online': typeof EstudioTiendaOnlineRoute
+  '/notas/$slug': typeof NotasSlugRoute
+  '/notas/': typeof NotasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
-  '/marca': typeof MarcaRoute
   '/legal': typeof LegalRoute
+  '/marca': typeof MarcaRoute
+  '/mendoza': typeof MendozaRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/san-juan': typeof SanJuanRoute
   '/tu-marca': typeof TuMarcaRoute
+  '/estudio/estrategia': typeof EstudioEstrategiaRoute
+  '/estudio/identidad-de-marca': typeof EstudioIdentidadDeMarcaRoute
+  '/estudio/produccion-audiovisual': typeof EstudioProduccionAudiovisualRoute
+  '/estudio/redes-y-contenido': typeof EstudioRedesYContenidoRoute
+  '/estudio/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
+  '/estudio/tienda-online': typeof EstudioTiendaOnlineRoute
+  '/notas/$slug': typeof NotasSlugRoute
+  '/notas': typeof NotasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/consultoria': typeof ConsultoriaRoute
   '/estudio': typeof EstudioRoute
-  '/marca': typeof MarcaRoute
   '/legal': typeof LegalRoute
+  '/marca': typeof MarcaRoute
+  '/mendoza': typeof MendozaRoute
   '/noticias': typeof NoticiasRoute
   '/red': typeof RedRoute
   '/salud': typeof SaludRoute
+  '/san-juan': typeof SanJuanRoute
   '/tu-marca': typeof TuMarcaRoute
+  '/estudio_/estrategia': typeof EstudioEstrategiaRoute
+  '/estudio_/identidad-de-marca': typeof EstudioIdentidadDeMarcaRoute
+  '/estudio_/produccion-audiovisual': typeof EstudioProduccionAudiovisualRoute
+  '/estudio_/redes-y-contenido': typeof EstudioRedesYContenidoRoute
+  '/estudio_/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
+  '/estudio_/tienda-online': typeof EstudioTiendaOnlineRoute
+  '/notas/$slug': typeof NotasSlugRoute
+  '/notas/': typeof NotasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,46 +196,86 @@ export interface FileRouteTypes {
     | '/'
     | '/consultoria'
     | '/estudio'
-    | '/marca'
     | '/legal'
+    | '/marca'
+    | '/mendoza'
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/san-juan'
     | '/tu-marca'
+    | '/estudio/estrategia'
+    | '/estudio/identidad-de-marca'
+    | '/estudio/produccion-audiovisual'
+    | '/estudio/redes-y-contenido'
+    | '/estudio/registro-de-marca'
+    | '/estudio/tienda-online'
+    | '/notas/$slug'
+    | '/notas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/consultoria'
     | '/estudio'
-    | '/marca'
     | '/legal'
+    | '/marca'
+    | '/mendoza'
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/san-juan'
     | '/tu-marca'
+    | '/estudio/estrategia'
+    | '/estudio/identidad-de-marca'
+    | '/estudio/produccion-audiovisual'
+    | '/estudio/redes-y-contenido'
+    | '/estudio/registro-de-marca'
+    | '/estudio/tienda-online'
+    | '/notas/$slug'
+    | '/notas'
   id:
     | '__root__'
     | '/'
     | '/consultoria'
     | '/estudio'
-    | '/marca'
     | '/legal'
+    | '/marca'
+    | '/mendoza'
     | '/noticias'
     | '/red'
     | '/salud'
+    | '/san-juan'
     | '/tu-marca'
+    | '/estudio_/estrategia'
+    | '/estudio_/identidad-de-marca'
+    | '/estudio_/produccion-audiovisual'
+    | '/estudio_/redes-y-contenido'
+    | '/estudio_/registro-de-marca'
+    | '/estudio_/tienda-online'
+    | '/notas/$slug'
+    | '/notas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConsultoriaRoute: typeof ConsultoriaRoute
   EstudioRoute: typeof EstudioRoute
-  MarcaRoute: typeof MarcaRoute
   LegalRoute: typeof LegalRoute
+  MarcaRoute: typeof MarcaRoute
+  MendozaRoute: typeof MendozaRoute
   NoticiasRoute: typeof NoticiasRoute
   RedRoute: typeof RedRoute
   SaludRoute: typeof SaludRoute
+  SanJuanRoute: typeof SanJuanRoute
   TuMarcaRoute: typeof TuMarcaRoute
+  EstudioEstrategiaRoute: typeof EstudioEstrategiaRoute
+  EstudioIdentidadDeMarcaRoute: typeof EstudioIdentidadDeMarcaRoute
+  EstudioProduccionAudiovisualRoute: typeof EstudioProduccionAudiovisualRoute
+  EstudioRedesYContenidoRoute: typeof EstudioRedesYContenidoRoute
+  EstudioRegistroDeMarcaRoute: typeof EstudioRegistroDeMarcaRoute
+  EstudioTiendaOnlineRoute: typeof EstudioTiendaOnlineRoute
+  NotasSlugRoute: typeof NotasSlugRoute
+  NotasIndexRoute: typeof NotasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -170,6 +301,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EstudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/marca': {
       id: '/marca'
       path: '/marca'
@@ -177,11 +315,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarcaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/legal': {
-      id: '/legal'
-      path: '/legal'
-      fullPath: '/legal'
-      preLoaderRoute: typeof LegalRouteImport
+    '/mendoza': {
+      id: '/mendoza'
+      path: '/mendoza'
+      fullPath: '/mendoza'
+      preLoaderRoute: typeof MendozaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/noticias': {
@@ -205,11 +343,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SaludRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/san-juan': {
+      id: '/san-juan'
+      path: '/san-juan'
+      fullPath: '/san-juan'
+      preLoaderRoute: typeof SanJuanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tu-marca': {
       id: '/tu-marca'
       path: '/tu-marca'
       fullPath: '/tu-marca'
       preLoaderRoute: typeof TuMarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/estrategia': {
+      id: '/estudio_/estrategia'
+      path: '/estudio/estrategia'
+      fullPath: '/estudio/estrategia'
+      preLoaderRoute: typeof EstudioEstrategiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/identidad-de-marca': {
+      id: '/estudio_/identidad-de-marca'
+      path: '/estudio/identidad-de-marca'
+      fullPath: '/estudio/identidad-de-marca'
+      preLoaderRoute: typeof EstudioIdentidadDeMarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/produccion-audiovisual': {
+      id: '/estudio_/produccion-audiovisual'
+      path: '/estudio/produccion-audiovisual'
+      fullPath: '/estudio/produccion-audiovisual'
+      preLoaderRoute: typeof EstudioProduccionAudiovisualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/redes-y-contenido': {
+      id: '/estudio_/redes-y-contenido'
+      path: '/estudio/redes-y-contenido'
+      fullPath: '/estudio/redes-y-contenido'
+      preLoaderRoute: typeof EstudioRedesYContenidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/registro-de-marca': {
+      id: '/estudio_/registro-de-marca'
+      path: '/estudio/registro-de-marca'
+      fullPath: '/estudio/registro-de-marca'
+      preLoaderRoute: typeof EstudioRegistroDeMarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio_/tienda-online': {
+      id: '/estudio_/tienda-online'
+      path: '/estudio/tienda-online'
+      fullPath: '/estudio/tienda-online'
+      preLoaderRoute: typeof EstudioTiendaOnlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notas/': {
+      id: '/notas/'
+      path: '/notas'
+      fullPath: '/notas/'
+      preLoaderRoute: typeof NotasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notas/$slug': {
+      id: '/notas/$slug'
+      path: '/notas/$slug'
+      fullPath: '/notas/$slug'
+      preLoaderRoute: typeof NotasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -219,12 +420,22 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConsultoriaRoute: ConsultoriaRoute,
   EstudioRoute: EstudioRoute,
-  MarcaRoute: MarcaRoute,
   LegalRoute: LegalRoute,
+  MarcaRoute: MarcaRoute,
+  MendozaRoute: MendozaRoute,
   NoticiasRoute: NoticiasRoute,
   RedRoute: RedRoute,
   SaludRoute: SaludRoute,
+  SanJuanRoute: SanJuanRoute,
   TuMarcaRoute: TuMarcaRoute,
+  EstudioEstrategiaRoute: EstudioEstrategiaRoute,
+  EstudioIdentidadDeMarcaRoute: EstudioIdentidadDeMarcaRoute,
+  EstudioProduccionAudiovisualRoute: EstudioProduccionAudiovisualRoute,
+  EstudioRedesYContenidoRoute: EstudioRedesYContenidoRoute,
+  EstudioRegistroDeMarcaRoute: EstudioRegistroDeMarcaRoute,
+  EstudioTiendaOnlineRoute: EstudioTiendaOnlineRoute,
+  NotasSlugRoute: NotasSlugRoute,
+  NotasIndexRoute: NotasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

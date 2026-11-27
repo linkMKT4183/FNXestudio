@@ -8,6 +8,14 @@ export const WHATSAPP_NUMBER = "5492616306508";
 export const MANUAL_URL = "https://www.canva.com/d/SYr8B-ZM5BWGkRt";
 
 export const WHATSAPP_MESSAGES = {
+  identidad: "Hola FNX, vengo de la web: quiero crear o renovar la identidad de mi marca",
+  audiovisual: "Hola FNX, vengo de la web: quiero fotos o videos para mi marca",
+  tienda: "Hola FNX, vengo de la web: quiero mi tienda online",
+  redes: "Hola FNX, vengo de la web: quiero que me ayuden con mis redes",
+  estrategia: "Hola FNX, vengo de la web: quiero una estrategia para mi marca",
+  registro: "Hola FNX, vengo de la web: quiero registrar mi marca",
+  mendoza: "Hola FNX, vengo de la web: tengo un negocio en Mendoza y quiero hacer crecer mi marca",
+  sanjuan: "Hola FNX, vengo de la web: tengo un negocio en San Juan y quiero hacer crecer mi marca",
   general: "Hola FNX, quiero hacer una consulta",
   marca: "Hola FNX, quiero hacer crecer mi marca",
   consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o del sector regulado",

@@ -55,7 +55,7 @@ export const Route = createFileRoute("/estudio")({
       { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
         property: "og:description",
-        content: "Identidad, contenido y estrategia para que tu marca deje de ser una más.",
+        content: "Identidad, contenido y estrategia para pymes y emprendedores que quieren dejar de ser una más.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/estudio") },
@@ -154,8 +154,8 @@ function Estudio() {
               className="text-6xl sm:text-7xl lg:text-8xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Diseñamos la identidad, el contenido y la estrategia para que tu marca deje de ser una
-              más y empiece a ser la elegida.
+              Desde 2019 diseñamos la identidad, el contenido y la estrategia para pymes y
+              emprendedores que quieren dejar de ser una más y empezar a ser la elegida.
             </p>
             <ul className="flex flex-wrap gap-2" aria-label="Servicios de FNX Estudio">
               {HERO_TAGS.map((t) => (
@@ -168,7 +168,7 @@ function Estudio() {
               ))}
             </ul>
             <div className="flex flex-wrap items-center gap-3">
-              <WhatsAppButton topic="marca" pulse />
+              <WhatsAppButton topic="marca" label="Pedí tus 15 minutos gratis" pulse />
               <EmailButton account="estudio" topic="marca" />
             </div>
           </Reveal>

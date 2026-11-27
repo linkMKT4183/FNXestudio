@@ -76,8 +76,8 @@ const STEPS = [
   {
     n: "02",
     icon: ClipboardList,
-    title: "Te hacemos 3 preguntas",
-    text: "Para entender qué necesitás, sin vueltas.",
+    title: "Entendemos qué necesitás",
+    text: "Unas preguntas por WhatsApp o, si es por tu marca, una charla de 15 minutos sin costo.",
   },
   {
     n: "03",
@@ -161,8 +161,9 @@ function Home() {
           />
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
-              Una empresa, cuatro áreas. Con sedes en San Juan y Mendoza, trabajamos en todo el
-              país.
+              Branding y marketing para tu marca, asesoría para proyectos agro y regulados,
+              orientación en salud y noticias de tu rubro. Elegí tu área y te respondemos por
+              WhatsApp.
             </p>
           </Reveal>
 
@@ -171,7 +172,7 @@ function Home() {
           </div>
           <div className="h-16 md:hidden" aria-hidden="true" />
           <div className="fixed inset-x-4 bottom-4 z-30 md:hidden">
-            <WhatsAppButton topic="marca" label="Escribinos" className="w-full shadow-lg" />
+            <WhatsAppButton topic="general" className="w-full shadow-lg" />
           </div>
         </div>
       </section>
@@ -312,10 +313,11 @@ function Home() {
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">
-              Contanos a qué te dedicás y qué querés lograr. Con eso ya podemos empezar.
+              Contanos a qué te dedicás y qué querés lograr. Si es por tu marca, la primera charla
+              de 15 minutos es sin costo.
             </p>
             <div className="flex flex-wrap gap-3">
-              <WhatsAppButton topic="marca" pulse />
+              <WhatsAppButton topic="general" pulse />
               <EmailButton account="estudio" topic="general" />
             </div>
           </div>

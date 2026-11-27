@@ -10,8 +10,8 @@ export const PASOS = [
   {
     n: "02",
     icon: ClipboardList,
-    title: "Te hacemos 3 preguntas",
-    text: "Para entender qué necesitás, sin vueltas.",
+    title: "Entendemos qué necesitás",
+    text: "Unas preguntas por WhatsApp o, si es por tu marca, una charla de 15 minutos sin costo.",
   },
   {
     n: "03",

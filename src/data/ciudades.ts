@@ -8,7 +8,7 @@ const FAQ_COMUN = (name: string) =>
     {
       question: "¿Cómo empezamos?",
       answer:
-        "Con un mensaje por WhatsApp. Te hacemos 3 preguntas y te pasamos una propuesta clara: qué hacemos, cuándo y cuánto sale.",
+        "Con un mensaje por WhatsApp. Entendemos qué necesitás con unas preguntas y te pasamos una propuesta clara: qué hacemos, cuándo y cuánto sale.",
     },
     {
       question: "¿La primera charla tiene costo?",

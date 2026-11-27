@@ -275,7 +275,9 @@ function topicFromPath(pathname: string): WhatsAppTopic {
   if (pathname.startsWith("/consultoria")) return "consultoria";
   if (pathname.startsWith("/salud")) return "salud";
   if (pathname.startsWith("/noticias")) return "novedades";
-  return "marca";
+  if (["/estudio", "/tu-marca", "/marca", "/notas"].some((p) => pathname.startsWith(p)))
+    return "marca";
+  return "general";
 }
 
 export function SiteHeader() {

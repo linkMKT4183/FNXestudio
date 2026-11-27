@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Headline, Section, TenSeconds } from "@/components/fnx/primitives";
+import { Headline, Reveal, Section, TenSeconds } from "@/components/fnx/primitives";
 import type { Ciudad } from "@/data/ciudades";
 import { Contacto, Preguntas, Proceso, ServiceLinks } from "./SeoSections";
 
@@ -20,19 +20,21 @@ export function CiudadPage({ city }: { city: Ciudad }) {
           accent={city.accent}
           className="mt-5 max-w-4xl text-4xl leading-tight sm:text-6xl lg:text-7xl"
         />
-        <TenSeconds className="mt-6 max-w-3xl">{city.summary}</TenSeconds>
+        <Reveal delay={150}>
+          <TenSeconds className="mt-6 max-w-3xl">{city.summary}</TenSeconds>
+        </Reveal>
       </section>
       <Section id="servicios" lead="Lo que" accent="hacemos." className="py-12 sm:py-16">
         <ServiceLinks />
       </Section>
       <Section id="donde-trabajamos" lead="Dónde" accent="trabajamos." className="py-12 sm:py-16">
-        <ul className="flex flex-wrap gap-3">
+        <Reveal as="ul" stagger className="chips-vivos flex flex-wrap gap-3">
           {[...city.departments, "y el resto de la provincia"].map((name) => (
             <li key={name} className="rounded-full border border-border px-4 py-2 text-sm">
               {name}
             </li>
           ))}
-        </ul>
+        </Reveal>
       </Section>
       <Proceso conditions={false} />
       <Preguntas faq={city.faq} />

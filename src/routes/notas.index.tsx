@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { Headline } from "@/components/fnx/primitives";
+import { Headline, Reveal } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { fechaCorta } from "@/components/notas/NotaPage";
 import { NOTAS } from "@/data/notas";
@@ -26,13 +26,13 @@ function Notas() {
         accent="se destaque."
         className="mt-5 text-4xl sm:text-7xl"
       />
-      <ul className="mt-10 grid gap-6 md:grid-cols-2">
+      <Reveal as="ul" stagger className="mt-10 grid gap-6 md:grid-cols-2">
         {NOTAS.map((note) => (
           <li key={note.slug}>
             <Link
               to="/notas/$slug"
               params={{ slug: note.slug }}
-              className="flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card hover:border-area"
+              className="tarjeta-viva flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card hover:border-area"
             >
               <FnxImage img={note.image} className="aspect-[3/2] w-full object-cover" />
               <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
@@ -50,7 +50,7 @@ function Notas() {
             </Link>
           </li>
         ))}
-      </ul>
+      </Reveal>
     </div>
   );
 }

@@ -1674,3 +1674,99 @@
 @keyframes senal-rebote { 0%, 55%, 100% { transform: translateY(0); } 15% { transform: translateY(-4px); } 30% { transform: translateY(0); } 40% { transform: translateY(-2px); } }
 @keyframes senal-giro { 0%, 60%, 100% { transform: rotate(0); } 75% { transform: rotate(-14deg); } 88% { transform: rotate(10deg); } }
 @media (prefers-reduced-motion: reduce) { .senal-icono svg { animation: none; } }
+
+
+/* =====================================================================================================
+   MOVIMIENTO CONSTANTE (sistema de contenido FNX): la cámara nunca está quieta.
+   Cada foto hace un acercamiento lento que va y vuelve (alternate = loop perfecto, sin corte).
+   Usa las propiedades `scale` y `translate`, independientes de `transform`, así no pisa .photo-hover
+   ni las animaciones de hover. Las fotos que ya tienen su propio zoom (.hero-zoom, .tono-zoom) quedan como están.
+   ===================================================================================================== */
+@keyframes fnx-cam {
+  from {
+    scale: 1;
+    translate: 0 0;
+  }
+  to {
+    scale: 1.07;
+    translate: 0 -1.5%;
+  }
+}
+.fnx-cam:not(.hero-zoom):not(.tono-zoom) {
+  animation: fnx-cam 14s ease-in-out var(--cam-delay, 0s) infinite alternate;
+  transform-origin: var(--cam-origin, 50% 50%);
+  will-change: scale, translate;
+}
+
+/* Marco que recorta la foto en movimiento (para fotos sueltas, fuera de una tarjeta) */
+.cam-marco {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Tarjetas de servicios y notas: suben apenas al pasar el mouse o al tocarlas */
+.tarjeta-viva {
+  transition:
+    border-color 0.3s ease,
+    translate 0.4s var(--ease-fnx);
+}
+.tarjeta-viva:hover,
+.tarjeta-viva:focus-visible {
+  translate: 0 -4px;
+}
+.tarjeta-viva:active {
+  translate: 0 -1px;
+}
+
+/* Chips y pasos: una luz recorre los bordes de a uno, en loop lento (solo el borde, nunca el fondo ni el texto) */
+@keyframes chip-recorre {
+  0%,
+  100% {
+    border-color: var(--border);
+  }
+  8% {
+    border-color: color-mix(in oklab, var(--area) 70%, var(--border));
+  }
+  16% {
+    border-color: var(--border);
+  }
+}
+.chips-vivos > * {
+  animation: chip-recorre 7s ease-in-out infinite;
+}
+.chips-vivos > :nth-child(2) { animation-delay: 0.6s; }
+.chips-vivos > :nth-child(3) { animation-delay: 1.2s; }
+.chips-vivos > :nth-child(4) { animation-delay: 1.8s; }
+.chips-vivos > :nth-child(5) { animation-delay: 2.4s; }
+.chips-vivos > :nth-child(6) { animation-delay: 3s; }
+.chips-vivos > :nth-child(7) { animation-delay: 3.6s; }
+
+/* Números de los pasos: respiran despacio */
+@keyframes paso-respira {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.paso-num {
+  animation: paso-respira 4s ease-in-out infinite;
+}
+li:nth-child(2) > * > .paso-num,
+li:nth-child(2) .paso-num { animation-delay: 1.3s; }
+li:nth-child(3) .paso-num { animation-delay: 2.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fnx-cam,
+  .chips-vivos > *,
+  .paso-num {
+    animation: none !important;
+  }
+  .tarjeta-viva,
+  .tarjeta-viva:hover {
+    translate: none;
+    transition: none;
+  }
+}

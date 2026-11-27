@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Headline, Section } from "@/components/fnx/primitives";
+import { Headline, Reveal, Section } from "@/components/fnx/primitives";
 import { FnxImage } from "@/components/fnx/FnxImage";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { EmailButton } from "@/components/fnx/EmailButton";
@@ -46,12 +46,12 @@ export function SeoBreadcrumb({
 
 export function ServiceLinks({ services = SERVICIOS }: { services?: readonly Servicio[] }) {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((service) => (
         <li key={service.slug}>
           <Link
             to={service.path}
-            className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card hover:border-area"
+            className="tarjeta-viva group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card hover:border-area"
           >
             <FnxImage img={service.image} className="aspect-[3/2] w-full object-cover" />
             <div className="flex flex-1 flex-col gap-3 p-5">
@@ -65,25 +65,25 @@ export function ServiceLinks({ services = SERVICIOS }: { services?: readonly Ser
           </Link>
         </li>
       ))}
-    </ul>
+    </Reveal>
   );
 }
 
 export function Proceso({ conditions = true }: { conditions?: boolean }) {
   return (
     <Section id="como-trabajamos" lead="Cómo" accent="trabajamos." className="py-12 sm:py-16">
-      <ol className="grid gap-6 md:grid-cols-3">
+      <Reveal as="ol" stagger className="grid gap-6 md:grid-cols-3">
         {PASOS.map((step) => (
           <li key={step.n} className="border-t border-border pt-5">
             <div className="flex items-center justify-between">
-              <span className="headline text-4xl text-area">{step.n}</span>
+              <span className="paso-num headline text-4xl text-area">{step.n}</span>
               <step.icon className="h-5 w-5 text-area" aria-hidden="true" />
             </div>
             <h3 className="mt-4 font-semibold">{step.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
           </li>
         ))}
-      </ol>
+      </Reveal>
       {conditions ? (
         <div className="mt-8 grid gap-6 border-t border-border pt-6 sm:grid-cols-2">
           <div>
@@ -109,26 +109,28 @@ export function Proceso({ conditions = true }: { conditions?: boolean }) {
 export function Preguntas({ faq }: { faq: readonly Pregunta[] }) {
   return (
     <Section id="preguntas" lead="Preguntas" accent="frecuentes." className="py-12 sm:py-16">
-      <Accordion type="single" collapsible className="max-w-3xl">
-        {faq.map((item, i) => (
-          <AccordionItem key={item.question} value={String(i)}>
-            <AccordionTrigger className="gap-4 text-left text-base font-semibold leading-relaxed">
-              {item.question}
-            </AccordionTrigger>
-            <AccordionContent className="leading-relaxed text-muted-foreground">
-              <p>{item.answer}</p>
-              {item.link ? (
-                <Button asChild variant="link" className="mt-2 h-auto px-0">
-                  <Link to={item.link}>
-                    {item.link === "/tu-marca" ? "Hacer la prueba" : "Registro de marca"}
-                    <ArrowRight aria-hidden="true" />
-                  </Link>
-                </Button>
-              ) : null}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <Reveal>
+        <Accordion type="single" collapsible className="max-w-3xl">
+          {faq.map((item, i) => (
+            <AccordionItem key={item.question} value={String(i)}>
+              <AccordionTrigger className="gap-4 text-left text-base font-semibold leading-relaxed">
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className="leading-relaxed text-muted-foreground">
+                <p>{item.answer}</p>
+                {item.link ? (
+                  <Button asChild variant="link" className="mt-2 h-auto px-0">
+                    <Link to={item.link}>
+                      {item.link === "/tu-marca" ? "Hacer la prueba" : "Registro de marca"}
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  </Button>
+                ) : null}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Reveal>
     </Section>
   );
 }
@@ -145,10 +147,10 @@ export function Contacto({ topic }: { topic: WhatsAppTopic }) {
         accent="Escribinos."
         className="text-4xl sm:text-6xl"
       />
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <WhatsAppButton topic={topic} />
+      <Reveal className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <WhatsAppButton topic={topic} pulse />
         <EmailButton account="estudio" topic="marca" />
-      </div>
+      </Reveal>
     </section>
   );
 }

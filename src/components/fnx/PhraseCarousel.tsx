@@ -97,6 +97,7 @@ export function PhraseCarousel({ slides, title }: { slides: PhraseSlide[]; title
               >
                 <FnxImage
                   img={s.img}
+                  cam={false}
                   sizes="100vw"
                   className={cn(
                     "absolute inset-0 h-full w-full object-cover transition-transform duration-[6000ms] ease-out",

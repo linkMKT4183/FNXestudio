@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FnxImage } from "@/components/fnx/FnxImage";
-import { Headline, Section } from "@/components/fnx/primitives";
+import { Reveal, Section } from "@/components/fnx/primitives";
 import { SERVICIOS } from "@/data/servicios";
 import type { Nota } from "@/data/notas";
 import { Contacto, SeoBreadcrumb, ServiceLinks } from "@/components/estudio/SeoSections";
@@ -26,15 +26,17 @@ export function NotaPage({ note }: { note: Nota }) {
             lectura
           </p>
         </header>
-        <FnxImage
-          img={note.image}
-          priority
-          sizes="(min-width: 1152px) 1088px, 100vw"
-          className="mt-8 aspect-[3/2] w-full rounded-2xl object-cover sm:aspect-[2/1]"
-        />
+        <Reveal variant="zoom" delay={200} className="cam-marco mt-8 rounded-2xl">
+          <FnxImage
+            img={note.image}
+            priority
+            sizes="(min-width: 1152px) 1088px, 100vw"
+            className="aspect-[3/2] w-full object-cover sm:aspect-[2/1]"
+          />
+        </Reveal>
         <div className="mx-auto max-w-3xl py-10 sm:py-16">
           {note.sections.map((section) => (
-            <section key={section.h2} className="mb-9">
+            <Reveal as="section" key={section.h2} className="mb-9">
               <h2 className="text-xl font-bold leading-snug sm:text-2xl">{section.h2}</h2>
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="mt-4 text-base leading-relaxed text-muted-foreground">
@@ -49,7 +51,7 @@ export function NotaPage({ note }: { note: Nota }) {
                   </Link>
                 </Button>
               ) : null}
-            </section>
+            </Reveal>
           ))}
         </div>
       </article>

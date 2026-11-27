@@ -14,6 +14,7 @@ import {
   Leaf,
   Lock,
   MapPin,
+  PawPrint,
   Scale,
   ShieldCheck,
   Sprout,
@@ -156,6 +157,8 @@ const NORMATIVA = [
       "Ley 9617 y Decreto 1928/2025: marco para la cadena de valor del cannabis medicinal y el cáñamo.",
       "Resolución 151/2026: registro provincial REPRO-Mendoza para pacientes, terceros cultivadores y asociaciones.",
       "Resolución 526/2026: registro provincial de médicos que indican cannabis.",
+      "REPROVET: programa provincial de cannabis medicinal para animales, el primero del país.",
+      "FNX también te acompaña con el trámite provincial.",
     ],
   },
   {
@@ -182,6 +185,11 @@ const PARA_QUIEN = [
     icon: CalendarClock,
     title: "Tu certificado vence",
     text: "Ya tenés REPROCANN y necesitás renovarlo a tiempo.",
+  },
+  {
+    icon: PawPrint,
+    title: "Tu mascota necesita tratamiento",
+    text: "En Mendoza existe el REPROVET, el programa provincial de cannabis medicinal para animales. Te orientamos con el trámite.",
   },
 ];
 
@@ -220,7 +228,7 @@ const FAQ = [
   {
     icon: MapPin,
     q: "¿Vivo en Mendoza o San Juan, cambia algo?",
-    a: "En San Juan el trámite se hace por el REPROCANN nacional. En Mendoza, además, existe el registro provincial (REPRO-Mendoza). Te decimos cuál te conviene según tu caso.",
+    a: "En San Juan el trámite se hace por el REPROCANN nacional. En Mendoza, además, existe el registro provincial (REPRO-Mendoza) y también te acompañamos con ese trámite. Te decimos cuál te conviene según tu caso.",
   },
   {
     icon: Lock,
@@ -408,7 +416,8 @@ function Salud() {
             <p className="max-w-xl text-lg text-muted-foreground">
               El REPROCANN es el registro nacional que te autoriza a cultivar cannabis con fines
               medicinales. Te guiamos desde la consulta médica hasta que tenés tu certificado, y te
-              avisamos cuando toca renovarlo.
+              avisamos cuando toca renovarlo. En Mendoza también te acompañamos con el registro
+              provincial.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <WhatsAppButton topic="salud" label="Quiero hacer mi REPROCANN" pulse />
@@ -514,7 +523,7 @@ function Salud() {
       </Section>
 
       <Section id="para-quien" eyebrow="Para quién es" lead="¿Es para" accent="vos?">
-        <Reveal as="ul" stagger className="grid gap-4 md:grid-cols-3">
+        <Reveal as="ul" stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PARA_QUIEN.map((p) => (
             <li
               key={p.title}

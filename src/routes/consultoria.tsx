@@ -611,7 +611,7 @@ function Consultoria() {
         eyebrow="Soluciones"
         lead="Una solución"
         accent="para cada etapa."
-        tldr="De la idea a la ejecución, con un mismo equipo. Cada solución se acuerda por escrito, con alcance, entregables y plazo orientativo."
+        tldr="De la idea a la ejecución, con un mismo equipo. Conviene empezar por un FNX Diagnostic. Cada solución se acuerda por escrito, con alcance, entregables y plazo orientativo."
       >
         <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {SOLUCIONES.map((sol, i) => (
@@ -653,6 +653,11 @@ function Consultoria() {
                     </div>
                   </dl>
                 </details>
+                {sol.entrada ? (
+                  <Tag tone="azul" className="self-start">
+                    Empezá acá
+                  </Tag>
+                ) : null}
                 {sol.estudio ? (
                   <Tag tone="naranja" className="self-start">
                     Suma al Estudio
@@ -672,7 +677,9 @@ function Consultoria() {
           <p className="text-sm text-muted-foreground">
             Diagnostic abre el camino hacia Start, Project o Growth. 360 sostiene el vínculo a largo
             plazo y Partnerships explora la colaboración. Si tu proyecto lo necesita, sumamos los
-            servicios del estudio creativo en una única propuesta.
+            servicios del estudio creativo en una única propuesta. La consultoría técnica se activa
+            cuando hay una necesidad clara y capacidad de ejecución, y los proyectos de mayor escala
+            se evalúan caso por caso.
           </p>
         </Reveal>
       </Section>

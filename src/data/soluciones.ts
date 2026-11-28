@@ -22,6 +22,8 @@ export interface Solucion {
   alcance: string;
   /** Si la solución suma servicios de FNX Estudio. */
   estudio?: boolean;
+  /** Servicio de entrada: por dónde conviene empezar (etapa de lanzamiento). */
+  entrada?: boolean;
   whatsapp: WhatsAppTopic;
 }
 
@@ -38,6 +40,7 @@ export const SOLUCIONES: Solucion[] = [
     entregables: "Informe ejecutivo, plan de acción priorizado y reunión de devolución.",
     plazo: "1 a 2 semanas",
     alcance: "No incluye implementación ni auditorías certificadas.",
+    entrada: true,
     whatsapp: "diagnostic",
   },
   {

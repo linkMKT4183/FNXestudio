@@ -245,7 +245,7 @@ function Home() {
           eyebrow="FNX Consultoría"
           lead="Una solución"
           accent="para cada etapa."
-          tldr="Cada solución tiene alcance, entregables y plazo orientativo por escrito. Si no sabés cuál te sirve, la charla de 15 minutos es sin costo."
+          tldr="Empezá por un FNX Diagnostic o por la charla de 15 minutos sin costo. Cada solución tiene alcance, entregables y plazo orientativo por escrito."
           footer={
             <Button asChild variant="area" size="lg">
               <Link to="/consultoria">Ver las seis soluciones</Link>
@@ -265,6 +265,11 @@ function Home() {
                     <h3 className="text-lg font-bold text-foreground">{s.nombre}</h3>
                   </div>
                   <p className="text-sm text-muted-foreground">{s.frase}</p>
+                  {s.entrada ? (
+                    <Tag tone="azul" className="mt-auto self-start">
+                      Empezá acá
+                    </Tag>
+                  ) : null}
                   {s.estudio ? (
                     <Tag tone="naranja" className="mt-auto self-start">
                       Suma al Estudio

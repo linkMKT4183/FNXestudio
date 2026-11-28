@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { FondoVivo } from "@/components/fnx/FondoVivo";
 import {
   Outlet,
   Link,
@@ -147,6 +148,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div data-area={areaFromPath(pathname)} className="fondo-fnx flex min-h-screen flex-col">
+        <FondoVivo />
         <a
           href="#contenido"
           className="sr-only z-50 rounded-full bg-area px-4 py-2 text-area-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

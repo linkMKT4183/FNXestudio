@@ -567,14 +567,73 @@
   --ease-fnx: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Titular por palabras */
+/* Titular por palabras. Cada palabra vive en una máscara (.w-mask) y sube desde atrás de ella mientras
+   pasa de borrosa a nítida. El relleno en em con margen negativo deja lugar a las colas (g, p, y) y a la
+   tilde de las mayúsculas sin mover el layout. */
+.w-mask {
+  display: inline-block;
+  overflow: clip;
+  padding: 0.14em 0.06em 0.1em;
+  margin: -0.14em -0.06em -0.1em;
+  vertical-align: top;
+}
 .w-reveal {
   display: inline-block;
   opacity: 0;
   transform: translateY(16px);
   filter: blur(14px);
 }
-.is-visible > .w-reveal {
+.headline .w-reveal {
+  transform: translateY(0.95em);
+}
+.is-visible .w-mask .w-reveal {
+  animation-name: w-in-mask;
+}
+@keyframes w-in-mask {
+  from {
+    opacity: 0;
+    transform: translateY(0.95em);
+    filter: blur(14px);
+  }
+  55% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.is-visible .w-mask .u-draw {
+  animation-name: w-in-mask, u-draw;
+}
+/* El titular principal (h1) se ve desde el primer cuadro: arranca visible, apenas corrido y desenfocado,
+   y se acomoda en medio segundo. Así el navegador lo cuenta como pintado enseguida (mejor LCP). */
+.headline-pronto .w-reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+.headline-pronto.is-visible .w-mask .w-reveal {
+  animation: w-in-pronto 0.75s var(--ease-fnx) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.headline-pronto.is-visible .w-mask .u-draw {
+  animation:
+    w-in-pronto 0.75s var(--ease-fnx) both,
+    u-draw 0.9s var(--ease-fnx) 0.6s forwards;
+}
+@keyframes w-in-pronto {
+  from {
+    transform: translateY(0.28em);
+    filter: blur(7px);
+  }
+  to {
+    transform: none;
+    filter: blur(0);
+  }
+}
+.is-visible .w-reveal {
   animation: w-in 0.9s var(--ease-fnx) both;
   animation-delay: calc(var(--i, 0) * 70ms);
 }
@@ -607,7 +666,7 @@
   background-clip: text;
   pointer-events: none;
 }
-.is-visible > .w-accent::after {
+.is-visible .w-accent::after {
   animation: w-sheen 1.2s var(--ease-fnx) both;
   animation-delay: calc(var(--i, 0) * 70ms + 500ms);
 }
@@ -627,7 +686,7 @@
   background-size: 0% 3px;
   padding-bottom: 0.04em;
 }
-.is-visible > .u-draw {
+.is-visible .u-draw {
   animation:
     w-in 0.9s var(--ease-fnx) both,
     u-draw 0.9s var(--ease-fnx) 0.9s forwards;
@@ -1221,6 +1280,101 @@
   animation: tela-deriva 40s ease-in-out infinite alternate;
   will-change: transform;
 }
+/* Parallax (28/11): la tela es más alta que la pantalla y sube despacio mientras bajás, así se mueve
+   más lento que el contenido. Lo maneja el propio navegador con el scroll (sin JavaScript); donde no
+   existe esta función la tela queda fija como antes. Usa `translate`, que se suma a la deriva lenta. */
+@supports (animation-timeline: scroll()) {
+  .fondo-fnx::before {
+    bottom: -34%;
+    animation:
+      tela-deriva 40s ease-in-out infinite alternate,
+      tela-parallax linear both;
+    animation-timeline: auto, scroll(root block);
+  }
+}
+@keyframes tela-parallax {
+  from { translate: 0 0; }
+  to { translate: 0 -26vh; }
+}
+
+/* Luz que sigue el dedo o el mouse: un brillo suave sobre los pliegues de la tela, entre la tela y los
+   resplandores del área. La mueve EfectosGlobales con transform (no repinta la página). */
+.fondo-luz {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 70vmax;
+  height: 70vmax;
+  margin: -35vmax 0 0 -35vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--fnx-crema) 24%, transparent) 0%,
+    color-mix(in oklab, var(--area) 18%, transparent) 26%,
+    color-mix(in oklab, var(--area) 6%, transparent) 44%,
+    transparent 64%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-fnx);
+  will-change: transform, opacity;
+}
+.fondo-luz.on {
+  opacity: 1;
+}
+
+/* Barrido: cada tanto una línea fina de luz del color del área cruza la tela en diagonal */
+.fondo-barrido {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.fondo-barrido::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  width: 18vmax;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--area) 10%, transparent) 36%,
+    color-mix(in oklab, var(--area) 85%, var(--fnx-crema)) 49.6%,
+    color-mix(in oklab, var(--area) 85%, var(--fnx-crema)) 50.4%,
+    color-mix(in oklab, var(--area) 10%, transparent) 64%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  transform: translate3d(-30vmax, 0, 0) rotate(18deg);
+  animation: tela-barrido 14s ease-in-out infinite;
+  animation-delay: -9s;
+}
+@keyframes tela-barrido {
+  0%,
+  62% {
+    transform: translate3d(-30vmax, 0, 0) rotate(18deg);
+  }
+  100% {
+    transform: translate3d(calc(100vw + 30vmax), 0, 0) rotate(18deg);
+  }
+}
+/* Pestaña oculta: nada se mueve (ahorra batería) */
+body.paused .fondo-fnx::before,
+body.paused .fondo-barrido::before {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fondo-luz,
+  .fondo-barrido {
+    display: none;
+  }
+}
 @media (min-aspect-ratio: 1 / 1) {
   .fondo-fnx::before {
     background-image: url("/fondos/tela-fnx-horizontal.webp");
@@ -1299,6 +1453,9 @@
 /* Titulares: las palabras en crema llevan degradado metálico; las de color quedan planas (regla de marca) */
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .headline .w-reveal:not(.w-accent) {
+    /* Relleno arriba para que el degradé también pinte las tildes de las mayúsculas (É, Á, Ñ) */
+    padding-top: 0.14em;
+    margin-top: -0.14em;
     background-image: linear-gradient(180deg, var(--fnx-crema) 8%, color-mix(in oklab, var(--fnx-crema) 58%, var(--fnx-negro)) 100%);
     -webkit-background-clip: text;
     background-clip: text;

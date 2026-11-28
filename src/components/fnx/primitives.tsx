@@ -149,9 +149,18 @@ export function TenSeconds({ children, className }: { children: ReactNode; class
  * y solo se enfoca, para que la página no tarde en mostrar su título.
  * El texto completo queda en aria-label: los lectores de pantalla no leen palabra por palabra.
  */
+/** Colores de las cuatro áreas, para titulares que mezclan más de uno. */
+const TONOS_TITULAR = {
+  naranja: "text-fnx-naranja",
+  azul: "text-fnx-azul",
+  verde: "text-fnx-verde",
+  amarillo: "text-fnx-amarillo",
+} as const;
+
 export function Headline({
   lead,
   accent,
+  tones,
   as: Tag = "h2",
   className,
   id,
@@ -159,6 +168,8 @@ export function Headline({
 }: {
   lead?: string | undefined;
   accent: string;
+  /** Un color de área por cada palabra o frase (unida con espacio duro) de la parte en color. */
+  tones?: (keyof typeof TONOS_TITULAR)[];
   as?: ElementType;
   className?: string;
   id?: string | undefined;
@@ -195,7 +206,11 @@ export function Headline({
               data-t={acc ? w : undefined}
               className={cn(
                 "w-reveal",
-                acc && "w-accent text-area",
+                acc && "w-accent",
+                acc &&
+                  (tones?.[k - leadWords.length]
+                    ? TONOS_TITULAR[tones[k - leadWords.length]!]
+                    : "text-area"),
                 acc && underline && k === total - 1 && "u-draw",
               )}
               style={{ "--i": k + (acc ? 2 : 0) } as CSSProperties}

@@ -103,6 +103,17 @@ const STEPS = [
   },
 ];
 
+/** Cada tarjeta lleva el color de un área: el inicio mezcla los cuatro. */
+const AREAS_SOLUCION = [
+  "consultoria",
+  "estudio",
+  "salud",
+  "noticias",
+  "consultoria",
+  "estudio",
+] as const;
+const AREAS_PASO = ["estudio", "consultoria", "noticias"] as const;
+
 const ICONOS_SOLUCION: Record<Solucion["id"], LucideIcon> = {
   diagnostic: Search,
   start: Rocket,
@@ -180,23 +191,25 @@ function Home() {
           <Headline
             as="h1"
             id="hero-titulo"
-            lead={"Pensamos tu negocio. Lo\u00A0construimos."}
-            accent={"Lo\u00A0hacemos\u00A0ver."}
+            lead="Tu empresa,"
+            accent={"de\u00A0la\u00A0idea al\u00A0crecimiento."}
+            tones={["naranja", "azul"]}
             className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl"
           />
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
-              Firma multidisciplinaria de desarrollo empresarial, con una red de especialistas. De
-              la idea a la ejecución, con un mismo equipo. Elegí por dónde empezar y te respondemos
-              por WhatsApp.
+              Firma multidisciplinaria de desarrollo empresarial, con estudio creativo propio y una
+              red de especialistas. Elegí por dónde empezar y te respondemos por WhatsApp.
             </p>
           </Reveal>
           <Reveal delay={200}>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-foreground backdrop-blur-md">
-              <span
-                className="h-2 w-2 rounded-full bg-fnx-naranja shadow-[0_0_10px_var(--fnx-naranja)]"
-                aria-hidden="true"
-              />
+              <span className="flex items-center gap-1" aria-hidden="true">
+                <span className="h-2 w-2 rounded-full bg-fnx-naranja" />
+                <span className="h-2 w-2 rounded-full bg-fnx-azul" />
+                <span className="h-2 w-2 rounded-full bg-fnx-verde" />
+                <span className="h-2 w-2 rounded-full bg-fnx-amarillo" />
+              </span>
               Con estudio creativo propio
             </span>
           </Reveal>
@@ -255,7 +268,10 @@ function Home() {
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {SOLUCIONES.map((s, i) => (
               <Reveal as="li" key={s.id} delay={i * 70}>
-                <div className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+                <div
+                  data-area={AREAS_SOLUCION[i % AREAS_SOLUCION.length]}
+                  className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6"
+                >
                   <div className="flex items-center justify-between">
                     <span className="headline text-5xl text-area">{s.n}</span>
                     <IconBadge icon={ICONOS_SOLUCION[s.id]} />
@@ -355,7 +371,10 @@ function Home() {
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 90}>
-              <div className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+              <div
+                data-area={AREAS_PASO[i % AREAS_PASO.length]}
+                className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6"
+              >
                 <div className="flex items-center justify-between">
                   <span className="headline text-5xl text-area">{s.n}</span>
                   <IconBadge icon={s.icon} />
@@ -373,7 +392,7 @@ function Home() {
           ))}
         </ol>
         <Reveal className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border p-6">
+          <div data-area="salud" className="rounded-2xl border border-border p-6">
             <p className="eyebrow flex items-center gap-2 text-muted-foreground">
               <FileSignature className="h-4 w-4 text-area" aria-hidden="true" />
               Para empezar
@@ -383,7 +402,7 @@ function Home() {
               propuesta.
             </p>
           </div>
-          <div className="rounded-2xl border border-border p-6">
+          <div data-area="noticias" className="rounded-2xl border border-border p-6">
             <p className="eyebrow flex items-center gap-2 text-muted-foreground">
               <FolderOpen className="h-4 w-4 text-area" aria-hidden="true" />
               Al terminar

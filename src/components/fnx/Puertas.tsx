@@ -59,7 +59,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         color === "area"
           ? principal
             ? "border-area/60 hover:border-area"
-            : "border-fnx-crema/20 hover:border-area md:border-area/40"
+            : "border-area/50 hover:border-area md:border-area/40"
           : "border-fnx-crema/30 hover:border-fnx-crema",
       )}
     >
@@ -70,7 +70,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
           color === "area"
             ? principal
               ? "bg-area text-area-foreground icon-glossy"
-              : "bg-fnx-grafito text-fnx-crema ring-1 ring-fnx-crema/15 md:bg-area md:text-area-foreground md:ring-0 md:icon-glossy"
+              : "bg-area text-area-foreground icon-glossy"
             : "bg-fnx-grafito text-fnx-crema ring-1 ring-fnx-crema/15 md:bg-fnx-crema md:text-fnx-negro md:ring-0",
         )}
       >
@@ -80,7 +80,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
         <span
           className={cn(
             "truncate text-[0.62rem] font-bold uppercase tracking-[0.14em]",
-            color === "area" ? (principal ? "text-area" : "text-fnx-crema/70 md:text-area") : "text-fnx-crema",
+            color === "area" ? "text-area" : "text-fnx-crema",
           )}
         >
           {kicker}
@@ -97,7 +97,7 @@ function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
           color === "area"
             ? principal
               ? "bg-area text-area-foreground icon-glossy"
-              : "bg-fnx-crema/10 text-fnx-crema md:bg-area md:text-area-foreground md:icon-glossy"
+              : "bg-area text-area-foreground icon-glossy"
             : "bg-fnx-crema/10 text-fnx-crema md:bg-fnx-crema md:text-fnx-negro",
         )}
       >

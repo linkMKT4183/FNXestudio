@@ -17,7 +17,7 @@ import { BackToTop, ExploreMore, MobileNavBlocks, SiteHeader, SiteFooter, areaFr
 import { Toaster } from "@/components/ui/sonner";
 import { SITE_NAME } from "@/config/site";
 
-const ORG_LD = {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://fnxestudio.com/#org","name":"Fénix Creativo","alternateName":"FNX","foundingDate":"2019","url":"https://fnxestudio.com/","logo":"https://fnxestudio.com/icon-512.png","image":"https://fnxestudio.com/og-fnx.jpg","email":"fnxestudio22@gmail.com","telephone":"+54 9 261 630-6508","sameAs":["https://www.instagram.com/fnx.estudio/"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","telephone":"+54 9 261 630-6508","availableLanguage":"es","areaServed":"AR"}},{"@type":"ProfessionalService","@id":"https://fnxestudio.com/#estudio","name":"FNX · Fénix Creativo","url":"https://fnxestudio.com/","image":"https://fnxestudio.com/og-fnx.jpg","telephone":"+54 9 261 630-6508","parentOrganization":{"@id":"https://fnxestudio.com/#org"},"areaServed":[{"@type":"State","name":"Mendoza"},{"@type":"State","name":"San Juan"},{"@type":"Country","name":"Argentina"}],"address":[{"@type":"PostalAddress","addressLocality":"Mendoza","addressRegion":"Mendoza","addressCountry":"AR"},{"@type":"PostalAddress","addressLocality":"San Juan","addressRegion":"San Juan","addressCountry":"AR"}],"knowsAbout":["Branding","Identidad de marca","Gestión de redes sociales","Marketing para pymes","Registro de marca","Producción audiovisual","Tienda online","Estrategia de redes","Asesoría jurídica y técnica para proyectos agrícolas"]},{"@type":"WebSite","@id":"https://fnxestudio.com/#web","url":"https://fnxestudio.com/","name":"FNX · Fénix Creativo","inLanguage":"es-AR","publisher":{"@id":"https://fnxestudio.com/#org"}}]};
+const ORG_LD = {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://fnxestudio.com/#org","name":"Fénix Creativo","alternateName":"FNX","foundingDate":"2019","url":"https://fnxestudio.com/","logo":"https://fnxestudio.com/icon-512.png","image":"https://fnxestudio.com/og-fnx.jpg","email":"fnxestudio22@gmail.com","telephone":"+54 9 261 630-6508","sameAs":["https://www.instagram.com/fnx.estudio/"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","telephone":"+54 9 261 630-6508","availableLanguage":"es","areaServed":"AR"}},{"@type":"ProfessionalService","@id":"https://fnxestudio.com/#estudio","name":"FNX · Fénix Creativo","url":"https://fnxestudio.com/","image":"https://fnxestudio.com/og-fnx.jpg","telephone":"+54 9 261 630-6508","parentOrganization":{"@id":"https://fnxestudio.com/#org"},"areaServed":[{"@type":"State","name":"Mendoza"},{"@type":"State","name":"San Juan"},{"@type":"Country","name":"Argentina"}],"address":[{"@type":"PostalAddress","addressLocality":"Mendoza","addressRegion":"Mendoza","addressCountry":"AR"},{"@type":"PostalAddress","addressLocality":"San Juan","addressRegion":"San Juan","addressCountry":"AR"}],"knowsAbout":["Branding","Identidad de marca","Gestión de redes sociales","Marketing para pymes","Registro de marca","Producción audiovisual","Tienda online","Estrategia de redes","Consultoría empresarial","Dirección y gestión de proyectos","Proyectos de inversión","Desarrollo comercial y representación","Consultoría agrícola y agroindustrial","Consultoría en cannabis y cáñamo","Asesoría jurídica y técnica para proyectos agrícolas"]},{"@type":"WebSite","@id":"https://fnxestudio.com/#web","url":"https://fnxestudio.com/","name":"FNX · Fénix Creativo","inLanguage":"es-AR","publisher":{"@id":"https://fnxestudio.com/#org"}}]};
 
 function NotFoundComponent() {
   return (
@@ -90,14 +90,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Branding, redes, contenido, tienda online y estrategia para pymes y emprendedores. Sedes en San Juan y Mendoza y trabajo en todo el país. Primera charla de 15 minutos sin costo.",
+          "Firma multidisciplinaria de desarrollo empresarial con estudio creativo propio y una red de especialistas. Sedes en San Juan y Mendoza y trabajo en todo el país. Primera charla de 15 minutos sin costo.",
       },
       { name: "author", content: "Fénix Creativo" },
       { name: "theme-color", content: "#0B0B0B" },
       { property: "og:title", content: "FNX · Fénix Creativo" },
       {
         property: "og:description",
-        content: "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
+        content: "Firma de desarrollo empresarial con estudio creativo propio. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "es_AR" },

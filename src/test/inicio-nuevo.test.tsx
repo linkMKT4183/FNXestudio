@@ -24,7 +24,7 @@ describe("Inicio", () => {
     await abrir("/");
     const nav = await screen.findByRole("navigation", { name: "¿Qué necesitás hoy?" });
     const hrefs = Array.from(nav.querySelectorAll("a")).map((a) => a.getAttribute("href"));
-    expect(hrefs).toEqual(["/estudio", "/consultoria", "/salud", "/noticias", "/red"]);
+    expect(hrefs).toEqual(["/consultoria", "/estudio", "/salud", "/noticias", "/red"]);
   });
 
   it("la cadena enlaza cada área con su página (a pantalla completa y en celular)", async () => {

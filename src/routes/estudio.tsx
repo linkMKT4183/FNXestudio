@@ -55,7 +55,8 @@ export const Route = createFileRoute("/estudio")({
       { property: "og:title", content: "FNX Estudio · Marcas que se destacan" },
       {
         property: "og:description",
-        content: "Identidad, contenido y estrategia para pymes y emprendedores que quieren dejar de ser una más.",
+        content:
+          "Identidad, contenido y estrategia para pymes y emprendedores que quieren dejar de ser una más.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/estudio") },
@@ -143,8 +144,8 @@ function Estudio() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
           <Reveal className="flex flex-col gap-8">
             <p className="eyebrow text-area">
-              FNX Estudio · Agencia de branding y marketing · Sedes en San Juan y Mendoza · Todo el
-              país
+              FNX Estudio · El estudio creativo propio de FNX · Sedes en San Juan y Mendoza · Todo
+              el país
             </p>
             <Headline
               as="h1"

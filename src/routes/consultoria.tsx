@@ -13,7 +13,9 @@ import {
   Network,
   PenTool,
   RefreshCw,
+  Rocket,
   Route as RouteIcon,
+  Search,
   Scale,
   Ban,
   Sprout,
@@ -43,8 +45,16 @@ import { WhatsAppChatLoop } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IMG, type FnxImg } from "@/data/imagenes";
+import { FRENTES } from "@/data/catalogo";
+import { SOLUCIONES, type Solucion } from "@/data/soluciones";
 import { cn } from "@/lib/utils";
-import { PARTNERS, buildPartnerInstagramLink, type PartnerId, pageUrl, OG_IMAGE_META } from "@/config/site";
+import {
+  PARTNERS,
+  buildPartnerInstagramLink,
+  type PartnerId,
+  pageUrl,
+  OG_IMAGE_META,
+} from "@/config/site";
 import { Button } from "@/components/ui/button";
 
 const RED_CONSULTORIA: NetworkNode[] = [
@@ -57,12 +67,12 @@ const RED_CONSULTORIA: NetworkNode[] = [
 
 const CHAT_CONSULTORIA = [
   {
-    q: "Hola FNX, quiero regularizar mi proyecto",
-    a: "Hola. Contanos en qué etapa está y qué documentación tenés. Relevamos y te pasamos un presupuesto a medida.",
+    q: "Hola FNX, quiero pedir una propuesta",
+    a: "Hola. Contanos qué querés lograr y en qué etapa está tu proyecto. Hacemos una charla de 15 minutos sin costo y te pasamos una propuesta por escrito.",
   },
   {
-    q: "¿Pueden constituir la estructura legal?",
-    a: "Sí. La red jurídica de FNX se ocupa de la constitución y del mantenimiento posterior.",
+    q: "¿Pueden armar el plan y ejecutarlo?",
+    a: "Sí. Con FNX Project planificamos y coordinamos la ejecución, y la red de especialistas hace lo que requiere incumbencia propia.",
   },
   {
     q: "Necesito tecnificar el riego del campo",
@@ -73,17 +83,20 @@ const CHAT_CONSULTORIA = [
 export const Route = createFileRoute("/consultoria")({
   head: () => ({
     meta: [
-      { title: "FNX Consultoría · Asesoría jurídica y técnica | FNX · Fénix Creativo" },
+      {
+        title:
+          "FNX Consultoría · Desarrollo empresarial, proyectos y alianzas | FNX · Fénix Creativo",
+      },
       {
         name: "description",
         content:
-          "Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan, se regularicen y crezcan en regla. Con sedes en San Juan y Mendoza y trabajo en todo el país.",
+          "Consultoría empresarial, dirección de proyectos, proyectos de inversión, desarrollo comercial, agro, cannabis y cáñamo. Seis soluciones, de la idea a la ejecución, con un mismo equipo y una red de profesionales habilitados. Sedes en San Juan y Mendoza y trabajo en todo el país.",
       },
-      { property: "og:title", content: "FNX Consultoría · Crecer en regla" },
+      { property: "og:title", content: "FNX Consultoría · Desarrollo empresarial, en regla" },
       {
         property: "og:description",
         content:
-          "Del campo al cultivo regulado: riego, tecnificación, estructuras legales y fortalecimiento organizacional, coordinado por FNX.",
+          "Diagnóstico, proyectos, desarrollo comercial y alianzas, con un mismo equipo y una red de profesionales habilitados.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/consultoria") },
@@ -200,7 +213,7 @@ const COMBOS_AGRO: Combo[] = [
   },
 ];
 
-/* ---------- Sector regulado ---------- */
+/* ---------- Cannabis y cáñamo ---------- */
 
 const AUDIENCE_REGULADO: Audience[] = [
   {
@@ -321,19 +334,28 @@ const COMBOS_REGULADO: Combo[] = [
 const STEP_ICONS: LucideIcon[] = [
   MessagesSquare,
   ClipboardList,
-  UsersRound,
   FileSignature,
+  UsersRound,
   Network,
   RefreshCw,
 ];
 
+const ICONOS_SOLUCION: Record<Solucion["id"], LucideIcon> = {
+  diagnostic: Search,
+  start: Rocket,
+  project: FolderKanban,
+  growth: TrendingUp,
+  plan360: RefreshCw,
+  partnerships: Handshake,
+};
+
 const STEPS = [
-  "Nos contás tu proyecto por WhatsApp o redes.",
-  "Completás un formulario con tus datos y lo que necesitás.",
-  "Entrevista inicial: definimos qué necesitás y qué profesionales intervienen.",
-  "Recibís el presupuesto completo antes de empezar. Sin sorpresas después.",
-  "La red de profesionales de FNX hace su parte y FNX coordina y entrega.",
-  "Te ofrecemos un servicio recurrente, como el mantenimiento, para seguir acompañándote.",
+  "Nos contás tu proyecto por WhatsApp o pedís una propuesta.",
+  "Escuchamos y diagnosticamos: tu necesidad, tu etapa y tus recursos.",
+  "Te pasamos una propuesta por escrito, con alcance, equipo, entregables, plazos y lo que no incluye. No empezamos sin tu aceptación.",
+  "Arrancamos con un plan: responsable, calendario, hitos y carpeta compartida.",
+  "Ejecutamos, te mantenemos al tanto y consultamos antes de cualquier cambio.",
+  "Entregamos los resultados y, si hace falta, seguimos acompañándote.",
 ];
 
 const NETWORK_POINTS = [
@@ -346,7 +368,7 @@ const LIMITS: { no: string; text: string; note?: string }[] = [
   {
     no: "No tomamos atajos.",
     text: "Si algo de tu proyecto está pendiente de regularizar, te acompañamos a ponerlo en regla, paso a paso.",
-    note: "Para cualquier proyecto, agrícola o del sector regulado",
+    note: "Para cualquier proyecto, agrícola o de cannabis y cáñamo",
   },
   {
     no: "No armamos actas",
@@ -360,11 +382,19 @@ const LIMITS: { no: string; text: string; note?: string }[] = [
     no: "No entregamos",
     text: "ningún documento legal hecho con IA sin la revisión de un abogado de la red.",
   },
+  {
+    no: "No reemplazamos",
+    text: "a los órganos de dirección de tu empresa ni a profesionales matriculados. Coordinamos con profesionales habilitados.",
+  },
+  {
+    no: "Las firmas y los dictámenes",
+    text: "de profesionales matriculados y los actos reservados se presupuestan por separado.",
+  },
 ];
 
 const SECTORS: { v: Sector; l: string; sub: string; icon: LucideIcon }[] = [
   { v: "agro", l: "Agro", sub: "Riego, campo y producción", icon: Sprout },
-  { v: "regulado", l: "Sector regulado", sub: "Estructura legal y trámites", icon: Scale },
+  { v: "regulado", l: "Cannabis y cáñamo", sub: "Estructura legal y trámites", icon: Scale },
 ];
 
 function Bullet() {
@@ -530,24 +560,23 @@ function Consultoria() {
         aria-labelledby="consultoria-titulo"
       >
         <Reveal className="flex flex-col gap-8">
-          <p className="eyebrow text-area">FNX Consultoría</p>
+          <p className="eyebrow text-area">FNX Consultoría · Desarrollo empresarial</p>
           <Headline
             as="h1"
             id="consultoria-titulo"
-            lead="Crecer en"
-            accent="regla."
-            className="text-7xl sm:text-8xl lg:text-9xl"
+            lead="Desarrollo empresarial,"
+            accent="en regla."
+            className="text-6xl sm:text-8xl lg:text-8xl"
           />
           <p className="max-w-xl text-lg text-muted-foreground">
-            Asesoría jurídica y técnica para proyectos agrícolas y del sector regulado: que se constituyan,
-            se regularicen y crezcan en regla.
+            Diagnóstico, proyectos, desarrollo comercial y alianzas, con un mismo equipo y una red
+            de profesionales habilitados.
           </p>
           <TenSeconds className="max-w-2xl">
-            Del riego de un campo a la estructura legal de un proyecto del sector regulado: te decimos
-            qué necesitás y quién lo hace.
+            De la idea a la ejecución: te decimos por dónde empezar y quién lo hace.
           </TenSeconds>
           <div className="flex flex-wrap items-center gap-6">
-            <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" pulse />
+            <WhatsAppButton topic="consultoria" label="Pedir propuesta" pulse />
             <EmailButton account="estudio" topic="consultoria" />
             <Pieces lit={1} />
           </div>
@@ -569,12 +598,129 @@ function Consultoria() {
         <Reveal className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
           <Headline
             as="p"
-            lead="Del campo al"
-            accent="cultivo regulado."
+            lead="Un cliente, un equipo,"
+            accent="un responsable."
             className="text-4xl sm:text-6xl"
           />
         </Reveal>
       </div>
+
+      {/* Las seis soluciones */}
+      <Section
+        id="soluciones"
+        eyebrow="Soluciones"
+        lead="Una solución"
+        accent="para cada etapa."
+        tldr="De la idea a la ejecución, con un mismo equipo. Cada solución se acuerda por escrito, con alcance, entregables y plazo orientativo."
+      >
+        <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {SOLUCIONES.map((sol, i) => (
+            <Reveal as="li" key={sol.id} delay={i * 70}>
+              <article className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+                <div className="flex items-center justify-between">
+                  <span className="headline text-5xl text-area">{sol.n}</span>
+                  <IconBadge icon={ICONOS_SOLUCION[sol.id]} />
+                </div>
+                <div>
+                  <p className="eyebrow text-muted-foreground">{sol.etapa}</p>
+                  <h3 className="text-lg font-bold text-foreground">{sol.nombre}</h3>
+                </div>
+                <p className="font-semibold leading-snug text-foreground">{sol.frase}</p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Para: </span>
+                  {sol.para}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Plazo orientativo: </span>
+                  {sol.plazo}
+                </p>
+                <details className="border-t border-border pt-3">
+                  <summary className="cursor-pointer text-sm font-semibold text-area">
+                    Qué incluye
+                  </summary>
+                  <dl className="mt-3 flex flex-col gap-3 text-sm text-muted-foreground">
+                    <div>
+                      <dt className="font-semibold text-foreground">Incluye</dt>
+                      <dd>{sol.incluye}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-foreground">Entregables</dt>
+                      <dd>{sol.entregables}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-foreground">Alcance</dt>
+                      <dd>{sol.alcance}</dd>
+                    </div>
+                  </dl>
+                </details>
+                {sol.estudio ? (
+                  <Tag tone="naranja" className="self-start">
+                    Suma al Estudio
+                  </Tag>
+                ) : null}
+                <WhatsAppButton
+                  topic={sol.whatsapp}
+                  label="Pedir propuesta"
+                  size="default"
+                  className="mt-auto self-start"
+                />
+              </article>
+            </Reveal>
+          ))}
+        </ul>
+        <Reveal className="mt-6">
+          <p className="text-sm text-muted-foreground">
+            Diagnostic abre el camino hacia Start, Project o Growth. 360 sostiene el vínculo a largo
+            plazo y Partnerships explora la colaboración. Si tu proyecto lo necesita, sumamos los
+            servicios del estudio creativo en una única propuesta.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* El catálogo: ocho líneas en cuatro frentes */}
+      <Section
+        id="catalogo"
+        eyebrow="Catálogo"
+        lead="Ocho líneas,"
+        accent="cuatro frentes."
+        className="border-t border-border"
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {FRENTES.map((f, i) => (
+            <Reveal key={f.id} delay={i * 70}>
+              <div className="flex h-full flex-col gap-5 rounded-2xl border border-border bg-card p-6">
+                <div>
+                  <p className="eyebrow text-area">Frente {i + 1}</p>
+                  <h3 className="headline text-3xl text-foreground">{f.titulo}</h3>
+                </div>
+                {f.lineas.map((l) => (
+                  <div
+                    key={l.n}
+                    className="flex flex-col gap-2 rounded-xl border border-border p-4"
+                  >
+                    <p className="text-sm font-bold text-foreground">
+                      <span className="mr-2 text-area">{l.n}</span>
+                      {l.titulo}
+                    </p>
+                    <p className="text-xs text-muted-foreground">{l.para}</p>
+                    <ul className="flex flex-col gap-2">
+                      {l.items.map((it) => (
+                        <li
+                          key={it}
+                          className="flex items-start gap-3 text-sm leading-relaxed text-foreground"
+                        >
+                          <Bullet />
+                          {it}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
 
       {/* Selector de sector: controla "A quién le hablamos" y "Servicios" */}
       <Tabs defaultValue="agro" className="block">
@@ -593,10 +739,15 @@ function Consultoria() {
                   value={s.v}
                   className="group/sector sector-boton flex h-auto min-h-12 items-center justify-start gap-2 rounded-2xl border-2 border-area/60 bg-card px-3 py-2 sm:min-h-14 sm:gap-3 sm:px-4 sm:py-2.5 text-left text-foreground shadow-none transition-[background-color,border-color,transform] hover:-translate-y-0.5 hover:border-area active:translate-y-0 data-[state=active]:border-area data-[state=active]:bg-area data-[state=active]:text-area-foreground data-[state=active]:shadow-none sm:min-w-56"
                 >
-                  <s.icon className="h-5 w-5 shrink-0 text-area group-data-[state=active]/sector:text-area-foreground" aria-hidden="true" />
+                  <s.icon
+                    className="h-5 w-5 shrink-0 text-area group-data-[state=active]/sector:text-area-foreground"
+                    aria-hidden="true"
+                  />
                   <span className="flex min-w-0 flex-col">
                     <span className="text-[13px] font-bold leading-tight sm:text-sm">{s.l}</span>
-                    <span className="hidden text-xs font-medium leading-tight opacity-75 sm:block">{s.sub}</span>
+                    <span className="hidden text-xs font-medium leading-tight opacity-75 sm:block">
+                      {s.sub}
+                    </span>
                   </span>
                   <CheckCircle2
                     className="ml-auto hidden h-5 w-5 shrink-0 sm:group-data-[state=active]/sector:block"
@@ -648,9 +799,23 @@ function Consultoria() {
         </TabsContent>
 
         <TabsContent value="regulado" className="mt-0">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16">
+            <Reveal className="flex flex-col items-start gap-5">
+              <TenSeconds className="max-w-3xl">
+                Cannabis y cáñamo, dentro del marco legal aplicable: evaluación de proyectos,
+                coordinación regulatoria y documental, trazabilidad y organización para empresas y
+                organizaciones.
+              </TenSeconds>
+              <WhatsAppButton
+                topic="cannabis"
+                label="Consultar por cannabis y cáñamo"
+                size="default"
+              />
+            </Reveal>
+          </div>
           <Section
             id="a-quien"
-            eyebrow="A quién le hablamos · Sector regulado"
+            eyebrow="A quién le hablamos · Cannabis y cáñamo"
             lead="Cada proyecto tiene"
             accent="su puerta."
           >
@@ -671,7 +836,7 @@ function Consultoria() {
 
           <Section
             id="servicios"
-            eyebrow="Servicios · Sector regulado"
+            eyebrow="Servicios · Cannabis y cáñamo"
             lead="Respaldo legal y"
             accent="dirección técnica."
           >
@@ -691,7 +856,7 @@ function Consultoria() {
         <div className="flex flex-col gap-14">
           <ComboGroup tag="Agro" combos={COMBOS_AGRO} />
           <ComboGroup
-            tag="Sector regulado"
+            tag="Cannabis y cáñamo"
             combos={COMBOS_REGULADO}
             extra={
               <div className="flex h-full min-h-40 flex-col justify-center gap-4 rounded-2xl border border-dashed border-border p-6">
@@ -717,13 +882,39 @@ function Consultoria() {
         </div>
       </Section>
 
+      {/* Diferencial: el estudio creativo propio */}
+      <div data-area="estudio">
+        <section
+          id="estudio-propio"
+          aria-labelledby="estudio-propio-titulo"
+          className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24"
+        >
+          <Reveal className="flex flex-col items-start gap-6 rounded-3xl border border-border bg-card p-8 sm:p-12">
+            <p className="eyebrow text-area">Nuestro diferencial</p>
+            <Headline
+              id="estudio-propio-titulo"
+              lead="Con estudio"
+              accent="creativo propio."
+              className="text-5xl sm:text-6xl"
+            />
+            <p className="max-w-2xl text-muted-foreground">
+              Tu proyecto también necesita marca. Identidad, video, tienda online y redes salen del
+              mismo equipo, en una única propuesta.
+            </p>
+            <Button asChild variant="area" size="lg">
+              <Link to="/estudio">Conocer FNX Estudio</Link>
+            </Button>
+          </Reveal>
+        </section>
+      </div>
+
       {/* Cómo trabajamos */}
       <Section
         id="como-trabajamos"
         eyebrow="Proceso"
         lead="Cómo"
         accent="trabajamos."
-        tldr="Todo lo que nos contás sobre tu proyecto es confidencial: solo lo conocen los profesionales que trabajan en él, con tu acuerdo."
+        tldr="Un cliente, un equipo, un responsable. Todo lo que nos contás es confidencial y no empezamos sin una propuesta aceptada por escrito."
       >
         <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -825,10 +1016,11 @@ function Consultoria() {
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">
-              Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar.
+              Te respondemos por WhatsApp o por mail y vemos juntos por dónde empezar. La primera
+              charla de 15 minutos es sin costo.
             </p>
             <div className="flex flex-wrap gap-3">
-              <WhatsAppButton topic="consultoria" label="Contanos tu proyecto" />
+              <WhatsAppButton topic="consultoria" label="Pedir propuesta" />
               <EmailButton account="estudio" topic="consultoria" />
               <InstagramButton account="estudio" />
             </div>

@@ -6,8 +6,14 @@ import {
   ClipboardList,
   FileCheck2,
   FileSignature,
+  FolderKanban,
   FolderOpen,
+  Handshake,
   MessagesSquare,
+  RefreshCw,
+  Rocket,
+  Search,
+  TrendingUp,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -21,6 +27,7 @@ import { RedVidrio, RedVidrioAncha } from "@/components/fnx/RedVidrio";
 import { Puertas } from "@/components/fnx/Puertas";
 
 import { pageUrl, OG_IMAGE_META } from "@/config/site";
+import { SOLUCIONES, type Solucion } from "@/data/soluciones";
 import { trackEvent } from "@/lib/track";
 
 const CHAT_INICIO = [
@@ -30,7 +37,7 @@ const CHAT_INICIO = [
   },
   {
     q: "Necesito asesoría para mi proyecto",
-    a: "Perfecto. ¿Es un proyecto agro o del sector regulado? Según eso, te decimos qué profesionales lo resuelven.",
+    a: "Perfecto. Contanos en qué etapa está tu proyecto y qué querés lograr, y te decimos por dónde empezar.",
   },
   {
     q: "¿Mis datos quedan protegidos?",
@@ -41,20 +48,20 @@ const CHAT_INICIO = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FNX · Agencia de branding y marketing en Mendoza y San Juan | Fénix Creativo" },
+      { title: "FNX · Firma de desarrollo empresarial en Mendoza y San Juan | Fénix Creativo" },
       {
         name: "description",
         content:
-          "Branding, redes, contenido, tienda online y estrategia para pymes y emprendedores. Sedes en San Juan y Mendoza y trabajo en todo el país. Primera charla de 15 minutos sin costo.",
+          "Firma multidisciplinaria de desarrollo empresarial con estudio creativo propio y una red de especialistas. Consultoría, proyectos, desarrollo comercial y marca. Sedes en San Juan y Mendoza y trabajo en todo el país. Primera charla de 15 minutos sin costo.",
       },
       {
         property: "og:title",
-        content: "FNX · Fénix Creativo | Creamos marcas y conectamos personas de confianza",
+        content: "FNX · Fénix Creativo | De la idea a la ejecución, con un mismo equipo",
       },
       {
         property: "og:description",
         content:
-          "Una empresa, cuatro áreas. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
+          "Firma de desarrollo empresarial con estudio creativo propio. Sedes en San Juan y Mendoza, trabajamos en todo el país.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: pageUrl("/") },
@@ -79,22 +86,31 @@ const STEPS = [
   {
     n: "01",
     icon: MessagesSquare,
-    title: "Nos escribís por WhatsApp",
-    text: "Un mensaje alcanza para arrancar.",
+    title: "Nos contás tu proyecto",
+    text: "Por WhatsApp alcanza con un mensaje para arrancar.",
   },
   {
     n: "02",
     icon: ClipboardList,
-    title: "Entendemos qué necesitás",
-    text: "Unas preguntas por WhatsApp o, si es por tu marca, una charla de 15 minutos sin costo.",
+    title: "Escuchamos y diagnosticamos",
+    text: "Entendemos tu necesidad, tu etapa y tus recursos en una charla de 15 minutos sin costo.",
   },
   {
     n: "03",
     icon: FileCheck2,
-    title: "Te pasamos una propuesta clara",
-    text: "Qué hacemos, cuándo y cuánto sale.",
+    title: "Te pasamos una propuesta por escrito",
+    text: "Con alcance, equipo, entregables, plazos y lo que no incluye. No empezamos sin tu aceptación.",
   },
 ];
+
+const ICONOS_SOLUCION: Record<Solucion["id"], LucideIcon> = {
+  diagnostic: Search,
+  start: Rocket,
+  project: FolderKanban,
+  growth: TrendingUp,
+  plan360: RefreshCw,
+  partnerships: Handshake,
+};
 
 /** Parallax leve: la foto baja más lento que el scroll. */
 function useParallax<T extends HTMLElement>(factor = 0.18, max = 90) {
@@ -159,21 +175,30 @@ function Home() {
 
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-8 pt-5 md:gap-5 md:px-5 sm:px-8 sm:pt-14 lg:pt-12">
           <p className="eyebrow text-area">
-            Agencia de branding y marketing · Sedes en San Juan y Mendoza · Todo el país
+            Desarrollo empresarial · Sedes en San Juan y Mendoza · Todo el país
           </p>
           <Headline
             as="h1"
             id="hero-titulo"
-            lead="Creamos marcas y conectamos personas de"
-            accent="confianza."
+            lead={"Pensamos tu negocio. Lo\u00A0construimos."}
+            accent={"Lo\u00A0hacemos\u00A0ver."}
             className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl"
           />
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
-              Branding y marketing para tu marca, asesoría para proyectos agro y regulados,
-              acompañamiento en el REPROCANN y noticias de tu rubro. Elegí tu área y te respondemos
+              Firma multidisciplinaria de desarrollo empresarial, con una red de especialistas. De
+              la idea a la ejecución, con un mismo equipo. Elegí por dónde empezar y te respondemos
               por WhatsApp.
             </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-foreground backdrop-blur-md">
+              <span
+                className="h-2 w-2 rounded-full bg-fnx-naranja shadow-[0_0_10px_var(--fnx-naranja)]"
+                aria-hidden="true"
+              />
+              Con estudio creativo propio
+            </span>
           </Reveal>
 
           <div className="mt-2 sm:mt-4">
@@ -196,14 +221,15 @@ function Home() {
           <Reveal className="flex max-w-xl flex-col gap-6 lg:max-w-[44%]">
             <Headline
               id="valor-titulo"
-              lead="Todo lo que necesitás,"
-              accent="en un solo lugar."
+              lead="De la idea a"
+              accent="la ejecución."
               className="max-w-4xl text-5xl sm:text-7xl lg:text-6xl xl:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">
-              Estudio le da forma a tu marca. Consultoría pone tu proyecto en regla. Salud te
-              acompaña en el trámite del REPROCANN. Noticias te cuenta lo que pasa en tu rubro, con
-              fuentes. Y si tu caso necesita más de un área, lo coordinamos nosotros.
+              Integramos estrategia, creatividad y desarrollo para acompañar a las empresas desde la
+              primera idea hasta su crecimiento. Consultoría ordena y ejecuta tu proyecto. Estudio
+              le da forma y lo hace ver. Salud te acompaña en el trámite del REPROCANN. Noticias te
+              cuenta lo que pasa en tu rubro, con fuentes.
             </p>
           </Reveal>
         </div>
@@ -211,6 +237,76 @@ function Home() {
           <RedVidrio />
         </div>
       </section>
+
+      {/* Seis soluciones de Consultoría */}
+      <div data-area="consultoria">
+        <Section
+          id="soluciones"
+          eyebrow="FNX Consultoría"
+          lead="Una solución"
+          accent="para cada etapa."
+          tldr="Cada solución tiene alcance, entregables y plazo orientativo por escrito. Si no sabés cuál te sirve, la charla de 15 minutos es sin costo."
+          footer={
+            <Button asChild variant="area" size="lg">
+              <Link to="/consultoria">Ver las seis soluciones</Link>
+            </Button>
+          }
+        >
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {SOLUCIONES.map((s, i) => (
+              <Reveal as="li" key={s.id} delay={i * 70}>
+                <div className="spot neon-card flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="headline text-5xl text-area">{s.n}</span>
+                    <IconBadge icon={ICONOS_SOLUCION[s.id]} />
+                  </div>
+                  <div>
+                    <p className="eyebrow text-muted-foreground">{s.etapa}</p>
+                    <h3 className="text-lg font-bold text-foreground">{s.nombre}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{s.frase}</p>
+                  {s.estudio ? (
+                    <Tag tone="naranja" className="mt-auto self-start">
+                      Suma al Estudio
+                    </Tag>
+                  ) : null}
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+        </Section>
+      </div>
+
+      {/* Diferencial: el estudio creativo propio */}
+      <div data-area="estudio">
+        <section
+          id="estudio-propio"
+          aria-labelledby="estudio-propio-titulo"
+          className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24"
+        >
+          <Reveal className="grid items-center gap-8 rounded-3xl border border-border bg-card p-8 sm:p-12 lg:grid-cols-[1.3fr_1fr]">
+            <div className="flex flex-col items-start gap-6">
+              <p className="eyebrow text-area">Nuestro diferencial</p>
+              <Headline
+                id="estudio-propio-titulo"
+                lead="Con estudio"
+                accent="creativo propio."
+                className="text-5xl sm:text-6xl"
+              />
+              <p className="max-w-lg text-muted-foreground">
+                Lo que planificamos también se ve. Identidad, video, tienda online y redes salen del
+                mismo equipo, así tu proyecto llega a la calle con marca.
+              </p>
+              <Button asChild variant="area" size="lg">
+                <Link to="/estudio">Conocer FNX Estudio</Link>
+              </Button>
+            </div>
+            <div className="flex justify-start lg:justify-center" aria-hidden="true">
+              <Pieces lit={3} />
+            </div>
+          </Reveal>
+        </section>
+      </div>
 
       {/* Prueba de marca: las 5 señales se encienden de a una y la luz lleva hasta el botón */}
       <Section
@@ -249,7 +345,7 @@ function Home() {
         lead="Cómo"
         accent="trabajamos."
         className="pt-10 sm:pt-14"
-        tldr="Del primer mensaje a la entrega, hablás siempre con FNX."
+        tldr="Un cliente, un equipo, un responsable. Del primer mensaje a la entrega, hablás siempre con FNX."
       >
         <ol className="grid gap-4 md:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -278,7 +374,8 @@ function Home() {
               Para empezar
             </p>
             <p className="mt-2 font-semibold text-foreground">
-              Firmás el presupuesto y abonás el 50%.
+              Aceptás la propuesta por escrito y arrancamos. El esquema de pago va en cada
+              propuesta.
             </p>
           </div>
           <div className="rounded-2xl border border-border p-6">
@@ -287,7 +384,8 @@ function Home() {
               Al terminar
             </p>
             <p className="mt-2 font-semibold text-foreground">
-              Con el 100% pago, te llevás todos los archivos editables. Son tuyos.
+              Con el pago completo, te llevás todos los entregables y los archivos editables. Son
+              tuyos.
             </p>
           </div>
         </Reveal>
@@ -322,8 +420,8 @@ function Home() {
               className="text-5xl sm:text-7xl"
             />
             <p className="max-w-lg text-muted-foreground">
-              Contanos a qué te dedicás y qué querés lograr. Si es por tu marca, la primera charla
-              de 15 minutos es sin costo.
+              Contanos a qué te dedicás y qué querés lograr. La primera charla de 15 minutos es sin
+              costo.
             </p>
             <div className="flex flex-wrap gap-3">
               <WhatsAppButton topic="general" pulse />

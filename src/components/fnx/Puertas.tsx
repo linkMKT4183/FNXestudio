@@ -17,8 +17,8 @@ interface Puerta {
 }
 
 const PUERTAS: Puerta[] = [
+  { to: "/consultoria", area: "consultoria", kicker: "FNX Consultoría", title: "Quiero impulsar mi negocio", icon: Scale },
   { to: "/estudio", area: "estudio", kicker: "FNX Estudio", title: "Quiero hacer crecer mi marca", icon: PenTool },
-  { to: "/consultoria", area: "consultoria", kicker: "FNX Consultoría", title: "Necesito asesoría para mi proyecto", icon: Scale },
   { to: "/salud", area: "salud", kicker: "FNX Salud · +18", title: "Quiero hacer mi REPROCANN (+18)", icon: HeartHandshake },
   { to: "/noticias", area: "noticias", kicker: "FNX Noticias", title: "Quiero estar al día", icon: Newspaper },
   { to: "/red", kicker: "Profesionales", title: "Soy profesional y quiero sumarme", icon: Users, soloCelular: true },
@@ -48,8 +48,8 @@ export function Puertas() {
 
 function PuertaBarra({ to, area, kicker, title, icon: Icon }: Puerta) {
   const color = area ? "area" : "crema";
-  // En celular un solo color: la puerta principal (Estudio) va en naranja y las demás en neutro, para que se vea dónde tocar.
-  const principal = area === "estudio";
+  // En celular un solo color: la puerta principal (Consultoría) va en su color y las demás en neutro, para que se vea dónde tocar.
+  const principal = area === "consultoria";
   return (
     <Link
       to={to}

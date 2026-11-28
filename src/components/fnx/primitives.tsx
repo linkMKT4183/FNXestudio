@@ -143,7 +143,10 @@ export function TenSeconds({ children, className }: { children: ReactNode; class
 
 /**
  * Titular Anton con la última palabra/frase en el color de acento.
- * Entra por palabras (suben y pasan de borroso a nítido); la parte en color entra después y un brillo la cruza una vez.
+ * Entra por palabras: cada una sube desde atrás de una máscara y pasa de borroso a nítido; la parte en
+ * color entra después y un brillo la cruza una vez.
+ * El titular principal de cada página (h1) se ve desde el primer momento: ya viene visible del servidor
+ * y solo se enfoca, para que la página no tarde en mostrar su título.
  * El texto completo queda en aria-label: los lectores de pantalla no leen palabra por palabra.
  */
 export function Headline({
@@ -162,7 +165,9 @@ export function Headline({
   /** Dibuja un subrayado bajo la última palabra. */
   underline?: boolean;
 }) {
-  const [ref, visible] = useInView<HTMLElement>();
+  const [ref, inView] = useInView<HTMLElement>();
+  const pronto = Tag === "h1";
+  const visible = pronto || inView;
   const leadWords = lead ? lead.split(" ").filter(Boolean) : [];
   const accentWords = accent.split(" ").filter(Boolean);
   const total = leadWords.length + accentWords.length;
@@ -176,21 +181,27 @@ export function Headline({
       ref={ref}
       id={id}
       aria-label={label}
-      className={cn("headline text-foreground", visible && "is-visible", className)}
+      className={cn(
+        "headline text-foreground",
+        pronto && "headline-pronto",
+        visible && "is-visible",
+        className,
+      )}
     >
       {words.map(({ w, k, acc }) => (
         <Fragment key={`${k}-${w}`}>
-          <span
-            aria-hidden="true"
-            data-t={acc ? w : undefined}
-            className={cn(
-              "w-reveal",
-              acc && "w-accent text-area",
-              acc && underline && k === total - 1 && "u-draw",
-            )}
-            style={{ "--i": k + (acc ? 2 : 0) } as CSSProperties}
-          >
-            {w}
+          <span aria-hidden="true" className="w-mask">
+            <span
+              data-t={acc ? w : undefined}
+              className={cn(
+                "w-reveal",
+                acc && "w-accent text-area",
+                acc && underline && k === total - 1 && "u-draw",
+              )}
+              style={{ "--i": k + (acc ? 2 : 0) } as CSSProperties}
+            >
+              {w}
+            </span>
           </span>
           {k < total - 1 ? " " : null}
         </Fragment>

@@ -158,6 +158,10 @@ function Estudio() {
               Desde 2019 diseñamos la identidad, el contenido y la estrategia para pymes y
               emprendedores que quieren dejar de ser una más y empezar a ser la elegida.
             </p>
+            <p className="max-w-xl text-sm text-muted-foreground">
+              Somos el estudio creativo propio de FNX: cuando tu proyecto lo necesita, trabajamos
+              junto al equipo de Consultoría en una única propuesta.
+            </p>
             <ul className="flex flex-wrap gap-2" aria-label="Servicios de FNX Estudio">
               {HERO_TAGS.map((t) => (
                 <li

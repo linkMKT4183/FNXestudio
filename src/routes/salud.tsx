@@ -433,6 +433,16 @@ function Salud() {
               <WhatsAppButton topic="renovacion" label="Quiero renovarlo" variant="outline" />
             </div>
             <AdultNote />
+            <p className="max-w-xl text-sm text-muted-foreground">
+              ¿Tenés una empresa o un proyecto? La consultoría para empresas es otra puerta:{" "}
+              <Link
+                to="/consultoria"
+                className="font-semibold text-foreground underline underline-offset-4 hover:text-area"
+              >
+                FNX Consultoría
+              </Link>
+              .
+            </p>
           </Reveal>
           <Reveal delay={150}>
             <NetworkViz nodes={RED_SALUD} />

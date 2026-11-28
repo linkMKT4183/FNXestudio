@@ -813,6 +813,10 @@ function Consultoria() {
                 coordinación regulatoria y documental, trazabilidad y organización para empresas y
                 organizaciones.
               </TenSeconds>
+              <p className="max-w-3xl text-xs text-muted-foreground">
+                Coordinamos con profesionales habilitados. Las firmas y los dictámenes se
+                presupuestan por separado. No prometemos habilitaciones ni resultados.
+              </p>
               <WhatsAppButton
                 topic="cannabis"
                 label="Consultar por cannabis y cáñamo"

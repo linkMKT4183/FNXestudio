@@ -17,6 +17,7 @@ import {
   PawPrint,
   Scale,
   ShieldCheck,
+  Smartphone,
   Sprout,
   Stethoscope,
   Timer,
@@ -31,6 +32,7 @@ import { EmailButton } from "@/components/fnx/EmailButton";
 import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
+import { CredencialEjemplo } from "@/components/salud/CredencialEjemplo";
 import { IMG } from "@/data/imagenes";
 import {
   Accordion,
@@ -224,6 +226,11 @@ const FAQ = [
     icon: FileCheck2,
     q: "¿Cuánto cuesta?",
     a: "La inscripción ante el Estado es gratuita. Nuestro acompañamiento tiene un valor, y te lo pasamos antes de empezar.",
+  },
+  {
+    icon: Smartphone,
+    q: "¿Dónde veo mi credencial?",
+    a: "En la app Mi Argentina, en la sección Salud. Necesitás tener tu identidad validada y suscribirte al servicio; si no sabés cómo, te ayudamos.",
   },
   {
     icon: MapPin,
@@ -451,6 +458,32 @@ function Salud() {
               <p className="text-sm text-muted-foreground">{b.text}</p>
             </li>
           ))}
+        </Reveal>
+        <Reveal
+          variant="zoom"
+          className="mt-10 grid items-center gap-8 rounded-3xl border border-border p-6 sm:p-10 lg:grid-cols-[1fr_1.1fr]"
+        >
+          <div className="flex flex-col gap-4">
+            <p className="eyebrow text-area">Lo que recibís</p>
+            <h3 className="headline text-4xl text-foreground sm:text-5xl">
+              Tu credencial, <span className="text-area">a tu nombre.</span>
+            </h3>
+            <p className="text-muted-foreground">
+              Cuando el trámite se aprueba, recibís tu credencial con tus datos, el lugar de cultivo
+              y la autorización para cultivo controlado y transporte. Es lo que te respalda si te la
+              piden.
+            </p>
+            <p className="flex items-start gap-3 rounded-2xl border border-area/40 bg-area/10 p-4 text-sm text-foreground">
+              <Smartphone className="mt-0.5 h-5 w-5 shrink-0 text-area" aria-hidden="true" />
+              <span>
+                <strong>La llevás siempre en el celular:</strong> tu credencial aparece en la app{" "}
+                <strong>Mi Argentina</strong>, en la sección Salud, lista para mostrarla cuando la
+                necesites.
+              </span>
+            </p>
+            <WhatsAppButton topic="salud" label="Quiero la mía" className="self-start" />
+          </div>
+          <CredencialEjemplo />
         </Reveal>
       </Section>
 

@@ -1770,3 +1770,15 @@ li:nth-child(3) .paso-num { animation-delay: 2.6s; }
     transition: none;
   }
 }
+
+/* Credencial de ejemplo de Salud: flota suave en loop */
+@keyframes credencial-flota {
+  from { translate: 0 0; rotate: -2deg; }
+  to { translate: 0 -8px; rotate: 1deg; }
+}
+.credencial-flota {
+  animation: credencial-flota 5s var(--ease-fnx) infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+  .credencial-flota { animation: none; }
+}

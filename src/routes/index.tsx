@@ -61,7 +61,16 @@ export const Route = createFileRoute("/")({
       ...OG_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: pageUrl("/") }],
+    links: [
+      { rel: "canonical", href: pageUrl("/") },
+      // La imagen del fondo del inicio es lo más grande de la pantalla en celular: se pide primero.
+      {
+        rel: "preload",
+        as: "image",
+        href: "/media/inicio-fondo-poster.webp",
+        fetchPriority: "high",
+      },
+    ],
   }),
   component: Home,
 });
@@ -162,8 +171,8 @@ function Home() {
           <Reveal delay={120}>
             <p className="max-w-xl text-sm text-muted-foreground md:text-lg">
               Branding y marketing para tu marca, asesoría para proyectos agro y regulados,
-              acompañamiento en el REPROCANN y noticias de tu rubro. Elegí tu área y te respondemos por
-              WhatsApp.
+              acompañamiento en el REPROCANN y noticias de tu rubro. Elegí tu área y te respondemos
+              por WhatsApp.
             </p>
           </Reveal>
 

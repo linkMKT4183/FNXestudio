@@ -25,6 +25,7 @@ import type { WhatsAppTopic } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { SERVICIOS } from "@/data/servicios";
 import { CIUDADES } from "@/data/ciudades";
+import { GUIAS_SALUD } from "@/data/salud-guias";
 import { trackEvent } from "@/lib/track";
 
 const NAV = [
@@ -273,6 +274,8 @@ function topicFromPath(pathname: string): WhatsAppTopic {
   const ciudad = CIUDADES.find((c) => pathname.startsWith(c.path));
   if (ciudad) return ciudad.topic;
   if (pathname.startsWith("/consultoria")) return "consultoria";
+  const guia = GUIAS_SALUD.find((g) => pathname.startsWith(g.path));
+  if (guia) return guia.topic;
   if (pathname.startsWith("/salud")) return "salud";
   if (pathname.startsWith("/noticias")) return "novedades";
   if (["/estudio", "/tu-marca", "/marca", "/notas"].some((p) => pathname.startsWith(p)))

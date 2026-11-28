@@ -47,6 +47,7 @@ export function WhatsAppButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        data-whatsapp-topic={topic}
         onClick={() => trackEvent("whatsapp_click", { topic, page: window.location.pathname })}
       >
         {showIcon ? <WhatsAppIcon className="h-5 w-5 shrink-0" /> : null}

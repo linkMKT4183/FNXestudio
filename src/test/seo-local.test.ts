@@ -4,6 +4,7 @@ import { buildWhatsAppLink, type WhatsAppTopic } from "@/config/site";
 import { SERVICIOS } from "@/data/servicios";
 import { CIUDADES } from "@/data/ciudades";
 import { NOTAS } from "@/data/notas";
+import { GUIAS_SALUD } from "@/data/salud-guias";
 import { serviceHead, cityHead, articleHead } from "@/lib/seo";
 
 const sitemap = readFileSync("public/sitemap.xml", "utf8");
@@ -15,6 +16,7 @@ describe("SEO local de FNX Estudio", () => {
       ...CIUDADES.map((c) => c.path),
       "/notas",
       ...NOTAS.map((n) => `/notas/${n.slug}`),
+      ...GUIAS_SALUD.map((g) => g.path),
     ];
     for (const path of paths) expect(sitemap).toContain(`<loc>https://fnxestudio.com${path}</loc>`);
   });

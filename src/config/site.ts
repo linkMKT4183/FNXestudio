@@ -21,6 +21,8 @@ export const WHATSAPP_MESSAGES = {
   consultoria: "Hola FNX, necesito asesoría para mi proyecto agrícola o del sector regulado",
   salud: "Hola FNX, vengo de la web: quiero hacer mi REPROCANN (+18)",
   renovacion: "Hola FNX, vengo de la web: tengo REPROCANN y quiero renovarlo (+18)",
+  reprocannMendoza: "Hola FNX, vengo de la web: vivo en Mendoza y quiero hacer mi REPROCANN (+18)",
+  reprocannSanJuan: "Hola FNX, vengo de la web: vivo en San Juan y quiero hacer mi REPROCANN (+18)",
   novedades: "Hola FNX, quiero recibir novedades",
   guia: "Hola FNX, quiero recibir la guía ¿FNX puede ayudarte?",
   consultoria15: "Hola FNX, escribo MARCA: quiero mi consultoría de 15 minutos",

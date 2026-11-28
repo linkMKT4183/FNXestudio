@@ -6,6 +6,132 @@ import { IMG } from "@/data/imagenes";
 
 export const NOTAS = [
   {
+    slug: "como-registrar-tu-marca-en-el-inpi",
+    title: "Cómo registrar tu marca en el INPI paso a paso (2026)",
+    description:
+      "Guía 2026 para registrar tu marca en el INPI: búsqueda de antecedentes, clases, solicitud online, oposiciones y vigencia. Qué cambió desde marzo de 2026.",
+    date: "2026-11-27",
+    readingMinutes: 5,
+    ctaTopic: "registro",
+    related: ["registro", "identidad"],
+    sections: [
+      {
+        h2: "Qué cambió en 2026",
+        paragraphs: [
+          "Desde el 1 de marzo de 2026 rige un procedimiento nuevo en el INPI: el examen de oficio se concentra en las prohibiciones absolutas y el control de marcas parecidas queda en manos de los titulares, a través de las oposiciones.",
+          "En la práctica, el trámite puede salir más rápido, pero si nadie vigila tu marca, otra muy parecida puede registrarse sin que el INPI la frene.",
+        ],
+      },
+      {
+        h2: "1. Buscá antecedentes antes de empezar",
+        paragraphs: [
+          "Antes de pagar nada, revisá si ya existe una marca igual o parecida en tu rubro. Es el paso que más problemas evita: cambiar de nombre después de invertir en diseño y publicidad sale caro.",
+        ],
+      },
+      {
+        h2: "2. Elegí las clases correctas",
+        paragraphs: [
+          "Las marcas se registran por clases de productos o servicios. Una clase mal elegida puede dejar tu actividad real sin proteger, así que conviene definirlas pensando en lo que vendés hoy y en lo que vas a vender.",
+        ],
+      },
+      {
+        h2: "3. Presentá la solicitud online",
+        paragraphs: [
+          "El trámite es 100% online en el portal de trámites del INPI y necesitás Clave Fiscal nivel 2 o superior de ARCA. El arancel se actualiza seguido, así que consultá el valor vigente antes de empezar.",
+        ],
+      },
+      {
+        h2: "4. Estate atento a las oposiciones",
+        paragraphs: [
+          "La solicitud se publica en el Boletín de Marcas y terceros pueden oponerse dentro de los 30 días. Si hay oposición, el trámite se detiene hasta resolverla. Y al revés: si alguien pide una marca parecida a la tuya, solo vos podés frenarla oponiéndote a tiempo.",
+        ],
+      },
+      {
+        h2: "5. Cuánto tarda y cuánto dura",
+        paragraphs: [
+          "Según el INPI, el registro lleva unos 24 meses, o 12 si la solicitud pasa por el estudio simplificado; con oposiciones puede demorar más.",
+          "Una vez concedida, la marca te protege 10 años en todo el país y se renueva por períodos iguales. A los 5 años hay que presentar la declaración jurada de uso.",
+        ],
+      },
+      {
+        h2: "¿Lo hacemos juntos?",
+        paragraphs: [
+          "En FNX Estudio te acompañamos con Aro · Estudio Jurídico: buscamos antecedentes, definimos las clases y presentamos la solicitud. Y si todavía no tenés marca, la diseñamos pensando en que se pueda registrar.",
+        ],
+        link: "/estudio/registro-de-marca",
+      },
+    ],
+    image: IMG.caminoLuz,
+  },
+  {
+    slug: "como-elegir-agencia-de-branding-en-mendoza",
+    title: "Cómo elegir una agencia de branding en Mendoza y San Juan: 7 preguntas",
+    description:
+      "Antes de contratar una agencia de branding o marketing en Mendoza o San Juan, hacé estas 7 preguntas: proceso, entregables, archivos, plazos, precio y registro de marca.",
+    date: "2026-11-27",
+    readingMinutes: 4,
+    ctaTopic: "marca",
+    related: ["identidad", "estrategia", "redes"],
+    sections: [
+      {
+        h2: "Elegir bien te ahorra empezar dos veces",
+        paragraphs: [
+          "Una marca mal hecha no solo se ve mal: obliga a rehacer logo, redes y cartelería. Estas 7 preguntas te ayudan a comparar agencias con criterio, no solo por precio.",
+        ],
+      },
+      {
+        h2: "1. ¿Cómo es su proceso?",
+        paragraphs: [
+          "Una agencia seria te explica qué pasa en cada etapa: primero entender tu negocio y tu público, después diseñar, después aplicar. Si arrancan directo por el logo, desconfiá.",
+        ],
+      },
+      {
+        h2: "2. ¿Qué te entregan exactamente?",
+        paragraphs: [
+          "Pedí la lista concreta: logo y versiones, colores, tipografías, manual de uso y aplicaciones. «Una identidad» no es una lista.",
+        ],
+      },
+      {
+        h2: "3. ¿Los archivos editables son tuyos?",
+        paragraphs: [
+          "Al terminar y pagar, los archivos originales tienen que quedarte a vos. Si no, cada cambio futuro depende de la agencia.",
+        ],
+      },
+      {
+        h2: "4. ¿Cuánto tarda y cuándo se paga?",
+        paragraphs: [
+          "Plazos claros y pagos por etapas (por ejemplo, una parte al empezar y el resto al entregar) protegen a las dos partes.",
+        ],
+      },
+      {
+        h2: "5. ¿Te dan el presupuesto antes de empezar?",
+        paragraphs: [
+          "Qué incluye, cuánto sale y qué no está incluido, por escrito. Sin sorpresas a mitad de camino.",
+        ],
+      },
+      {
+        h2: "6. ¿Piensan en registrar tu marca?",
+        paragraphs: [
+          "Un nombre o un logo que no se pueden registrar son una inversión en riesgo. Preguntá si chequean antecedentes antes de diseñar.",
+        ],
+      },
+      {
+        h2: "7. ¿Te acompañan después?",
+        paragraphs: [
+          "La marca se juega en el día a día: redes, contenido, tienda. Preguntá si pueden seguir con vos o si te dejan solo con un manual.",
+        ],
+      },
+      {
+        h2: "Hacé la prueba con nosotros",
+        paragraphs: [
+          "En FNX Estudio trabajamos desde 2019, con sedes en San Juan y Mendoza y trabajo en todo el país. La primera charla de 15 minutos es sin costo: hacenos estas 7 preguntas.",
+        ],
+        link: "/estudio",
+      },
+    ],
+    image: IMG.rey,
+  },
+  {
     slug: "tu-marca-pasa-desapercibida-5-senales",
     title: "Tu marca pasa desapercibida: 5 señales para darte cuenta",
     description:

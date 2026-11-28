@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
+  ArrowRight,
   BadgeCheck,
   BellRing,
   CalendarClock,
@@ -33,6 +34,7 @@ import { WhatsAppChat } from "@/components/fnx/WhatsAppChat";
 import { NetworkViz, type NetworkNode } from "@/components/fnx/NetworkViz";
 import { WhatsAppButton } from "@/components/fnx/WhatsAppButton";
 import { CredencialEjemplo } from "@/components/salud/CredencialEjemplo";
+import { GUIAS_SALUD } from "@/data/salud-guias";
 import { IMG } from "@/data/imagenes";
 import {
   Accordion,
@@ -581,6 +583,19 @@ function Salud() {
             </Link>
             : inscripción, plan de cultivo, documentación y respaldo legal.
           </p>
+        </Reveal>
+        <Reveal as="ul" stagger className="mt-4 grid gap-4 md:grid-cols-3">
+          {GUIAS_SALUD.map((g) => (
+            <li key={g.slug}>
+              <Link
+                to={g.path}
+                className="tarjeta-viva flex h-full items-center justify-between gap-3 rounded-2xl border border-area/40 bg-card p-5 font-semibold text-foreground hover:border-area"
+              >
+                {g.lead} {g.accent.replace(".", "")}
+                <ArrowRight className="h-5 w-5 shrink-0 text-area" aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
         </Reveal>
       </Section>
 

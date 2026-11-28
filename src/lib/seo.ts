@@ -2,6 +2,7 @@ import { OG_IMAGE_META, pageUrl } from "@/config/site";
 import type { Servicio, Pregunta } from "@/data/servicios";
 import type { Ciudad } from "@/data/ciudades";
 import type { Nota } from "@/data/notas";
+import type { GuiaSalud } from "@/data/salud-guias";
 
 const ORG = { "@id": pageUrl("/#org") };
 export const COBERTURA = [
@@ -130,4 +131,14 @@ export function articleHead(note: Nota) {
     ],
     "article",
   );
+}
+export function guiaHead(guia: GuiaSalud) {
+  return pageHead(guia.title, guia.description, guia.path, [
+    faqLd(guia.faq),
+    breadcrumbLd([
+      { name: "Inicio", path: "/" },
+      { name: "FNX Salud", path: "/salud" },
+      { name: `${guia.lead} ${guia.accent.replace(".", "")}`, path: guia.path },
+    ]),
+  ]);
 }

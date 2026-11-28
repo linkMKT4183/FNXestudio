@@ -28,6 +28,9 @@ import { Route as EstudioRegistroDeMarcaRouteImport } from './routes/estudio_.re
 import { Route as EstudioTiendaOnlineRouteImport } from './routes/estudio_.tienda-online'
 import { Route as NotasIndexRouteImport } from './routes/notas.index'
 import { Route as NotasSlugRouteImport } from './routes/notas.$slug'
+import { Route as SaludRenovarReprocannRouteImport } from './routes/salud_.renovar-reprocann'
+import { Route as SaludReprocannMendozaRouteImport } from './routes/salud_.reprocann-mendoza'
+import { Route as SaludReprocannSanJuanRouteImport } from './routes/salud_.reprocann-san-juan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -125,6 +128,21 @@ const NotasSlugRoute = NotasSlugRouteImport.update({
   path: '/notas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SaludRenovarReprocannRoute = SaludRenovarReprocannRouteImport.update({
+  id: '/salud_/renovar-reprocann',
+  path: '/salud/renovar-reprocann',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaludReprocannMendozaRoute = SaludReprocannMendozaRouteImport.update({
+  id: '/salud_/reprocann-mendoza',
+  path: '/salud/reprocann-mendoza',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaludReprocannSanJuanRoute = SaludReprocannSanJuanRouteImport.update({
+  id: '/salud_/reprocann-san-juan',
+  path: '/salud/reprocann-san-juan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,6 +163,9 @@ export interface FileRoutesByFullPath {
   '/estudio/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
   '/estudio/tienda-online': typeof EstudioTiendaOnlineRoute
   '/notas/$slug': typeof NotasSlugRoute
+  '/salud/renovar-reprocann': typeof SaludRenovarReprocannRoute
+  '/salud/reprocann-mendoza': typeof SaludReprocannMendozaRoute
+  '/salud/reprocann-san-juan': typeof SaludReprocannSanJuanRoute
   '/notas/': typeof NotasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -166,6 +187,9 @@ export interface FileRoutesByTo {
   '/estudio/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
   '/estudio/tienda-online': typeof EstudioTiendaOnlineRoute
   '/notas/$slug': typeof NotasSlugRoute
+  '/salud/renovar-reprocann': typeof SaludRenovarReprocannRoute
+  '/salud/reprocann-mendoza': typeof SaludReprocannMendozaRoute
+  '/salud/reprocann-san-juan': typeof SaludReprocannSanJuanRoute
   '/notas': typeof NotasIndexRoute
 }
 export interface FileRoutesById {
@@ -188,6 +212,9 @@ export interface FileRoutesById {
   '/estudio_/registro-de-marca': typeof EstudioRegistroDeMarcaRoute
   '/estudio_/tienda-online': typeof EstudioTiendaOnlineRoute
   '/notas/$slug': typeof NotasSlugRoute
+  '/salud_/renovar-reprocann': typeof SaludRenovarReprocannRoute
+  '/salud_/reprocann-mendoza': typeof SaludReprocannMendozaRoute
+  '/salud_/reprocann-san-juan': typeof SaludReprocannSanJuanRoute
   '/notas/': typeof NotasIndexRoute
 }
 export interface FileRouteTypes {
@@ -211,6 +238,9 @@ export interface FileRouteTypes {
     | '/estudio/registro-de-marca'
     | '/estudio/tienda-online'
     | '/notas/$slug'
+    | '/salud/renovar-reprocann'
+    | '/salud/reprocann-mendoza'
+    | '/salud/reprocann-san-juan'
     | '/notas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -232,6 +262,9 @@ export interface FileRouteTypes {
     | '/estudio/registro-de-marca'
     | '/estudio/tienda-online'
     | '/notas/$slug'
+    | '/salud/renovar-reprocann'
+    | '/salud/reprocann-mendoza'
+    | '/salud/reprocann-san-juan'
     | '/notas'
   id:
     | '__root__'
@@ -253,6 +286,9 @@ export interface FileRouteTypes {
     | '/estudio_/registro-de-marca'
     | '/estudio_/tienda-online'
     | '/notas/$slug'
+    | '/salud_/renovar-reprocann'
+    | '/salud_/reprocann-mendoza'
+    | '/salud_/reprocann-san-juan'
     | '/notas/'
   fileRoutesById: FileRoutesById
 }
@@ -275,6 +311,9 @@ export interface RootRouteChildren {
   EstudioRegistroDeMarcaRoute: typeof EstudioRegistroDeMarcaRoute
   EstudioTiendaOnlineRoute: typeof EstudioTiendaOnlineRoute
   NotasSlugRoute: typeof NotasSlugRoute
+  SaludRenovarReprocannRoute: typeof SaludRenovarReprocannRoute
+  SaludReprocannMendozaRoute: typeof SaludReprocannMendozaRoute
+  SaludReprocannSanJuanRoute: typeof SaludReprocannSanJuanRoute
   NotasIndexRoute: typeof NotasIndexRoute
 }
 
@@ -413,6 +452,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/salud_/renovar-reprocann': {
+      id: '/salud_/renovar-reprocann'
+      path: '/salud/renovar-reprocann'
+      fullPath: '/salud/renovar-reprocann'
+      preLoaderRoute: typeof SaludRenovarReprocannRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salud_/reprocann-mendoza': {
+      id: '/salud_/reprocann-mendoza'
+      path: '/salud/reprocann-mendoza'
+      fullPath: '/salud/reprocann-mendoza'
+      preLoaderRoute: typeof SaludReprocannMendozaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salud_/reprocann-san-juan': {
+      id: '/salud_/reprocann-san-juan'
+      path: '/salud/reprocann-san-juan'
+      fullPath: '/salud/reprocann-san-juan'
+      preLoaderRoute: typeof SaludReprocannSanJuanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -435,6 +495,9 @@ const rootRouteChildren: RootRouteChildren = {
   EstudioRegistroDeMarcaRoute: EstudioRegistroDeMarcaRoute,
   EstudioTiendaOnlineRoute: EstudioTiendaOnlineRoute,
   NotasSlugRoute: NotasSlugRoute,
+  SaludRenovarReprocannRoute: SaludRenovarReprocannRoute,
+  SaludReprocannMendozaRoute: SaludReprocannMendozaRoute,
+  SaludReprocannSanJuanRoute: SaludReprocannSanJuanRoute,
   NotasIndexRoute: NotasIndexRoute,
 }
 export const routeTree = rootRouteImport

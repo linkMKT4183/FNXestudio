@@ -1200,16 +1200,44 @@
    Todo con la paleta FNX: el color sale de --area (naranja en Estudio, el de cada área en las otras).
    ===================================================================================================== */
 
-/* Ambiente: resplandores de color en los bordes y una grilla casi invisible */
+/* Ambiente: tela negra satinada (pliegues con brillo suave) que deriva muy lento, y encima los
+   resplandores del color del área. Reemplaza la grilla de cuadros grandes (27/11). Las texturas son
+   livianas (public/fondos, ~35-60 KB) y quedan fijas detrás de todo el contenido. */
 .fondo-fnx {
+  position: relative;
+  isolation: isolate;
   background-color: var(--fnx-negro);
+}
+.fondo-fnx::before,
+.fondo-fnx::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+.fondo-fnx::before {
+  inset: -6%;
+  background: var(--fnx-negro) url("/fondos/tela-fnx-vertical.webp") center / cover no-repeat;
+  animation: tela-deriva 40s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (min-aspect-ratio: 1 / 1) {
+  .fondo-fnx::before {
+    background-image: url("/fondos/tela-fnx-horizontal.webp");
+  }
+}
+.fondo-fnx::after {
+  inset: 0;
   background-image:
-    radial-gradient(ellipse 55% 38% at 100% 0%, color-mix(in oklab, var(--area) 16%, transparent), transparent 72%),
-    radial-gradient(ellipse 50% 34% at 0% 100%, color-mix(in oklab, var(--area) 11%, transparent), transparent 72%),
-    linear-gradient(rgb(243 238 228 / 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(243 238 228 / 0.028) 1px, transparent 1px);
-  background-size: auto, auto, 96px 96px, 96px 96px;
-  background-attachment: fixed, fixed, scroll, scroll;
+    radial-gradient(ellipse 55% 38% at 100% 0%, color-mix(in oklab, var(--area) 14%, transparent), transparent 72%),
+    radial-gradient(ellipse 50% 34% at 0% 100%, color-mix(in oklab, var(--area) 10%, transparent), transparent 72%);
+}
+@keyframes tela-deriva {
+  from { transform: translate3d(0, 0, 0) scale(1.02); }
+  to { transform: translate3d(-2.5%, -2%, 0) scale(1.09); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fondo-fnx::before { animation: none; }
 }
 
 /* Paneles: vidrio oscuro con luz que entra por arriba */

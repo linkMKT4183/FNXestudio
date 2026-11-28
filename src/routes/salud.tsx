@@ -469,9 +469,10 @@ function Salud() {
               Tu credencial, <span className="text-area">a tu nombre.</span>
             </h3>
             <p className="text-muted-foreground">
-              Cuando el trámite se aprueba, recibís tu credencial con tus datos, el lugar de cultivo
-              y la autorización para cultivo controlado y transporte. Es lo que te respalda si te la
-              piden.
+              Cuando el trámite se aprueba, recibís tu credencial con tu nombre, tu documento, la
+              dirección donde cultivás, hasta cuándo está vigente, un código QR para que la puedan
+              controlar y la autorización para cultivo controlado y transporte, con sus límites. Es
+              lo que te respalda si te la piden.
             </p>
             <p className="flex items-start gap-3 rounded-2xl border border-area/40 bg-area/10 p-4 text-sm text-foreground">
               <Smartphone className="mt-0.5 h-5 w-5 shrink-0 text-area" aria-hidden="true" />

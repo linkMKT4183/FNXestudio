@@ -191,8 +191,8 @@ function Home() {
           <Headline
             as="h1"
             id="hero-titulo"
-            lead="Tu empresa,"
-            accent={"de\u00A0la\u00A0idea al\u00A0crecimiento."}
+            lead="De la idea"
+            accent={"a\u00A0la\u00A0ejecución, con\u00A0un\u00A0mismo\u00A0equipo."}
             tones={["naranja", "azul"]}
             className="max-w-4xl text-4xl sm:text-6xl lg:text-7xl"
           />
@@ -234,8 +234,8 @@ function Home() {
           <Reveal className="flex max-w-xl flex-col gap-6 lg:max-w-[44%]">
             <Headline
               id="valor-titulo"
-              lead="De la idea a"
-              accent="la ejecución."
+              lead="Estrategia, proyectos"
+              accent="y marca."
               className="max-w-4xl text-5xl sm:text-7xl lg:text-6xl xl:text-7xl"
             />
             <p className="max-w-xl text-lg text-muted-foreground">

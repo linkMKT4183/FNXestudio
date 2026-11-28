@@ -18,3 +18,4 @@
 - Studio service and city pages use shared templates fed by plain data (`src/data/servicios.ts`, `src/data/ciudades.ts`); standalone service routes use the `estudio_` prefix so /estudio keeps rendering on its own.
 - Original articles live in `src/data/notas.ts` (separate from external news); route heads build metadata and JSON-LD from the same data via `src/lib/seo.ts`.
 - When adding a service, city or note, also add its URL to `public/sitemap.xml` (a test checks it).
+- The site background is the dark satin texture in `public/fondos/` (vertical for phones, horizontal for wide screens), drawn by `.fondo-fnx::before` with the area glows in `::after`; never bring back the square grid.
